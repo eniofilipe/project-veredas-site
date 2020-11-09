@@ -22,6 +22,27 @@ const products = () => (
           value={3.8}
           onChange={() => console.log('cliquei')}
         />
+        <CardProduct
+          category={['Categorias', 'Subcategorias']}
+          comment="Pacotes de 300g de alface"
+          name="Alface"
+          value={3.8}
+          onChange={() => console.log('cliquei')}
+        />
+        <CardProduct
+          category={['Categorias', 'Subcategorias']}
+          comment="Pacotes de 300g de alface"
+          name="Alface"
+          value={3.8}
+          onChange={() => console.log('cliquei')}
+        />
+        <CardProduct
+          category={['Categorias', 'Subcategorias']}
+          comment="Pacotes de 300g de alface"
+          name="Alface"
+          value={3.8}
+          onChange={() => console.log('cliquei')}
+        />
       </div>
     </body>
   </div>
