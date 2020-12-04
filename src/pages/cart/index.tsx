@@ -1,6 +1,8 @@
+/* eslint-disable import/extensions */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable operator-linebreak */
+// eslint-disable-next-line import/no-unresolved
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
 

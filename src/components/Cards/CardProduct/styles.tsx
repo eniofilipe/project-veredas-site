@@ -38,10 +38,12 @@ export const Container = styled.div`
   width: 220px;
   border-radius: 10px;
   border: 1px solid #000;
+  background-color: #fff;
 `;
 
 export const ImageHeader = styled.img`
   width: 100%;
+  border-radius: 8px 8px 0 0;
 `;
 
 export const ButtonBuy = styled(Button)`

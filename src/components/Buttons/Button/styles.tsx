@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Button = styled.button<{ clear?: boolean }>`
   color: ${(props) => (props.clear ? '#000' : '#fff')};
-  background: ${(props) => (props.clear ? '#fff' : 'rgba(30, 149, 31, 0.4)')};
+  background: ${(props) => (props.clear ? '#fff' : '#2ECC71')};
   border-radius: 8px;
   align-self: center;
   border: 0px;
