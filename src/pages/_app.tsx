@@ -3,13 +3,20 @@ import React from 'react';
 import { AppProps } from 'next/app';
 
 import { ThemeProvider } from 'styled-components';
+import { ValidadeProvider } from '../contexts/validade';
+import { AuthProvider } from '../contexts/auth';
 import GlobalStyle from '../styles/global';
 import theme from '../styles/theme';
+import Route from './_route';
 
-const MyApp = ({ Component, pageProps }: AppProps) => (
+const MyApp = ({ Component, pageProps, router }: AppProps) => (
   <ThemeProvider theme={theme}>
-    <Component {...pageProps} />
-    <GlobalStyle />
+    <AuthProvider>
+      <ValidadeProvider>
+        <Route Component={Component} pageProps={pageProps} router={router} />
+        <GlobalStyle />
+      </ValidadeProvider>
+    </AuthProvider>
   </ThemeProvider>
 );
 
