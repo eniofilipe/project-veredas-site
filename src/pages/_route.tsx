@@ -5,6 +5,7 @@ import { NextPageContext, NextComponentType } from 'next/types';
 
 import Router from 'next/router';
 import Home from './index';
+import Login from './login';
 import ValidadeContext from '../contexts/validade';
 import AuthContext from '../contexts/auth';
 
@@ -17,12 +18,8 @@ const route: NextComponentType<NextPageContext> = ({
 
   if (!validade) return <Home />;
 
-  if (validade) {
-    if (validade.length === 0) return <Home />;
-  }
-
-  if (Router.asPath !== '/login' && !cliente) {
-    return <Home />;
+  if (Router.asPath !== '/login' && Router.asPath !== '/' && !cliente) {
+    return <Login />;
   }
   return <Component {...pageProps} />;
 };
