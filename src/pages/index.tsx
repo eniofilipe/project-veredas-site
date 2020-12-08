@@ -1,33 +1,50 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { useRouter } from 'next/router';
+
 import styled from 'styled-components';
 import Head from 'next/head';
+import ValidadeContext from '../contexts/validade';
 
 import veredaslogo from '../assets/logo.png';
 
-const Home = () => (
-  <div>
-    <Head>
-      <title>Veredas da terra</title>
-    </Head>
+const Home = () => {
+  const { validade } = useContext(ValidadeContext);
+  const router = useRouter();
 
-    <body>
-      <Header>
-        <Logo src={veredaslogo} alt="" />
-      </Header>
-      <Content>
-        <Title>BEM VINDO À CESTA DA REFORMA AGRÁRIA</Title>
-        <SubTitle>
-          Aqui nós oferecemos os alimentos orgânicos de melhor qualidade, direto
-          do campo da agricultura familiar.
-        </SubTitle>
-        <Button>Entrar na feirinha</Button>
-        <ErrorMessage>
-          Feirinha não está disponível. Novos Pedidos de Domingo à Terça.
-        </ErrorMessage>
-      </Content>
-    </body>
-  </div>
-);
+  const goToProducts = () => {
+    router.push('/products');
+  };
+
+  return (
+    <div>
+      <Head>
+        <title>Veredas da terra</title>
+      </Head>
+
+      <body>
+        <Header>
+          <Logo src={veredaslogo} alt="" />
+        </Header>
+        <Content>
+          <Title>BEM VINDO À CESTA DA REFORMA AGRÁRIA</Title>
+          <SubTitle>
+            Aqui nós oferecemos os alimentos orgânicos de melhor qualidade,
+            direto do campo da agricultura familiar.
+          </SubTitle>
+          {validade && (
+            <Button onClick={goToProducts}>Entrar na feirinha</Button>
+          )}
+          {!validade && (
+            <ErrorMessage>
+              Feirinha não está disponível. Novos Pedidos de Domingo à Terça.
+            </ErrorMessage>
+          )}
+        </Content>
+      </body>
+    </div>
+  );
+};
 
 const Header = styled.div`
   display: flex;

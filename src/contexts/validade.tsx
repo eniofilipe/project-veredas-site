@@ -1,22 +1,21 @@
 import React, { createContext, useState, useEffect } from 'react';
 
 import { getProdutosOfertas } from '../api/Ofertas';
-import { Oferta } from '../types';
 
 interface IValidContext {
-  validade: Oferta[] | null;
+  validade: boolean | null;
 }
 
 const ValidadeContext = createContext<IValidContext>({} as IValidContext);
 
 export const ValidadeProvider: React.FC = ({ children }) => {
-  const [validade, setValidade] = useState<Oferta[] | null>();
+  const [validade, setValidade] = useState<boolean | null>();
 
   const get = async () => {
     try {
       const response = await getProdutosOfertas();
 
-      setValidade(response.data);
+      setValidade(response.data.length > 0);
     } catch (error) {
       console.log(error);
     }
