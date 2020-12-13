@@ -22,6 +22,7 @@ interface CardProductProps {
   name: string;
   comment: string;
   category: string[];
+  image?: string;
 }
 
 const cardProduct = ({
@@ -31,9 +32,10 @@ const cardProduct = ({
   comment,
   onChange,
   category,
+  image,
 }: CardProductProps) => (
   <Container>
-    <ImageHeader src={alface} alt="" />
+    <ImageHeader src={image ? `http://${image}` : alface} alt="" />
     <InfoContainer>
       <Title>{name}</Title>
       <SubTitle>{comment}</SubTitle>
