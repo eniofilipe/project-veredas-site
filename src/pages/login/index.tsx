@@ -1,20 +1,16 @@
-import React, { useContext, useState } from 'react';
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable import/no-unresolved */
+import { useContext, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
+import EmailIcon from '@material-ui/icons/Email';
+import LockIcon from '@material-ui/icons/Lock';
 import AuthContext from '../../contexts/auth';
-
-import {
-  Header,
-  Content,
-  LoginContainer,
-  ButtonLogin,
-  Logo,
-  InputLogin,
-} from './styles';
+import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
 
-const login = () => {
+const Login = () => {
   const Router = useRouter();
   const { signIn } = useContext(AuthContext);
   const [email, setEmail] = useState('');
@@ -34,37 +30,44 @@ const login = () => {
       </Head>
 
       <body>
-        <Header>
-          <Logo src={veredaslogo} alt="" />
-        </Header>
-        <Content>
-          <LoginContainer>
+        <S.Header>
+          <S.Logo src={veredaslogo} alt="" />
+        </S.Header>
+        <S.Content>
+          <S.LoginContainer>
             <div>
-              <span>Usuário</span>
-              <InputLogin
+              <S.Icon>
+                <EmailIcon />
+              </S.Icon>
+              <span>Email</span>
+              <S.InputLogin
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
+              <S.Icon>
+                <LockIcon />
+              </S.Icon>
               <span>Senha</span>
-              <InputLogin
+              <S.InputLogin
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
+            <S.SubTitle>Recuperar Senha</S.SubTitle>
 
-            <ButtonLogin onClick={handleLogin}>Acessar</ButtonLogin>
-            <ButtonLogin clear onClick={() => Router.push('/register')}>
+            <S.ButtonLogin onClick={handleLogin}>Acessar</S.ButtonLogin>
+            <S.ButtonLogin clear onClick={() => Router.push('/register')}>
               Criar conta
-            </ButtonLogin>
-          </LoginContainer>
-        </Content>
+            </S.ButtonLogin>
+          </S.LoginContainer>
+        </S.Content>
       </body>
     </div>
   );
 };
 
-export default login;
+export default Login;

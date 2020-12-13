@@ -10,4 +10,12 @@ export const Button = styled.button<{ clear?: boolean }>`
   font-size: 15px;
   line-height: 18px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  outline: none;
+
+  &:hover {
+    color: ${(props) => (props.clear ? '#fff' : '#2ECC71')};
+    background: ${(props) => (props.clear ? '#000' : '#fff')};
+    border: 1px solid ${(props) => (props.clear ? '#000' : '#2ECC71')};
+  }
 `;
