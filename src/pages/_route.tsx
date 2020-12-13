@@ -18,7 +18,12 @@ const route: NextComponentType<NextPageContext> = ({
 
   if (!validade) return <Home />;
 
-  if (Router.asPath !== '/login' && Router.asPath !== '/' && !cliente) {
+  if (
+    Router.asPath !== '/login'
+    && Router.asPath !== '/'
+    && Router.asPath !== '/register'
+    && !cliente
+  ) {
     return <Login />;
   }
   return <Component {...pageProps} />;
