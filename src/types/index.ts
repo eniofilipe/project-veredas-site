@@ -62,9 +62,9 @@ export interface PostClienteProps {
   nome: string;
   email: string;
   cpf: string;
-  telefone: number;
+  telefone: string;
   password: string;
-  cep: number;
+  cep: string;
   estado: string;
   cidade: string;
   bairro: string;

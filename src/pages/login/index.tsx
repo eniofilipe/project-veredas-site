@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 import AuthContext from '../../contexts/auth';
 
@@ -14,6 +15,7 @@ import {
 import veredaslogo from '../../assets/logo.png';
 
 const login = () => {
+  const Router = useRouter();
   const { signIn } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -55,7 +57,7 @@ const login = () => {
             </div>
 
             <ButtonLogin onClick={handleLogin}>Acessar</ButtonLogin>
-            <ButtonLogin clear onClick={() => {}}>
+            <ButtonLogin clear onClick={() => Router.push('/register')}>
               Criar conta
             </ButtonLogin>
           </LoginContainer>

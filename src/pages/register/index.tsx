@@ -4,8 +4,10 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import Head from 'next/head';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
+import { postClientes } from '../../api/Clientes';
 
 export type ProfileProps = {
   name: string;
@@ -21,6 +23,7 @@ export type ProfileProps = {
 };
 
 const Profile = () => {
+  const router = useRouter();
   const [name, setName] = useState('');
   const [cpf, setCpf] = useState('');
   const [phone, setPhone] = useState('');
@@ -32,8 +35,30 @@ const Profile = () => {
   const [neighborhood, setNeighborhood] = useState('');
   const [street, setStreet] = useState('');
   const [number, setNumber] = useState('');
-  const [complement, setComplement] = useState('');
-  const [reference, setReference] = useState('');
+  const [cidade, setCidade] = useState('');
+  const [estado, setEstado] = useState('');
+
+  const register = async () => {
+    try {
+      const response = await postClientes({
+        bairro: neighborhood,
+        cep,
+        cidade,
+        cpf,
+        email,
+        estado,
+        logradouro: street,
+        nome: name,
+        numero: number,
+        password,
+        telefone: phone,
+      });
+
+      router.push('/login');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <S.Wrapper>
@@ -96,6 +121,20 @@ const Profile = () => {
             <S.WrapperAddress>
               <S.Title>Endereço</S.Title>
               <S.Row>
+                <S.Label> Cidade: </S.Label>
+                <S.Input
+                  value={cidade}
+                  onChange={(e) => setCidade(e.target.value)}
+                />
+              </S.Row>
+              <S.Row>
+                <S.Label> Estado: </S.Label>
+                <S.Input
+                  value={estado}
+                  onChange={(e) => setEstado(e.target.value)}
+                />
+              </S.Row>
+              <S.Row>
                 <S.Label> CEP: </S.Label>
                 <S.Input value={cep} onChange={(e) => setCep(e.target.value)} />
               </S.Row>
@@ -120,25 +159,13 @@ const Profile = () => {
                   onChange={(e) => setNumber(e.target.value)}
                 />
               </S.Row>
-              <S.Row>
-                <S.Label> Compl.: </S.Label>
-                <S.Input
-                  value={complement}
-                  onChange={(e) => setComplement(e.target.value)}
-                />
-              </S.Row>
-              <S.Row>
-                <S.Label> Referência: </S.Label>
-                <S.Input
-                  value={reference}
-                  onChange={(e) => setReference(e.target.value)}
-                />
-              </S.Row>
             </S.WrapperAddress>
           </S.WrapperContent>
           <S.WrapperButtons>
-            <S.Button>Já tenho conta</S.Button>
-            <S.Button>Finalizar</S.Button>
+            <S.Button onClick={() => router.push('/login')}>
+              Já tenho conta
+            </S.Button>
+            <S.Button onClick={register}>Finalizar</S.Button>
           </S.WrapperButtons>
         </S.WrapperController>
       </S.Body>
