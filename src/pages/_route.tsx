@@ -9,24 +9,21 @@ import Login from './login';
 import ValidadeContext from '../contexts/validade';
 import AuthContext from '../contexts/auth';
 
-const route: NextComponentType<NextPageContext> = ({
-  Component,
-  pageProps,
-}: AppProps) => {
+const Route = ({ pageProps, Component }: AppProps) => {
   const { validade } = useContext(ValidadeContext);
   const { cliente } = useContext(AuthContext);
 
   if (!validade) return <Home />;
 
   if (
-    Router.asPath !== '/login'
-    && Router.asPath !== '/'
-    && Router.asPath !== '/register'
-    && !cliente
+    Router.asPath !== '/login' &&
+    Router.asPath !== '/' &&
+    Router.asPath !== '/register' &&
+    !cliente
   ) {
     return <Login />;
   }
   return <Component {...pageProps} />;
 };
 
-export default route;
+export default Route;

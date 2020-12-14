@@ -150,3 +150,5 @@ export const AcceptButton = styled.button`
     transition: 0.4s;
   }
 `;
+
+export default AcceptButton;

@@ -45,3 +45,5 @@ export const WrapperContent = styled.div`
   padding-top: 4rem;
 `;
 export const Body = styled.body``;
+
+export default Body;

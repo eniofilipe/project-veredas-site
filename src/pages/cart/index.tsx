@@ -6,7 +6,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
-
 import CartContext from '../../contexts/cart';
 
 type Product = {

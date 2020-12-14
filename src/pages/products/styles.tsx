@@ -73,3 +73,5 @@ export const Icon = styled.div`
   margin-right: 2rem;
   cursor: pointer;
 `;
+
+export default Icon;

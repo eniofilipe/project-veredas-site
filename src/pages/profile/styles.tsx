@@ -106,3 +106,5 @@ export const Label = styled.p`
 
   color: rgba(95, 30, 31, 0.7);
 `;
+
+export default Label;

@@ -266,3 +266,5 @@ export const WrapperButtons = styled.div`
     }
   }
 `;
+
+export default Header;
