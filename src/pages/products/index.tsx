@@ -2,8 +2,9 @@
 /* eslint-disable operator-linebreak */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import {
   Cart as CartIcon,
   User as ProfileIcon,
@@ -16,10 +17,13 @@ import CardProduct from '../../components/Cards/CardProduct';
 
 import { Categoria, Oferta } from '../../types';
 
+import CartContext from '../../contexts/cart';
 import { getCategorias } from '../../api/Categorias';
 import { getProdutosOfertas } from '../../api/Ofertas';
 
 const products = () => {
+  const Router = useRouter();
+  const { addProduct } = useContext(CartContext);
   const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [produtosOferta, setProdutosOferta] = useState<Oferta[]>([]);
 
@@ -58,7 +62,7 @@ const products = () => {
           <S.SearchBar placeholder="Buscar" />
           <S.WrapperIcons>
             <S.Icon>
-              <CartIcon />
+              <CartIcon onClick={() => Router.push('/cart')} />
             </S.Icon>
             <S.Icon>
               <ProfileIcon />
@@ -96,7 +100,7 @@ const products = () => {
                 comment={prod.produtos.descricao}
                 name={prod.produtos.nome}
                 value={prod.valor_unitario}
-                onChange={() => console.log('cliquei')}
+                onChange={() => addProduct(prod)}
                 image={prod.produtos.imagem.url}
               />
             ))}

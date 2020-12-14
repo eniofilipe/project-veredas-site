@@ -3,8 +3,11 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable operator-linebreak */
 // eslint-disable-next-line import/no-unresolved
+import React, { useContext, useState, useEffect } from 'react';
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
+
+import CartContext from '../../contexts/cart';
 
 type Product = {
   product: string;
@@ -21,7 +24,6 @@ type Address = {
 };
 
 export type CartProps = {
-  products: Product[];
   address: Address;
   frete: number;
   tipoPagamento: string[];
@@ -48,68 +50,89 @@ const product2: Product = {
 };
 
 const Cart = ({
-  products = [product1, product2],
   address = endereco,
   frete = 5.2,
   tipoPagamento = ['Dinheiro'],
-}: CartProps) => (
-  <S.Wrapper>
-    <S.WrapperHeader>
-      <S.Logo src={veredaslogo} alt="" />
-      <S.Title> Minha Cesta </S.Title>
-    </S.WrapperHeader>
+}: CartProps) => {
+  const { products } = useContext(CartContext);
+  const [subtotal, setSubtotal] = useState(0);
+  const [total, setTotal] = useState(0);
 
-    <S.WrapperContent>
-      <S.Label>Pedido</S.Label>
-      <S.Items>
-        {!!products &&
-          products.map(({ product, quantity, value }) => (
+  useEffect(() => {
+    const resultAux = products.map(
+      (prod) => prod.quantidadeCart * prod.valor_unitario,
+    );
+
+    const result = resultAux.reduce(
+      (prev, curr) => Number(prev) + Number(curr),
+      0
+    );
+
+    setSubtotal(result);
+
+    setTotal(result + 5);
+  }, [products]);
+
+  return (
+    <S.Wrapper>
+      <S.WrapperHeader>
+        <S.Logo src={veredaslogo} alt="" />
+        <S.Title> Minha Cesta </S.Title>
+      </S.WrapperHeader>
+
+      <S.WrapperContent>
+        <S.Label>Pedido</S.Label>
+        <S.Items>
+          {products.map((offer) => (
             <S.WrapperItem>
               <S.WrapperControl>
                 <S.SumButton />
-                <S.Text>{quantity}</S.Text>
+                <S.Text>{offer.quantidadeCart}</S.Text>
                 <S.SubButton />
-                <S.Text>{product}</S.Text>
+                <S.Text>{offer.produtos.nome}</S.Text>
               </S.WrapperControl>
-              <S.Value>R${value * quantity} </S.Value>
+              <S.Value>
+                R${offer.valor_unitario * offer.quantidadeCart}{' '}
+              </S.Value>
             </S.WrapperItem>
           ))}
-      </S.Items>
+        </S.Items>
 
-      <S.SubTotal>Subtotal R$130,00</S.SubTotal>
+        <S.SubTotal>{`Subtotal R$ ${subtotal}`}</S.SubTotal>
 
-      <S.WrapperDelivery>
-        <S.Label>Endereço</S.Label>
-        <S.Address>
-          {address && (
-            <S.Text>
-              {address.cep} - {address.neighborhood} - {address.street} -{' '}
-              {address.number} - {address.complement}
-            </S.Text>
+        <S.WrapperDelivery>
+          <S.Label>Endereço</S.Label>
+          <S.Address>
+            {address && (
+              <S.Text>
+                {address.cep} - {address.neighborhood} - {address.street} -{' '}
+                {address.number} - {address.complement}
+              </S.Text>
+            )}
+
+            <S.Value>R${frete}</S.Value>
+          </S.Address>
+        </S.WrapperDelivery>
+        <S.SubTotal>{`Total R$ ${total}`}</S.SubTotal>
+
+        <S.WrapperSelect>
+          <S.Label>Tipo de Pagamento</S.Label>
+          {tipoPagamento && (
+            <S.Select>
+              {tipoPagamento.map((tipo, i) => (
+                <option key={i}>{tipo}</option>
+              ))}
+            </S.Select>
           )}
+        </S.WrapperSelect>
+      </S.WrapperContent>
 
-          <S.Value>R${frete}</S.Value>
-        </S.Address>
-      </S.WrapperDelivery>
-      <S.SubTotal>Total R$135,20</S.SubTotal>
-
-      <S.WrapperSelect>
-        <S.Label>Tipo de Pagamento</S.Label>
-        {tipoPagamento && (
-          <S.Select>
-            {tipoPagamento.map((tipo, i) => (
-              <option key={i}>{tipo}</option>
-            ))}
-          </S.Select>
-        )}
-      </S.WrapperSelect>
-    </S.WrapperContent>
-
-    <S.WrapperButtons>
-      <S.CancelButton>Cancelar</S.CancelButton>
-      <S.AcceptButton>Finalizar</S.AcceptButton>
-    </S.WrapperButtons>
-  </S.Wrapper>
-);
+      <S.WrapperButtons>
+        <S.CancelButton>Cancelar</S.CancelButton>
+        <S.AcceptButton>Finalizar</S.AcceptButton>
+      </S.WrapperButtons>
+    </S.Wrapper>
+  );
+};
 
 export default Cart;
