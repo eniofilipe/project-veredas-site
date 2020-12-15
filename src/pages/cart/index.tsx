@@ -50,7 +50,7 @@ const product2: Product = {
 
 const Cart = ({
   address = endereco,
-  frete = 5.2,
+  frete = 5,
   tipoPagamento = ['Dinheiro'],
 }: CartProps) => {
   const { products } = useContext(CartContext);
@@ -59,12 +59,12 @@ const Cart = ({
 
   useEffect(() => {
     const resultAux = products.map(
-      (prod) => prod.quantidadeCart * prod.valor_unitario,
+      (prod) => prod.quantidadeCart * prod.valor_unitario
     );
 
     const result = resultAux.reduce(
       (prev, curr) => Number(prev) + Number(curr),
-      0
+      0,
     );
 
     setSubtotal(result);
