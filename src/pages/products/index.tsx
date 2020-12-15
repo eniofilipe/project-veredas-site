@@ -65,7 +65,7 @@ const products = () => {
               <CartIcon onClick={() => Router.push('/cart')} />
             </S.Icon>
             <S.Icon>
-              <ProfileIcon />
+              <ProfileIcon onClick={() => Router.push('profile')} />
             </S.Icon>
           </S.WrapperIcons>
         </S.Header>

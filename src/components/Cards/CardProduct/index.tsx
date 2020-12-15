@@ -35,7 +35,7 @@ const cardProduct = ({
   image,
 }: CardProductProps) => (
   <Container>
-    <ImageHeader src={image ? `http://${image}` : alface} alt="" />
+    <ImageHeader src={image || alface} alt="" />
     <InfoContainer>
       <Title>{name}</Title>
       <SubTitle>{comment}</SubTitle>
