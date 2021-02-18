@@ -92,8 +92,12 @@ const Home = () => {
       <S.HomeSectionWrapper ref={sectionOneRef}>
         <S.BGHome>
           <S.CentralizeWrapper>
-            <p>Alimentos saudáveis e de qualidade</p>
-            <p>Cestas Agroecologicas</p>
+            <p>BEM VINDO À CESTA AGROECOLOGICA</p>
+            <p>
+              Aqui nós oferecemos os alimentos orgânicos de melhor qualidade,{' '}
+              <p />
+              direto do campo da agricultura familiar.
+            </p>
             <S.Logo src={logomst} alt="Logo do MST" />
           </S.CentralizeWrapper>
         </S.BGHome>
@@ -116,23 +120,25 @@ const Home = () => {
         <S.TextWrapper>
           <p>Como funciona? </p>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-            dapibus neque felis, sed fermentum metus tristique in. Phasellus
-            imperdiet dui eu euismod tincidunt. Donec varius, mi eu cursus
-            dignissim, eros libero scelerisque metus, a ullamcorper tellus elit
-            ac tortor. Pellentesque lobortis elit eu ex aliquam, nec eleifend
-            erat dapibus.{' '}
+            Mussum Ipsum, cacilds vidis litro abertis. Interessantiss quisso
+            pudia ce receita de bolis, mais bolis eu num gostis. Mé faiz
+            elementum girarzis, nisi eros vermeio. Suco de cevadiss deixa as
+            pessoas mais interessantis. Posuere libero varius. Nullam a nisl ut
+            ante blandit hendrerit. Aenean sit amet nisi..{' '}
           </p>
           <p>
-            Nullam vel molestie odio. Cras in lacinia sem. Integer consectetur
-            dolor et odio venenatis eleifend. Maecenas ipsum risus, lobortis
-            vitae velit ut, interdum fermentum mi. Sed ullamcorper dictum libero
-            vel facilisis.
+            Todo mundo vê os porris que eu tomo, mas ninguém vê os tombis que eu
+            levo! Interagi no mé, cursus quis, vehicula ac nisi. Praesent
+            malesuada urna nisi, quis volutpat erat hendrerit non. Nam vulputate
+            dapibus. Copo furadis é disculpa de bebadis, arcu quam euismod
+            magna.
           </p>
           <p>
-            Aliquam ac maximus lacus. Duis a lacus varius, viverra massa quis,
-            bibendum risus. Mauris tempor nisi nisi, a condimentum ex tincidunt
-            in. Fusce hendrerit dolor gravida imperdiet viverra.{' '}
+            A ordem dos tratores não altera o pão duris. Suco de cevadiss, é um
+            leite divinis, qui tem lupuliz, matis, aguis e fermentis. Admodum
+            accumsan disputationi eu sit. Vide electram sadipscing et per.
+            Nullam volutpat risus nec leo commodo, ut interdum diam laoreet. Sed
+            non consequat odio. <p />
           </p>
         </S.TextWrapper>
       </S.WrapperThreeSection>

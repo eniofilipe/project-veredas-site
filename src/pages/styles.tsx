@@ -17,7 +17,6 @@ export const MenuLink = styled.a`
   text-align: center;
   cursor: pointer;
   font-weight: 300;
-
   &:hover {
     &::after {
       content: '';
@@ -56,6 +55,7 @@ export const BGHome = styled.div`
 `;
 export const CentralizeWrapper = styled.div`
   display: flex;
+  text-align: center;
   flex-direction: column;
   align-items: center;
   justify-content: center;
