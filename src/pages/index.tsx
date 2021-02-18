@@ -1,4 +1,6 @@
-import { useEffect, useState, useRef, useContext } from 'react';
+import {
+ useEffect, useState, useRef, useContext 
+} from 'react';
 import { useRouter } from 'next/router';
 import veredaslogo from '../assets/logo.png';
 import * as S from './styles';
@@ -79,9 +81,9 @@ const Home = () => {
               Como Funciona
             </S.MenuLink>
             {!validade ? (
-              <S.Button onClick={goToProducts}>Entrar na feirinha</S.Button>
-            ) : (
               <S.Button onClick={goToLogin}>Acessar conta</S.Button>
+            ) : (
+              <S.Button onClick={goToProducts}>Entrar na feirinha</S.Button>
             )}
           </S.MenuNav>
         </S.Header>

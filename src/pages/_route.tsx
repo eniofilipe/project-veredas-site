@@ -13,16 +13,17 @@ const Route = ({ pageProps, Component }: AppProps) => {
   const { validade } = useContext(ValidadeContext);
   const { cliente } = useContext(AuthContext);
 
-  if (!validade) return <Home />;
+  if (validade) return <Home />;
 
-  if (
-    Router.asPath !== '/login'
-    && Router.asPath !== '/'
-    && Router.asPath !== '/register'
-    && !cliente
-  ) {
-    return <Login />;
-  }
+  // if (
+  //   Router.asPath !== '/login' &&
+  //   Router.asPath !== '/' &&
+  //   Router.asPath !== '/register' &&
+  //   !cliente
+  // ) {
+  //   return <Login />;
+  // }
+
   return <Component {...pageProps} />;
 };
 

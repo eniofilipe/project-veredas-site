@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { useRouter } from 'next/router';
 import veredaslogo from '../../assets/logo.png';
 import * as S from './styles';
 import logomst from '../../assets/logo-mst-rurais.png';
@@ -7,6 +8,7 @@ import logoif from '../../assets/logo-if.png';
 import { getOpened } from '../../api/Validade';
 
 const Home = () => {
+  const router = useRouter();
   const [scrollY, setScrollY] = useState(0);
   const [opened, setOpened] = useState(false);
 
@@ -86,7 +88,9 @@ const Home = () => {
             {opened ? (
               <S.Button>Entrar na feirinha</S.Button>
             ) : (
-              <S.Button>Acessar conta</S.Button>
+              <S.Button onClick={() => router.push('/login')}>
+                Acessar conta
+              </S.Button>
             )}
           </S.MenuNav>
         </S.Header>
