@@ -4,10 +4,11 @@ import * as S from './styles';
 import logomst from '../../assets/logo-mst-rurais.png';
 import imagecampo from '../../assets/Campo-cidade.png';
 import logoif from '../../assets/logo-if.png';
+import { getOpened } from '../../api/Validade';
 
 const Home = () => {
-  const [section, setSection] = useState('');
   const [scrollY, setScrollY] = useState(0);
+  const [opened, setOpened] = useState(false);
 
   const sectionOneRef = useRef<null | HTMLDivElement>(null);
   const sectionTwoRef = useRef<null | HTMLDivElement>(null);
@@ -51,6 +52,22 @@ const Home = () => {
     }
   }
 
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const { data } = await getOpened();
+        if (data.success === 'aberta') {
+          setOpened(true);
+          return;
+        }
+        setOpened(true);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    loadData();
+  }, []);
+
   return (
     <S.Wrapper>
       <S.HeaderWrapper position={scrollY}>
@@ -66,7 +83,11 @@ const Home = () => {
             <S.MenuLink onClick={() => handleChange('sectionThreeRef')}>
               Como Funciona
             </S.MenuLink>
-            <S.Button>Entrar</S.Button>
+            {opened ? (
+              <S.Button>Entrar na feirinha</S.Button>
+            ) : (
+              <S.Button>Acessar conta</S.Button>
+            )}
           </S.MenuNav>
         </S.Header>
       </S.HeaderWrapper>

@@ -77,8 +77,9 @@ export const CentralizeWrapper = styled.div`
 `;
 
 export const WrapperSecondSection = styled.div`
-  padding-top: 100vh;
+  padding-top: 110vh;
   display: flex;
+  padding-bottom: 10vh;
 `;
 export const Card1 = styled.div`
   margin-left: 5%;
