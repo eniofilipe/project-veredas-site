@@ -81,9 +81,9 @@ const Home = () => {
               Como Funciona
             </S.MenuLink>
             {!validade ? (
-              <S.Button onClick={goToLogin}>Acessar conta</S.Button>
+              <S.Button onClick={goToLogin}>Acessar Conta</S.Button>
             ) : (
-              <S.Button onClick={goToProducts}>Entrar na feirinha</S.Button>
+              <S.Button onClick={goToProducts}>Entrar na Feirinha</S.Button>
             )}
           </S.MenuNav>
         </S.Header>
