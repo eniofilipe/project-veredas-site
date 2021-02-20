@@ -30,9 +30,9 @@ const Login = () => {
       </Head>
 
       <body>
-        <S.Header>
+        <S.HeaderWrapper>
           <S.Logo src={veredaslogo} alt="" />
-        </S.Header>
+        </S.HeaderWrapper>
         <S.Content>
           <S.LoginContainer>
             <div>
@@ -58,7 +58,7 @@ const Login = () => {
               />
             </div>
             <S.SubTitle>Recuperar Senha</S.SubTitle>
-
+            <p />
             <S.ButtonLogin onClick={handleLogin}>Acessar</S.ButtonLogin>
             <S.ButtonLogin clear onClick={() => Router.push('/register')}>
               Criar conta
