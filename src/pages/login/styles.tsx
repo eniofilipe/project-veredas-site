@@ -239,6 +239,7 @@ export const Header = styled.menu<MenuProps>`
     width: 200px;
   }
 `;
+
 export const HeaderWrapper = styled.div<MenuProps>`
   ${({ position }) => css`
     position: fixed;

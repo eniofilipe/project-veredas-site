@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import React, { createContext, useState, useEffect } from 'react';
 
 import { getProdutosOfertas } from '../api/Ofertas';
@@ -17,6 +18,7 @@ export const ValidadeProvider: React.FC = ({ children }) => {
 
       setValidade(response.data.length > 0);
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   };
