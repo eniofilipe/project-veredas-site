@@ -111,7 +111,7 @@ export const SearchBar = styled.input`
 export const WrapperIcons = styled.div`
   display: flex;
   margin-left: auto;
-  margin-right: 2rem;
+  margin-right: -5rem;
   gap: 10%;
 `;
 export const Icon = styled.div`
