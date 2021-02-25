@@ -124,26 +124,29 @@ const Home = () => {
             Mussum Ipsum, cacilds vidis litro abertis. Interessantiss quisso
             pudia ce receita de bolis, mais bolis eu num gostis. Mé faiz
             elementum girarzis, nisi eros vermeio. Suco de cevadiss deixa as
-            pessoas mais interessantis. Posuere libero varius. Nullam a nisl ut
-            ante blandit hendrerit. Aenean sit amet nisi..{' '}
+            pessoas mais interessantis. Posuere libero varius.
           </S.TextDiv1>
           <S.TextDiv2>
             Todo mundo vê os porris que eu tomo, mas ninguém vê os tombis que eu
             levo! Interagi no mé, cursus quis, vehicula ac nisi. Praesent
             malesuada urna nisi, quis volutpat erat hendrerit non. Nam vulputate
-            dapibus. Copo furadis é disculpa de bebadis, arcu quam euismod
-            magna.
+            dapibus.
           </S.TextDiv2>
           <S.TextDiv3>
             A ordem dos tratores não altera o pão duris. Suco de cevadiss, é um
-            leite divinis, qui tem lupuliz, matis, aguis e fermentis. Admodum
-            accumsan disputationi eu sit. Vide electram sadipscing et per.
-            Nullam volutpat risus nec leo commodo, ut interdum diam laoreet. Sed
-            non consequat odio.
+            leite divinis, qui tem lupuliz, matis, aguis e fermentis. Vide
+            electram sadipscing et per. Nullam volutpat risus nec leo commodo,
+            ut interdum diam laoreet. Sed non consequat odio.
           </S.TextDiv3>
         </S.TextDivPrincipal>
+        {!validade ? (
+          <S.ButtonSecond onClick={goToLogin}>Acessar Conta</S.ButtonSecond>
+        ) : (
+          <S.ButtonSecond onClick={goToProducts}>
+            Entrar na Feirinha
+          </S.ButtonSecond>
+        )}
       </S.WrapperThreeSection>
-
       <S.WrapperFooter>
         <div>
           <p>Cooperativa Veredas da Terra</p>
