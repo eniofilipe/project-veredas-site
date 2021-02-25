@@ -12,12 +12,13 @@ import veredaslogo from '../../assets/logo.png';
 
 const Login = () => {
   const Router = useRouter();
+
   const { signIn } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    signIn({
+  const handleLogin = async () => {
+    await signIn({
       email,
       password,
     });
@@ -28,11 +29,10 @@ const Login = () => {
       <Head>
         <title>Veredas da terra</title>
       </Head>
-
       <body>
-        <S.Header>
+        <S.HeaderWrapper>
           <S.Logo src={veredaslogo} alt="" />
-        </S.Header>
+        </S.HeaderWrapper>
         <S.Content>
           <S.LoginContainer>
             <div>
@@ -58,8 +58,8 @@ const Login = () => {
               />
             </div>
             <S.SubTitle>Recuperar Senha</S.SubTitle>
-
-            <S.ButtonLogin onClick={handleLogin}>Acessar</S.ButtonLogin>
+            <p />
+            <S.ButtonLogin onClick={() => handleLogin()}>Acessar</S.ButtonLogin>
             <S.ButtonLogin clear onClick={() => Router.push('/register')}>
               Criar conta
             </S.ButtonLogin>

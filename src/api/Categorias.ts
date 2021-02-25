@@ -1,3 +1,4 @@
+/* eslint-disable implicit-arrow-linebreak */
 import api from './Api';
 import { Categoria, PostCategoriaProps, PutCategoriaProps } from '../types';
 

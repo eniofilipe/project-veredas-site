@@ -131,3 +131,6 @@ export interface PostPedidoProps {
   valor_frete: number;
   tipo_frete_id: number;
 }
+export interface GetStatusLojaProps {
+  success: string;
+}
