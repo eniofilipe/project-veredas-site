@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect } from 'react';
-
 import { useRouter } from 'next/router';
 import { getLogin } from '../api/Login';
 import { ClienteLogin, Login } from '../types';
