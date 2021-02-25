@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { getLogin } from '../api/Login';
 import { ClienteLogin, Login } from '../types';
+import { getValidaToken } from '../api/Validade';
 
 interface IAuthContext {
   signed: boolean;
@@ -17,10 +18,24 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [cliente, setCliente] = useState<ClienteLogin | null>(null);
   const [token, setToken] = useState<string | null>(null);
 
-  useEffect(() => {
-    const cli = localStorage.getItem('cliente');
+  const handleToken = async () => {
+    const token = localStorage.getItem('token');
+    try {
+      const response = await getValidaToken(token);
 
-    setCliente(JSON.parse(cli) as ClienteLogin);
+      setCliente({
+        nome: response.data.nome,
+        email: response.data.email,
+        id: response.data.id,
+      });
+    } catch (e) {
+      console.log(e);
+      setCliente(null);
+    }
+  };
+
+  useEffect(() => {
+    handleToken();
   }, []);
 
   const signIn = async (data: Login) => {
@@ -30,8 +45,6 @@ export const AuthProvider: React.FC = ({ children }) => {
         password: data.password,
       });
 
-      setCliente(response.data.client);
-      localStorage.setItem('cliente', JSON.stringify(response.data.client));
       setToken(response.data.token);
       localStorage.setItem('token', response.data.token);
       router.push('/products');
