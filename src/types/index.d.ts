@@ -134,3 +134,10 @@ export interface PostPedidoProps {
 export interface GetStatusLojaProps {
   success: string;
 }
+
+export interface ResponseValidaToken {
+  option: string;
+  id: number;
+  nome: string;
+  email: string;
+}

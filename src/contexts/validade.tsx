@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 import React, { createContext, useState, useEffect } from 'react';
 
-import { getProdutosOfertas } from '../api/Ofertas';
+import { getOpened } from '../api/Validade';
 
 interface IValidContext {
   validade: boolean | null;
@@ -14,12 +14,15 @@ export const ValidadeProvider: React.FC = ({ children }) => {
 
   const get = async () => {
     try {
-      const response = await getProdutosOfertas();
+      const response = await getOpened();
 
-      setValidade(response.data.length > 0);
+      console.log(response);
+
+      setValidade(!response.data.success);
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
+      setValidade(false);
     }
   };
 
