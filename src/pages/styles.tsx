@@ -8,6 +8,7 @@ export const Logo = styled.img``;
 export const MenuNav = styled.div`
   margin-right: 4rem;
 `;
+
 export const MenuLink = styled.a`
   position: relative;
   color: #961913;
@@ -81,6 +82,7 @@ export const WrapperSecondSection = styled.div`
   display: flex;
   padding-bottom: 10vh;
 `;
+
 export const Card1 = styled.div`
   margin-left: 5%;
   background-color: #961913;
@@ -129,10 +131,11 @@ export const WrapperThreeSection = styled.div`
   align-items: center;
   position: relative;
 `;
+
 export const TextWrapper = styled.div`
   width: 100%;
-  height: 100%;
-  padding: 5%;
+  height: 30%;
+  padding: 2%;
   p:nth-child(1) {
     font-size: 4rem;
     font-weight: 600;
@@ -140,17 +143,54 @@ export const TextWrapper = styled.div`
   }
 
   p:nth-child(3) {
-    padding-left: 30%;
-    padding-top: 5%;
+    padding-left: 0%;
+    padding-top: 1%;
     padding-bottom: 5%;
   }
 
   p {
     color: #fff;
     font-size: 1.5rem;
-    line-height: 1.85;
+    line-height: 1.8;
   }
 `;
+
+export const TextDivPrincipal = styled.div`
+  text-align: center;
+  width: 100%;
+`;
+
+export const TextDiv1 = styled.div`
+  float: left;
+  width: 30%;
+  text-align: justify;
+  color: #fff;
+  font-size: 1.8rem;
+  line-height: 2;
+  margin-right: 2rem;
+  margin-left: 2.8rem;
+`;
+
+export const TextDiv2 = styled.div`
+  float: left;
+  width: 30%;
+  text-align: justify;
+  color: #fff;
+  font-size: 1.8rem;
+  line-height: 2;
+  margin-right: 2rem;
+`;
+
+export const TextDiv3 = styled.div`
+  float: left;
+  width: 30%;
+  text-align: justify;
+  color: #fff;
+  font-size: 1.8rem;
+  line-height: 2;
+  margin-right: 1rem;
+`;
+
 export const WrapperFooter = styled.footer`
   height: 10vh;
   display: flex;

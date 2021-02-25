@@ -25,6 +25,7 @@ interface CardProductProps {
   image?: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const cardProduct = ({
   className,
   value,

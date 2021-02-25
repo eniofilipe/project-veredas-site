@@ -95,7 +95,6 @@ const Home = () => {
           </S.MenuNav>
         </S.Header>
       </S.HeaderWrapper>
-
       <S.HomeSectionWrapper ref={sectionOneRef}>
         <S.BGHome>
           <S.CentralizeWrapper>
