@@ -1,270 +1,215 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Logo = styled.img`
-  width: 16rem;
-  position: absolute;
-  left: 2rem;
-  top: 0.4rem;
+export const Wrapper = styled.div``;
+export const Logo = styled.img``;
+export const MenuNav = styled.div`
+  margin-right: 4rem;
 `;
-
-export const Title = styled.p`
-  font-size: 2rem;
-  color: rgba(95, 30, 31, 0.7);
-  cursor: default;
+export const MenuLink = styled.a`
+  position: relative;
+  color: #961913;
+  font-size: 1.5rem;
+  margin: 0.3rem 0.8rem 0;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 300;
+  &:hover {
+    &::after {
+      content: '';
+      position: absolute;
+      display: block;
+      height: 0.3rem;
+      background-color: #961913;
+      animation: hoverAnimation 0.2s forwards;
+    }
+    @keyframes hoverAnimation {
+      from {
+        width: 0;
+        left: 50%;
+      }
+      to {
+        width: 100%;
+        left: 0;
+      }
+    }
+  }
 `;
-
-export const Header = styled.div`
-  display: flex;
-  flex-direction: row;
+export const HeaderWrapper = styled.div`
+  position: relative;
+  opacity: 1;
+  background-color: rgba(250, 250, 240, 0.8);
+  top: 0;
+  left: 0;
+  z-index: 2;
   width: 100%;
-  background: rgba(30, 149, 31, 0.4);
-  justify-content: center;
-  align-items: center;
-  padding: 2rem 1%;
-  ${Title} {
-    color: #444;
-  }
-
-  @media only screen and (max-width: 695px) {
-    ${Logo} {
-      width: 14rem;
-      left: 1rem;
-    }
-  }
-
-  @media only screen and (max-width: 600px) {
-    padding: 1.2rem 1%;
-
-    ${Logo} {
-      width: 10rem;
-      left: 1rem;
-    }
-    ${Title} {
-      font-size: 2rem;
-    }
-  }
-
-  @media only screen and (max-width: 467px) {
-    padding: 1.2rem 1%;
-
-    ${Logo} {
-      width: 8rem;
-      left: 0.7rem;
-    }
-    ${Title} {
-      font-size: 1.4rem;
-    }
-  }
-
-  @media only screen and (max-width: 367px) {
-    padding: 1rem 1%;
-
-    ${Logo} {
-      width: 6rem;
-      left: 0.5rem;
-    }
-    ${Title} {
-      font-size: 1.2rem;
-    }
-  }
-  @media only screen and (max-width: 275px) {
-    justify-content: flex-end;
-
-    padding: 1rem 1%;
-
-    ${Logo} {
-      width: 7rem;
-      left: 0.5rem;
-    }
-    ${Title} {
-      font-size: 1.2rem;
-      padding-right: 1rem;
-    }
-  }
 `;
 
 export const Button = styled.button`
-  background: #ffffff;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background: #961913;
+  color: #fff;
+  border: 1px solid #961913;
   border-radius: 8px;
-  border: none;
-  height: 3rem;
-  cursor: pointer;
+  padding: 1rem 2rem;
   outline: none;
+  margin-left: 2rem;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
   &:hover {
-    color: rgba(95, 30, 31, 0.7);
-    border: 1px solid rgba(95, 30, 31, 0.7);
+    color: #961913;
+    background: rgba(205, 205, 205, 0.7);
+    border: 1px solid #961913;
+    cursor: pointer;
   }
 `;
+export const Title = styled.h1`
+  font-size: 2rem;
+  color: #961913;
+  font-weight: 600;
+  text-align: center;
+  padding-top: 2rem;
+`;
 
-export const Wrapper = styled.div``;
-export const WrapperContent = styled.div`
+export const Header = styled.menu`
   display: flex;
-  gap: 2rem;
-`;
-export const Label = styled.p`
-  font-size: 1.4rem;
-  color: rgba(95, 30, 31, 0.7);
-`;
-
-export const Input = styled.input`
-  margin-left: auto;
-  width: 60%;
-  border-radius: 4px;
-  border: 1px solid #444;
-  outline: none;
-  font-size: 1.4rem;
-  color: rgba(95, 30, 31, 0.7);
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 4px;
+  align-items: center;
+  padding: 0.8rem 2rem;
+  justify-content: space-between;
+  background-color: rgba(211, 211, 211, 0.8);
+  ${Logo} {
+    width: 200px;
+  }
 `;
 
 export const WrapperData = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid #444;
-  padding: 1rem 2rem;
-  border-radius: 4px;
-  row-gap: 1rem;
-  height: 100%;
-  ${Button} {
-    margin-left: auto;
-    margin-top: 1rem;
-    width: 25%;
-    margin-bottom: 0.5rem;
+  width: 48%;
+  background-color: #fafafa;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 2rem;
+  padding-bottom: 2rem;
+  ${Title} {
+    text-align: left;
+    padding-top: 0.8rem;
+    padding-bottom: 1.2rem;
   }
 `;
-
+export const WrapperContent = styled.div`
+  display: flex;
+  width: 100%;
+  padding-left: 14%;
+  padding-right: 14%;
+  justify-content: space-between;
+`;
+export const Form = styled.div`
+  padding-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+export const Label = styled.label`
+  font-size: 1.3rem;
+`;
+export const Input = styled.input`
+  font-size: 1.3rem;
+  border-radius: 4px;
+  outline: none;
+  padding: 4px;
+  overflow: hidden;
+  margin-left: 10px;
+`;
+export const Body = styled.div``;
+export const WrapperController = styled.div``;
+export const Row = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  white-space: nowrap;
+`;
 export const WrapperAddress = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid #444;
-  padding: 1rem 2rem;
-  border-radius: 4px;
-  row-gap: 1rem;
-  height: 100%;
+  width: 72%;
+  margin-left: 14%;
+  background-color: #fafafa;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  padding: 1.2rem;
+  margin-top: 2rem;
+  padding-bottom: 2rem;
+  ${Title} {
+    text-align: left;
+    padding-top: 0.8rem;
+    padding-bottom: 1.2rem;
+    margin-left: 16%;
+  }
 `;
-export const WrapperController = styled.div`
-  width: 70%;
-  margin: 0 auto;
+export const WrapperDataAddress = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding-top: 4rem;
-
-  @media only screen and (max-width: 1393px) {
-    width: 80%;
-  }
-  @media only screen and (max-width: 1217px) {
-    width: 90%;
-  }
-
-  @media only screen and (max-width: 1083px) {
-    ${Label} {
-      font-size: 1.5rem;
-    }
-    ${Input} {
-      width: 50%;
-    }
-  }
-
-  @media only screen and (max-width: 901px) {
-    ${Label} {
-      font-size: 1.2rem;
-    }
-    ${Input} {
-      width: 45%;
-    }
-  }
-
-  @media only screen and (max-width: 750px) {
-    padding-top: 2rem;
-
-    ${WrapperData} {
-      padding: 0.5rem 1rem;
-    }
-    ${WrapperAddress} {
-      padding: 0.5rem 1rem;
-    }
-  }
-  @media only screen and (max-width: 675px) {
-    width: 80%;
-    ${WrapperContent} {
-      flex-direction: column;
-    }
-    ${Label} {
-      font-size: 1.5rem;
-    }
-    ${Input} {
-      width: 50%;
-    }
-  }
-
-  @media only screen and (max-width: 505px) {
-    width: 85%;
-
-    ${Label} {
-      font-size: 1.3rem;
-    }
-    ${Input} {
-      width: 45%;
-    }
-  }
-
-  @media only screen and (max-width: 400px) {
-    width: 90%;
-
-    ${Label} {
-      font-size: 1.2rem;
-    }
-    ${Input} {
-      width: 40%;
-    }
-  }
-`;
-
-export const Body = styled.body`
-  background-color: rgba(196, 196, 196, 0.1);
-  height: 110vh;
-  max-width: 1580px;
-  margin: 0 auto;
-`;
-
-export const WrapperMenu = styled.div`
-  display: flex;
-  position: absolute;
-  right: 1rem;
-  top: 2rem;
-  gap: 3rem;
-  ${Title} {
-    cursor: pointer;
-  }
-`;
-
-export const Row = styled.div`
-  display: flex;
+  width: 100%;
+  padding-left: 30%;
+  padding-right: 30%;
+  justify-content: space-between;
+  gap: 1rem;
 `;
 
 export const WrapperButtons = styled.div`
   display: flex;
-  justify-content: space-between;
   width: 100%;
-  margin: 1rem auto;
-
+  padding-left: 12%;
+  padding-right: 14%;
+  justify-content: space-between;
+  padding-top: 2%;
+  padding-bottom: 5%;
   ${Button} {
-    width: 6rem;
+    width: 12rem;
   }
-  ${Button}:nth-child(2) {
-    background: green;
-    color: white;
-    border: 1px solid green;
+  ${Button}:nth-child(1) {
+    background: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    color: #000;
+    border: 1px solid #ffffff;
     &:hover {
-      color: green;
-      background: white;
+      color: #961913;
+      box-shadow: 0px 6px 6px #961913;
     }
   }
 `;
+export const WrapperFooter = styled.footer`
+  height: 8vh;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding-top: 6vw;
+  padding-bottom: 6vw;
+  gap: 4rem;
+  background-color: #444;
 
-export default Header;
+  div {
+    color: #fff;
+    font-size: 1.5rem;
+  }
+  ${Logo}:nth-child(1) {
+    width: 250px;
+    padding-left: 1rem;
+  }
+
+  ${Logo}:nth-child(2) {
+    width: 120px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  ${Logo}:nth-child(3) {
+    width: 110px;
+    border-radius: 18px;
+  }
+`;

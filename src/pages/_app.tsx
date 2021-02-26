@@ -1,8 +1,9 @@
 import React from 'react';
 
 import { AppProps } from 'next/app';
-
+import 'react-toastify/dist/ReactToastify.css';
 import { ThemeProvider } from 'styled-components';
+import { ToastContainer } from 'react-toastify';
 import { ValidadeProvider } from '../contexts/validade';
 import { AuthProvider } from '../contexts/auth';
 import { CartProvider } from '../contexts/cart';
@@ -20,6 +21,7 @@ const MyApp = ({ Component, pageProps, router }: AppProps) => (
         </ValidadeProvider>
       </AuthProvider>
     </CartProvider>
+    <ToastContainer />
   </ThemeProvider>
 );
 
