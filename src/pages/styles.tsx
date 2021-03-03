@@ -116,7 +116,7 @@ export const Card2 = styled.div`
 `;
 export const WrapperThreeSection = styled.div`
   background-image: url(${bg2});
-  height: 50rem;
+  height: 100vh;
   width: 100vw;
 
   /* Create the parallax scrolling effect */
@@ -163,10 +163,10 @@ export const TextDivPrincipal = styled.div`
 export const TextDiv1 = styled.div`
   float: left;
   width: 30%;
-  text-align: justify;
+  text-align: left;
   color: #fff;
   font-size: 1.8rem;
-  line-height: 2;
+  line-height: 1.8;
   margin-right: 2rem;
   margin-left: 2.8rem;
 `;
@@ -174,7 +174,7 @@ export const TextDiv1 = styled.div`
 export const TextDiv2 = styled.div`
   float: left;
   width: 30%;
-  text-align: justify;
+  text-align: left;
   color: #fff;
   font-size: 1.8rem;
   line-height: 2;
@@ -184,7 +184,7 @@ export const TextDiv2 = styled.div`
 export const TextDiv3 = styled.div`
   float: left;
   width: 30%;
-  text-align: justify;
+  text-align: left;
   color: #fff;
   font-size: 1.8rem;
   line-height: 2;
