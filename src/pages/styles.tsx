@@ -107,8 +107,8 @@ export const Image = styled.img``;
 export const Card2 = styled.div`
   ${Image} {
     margin: 2rem;
-    width: 100%;
-    height: 90%;
+    width: 90%;
+    height: 80%;
     border-radius: 4px;
   }
   padding-top: 1rem;
@@ -116,7 +116,7 @@ export const Card2 = styled.div`
 `;
 export const WrapperThreeSection = styled.div`
   background-image: url(${bg2});
-  height: 50rem;
+  height: 60rem;
   width: 100vw;
 
   /* Create the parallax scrolling effect */
@@ -144,8 +144,8 @@ export const TextWrapper = styled.div`
 
   p:nth-child(3) {
     padding-left: 0%;
-    padding-top: 1%;
-    padding-bottom: 5%;
+    padding-top: 2%;
+    padding-bottom: 4%;
   }
 
   p {

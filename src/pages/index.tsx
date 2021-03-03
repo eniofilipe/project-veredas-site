@@ -121,22 +121,29 @@ const Home = () => {
         </S.TextWrapper>
         <S.TextDivPrincipal>
           <S.TextDiv1>
-            Mussum Ipsum, cacilds vidis litro abertis. Interessantiss quisso
-            pudia ce receita de bolis, mais bolis eu num gostis. Mé faiz
-            elementum girarzis, nisi eros vermeio. Suco de cevadiss deixa as
-            pessoas mais interessantis. Posuere libero varius.
+            Na loja se encontra todos os produtos ofertados na semana. É
+            possível escolher o produto, a quantidade e adicionar ao carrinho.
+            Assim que finalizar o pedido, é solicitado uma conta, caso não tenha
+            pode criar uma conta nova. <p />
+            Informe seus dados corretamente para poder ser efetuado a entrega.{' '}
+            <p />
           </S.TextDiv1>
           <S.TextDiv2>
-            Todo mundo vê os porris que eu tomo, mas ninguém vê os tombis que eu
-            levo! Interagi no mé, cursus quis, vehicula ac nisi. Praesent
-            malesuada urna nisi, quis volutpat erat hendrerit non. Nam vulputate
-            dapibus.
+            Período de funcionamento: <p />
+            &nbsp; &nbsp; &nbsp; Pedidos: Segunda-Feira até Quarta-Feira. <p />
+            &nbsp; &nbsp; &nbsp; Entregas: A partir de Sexta-Feira. <p />
+            &nbsp; &nbsp; &nbsp;Só aceitamos alteração do pedido até as &nbsp;
+            &nbsp; &nbsp; &nbsp;Quarta-Feira 23:59hrs. <p />
+            <br />
+            <p /> Caso surja algum imprevisto entraremos em contato! <p />
           </S.TextDiv2>
           <S.TextDiv3>
-            A ordem dos tratores não altera o pão duris. Suco de cevadiss, é um
-            leite divinis, qui tem lupuliz, matis, aguis e fermentis. Vide
-            electram sadipscing et per. Nullam volutpat risus nec leo commodo,
-            ut interdum diam laoreet. Sed non consequat odio.
+            Frete: R$ 5,00. <p />
+            Entregas realizadas somente na cidade de Montes Claros/MG. <p />
+            <br />
+            Endereço: Assentamento Estrela do Norte, Estrada da Produção, Km 14,
+            CEP: 39410-000, Zona Rural, Município de Montes Claros/MG CEP:
+            39410-000.
           </S.TextDiv3>
         </S.TextDivPrincipal>
         {!validade ? (
@@ -149,14 +156,14 @@ const Home = () => {
       </S.WrapperThreeSection>
       <S.WrapperFooter>
         <div>
-          <p>Cooperativa Veredas da Terra</p>
-          <p>CNPJ: 33.870.746/0001-05</p>
+          <p>Cooperativa Camponesa - Veredas da Terra</p>
+          <p>CNPJ: 10.286.881/0001-02</p>
         </div>
 
         <div>
-          <p>Contato</p>
-          <p>email@veredasdaterra.com.br</p>
-          <p>+55 38 9 995133333</p>
+          <p>Contato:</p>
+          <p>contato@veredasdaterra.com.br</p>
+          <p>+55 38 9 99508136</p>
         </div>
 
         <div>
