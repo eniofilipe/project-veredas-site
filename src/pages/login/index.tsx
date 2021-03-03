@@ -9,8 +9,12 @@ import LockIcon from '@material-ui/icons/Lock';
 import AuthContext from '../../contexts/auth';
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
+import ValidadeContext from '../../contexts/validade';
+import logomst from '../../assets/logo-mst-rurais.png';
+import logoif from '../../assets/logo-if.png';
 
 const Login = () => {
+  const { validade } = useContext(ValidadeContext);
   const Router = useRouter();
 
   const { signIn } = useContext(AuthContext);
@@ -24,6 +28,13 @@ const Login = () => {
     });
   };
 
+  const goToProducts = () => {
+    Router.push('/products');
+  };
+
+  const goToLogin = () => {
+    Router.push('/register');
+  };
   return (
     <div>
       <Head>
@@ -31,10 +42,27 @@ const Login = () => {
       </Head>
       <body>
         <S.HeaderWrapper>
-          <S.Logo src={veredaslogo} alt="" />
+          <S.Header>
+            <S.Logo src={veredaslogo} alt="" />
+            <S.MenuNav>
+              <S.MenuLink onClick={() => Router.push('/')}>Home</S.MenuLink>
+              <S.MenuLink onClick={() => Router.push('/')}>
+                Quem somos
+              </S.MenuLink>
+              <S.MenuLink onClick={() => Router.push('/')}>
+                Como Funciona
+              </S.MenuLink>
+              {!validade ? (
+                <S.Button onClick={goToLogin}>Criar conta</S.Button>
+              ) : (
+                <S.Button onClick={goToProducts}>Entrar na Feirinha</S.Button>
+              )}
+            </S.MenuNav>
+          </S.Header>
         </S.HeaderWrapper>
         <S.Content>
           <S.LoginContainer>
+            <h1>Acesso</h1>
             <div>
               <S.Icon>
                 <EmailIcon />
@@ -60,12 +88,33 @@ const Login = () => {
             <S.SubTitle>Recuperar Senha</S.SubTitle>
             <p />
             <S.ButtonLogin onClick={() => handleLogin()}>Acessar</S.ButtonLogin>
-            <S.ButtonLogin clear onClick={() => Router.push('/register')}>
+            <S.ButtonLogin onClick={() => Router.push('/register')}>
               Criar conta
             </S.ButtonLogin>
           </S.LoginContainer>
         </S.Content>
       </body>
+      <S.WrapperFooter>
+        <div>
+          <p>Cooperativa Camponesa - Veredas da Terra</p>
+          <p>CNPJ: 10.286.881/0001-02</p>
+        </div>
+
+        <div>
+          <p>Contato</p>
+          <p>email@veredasdaterra.com.br</p>
+          <p>(38) 9 9900-0000</p>
+        </div>
+
+        <div>
+          <S.Logo
+            src={veredaslogo}
+            alt="Logo da cooperativa Veredas da Terra"
+          />
+          <S.Logo src={logomst} alt="Logo do MST" />
+          <S.Logo src={logoif} alt="Logo do IFNMG" />
+        </div>
+      </S.WrapperFooter>
     </div>
   );
 };

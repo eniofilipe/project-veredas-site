@@ -121,39 +121,33 @@ const Home = () => {
         </S.TextWrapper>
         <S.TextDivPrincipal>
           <S.TextDiv1>
-            Mussum Ipsum, cacilds vidis litro abertis. Interessantiss quisso
-            pudia ce receita de bolis, mais bolis eu num gostis. Mé faiz
-            elementum girarzis, nisi eros vermeio. Suco de cevadiss deixa as
-            pessoas mais interessantis. Posuere libero varius. Nullam a nisl ut
-            ante blandit hendrerit. Aenean sit amet nisi..{' '}
+            As cestas agroecológicas são comercializadas em{' '}
+            <b>Montes Claros (MG)</b>, na modalidade de <b>circuito curto</b>,
+            isto é, do campo, direto para a casa do consumidor, num esquema de
+            entrega porta a porta.
           </S.TextDiv1>
           <S.TextDiv2>
-            Todo mundo vê os porris que eu tomo, mas ninguém vê os tombis que eu
-            levo! Interagi no mé, cursus quis, vehicula ac nisi. Praesent
-            malesuada urna nisi, quis volutpat erat hendrerit non. Nam vulputate
-            dapibus. Copo furadis é disculpa de bebadis, arcu quam euismod
-            magna.
+            Nossa loja online abre para realização de pedidos na Segunda-feira e
+            costuma fechar para pedidos na Quinta-feira.
           </S.TextDiv2>
           <S.TextDiv3>
-            A ordem dos tratores não altera o pão duris. Suco de cevadiss, é um
-            leite divinis, qui tem lupuliz, matis, aguis e fermentis. Admodum
-            accumsan disputationi eu sit. Vide electram sadipscing et per.
-            Nullam volutpat risus nec leo commodo, ut interdum diam laoreet. Sed
-            non consequat odio.
+            Com o fechamento dos pedidos, iniciamos o processo de entrega dos
+            produtos. Assim, você receberá nossos produtos agorcológicos no
+            conforto de sua casa.
           </S.TextDiv3>
         </S.TextDivPrincipal>
       </S.WrapperThreeSection>
 
       <S.WrapperFooter>
         <div>
-          <p>Cooperativa Veredas da Terra</p>
-          <p>CNPJ: 33.870.746/0001-05</p>
+          <p>Cooperativa Camponesa - Veredas da Terra</p>
+          <p>CNPJ: 10.286.881/0001-02</p>
         </div>
 
         <div>
           <p>Contato</p>
           <p>email@veredasdaterra.com.br</p>
-          <p>+55 38 9 995133333</p>
+          <p>(38) 9 9900-0000</p>
         </div>
 
         <div>
