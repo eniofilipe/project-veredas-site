@@ -40,15 +40,16 @@ const Profile = () => {
         <title>Veredas da terra</title>
       </Head>
       <body>
-        <S.Header>
-          <S.Logo src={veredaslogo} alt="" />
-          <S.Title>Perfil</S.Title>
-          <S.WrapperMenu>
-            <S.Title onClick={() => Router.push('/orders')}> Pedidos</S.Title>
-            <S.Title onClick={signOut}>Sair</S.Title>
-          </S.WrapperMenu>
-        </S.Header>
-
+        <S.HeaderWrapper>
+          <S.Header>
+            <S.Logo src={veredaslogo} alt="" />
+            <S.TitlePerfil>Perfil</S.TitlePerfil>
+            <S.WrapperMenu>
+              <S.Title onClick={() => Router.push('/orders')}> Pedidos</S.Title>
+              <S.Title onClick={signOut}>Sair</S.Title>
+            </S.WrapperMenu>
+          </S.Header>
+        </S.HeaderWrapper>
         <S.WrapperContent>
           <S.WrapperData>
             <S.Title>Dados</S.Title>

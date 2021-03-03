@@ -57,18 +57,22 @@ const products = () => {
         <title>Veredas da terra</title>
       </Head>
       <body>
-        <S.Header>
-          <S.Logo src={veredaslogo} alt="" />
-          <S.SearchBar placeholder="Buscar" />
-          <S.WrapperIcons>
-            <S.Icon>
-              <CartIcon onClick={() => Router.push('/cart')} />
-            </S.Icon>
-            <S.Icon>
-              <ProfileIcon onClick={() => Router.push('profile')} />
-            </S.Icon>
-          </S.WrapperIcons>
-        </S.Header>
+        <S.HeaderWrapper>
+          <S.Header>
+            <S.Logo src={veredaslogo} alt="" />
+            <S.SearchBar placeholder="Buscar" />
+            <S.MenuNav>
+              <S.WrapperIcons>
+                <S.Icon>
+                  <CartIcon onClick={() => Router.push('/cart')} />
+                </S.Icon>
+                <S.Icon>
+                  <ProfileIcon onClick={() => Router.push('profile')} />
+                </S.Icon>
+              </S.WrapperIcons>
+            </S.MenuNav>
+          </S.Header>
+        </S.HeaderWrapper>
         <S.WrapperContent>
           <S.WrapperCategory>
             <div>

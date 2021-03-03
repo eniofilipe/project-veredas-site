@@ -102,7 +102,6 @@ const Home = () => {
           </S.CentralizeWrapper>
         </S.BGHome>
       </S.HomeSectionWrapper>
-
       <S.WrapperSecondSection ref={sectionTwoRef}>
         <S.Card1>
           <p> Do campo à cidade</p>
@@ -119,28 +118,30 @@ const Home = () => {
       <S.WrapperThreeSection ref={sectionThreeRef}>
         <S.TextWrapper>
           <p>Como funciona? </p>
-          <p>
+        </S.TextWrapper>
+        <S.TextDivPrincipal>
+          <S.TextDiv1>
             Mussum Ipsum, cacilds vidis litro abertis. Interessantiss quisso
             pudia ce receita de bolis, mais bolis eu num gostis. Mé faiz
             elementum girarzis, nisi eros vermeio. Suco de cevadiss deixa as
             pessoas mais interessantis. Posuere libero varius. Nullam a nisl ut
             ante blandit hendrerit. Aenean sit amet nisi..{' '}
-          </p>
-          <p>
+          </S.TextDiv1>
+          <S.TextDiv2>
             Todo mundo vê os porris que eu tomo, mas ninguém vê os tombis que eu
             levo! Interagi no mé, cursus quis, vehicula ac nisi. Praesent
             malesuada urna nisi, quis volutpat erat hendrerit non. Nam vulputate
             dapibus. Copo furadis é disculpa de bebadis, arcu quam euismod
             magna.
-          </p>
-          <p>
+          </S.TextDiv2>
+          <S.TextDiv3>
             A ordem dos tratores não altera o pão duris. Suco de cevadiss, é um
             leite divinis, qui tem lupuliz, matis, aguis e fermentis. Admodum
             accumsan disputationi eu sit. Vide electram sadipscing et per.
             Nullam volutpat risus nec leo commodo, ut interdum diam laoreet. Sed
-            non consequat odio. <p />
-          </p>
-        </S.TextWrapper>
+            non consequat odio.
+          </S.TextDiv3>
+        </S.TextDivPrincipal>
       </S.WrapperThreeSection>
 
       <S.WrapperFooter>

@@ -20,9 +20,11 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 import Head from 'next/head';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { useRouter } from 'next/router';
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
+import AuthContext from '../../contexts/auth';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -81,6 +83,8 @@ const pedidos = [
 
 const Order = () => {
   const classes = useStyles();
+  const Router = useRouter();
+  const { cliente, signOut } = useContext(AuthContext);
 
   function handleSubtotal(prods) {
     let sub = 0;
@@ -101,13 +105,12 @@ const Order = () => {
       <body>
         <S.Header>
           <S.Logo src={veredaslogo} alt="" />
-          <S.Title>Pedidos</S.Title>
+          <S.TitlePedidos>Pedidos</S.TitlePedidos>
           <S.WrapperMenu>
-            <S.Title>Perfil</S.Title>
-            <S.Title>Sair</S.Title>
+            <S.Title onClick={() => Router.push('profile')}>Perfil</S.Title>
+            <S.Title onClick={signOut}>Sair</S.Title>
           </S.WrapperMenu>
         </S.Header>
-
         <S.Body>
           <S.WrapperContent>
             <List
