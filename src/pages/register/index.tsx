@@ -1,13 +1,22 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable operator-linebreak */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import Head from 'next/head';
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
+import searchCep from 'cep-promise';
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
 import { postClientes } from '../../api/Clientes';
+import { isEmail, validarCPF } from '../../Utils/Validation';
+import { cepMask, cellphoneeMask, cpfMask } from '../../Utils/Masks';
+import ValidadeContext from '../../contexts/validade';
+import logomst from '../../assets/logo-mst-rurais.png';
+import logoif from '../../assets/logo-if.png';
+import logowhite from '../../assets/logo-white.png';
 
 export type ProfileProps = {
   name: string;
@@ -24,6 +33,8 @@ export type ProfileProps = {
 
 const Profile = () => {
   const router = useRouter();
+  const { validade } = useContext(ValidadeContext);
+
   const [name, setName] = useState('');
   const [cpf, setCpf] = useState('');
   const [phone, setPhone] = useState('');
@@ -38,9 +49,53 @@ const Profile = () => {
   const [cidade, setCidade] = useState('');
   const [estado, setEstado] = useState('');
 
+  useEffect(() => {
+    if (cep) {
+      setCep(cepMask(cep));
+      if (cep.length === 9) {
+        searchCep(cep.replace(/\D/g, '')).then(setValuesCep).catch(errorCep);
+      }
+    }
+
+    function errorCep() {
+      toast.warn('CEP não encontrado!');
+    }
+    function setValuesCep(data: any) {
+      console.log(data);
+      setEstado(data.state);
+      setCidade(data.city);
+      setNeighborhood(data.neighborhood);
+      setStreet(data.street);
+    }
+  }, [cep]);
+
   const register = async () => {
     try {
-      const response = await postClientes({
+      if (!validarCPF(cpf)) {
+        toast.warn('CPF Inválido');
+        return;
+      }
+
+      if (!isEmail(email)) {
+        toast.warn('Email Inválido');
+        return;
+      }
+
+      if (!isEmail(email)) {
+        toast.warn('Email Inválido');
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        toast.warn('As senhas não coincidem');
+        return;
+      }
+
+      if (password.length < 6) {
+        toast.warn('As senhas não coincidem');
+        return;
+      }
+      await postClientes({
         bairro: neighborhood,
         cep,
         cidade,
@@ -60,66 +115,100 @@ const Profile = () => {
     }
   };
 
+  const goToProducts = () => {
+    router.push('/products');
+  };
+
+  const goToLogin = () => {
+    router.push('/login');
+  };
   return (
     <S.Wrapper>
-      <Head>
-        <title>Veredas da terra</title>
-      </Head>
-      <S.Header>
-        <S.Logo src={veredaslogo} alt="" />
-        <S.Title>Cadastro</S.Title>
-      </S.Header>
+      <S.HeaderWrapper>
+        <S.Header>
+          <S.Logo src={veredaslogo} alt="" />
+          <S.MenuNav>
+            <S.MenuLink onClick={() => router.push('/')}>Home</S.MenuLink>
+            <S.MenuLink onClick={() => router.push('/')}>Quem somos</S.MenuLink>
+            <S.MenuLink onClick={() => router.push('/')}>
+              Como Funciona
+            </S.MenuLink>
+            {!validade ? (
+              <S.Button onClick={goToLogin}>Acessar Conta</S.Button>
+            ) : (
+              <S.Button onClick={goToProducts}>Entrar na Feirinha</S.Button>
+            )}
+          </S.MenuNav>
+        </S.Header>
+      </S.HeaderWrapper>
       <S.Body>
         <S.WrapperController>
+          <S.Title>Cadastro</S.Title>
           <S.WrapperContent>
             <S.WrapperData>
-              <S.Title>Dados</S.Title>
-              <S.Row>
-                <S.Label> Nome: </S.Label>
-                <S.Input
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </S.Row>
-              <S.Row>
-                <S.Label> CPF: </S.Label>
-                <S.Input value={cpf} onChange={(e) => setCpf(e.target.value)} />
-              </S.Row>
-              <S.Row>
-                <S.Label> Telefone: </S.Label>
-                <S.Input
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                />
-              </S.Row>
-              <S.Row>
-                <S.Label> E-Mail: </S.Label>
-                <S.Input
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </S.Row>
-
-              <S.Row>
-                <S.Label> Senha: </S.Label>
-                <S.Input
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  type="password"
-                />
-              </S.Row>
-
-              <S.Row>
-                <S.Label> Confirmar Senha: </S.Label>
-                <S.Input
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  type="password"
-                />
-              </S.Row>
+              <S.Title>Dados Pessoais</S.Title>
+              <S.Form>
+                <S.Row>
+                  <S.Label> Nome: </S.Label>
+                  <S.Input
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </S.Row>
+                <S.Row>
+                  <S.Label> CPF: </S.Label>
+                  <S.Input
+                    value={cpf}
+                    onChange={(e) => setCpf(cpfMask(e.target.value))}
+                  />
+                </S.Row>
+                <S.Row>
+                  <S.Label> Celular: </S.Label>
+                  <S.Input
+                    value={phone}
+                    onChange={(e) => setPhone(cellphoneeMask(e.target.value))}
+                  />
+                </S.Row>
+              </S.Form>
             </S.WrapperData>
-            <S.WrapperAddress>
-              <S.Title>Endereço</S.Title>
+            <S.WrapperData>
+              <S.Title>Dados de Acesso</S.Title>
+              <S.Form>
+                <S.Row>
+                  <S.Label> E-Mail: </S.Label>
+                  <S.Input
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </S.Row>
+
+                <S.Row>
+                  <S.Label> Senha: </S.Label>
+                  <S.Input
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    type="password"
+                  />
+                </S.Row>
+
+                <S.Row>
+                  <S.Label> Confirmar Senha: </S.Label>
+                  <S.Input
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    type="password"
+                  />
+                </S.Row>
+              </S.Form>
+            </S.WrapperData>
+          </S.WrapperContent>
+          <S.WrapperAddress>
+            <S.Title>Endereço</S.Title>
+            <S.WrapperDataAddress>
+              <S.Row>
+                <S.Label> CEP: </S.Label>
+                <S.Input value={cep} onChange={(e) => setCep(e.target.value)} />
+              </S.Row>
               <S.Row>
                 <S.Label> Cidade: </S.Label>
                 <S.Input
@@ -134,10 +223,7 @@ const Profile = () => {
                   onChange={(e) => setEstado(e.target.value)}
                 />
               </S.Row>
-              <S.Row>
-                <S.Label> CEP: </S.Label>
-                <S.Input value={cep} onChange={(e) => setCep(e.target.value)} />
-              </S.Row>
+
               <S.Row>
                 <S.Label> Bairro: </S.Label>
                 <S.Input
@@ -159,16 +245,35 @@ const Profile = () => {
                   onChange={(e) => setNumber(e.target.value)}
                 />
               </S.Row>
-            </S.WrapperAddress>
-          </S.WrapperContent>
-          <S.WrapperButtons>
-            <S.Button onClick={() => router.push('/login')}>
-              Já tenho conta
-            </S.Button>
-            <S.Button onClick={register}>Finalizar</S.Button>
-          </S.WrapperButtons>
+            </S.WrapperDataAddress>
+          </S.WrapperAddress>
         </S.WrapperController>
+        <S.WrapperButtons>
+          <S.Button onClick={() => router.push('/login')}>
+            Já tenho conta
+          </S.Button>
+          <S.Button onClick={() => register()}>Finalizar</S.Button>
+        </S.WrapperButtons>
       </S.Body>
+
+      <S.WrapperFooter>
+        <div>
+          <p>Cooperativa Veredas da Terra</p>
+          <p>CNPJ: 33.870.746/0001-05</p>
+        </div>
+
+        <div>
+          <p>Contato</p>
+          <p>email@veredasdaterra.com.br</p>
+          <p>+55 38 9 995133333</p>
+        </div>
+
+        <div>
+          <S.Logo src={logowhite} alt="Logo da cooperativa Veredas da Terra" />
+          <S.Logo src={logomst} alt="Logo do MST" />
+          <S.Logo src={logoif} alt="Logo do IFNMG" />
+        </div>
+      </S.WrapperFooter>
     </S.Wrapper>
   );
 };

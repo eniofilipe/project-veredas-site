@@ -1,11 +1,12 @@
-/* eslint-disable object-curly-newline */
-import { useEffect, useState, useRef, useContext } from 'react';
+import {
+ useEffect, useState, useRef, useContext
+} from 'react';
 import { useRouter } from 'next/router';
 import veredaslogo from '../assets/logo.png';
 import * as S from './styles';
 import logomst from '../assets/logo-mst-rurais.png';
-import imagecampo from '../assets/Campo-cidade.png';
 import logoif from '../assets/logo-if.png';
+import imagecampo from '../assets/Campo-cidade.png';
 import ValidadeContext from '../contexts/validade';
 
 const Home = () => {
