@@ -1,19 +1,16 @@
-import {
- useEffect, useState, useRef, useContext
-} from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/router';
-import veredaslogo from '../assets/logo.png';
+import veredaslogo from '../../assets/logo.png';
 import * as S from './styles';
-import logomst from '../assets/logo-mst-rurais.png';
-import logoif from '../assets/logo-if.png';
-import imagecampo from '../assets/Campo-cidade.png';
-import ValidadeContext from '../contexts/validade';
+import logomst from '../../assets/logo-mst-rurais.png';
+import imagecampo from '../../assets/Campo-cidade.png';
+import logoif from '../../assets/logo-if.png';
+import { getOpened } from '../../api/Validade';
 
 const Home = () => {
-  const { validade } = useContext(ValidadeContext);
-  const [scrollY, setScrollY] = useState(0);
-
   const router = useRouter();
+  const [scrollY, setScrollY] = useState(0);
+  const [opened, setOpened] = useState(false);
 
   const sectionOneRef = useRef<null | HTMLDivElement>(null);
   const sectionTwoRef = useRef<null | HTMLDivElement>(null);
@@ -22,14 +19,6 @@ const Home = () => {
   function logit() {
     setScrollY(window.pageYOffset);
   }
-
-  const goToProducts = () => {
-    router.push('/products');
-  };
-
-  const goToLogin = () => {
-    router.push('/login');
-  };
 
   useEffect(() => {
     function watchScroll() {
@@ -65,6 +54,22 @@ const Home = () => {
     }
   }
 
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const { data } = await getOpened();
+        if (data.success === 'aberta') {
+          setOpened(true);
+          return;
+        }
+        setOpened(true);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    loadData();
+  }, []);
+
   return (
     <S.Wrapper>
       <S.HeaderWrapper position={scrollY}>
@@ -80,10 +85,12 @@ const Home = () => {
             <S.MenuLink onClick={() => handleChange('sectionThreeRef')}>
               Como Funciona
             </S.MenuLink>
-            {!validade ? (
-              <S.Button onClick={goToLogin}>Acessar Conta</S.Button>
+            {opened ? (
+              <S.Button>Entrar na feirinha</S.Button>
             ) : (
-              <S.Button onClick={goToProducts}>Entrar na Feirinha</S.Button>
+              <S.Button onClick={() => router.push('/login')}>
+                Acessar conta
+              </S.Button>
             )}
           </S.MenuNav>
         </S.Header>
@@ -92,12 +99,8 @@ const Home = () => {
       <S.HomeSectionWrapper ref={sectionOneRef}>
         <S.BGHome>
           <S.CentralizeWrapper>
-            <p>BEM VINDO À CESTA AGROECOLOGICA</p>
-            <p>
-              Aqui nós oferecemos os alimentos orgânicos de melhor qualidade,{' '}
-              <p />
-              direto do campo da agricultura familiar.
-            </p>
+            <p>Alimentos saudáveis e de qualidade</p>
+            <p>Cestas Agroecologicas</p>
             <S.Logo src={logomst} alt="Logo do MST" />
           </S.CentralizeWrapper>
         </S.BGHome>
@@ -120,25 +123,23 @@ const Home = () => {
         <S.TextWrapper>
           <p>Como funciona? </p>
           <p>
-            Mussum Ipsum, cacilds vidis litro abertis. Interessantiss quisso
-            pudia ce receita de bolis, mais bolis eu num gostis. Mé faiz
-            elementum girarzis, nisi eros vermeio. Suco de cevadiss deixa as
-            pessoas mais interessantis. Posuere libero varius. Nullam a nisl ut
-            ante blandit hendrerit. Aenean sit amet nisi..{' '}
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+            dapibus neque felis, sed fermentum metus tristique in. Phasellus
+            imperdiet dui eu euismod tincidunt. Donec varius, mi eu cursus
+            dignissim, eros libero scelerisque metus, a ullamcorper tellus elit
+            ac tortor. Pellentesque lobortis elit eu ex aliquam, nec eleifend
+            erat dapibus.{' '}
           </p>
           <p>
-            Todo mundo vê os porris que eu tomo, mas ninguém vê os tombis que eu
-            levo! Interagi no mé, cursus quis, vehicula ac nisi. Praesent
-            malesuada urna nisi, quis volutpat erat hendrerit non. Nam vulputate
-            dapibus. Copo furadis é disculpa de bebadis, arcu quam euismod
-            magna.
+            Nullam vel molestie odio. Cras in lacinia sem. Integer consectetur
+            dolor et odio venenatis eleifend. Maecenas ipsum risus, lobortis
+            vitae velit ut, interdum fermentum mi. Sed ullamcorper dictum libero
+            vel facilisis.
           </p>
           <p>
-            A ordem dos tratores não altera o pão duris. Suco de cevadiss, é um
-            leite divinis, qui tem lupuliz, matis, aguis e fermentis. Admodum
-            accumsan disputationi eu sit. Vide electram sadipscing et per.
-            Nullam volutpat risus nec leo commodo, ut interdum diam laoreet. Sed
-            non consequat odio. <p />
+            Aliquam ac maximus lacus. Duis a lacus varius, viverra massa quis,
+            bibendum risus. Mauris tempor nisi nisi, a condimentum ex tincidunt
+            in. Fusce hendrerit dolor gravida imperdiet viverra.{' '}
           </p>
         </S.TextWrapper>
       </S.WrapperThreeSection>
