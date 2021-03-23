@@ -1,5 +1,8 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable no-use-before-define */
 import React, { createContext, useState, useEffect } from 'react';
 
+import { toast } from 'react-toastify';
 import { Oferta } from '../types';
 
 interface OfertaCart extends Oferta {
@@ -30,6 +33,7 @@ export const CartProvider: React.FC = ({ children }) => {
       };
 
       setProducts(productsAux);
+      toast.success('Produto adicionado');
     } else {
       const productAux = { ...prod, quantidadeCart: 1 } as OfertaCart;
 

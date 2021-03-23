@@ -1,4 +1,6 @@
-import React, { createContext, useState, useEffect } from 'react';
+/* eslint-disable no-throw-literal */
+/* eslint-disable import/no-unresolved */
+import { createContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { getLogin } from '../api/Login';
 import { ClienteLogin, Login } from '../types';
@@ -7,7 +9,7 @@ import { getValidaToken } from '../api/Validade';
 interface IAuthContext {
   signed: boolean;
   cliente: ClienteLogin | null;
-  signIn: (data: Login) => Promise<void>;
+  signIn: (data: Login) => Promise<404 | 200 | 403>;
   signOut: () => void;
 }
 
@@ -19,9 +21,9 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
 
   const handleToken = async () => {
-    const token = localStorage.getItem('token');
+    const localToken = localStorage.getItem('token');
     try {
-      const response = await getValidaToken(token);
+      const response = await getValidaToken(localToken);
 
       setCliente({
         nome: response.data.nome,
@@ -39,17 +41,23 @@ export const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   const signIn = async (data: Login) => {
+    localStorage.clear();
     try {
       const response = await getLogin({
         email: data.email,
         password: data.password,
       });
-
+      if (response.data.option !== 'cliente') {
+        return 403;
+      }
       setToken(response.data.token);
+      setCliente(response.data.client);
       localStorage.setItem('token', response.data.token);
       router.push('/products');
+      return 200;
     } catch (error) {
       console.log(error);
+      return 404;
     }
   };
 

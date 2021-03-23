@@ -1,12 +1,17 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable import/extensions */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable operator-linebreak */
 // eslint-disable-next-line import/no-unresolved
 import React, { useContext, useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
 import CartContext from '../../contexts/cart';
+import AuthContext from '../../contexts/auth';
+import { postPedido } from '../../api/Pedido';
+import { OfertaPedido } from '../../types';
 
 type Product = {
   product: string;
@@ -54,12 +59,13 @@ const Cart = ({
   tipoPagamento = ['Dinheiro'],
 }: CartProps) => {
   const { products } = useContext(CartContext);
+  const { cliente } = useContext(AuthContext);
   const [subtotal, setSubtotal] = useState(0);
   const [total, setTotal] = useState(0);
-
+  const router = useRouter();
   useEffect(() => {
     const resultAux = products.map(
-      (prod) => prod.quantidadeCart * prod.valor_unitario
+      (prod) => prod.quantidadeCart * prod.valor_unitario,
     );
 
     const result = resultAux.reduce(
@@ -71,6 +77,22 @@ const Cart = ({
 
     setTotal(result + 5);
   }, [products]);
+
+  async function handlePedido() {
+    try {
+      await postPedido({
+        ofertas: products.map(
+          (c) => ({ oferta_id: c.id, quantidade: c.quantidadeCart } as OfertaPedido),
+        ),
+        cliente_id: cliente.id,
+        tipo_frete_id: 1,
+        tipo_pagamento_id: 1,
+        valor_frete: 5,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <S.Wrapper>
@@ -127,8 +149,8 @@ const Cart = ({
       </S.WrapperContent>
 
       <S.WrapperButtons>
-        <S.CancelButton>Cancelar</S.CancelButton>
-        <S.AcceptButton>Finalizar</S.AcceptButton>
+        <S.CancelButton onClick={() => router.back()}>Cancelar</S.CancelButton>
+        <S.AcceptButton onClick={() => handlePedido()}>Finalizar</S.AcceptButton>
       </S.WrapperButtons>
     </S.Wrapper>
   );

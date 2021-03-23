@@ -97,21 +97,33 @@ const Profile = () => {
       }
       await postClientes({
         bairro: neighborhood,
-        cep,
+        cep: cep.replace(/\D/g, ''),
         cidade,
-        cpf,
+        cpf: cpf.replace(/\D/g, ''),
         email,
         estado,
         logradouro: street,
         nome: name,
         numero: number,
         password,
-        telefone: phone,
+        telefone: phone.replace(/\D/g, ''),
       });
-
+      toast.success('Cadastro realizado com sucesso.');
       router.push('/login');
     } catch (error) {
-      console.log(error);
+      const { status } = error.response;
+      switch (status) {
+        case 400:
+          toast.warn('Email já cadastrado.');
+          break;
+        case 401:
+          toast.warn('CPF já cadastrado.');
+          break;
+        default:
+          toast.warn('Algo de errado ocorreu ao tentar criar sua conta.');
+          break;
+      }
+      console.log({ error });
     }
   };
 
