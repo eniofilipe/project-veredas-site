@@ -55,7 +55,7 @@ const Profile = () => {
         });
         setProfileData(data);
         setBairro(data.enderecos.bairro);
-        setCep(cepMask(data.enderecos.cep));
+        setCep(cepMask(`${data.enderecos.cep}`));
         setCidade(data.enderecos.cidade);
         setComplemento(data.enderecos.complemento);
         setCpf(cpfMask(data.cpf));
