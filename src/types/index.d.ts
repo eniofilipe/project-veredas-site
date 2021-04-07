@@ -193,10 +193,6 @@ export interface PedidosProps {
     produtos: {
       id: number;
       nome: string;
-      frete: {
-        id: number;
-        valor_frete: number;
-      };
       // descricao: string;
       // imagem_id: number;
       // imagem: {
@@ -208,5 +204,9 @@ export interface PedidosProps {
       quantidade: number;
     };
   }[];
+  frete: {
+    id: number;
+    valor_frete: number;
+  };
   total: number;
 }

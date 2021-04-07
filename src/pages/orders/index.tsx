@@ -61,19 +61,30 @@ const Order = () => {
     fetchPedidos();
   }, []);
 
+  // function handleSubtotal(prods) {
+  //   let sub = 0;
+  //   prods.forEach((prod) => {
+  //     sub += prod.preco;
+  //   });
+  //   return sub.toFixed(2);
+  // }
+
   function handleSubtotal(prods) {
     let sub = 0;
+
     prods.forEach((prod) => {
-      sub += prod.preco;
+      sub += prod.valor_unitario;
     });
-    return sub.toFixed(2);
+
+    // return sub.toFixed(2);
+    return sub;
   }
 
   const [open, setOpen] = useState(false);
 
-  // const handleClick = () => {
-  //   setOpen(!open);
-  // };
+  const handleClick = () => {
+    setOpen(!open);
+  };
 
   // function formatCurrency(value) {
   //   return `R$ ${value.toFixed(2)}`;
@@ -100,72 +111,65 @@ const Order = () => {
               aria-labelledby="nested-list-subheader"
               className={classes.root}
             >
-              {pedidos.map((pedido) => {
-                // const [open, setOpen] = useState(false);
-                const handleClick = () => {
-                  setOpen(!open);
-                };
-                return (
-                  <div key={`${pedido.id}`}>
-                    <ListItem button onClick={handleClick}>
-                      <ListItemText
-                        primary={`Pedido #${pedido.id}\xa0\xa0\xa0\xa0\xa0\xa0\xa0${pedido.createdAt}\xa0\xa0\xa0\xa0\xa0\xa0\xa0${pedido.status}`}
-                      />
-                      {open ? <ExpandLess /> : <ExpandMore />}
-                    </ListItem>
-                    <Collapse in={open} timeout="auto" unmountOnExit>
-                      <TableContainer component={Paper}>
-                        <Table aria-label="spanning table">
-                          <TableHead>
-                            <TableRow>
-                              <TableCell>Quantidade</TableCell>
-                              <TableCell align="right">Produto</TableCell>
-                              <TableCell align="right">Valor</TableCell>
-                            </TableRow>
-                          </TableHead>
-                          <TableBody>
-                            {pedido.ofertas &&
-                              pedido.ofertas.map((prod) => (
-                                <TableRow key={prod.id}>
-                                  <TableCell>
-                                    {prod.oferta_pedidos.quantidade}
-                                  </TableCell>
-                                  <TableCell align="right">
-                                    {prod.produtos.nome}
-                                  </TableCell>
-                                  <TableCell align="right">
-                                    {prod.preco}
-                                  </TableCell>
-                                </TableRow>
-                              ))}
-                            <TableRow>
-                              <TableCell rowSpan={3} />
-                              <TableCell colSpan={1}>Subtotal</TableCell>
-                              <TableCell align="right">
-                                R$ {handleSubtotal(pedido.ofertas)}
-                              </TableCell>
-                            </TableRow>
-                            <TableRow>
-                              <TableCell>Taxa de entrega</TableCell>
-                              <TableCell align="right">
-                                {pedido.valor_frete}
-                              </TableCell>
-                            </TableRow>
-                            <TableRow>
-                              <TableCell>Total</TableCell>
-                              <TableCell align="right">
-                                {Number(handleSubtotal(pedido.ofertas)) +
-                                  Number(pedido.valor_frete)}
-                                {pedido.valor_frete}
-                              </TableCell>
-                            </TableRow>
-                          </TableBody>
-                        </Table>
-                      </TableContainer>
-                    </Collapse>
-                  </div>
-                );
-              })}
+              {pedidos.map((pedido) => (
+                <div key={`${pedido.id}`}>
+                  <ListItem button onClick={handleClick}>
+                    <ListItemText
+                      primary={`Pedido #${pedido.id}\xa0\xa0\xa0\xa0\xa0\xa0\xa0${pedido.createdAt}\xa0\xa0\xa0\xa0\xa0\xa0\xa0${pedido.status}`}
+                    />
+                    {open ? <ExpandLess /> : <ExpandMore />}
+                  </ListItem>
+                  <Collapse in={open} timeout="auto" unmountOnExit>
+                    <TableContainer component={Paper}>
+                      <Table aria-label="spanning table">
+                        <TableHead>
+                          <TableRow>
+                            <TableCell>Quantidade</TableCell>
+                            <TableCell align="center">Produto</TableCell>
+                            <TableCell align="right">Valor</TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          {pedido.ofertas &&
+                            pedido.ofertas.map((prod) => (
+                              <TableRow key={prod.id}>
+                                <TableCell>
+                                  {prod.oferta_pedidos.quantidade}
+                                </TableCell>
+                                <TableCell align="center">
+                                  {prod.produtos.nome}
+                                </TableCell>
+                                <TableCell align="right">
+                                  {prod.valor_unitario}
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                          <TableRow>
+                            <TableCell rowSpan={3} />
+                            <TableCell colSpan={1}>Subtotal</TableCell>
+                            <TableCell align="right">
+                              R$ {handleSubtotal(pedido.ofertas)}
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell>Taxa de entrega</TableCell>
+                            <TableCell align="right">
+                              {pedido.frete.valor_frete}
+                            </TableCell>
+                          </TableRow>
+                          <TableRow>
+                            <TableCell>Total</TableCell>
+                            <TableCell align="right">
+                              {Number(handleSubtotal(pedido.ofertas)) +
+                                Number(pedido.frete.valor_frete)}
+                            </TableCell>
+                          </TableRow>
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                  </Collapse>
+                </div>
+              ))}
             </List>
           </S.WrapperContent>
         </S.Body>
