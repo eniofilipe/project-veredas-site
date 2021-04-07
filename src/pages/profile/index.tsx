@@ -50,9 +50,7 @@ const Profile = () => {
     if (cliente) {
       try {
         const { data } = await getDetails(cliente.id);
-        console.log({
-          data,
-        });
+        console.log({ data });
         setProfileData(data);
         setBairro(data.enderecos.bairro);
         setCep(cepMask(`${data.enderecos.cep}`));

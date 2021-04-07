@@ -141,6 +141,7 @@ export interface OfertaPedido {
   oferta_id: number;
   quantidade: number;
 }
+
 export interface PostPedidoProps {
   ofertas: OfertaPedido[];
   cliente_id: number;
@@ -157,4 +158,55 @@ export interface ResponseValidaToken {
   id: number;
   nome: string;
   email: string;
+}
+
+export interface Product {
+  product: string;
+  quantity: number;
+  value: number;
+}
+
+export interface Address {
+  street: string;
+  number: string;
+  neighborhood: string;
+  cep: string;
+  complement?: string;
+}
+
+export interface CartProps {
+  address: Address;
+  frete: number;
+  tipoPagamento: string[];
+}
+
+export interface PedidosProps {
+  id: number;
+  status: string;
+  createdAt: string;
+  // tipo_pagamento_id: number;
+  // tipo_frete_id: number;
+  ofertas: {
+    id: number;
+    valor_unitario: number;
+    // validade_oferta_id: number;
+    produtos: {
+      id: number;
+      nome: string;
+      frete: {
+        id: number;
+        valor_frete: number;
+      };
+      // descricao: string;
+      // imagem_id: number;
+      // imagem: {
+      //   url: string;
+      //   path: string;
+      // };
+    };
+    oferta_pedidos: {
+      quantidade: number;
+    };
+  }[];
+  total: number;
 }

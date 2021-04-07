@@ -10,28 +10,7 @@ import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
 import CartContext from '../../contexts/cart';
 import AuthContext from '../../contexts/auth';
-import { postPedido } from '../../api/Pedido';
-import { OfertaPedido } from '../../types';
-
-type Product = {
-  product: string;
-  quantity: number;
-  value: number;
-};
-
-type Address = {
-  street: string;
-  number: string;
-  neighborhood: string;
-  cep: string;
-  complement?: string;
-};
-
-export type CartProps = {
-  address: Address;
-  frete: number;
-  tipoPagamento: string[];
-};
+import { OfertaPedido, Address, CartProps } from '../../types';
 
 const endereco: Address = {
   cep: '39404-154',
@@ -39,18 +18,6 @@ const endereco: Address = {
   street: 'Rua trinta e dois',
   number: '122B',
   complement: 'Perto do bar',
-};
-
-const product1: Product = {
-  product: 'Alface',
-  quantity: 3,
-  value: 2.5,
-};
-
-const product2: Product = {
-  product: 'Rucula',
-  quantity: 3,
-  value: 5.5,
 };
 
 const Cart = ({
@@ -63,6 +30,7 @@ const Cart = ({
   const [subtotal, setSubtotal] = useState(0);
   const [total, setTotal] = useState(0);
   const router = useRouter();
+
   useEffect(() => {
     const resultAux = products.map(
       (prod) => prod.quantidadeCart * prod.valor_unitario,
