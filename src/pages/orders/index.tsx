@@ -29,6 +29,8 @@ import AuthContext from '../../contexts/auth';
 import { PedidosProps } from '../../types';
 import { getPedidos } from '../../api/Pedidos';
 
+import { FormatDateByFNS } from '../../Utils/Masks';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '60%',
@@ -44,6 +46,7 @@ const Order = () => {
   const Router = useRouter();
   const { cliente, signOut } = useContext(AuthContext);
   const [pedidos, setPedidos] = useState<PedidosProps[]>([]);
+  const soma = 0;
 
   const fetchPedidos = async () => {
     try {
@@ -73,11 +76,11 @@ const Order = () => {
     let sub = 0;
 
     prods.forEach((prod) => {
-      sub += prod.valor_unitario;
+      sub +=
+        Number(prod.valor_unitario) * Number(prod.oferta_pedidos.quantidade);
     });
 
-    // return sub.toFixed(2);
-    return sub;
+    return sub.toFixed(2);
   }
 
   const [open, setOpen] = useState(false);
@@ -85,10 +88,6 @@ const Order = () => {
   const handleClick = () => {
     setOpen(!open);
   };
-
-  // function formatCurrency(value) {
-  //   return `R$ ${value.toFixed(2)}`;
-  // }
 
   return (
     <S.Wrapper>
@@ -115,7 +114,11 @@ const Order = () => {
                 <div key={`${pedido.id}`}>
                   <ListItem button onClick={handleClick}>
                     <ListItemText
-                      primary={`Pedido #${pedido.id}\xa0\xa0\xa0\xa0\xa0\xa0\xa0${pedido.createdAt}\xa0\xa0\xa0\xa0\xa0\xa0\xa0${pedido.status}`}
+                      primary={`Pedido #${
+                        pedido.id
+                      }\xa0\xa0\xa0\xa0\xa0\xa0\xa0${FormatDateByFNS(
+                        pedido.createdAt
+                      )}\xa0\xa0\xa0\xa0\xa0\xa0\xa0${pedido.status}`}
                     />
                     {open ? <ExpandLess /> : <ExpandMore />}
                   </ListItem>
@@ -154,14 +157,15 @@ const Order = () => {
                           <TableRow>
                             <TableCell>Taxa de entrega</TableCell>
                             <TableCell align="right">
-                              {pedido.frete.valor_frete}
+                              R$ {pedido.frete.valor_frete}
                             </TableCell>
                           </TableRow>
                           <TableRow>
                             <TableCell>Total</TableCell>
                             <TableCell align="right">
-                              {Number(handleSubtotal(pedido.ofertas)) +
-                                Number(pedido.frete.valor_frete)}
+                              R${' '}
+                              {Number(pedido.frete.valor_frete) +
+                                Number(handleSubtotal(pedido.ofertas))}
                             </TableCell>
                           </TableRow>
                         </TableBody>

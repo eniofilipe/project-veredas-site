@@ -208,5 +208,6 @@ export interface PedidosProps {
     id: number;
     valor_frete: number;
   };
+  subtotal: number;
   total: number;
 }
