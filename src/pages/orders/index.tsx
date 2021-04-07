@@ -111,6 +111,10 @@ const Order = () => {
               className={classes.root}
             >
               {pedidos.map((pedido) => (
+                // const [open, setOpen] = useState(false);
+                // const handleClick = () => {
+                //   setOpen(!open);
+                // };
                 <div key={`${pedido.id}`}>
                   <ListItem button onClick={handleClick}>
                     <ListItemText
