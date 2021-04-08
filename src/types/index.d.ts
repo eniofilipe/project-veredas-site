@@ -158,3 +158,15 @@ export interface ResponseValidaToken {
   nome: string;
   email: string;
 }
+export interface PostRecuperarSenhaProps {
+  email: string;
+}
+
+export interface ResponseRecuperarSenha {
+  ok: boolean;
+}
+
+export interface PostResetarSenhaProps {
+  password: string;
+  token: string | string[];
+}
