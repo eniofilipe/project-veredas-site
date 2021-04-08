@@ -161,15 +161,17 @@ const Order = () => {
                           <TableRow>
                             <TableCell>Taxa de entrega</TableCell>
                             <TableCell align="right">
-                              R$ {pedido.frete.valor_frete}
+                              R$ {pedido.frete.valor_frete.toFixed(2)}
                             </TableCell>
                           </TableRow>
                           <TableRow>
                             <TableCell>Total</TableCell>
                             <TableCell align="right">
                               R${' '}
-                              {Number(pedido.frete.valor_frete) +
-                                Number(handleSubtotal(pedido.ofertas))}
+                              {Number(
+                                pedido.frete.valor_frete +
+                                  Number(handleSubtotal(pedido.ofertas))
+                              ).toFixed(2)}
                             </TableCell>
                           </TableRow>
                         </TableBody>
