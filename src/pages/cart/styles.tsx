@@ -1,6 +1,8 @@
-import styled from 'styled-components';
+/* eslint-disable prettier/prettier */
+import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.main``;
+export const Logo = styled.img``;
 
 export const WrapperHeader = styled.header`
   display: flex;
@@ -11,10 +13,26 @@ export const WrapperHeader = styled.header`
   align-items: flex-start;
 `;
 
-export const Logo = styled.img`
-  width: 20%;
-`;
+type MenuProps = {
+  background?: string;
+  position?: number;
+};
 
+export const Header = styled.menu<MenuProps>`
+  ${({ background }) => css`
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 2rem;
+    justify-content: space-between;
+    background-color: ${background && background === 'white'
+    ? '#FFF'
+    : 'rgba(211, 211, 211, 0.8)'};
+  `}
+
+  ${Logo} {
+    width: 200px;
+  }
+`;
 export const Title = styled.p`
   white-space: nowrap;
   align-self: center;
@@ -22,79 +40,114 @@ export const Title = styled.p`
   font-size: 2.5rem;
 `;
 
+export const TitleCart = styled.p`
+  font-size: 2rem;
+  color: #444;
+  cursor: default;
+  display: flex;
+  width: 50%;
+`;
+
+export const WrapperMenu = styled.div`
+  display: flex;
+  position: absolute;
+  right: 1rem;
+  top: 2rem;
+  gap: 3rem;
+  ${Title} {
+    cursor: pointer;
+  }
+`;
+
 export const WrapperContent = styled.div`
-  width: 40%;
+  width: 80%;
   margin: 1.5rem auto;
 `;
 export const Label = styled.p`
   align-self: flex-start;
-  font-size: 1.6rem;
+  color: #961913;
+  font-weight: 500;
+  font-size: 1.8rem;
 `;
 export const WrapperItem = styled.div`
   display: flex;
-  color: #aa5e5a;
+  justify-content: center;
+  align-items: center;
+  background: #fafafa;
   padding-left: 5%;
-  padding-top: 0.4rem;
+  margin-top: 0.4rem;
+  padding: 1rem;
   justify-content: space-between;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 export const WrapperControl = styled.div`
   display: flex;
-  gap: 0.4rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
 `;
 export const SumButton = styled.button`
-  padding: 0.4rem;
-  background: transparent;
+  padding: 0.6rem;
+  width: 2.8rem;
+  background: #961913;
   outline: none;
-  border: 1px solid #aa5e5a;
-  border-radius: 4px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
   ::after {
     content: '+';
-    color: #aa5e5a;
+    color: #fafafa;
+    font-weight: 600;
+    font-size: 1rem;
   }
 `;
 export const SubButton = styled.button`
-  padding: 0.4rem;
-  background: transparent;
+  padding: 0.6rem;
+  width: 2.8rem;
+  background: #961913;
   outline: none;
-  border: 1px solid #aa5e5a;
-  border-radius: 4px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  border: none;
   cursor: pointer;
-
   ::after {
     content: '-';
-    color: #aa5e5a;
+    color: #fafafa;
+    font-weight: 600;
+    font-size: 1rem;
   }
 `;
 export const Text = styled.p`
-  color: #aa5e5a;
+  color: rgba(95, 30, 31, 0.7);
   font-size: 1.4rem;
 `;
 export const Value = styled.p`
-  color: #aa5e5a;
-  font-weight: bold;
+  color: rgba(95, 30, 31, 0.7);
   font-size: 1.4rem;
 `;
 export const Items = styled.div`
-  padding: 1rem;
-  border-bottom: 1px solid #aa5e5a;
+  margin-top: 1rem;
+  padding: 0;
+  background: #fafafa;
+  padding-bottom: 2rem;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
 `;
-export const SubTotal = styled.p`
-  width: 100%;
-  padding: 1rem 0;
-  color: #aa5e5a;
-  font-size: 1.4rem;
-  text-align: right;
-`;
+
 export const WrapperDelivery = styled.div`
   border-bottom: 1px solid #aa5e5a;
 `;
 export const WrapperSelect = styled.div`
   display: flex;
-  padding-top: 1rem;
-  justify-content: space-between;
+  padding-top: 2rem;
+  width: 100%;
+  padding-left: 50%;
+  gap: 5%;
   ${Label} {
     font-size: 1.5rem;
+    align-self: flex-end;
+    font-weight: 400;
   }
 `;
 export const Select = styled.select`
@@ -104,19 +157,18 @@ export const Select = styled.select`
 `;
 export const Address = styled.div`
   display: flex;
-  padding-left: 5rem;
-  padding-top: 1rem;
+  width: 100%;
+  padding-top: 3rem;
   padding-bottom: 1rem;
-  justify-content: space-between;
   ${Text} {
-    font-size: 1.2rem;
-    width: 70%;
+    font-size: 1.5rem;
+    width: 90%;
   }
 `;
 
 export const WrapperButtons = styled.div`
   display: flex;
-  width: 70%;
+  width: 80%;
   margin: 1rem auto;
   justify-content: space-between;
 `;
@@ -129,26 +181,99 @@ export const CancelButton = styled.button`
   border: none;
   font-size: 1.2rem;
   :hover {
-    background: #aa5e5a;
+    background: #961913;
     color: white;
     transition: 0.4s;
+    cursor:pointer;
   }
 `;
 export const AcceptButton = styled.button`
-  background: rgba(33, 147, 33, 0.55);
+  background: #961913;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
-  height: 4rem;
-  width: 6rem;
+  height: 3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-weight: 500;
   border: none;
   color: white;
   font-size: 1.2rem;
   :hover {
-    border: 2px solid rgba(33, 147, 33, 0.55);
+    border: 2px solid  #961913;
     background: white;
-    color: rgba(33, 147, 33, 0.55);
+    color:  #961913;
     font-weight: bold;
     transition: 0.4s;
+    cursor:pointer;
+  }
+`;
+
+export const WrapperFooter = styled.footer`
+  height: 10vh;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding-top: 4vw;
+  padding-bottom: 6vw;
+  gap: 4rem;
+  background-color: #444;
+
+  div {
+    color: #fff;
+    font-size: 1.5rem;
+  }
+  ${Logo}:nth-child(1) {
+    width: 200px;
+    padding: 1rem;
+  }
+
+  ${Logo}:nth-child(2) {
+    width: 100px;
+    padding: 1rem;
+  }
+  ${Logo}:nth-child(3) {
+    width: 120px;
+    padding: 1rem;
+    border-radius: 30px;
   }
 `;
 
 export default AcceptButton;
+
+export const H1 = styled.h1`
+  text-align: center;
+  color: #961913;
+  font-weight: 500;
+  font-size: 1.8rem;
+`;
+export const WrapperProd = styled.div`
+  padding-left: 1rem;
+`;
+
+export const SubTotal = styled.p`
+  width: 100%;
+  color: rgba(95, 30, 31, 0.7);
+  font-size: 1.4rem;
+`;
+
+export const WrapperSubtotal = styled.div`
+  margin-top: 1rem;
+  margin-left: 65%;
+`;
+export const Row = styled.div`
+  display: flex;
+  width: 100%;
+  padding-top: 0.6rem;
+  justify-content: space-between;
+  ${WrapperSubtotal} {
+    padding: 1rem;
+  }
+`;
+export const Line = styled.div`
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+  height: 2px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 95%;
+`;

@@ -53,7 +53,7 @@ const Order = () => {
     try {
       const response = await getPedidos();
 
-      setPedidos(response.data);
+      setPedidos(response.data.reverse());
       const control = [];
       for (const i of response.data) {
         control.push(false);
