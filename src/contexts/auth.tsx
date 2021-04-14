@@ -3,12 +3,13 @@
 import { createContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { getLogin } from '../api/Login';
-import { ClienteLogin, Login } from '../types';
+import { ClienteLogin, Login, Address } from '../types';
 import { getValidaToken } from '../api/Validade';
 
 interface IAuthContext {
   signed: boolean;
   cliente: ClienteLogin | null;
+  endereco: Address | null;
   signIn: (data: Login) => Promise<404 | 200 | 403>;
   signOut: () => void;
 }
@@ -18,6 +19,7 @@ const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 export const AuthProvider: React.FC = ({ children }) => {
   const router = useRouter();
   const [cliente, setCliente] = useState<ClienteLogin | null>(null);
+  const [endereco, setEndereco] = useState<Address | null>(null);
   const [token, setToken] = useState<string | null>(null);
 
   const handleToken = async () => {
@@ -50,6 +52,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       if (response.data.option !== 'cliente') {
         return 403;
       }
+      setEndereco(response.data.endereco);
       setToken(response.data.token);
       setCliente(response.data.client);
       localStorage.setItem('token', response.data.token);
@@ -73,6 +76,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       value={{
         signed: !!cliente,
         cliente,
+        endereco,
         signIn,
         signOut,
       }}

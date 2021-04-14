@@ -11,7 +11,7 @@ interface OfertaCart extends Oferta {
 
 interface ICartContext {
   products: OfertaCart[];
-  addProduct: (prod: Oferta) => void;
+  addProduct: (prod: Oferta, quantidade: number) => void;
 }
 
 const CartContext = createContext<ICartContext>({} as ICartContext);
@@ -19,7 +19,7 @@ const CartContext = createContext<ICartContext>({} as ICartContext);
 export const CartProvider: React.FC = ({ children }) => {
   const [products, setProducts] = useState<OfertaCart[]>([]);
 
-  const addProduct = (prod: Oferta) => {
+  const addProduct = (prod: Oferta, quantidade: number) => {
     const index = products.findIndex((value) => value.id === prod.id);
 
     console.log(index);
@@ -29,18 +29,17 @@ export const CartProvider: React.FC = ({ children }) => {
 
       productsAux[index] = {
         ...productsAux[index],
-        quantidadeCart: productsAux[index].quantidadeCart + 1,
+        quantidadeCart: productsAux[index].quantidadeCart + quantidade,
       };
 
       setProducts(productsAux);
       toast.success('Produto adicionado');
     } else {
-      const productAux = { ...prod, quantidadeCart: 1 } as OfertaCart;
+      const productAux = { ...prod, quantidadeCart: quantidade } as OfertaCart;
 
       setProducts(products.concat(productAux));
     }
   };
-
   useEffect(() => {
     console.log(products);
   }, [products]);
