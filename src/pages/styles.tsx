@@ -39,6 +39,7 @@ export const MenuLink = styled.a`
     }
   }
 `;
+
 export const HomeSectionWrapper = styled.div`
   position: absolute;
   top: 0;
@@ -107,8 +108,8 @@ export const Image = styled.img``;
 export const Card2 = styled.div`
   ${Image} {
     margin: 2rem;
-    width: 100%;
-    height: 90%;
+    width: 90%;
+    height: 80%;
     border-radius: 4px;
   }
   padding-top: 1rem;
@@ -116,7 +117,7 @@ export const Card2 = styled.div`
 `;
 export const WrapperThreeSection = styled.div`
   background-image: url(${bg2});
-  height: 100vh;
+  height: 60rem;
   width: 100vw;
 
   /* Create the parallax scrolling effect */
@@ -134,7 +135,7 @@ export const WrapperThreeSection = styled.div`
 
 export const TextWrapper = styled.div`
   width: 100%;
-  height: 30%;
+  height: 24%;
   padding: 2%;
   p:nth-child(1) {
     font-size: 4rem;
@@ -144,8 +145,8 @@ export const TextWrapper = styled.div`
 
   p:nth-child(3) {
     padding-left: 0%;
-    padding-top: 1%;
-    padding-bottom: 5%;
+    padding-top: 2%;
+    padding-bottom: 4%;
   }
 
   p {
@@ -189,6 +190,7 @@ export const TextDiv3 = styled.div`
   font-size: 1.8rem;
   line-height: 2;
   margin-right: 1rem;
+  /* margin-bottom: 2rem; */
 `;
 
 export const WrapperFooter = styled.footer`
@@ -215,6 +217,7 @@ export const WrapperFooter = styled.footer`
     padding: 1rem;
   }
 `;
+
 export const Button = styled.button`
   background: #961913;
   color: #fff;
@@ -233,6 +236,27 @@ export const Button = styled.button`
     cursor: pointer;
   }
 `;
+
+export const ButtonSecond = styled.button`
+  background: #961913;
+  color: #fff;
+  border-radius: 8px;
+  padding: 1rem 2rem;
+  border: none;
+  outline: none;
+  margin-left: 2rem;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 3rem;
+
+  &:hover {
+    color: #961913;
+    background: rgba(205, 205, 205, 0.7);
+    border: 1px solid #961913;
+    cursor: pointer;
+  }
+`;
+
 type MenuProps = {
   background?: string;
   position?: number;

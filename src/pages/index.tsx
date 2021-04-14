@@ -1,6 +1,4 @@
-import {
- useEffect, useState, useRef, useContext
-} from 'react';
+import { useEffect, useState, useRef, useContext } from 'react';
 import { useRouter } from 'next/router';
 import veredaslogo from '../assets/logo.png';
 import * as S from './styles';
@@ -121,32 +119,48 @@ const Home = () => {
         </S.TextWrapper>
         <S.TextDivPrincipal>
           <S.TextDiv1>
-            As cestas agroecológicas são comercializadas em{' '}
-            <b>Montes Claros (MG)</b>, na modalidade de <b>circuito curto</b>,
-            isto é, do campo, direto para a casa do consumidor, num esquema de
-            entrega porta a porta.
+            Na loja se encontra todos os produtos ofertados na semana. É
+            possível escolher o produto, a quantidade e adicionar ao carrinho.
+            Assim que finalizar o pedido, é solicitado uma conta, caso não tenha
+            pode criar uma conta nova. <p />
+            Informe seus dados corretamente para poder ser efetuado a entrega.{' '}
+            <p />
           </S.TextDiv1>
           <S.TextDiv2>
-            Nossa loja online abre para realização de pedidos na Segunda-feira e
-            costuma fechar para pedidos na Quinta-feira.
+            Período de funcionamento: <p />
+            &nbsp; &nbsp; &nbsp; Pedidos: Segunda-Feira até Quarta-Feira. <p />
+            &nbsp; &nbsp; &nbsp; Entregas: A partir de Sexta-Feira. <p />
+            &nbsp; &nbsp; &nbsp;Só aceitamos alteração do pedido até as &nbsp;
+            &nbsp; &nbsp; &nbsp;Quarta-Feira 23:59hrs. <p />
+            <br />
+            <p /> Caso surja algum imprevisto entraremos em contato! <p />
           </S.TextDiv2>
           <S.TextDiv3>
-            Com o fechamento dos pedidos, iniciamos o processo de entrega dos
-            produtos. Assim, você receberá nossos produtos agorcológicos no
-            conforto de sua casa.
+            Frete: R$ 5,00. <p />
+            Entregas realizadas somente na cidade de Montes Claros/MG. <p />
+            <br />
+            Endereço: Assentamento Estrela do Norte, Estrada da Produção, Km 14,
+            CEP: 39410-000, Zona Rural, Município de Montes Claros/MG CEP:
+            39410-000.
           </S.TextDiv3>
         </S.TextDivPrincipal>
+        {!validade ? (
+          <S.ButtonSecond onClick={goToLogin}>Acessar Conta</S.ButtonSecond>
+        ) : (
+          <S.ButtonSecond onClick={goToProducts}>
+            Entrar na Feirinha
+          </S.ButtonSecond>
+        )}
       </S.WrapperThreeSection>
-
       <S.WrapperFooter>
         <div>
           <p>Cooperativa Camponesa - Veredas da Terra</p>
           <p>CNPJ: 10.286.881/0001-02</p>
         </div>
         <div>
-          <p>Contato</p>
+          <p>Contato:</p>
           <p>contato@veredasdaterra.com.br</p>
-          <p>(38) 9 9900-0000</p>
+          <p>+55 38 9 9900-0000</p>
         </div>
         <div>
           <S.Logo
