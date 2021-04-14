@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 
 import EmailIcon from '@material-ui/icons/Email';
 import LockIcon from '@material-ui/icons/Lock';
+import { toast } from 'react-toastify';
 import AuthContext from '../../contexts/auth';
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
@@ -22,12 +23,30 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
-    await signIn({
-      email,
-      password,
-    });
-  };
+    try {
+      const code = await signIn({
+        email,
+        password,
+      });
 
+      switch (code) {
+        case 404:
+          toast.warn('Credenciais incorretas. Tente novamente');
+          break;
+        case 403:
+          toast.warn('Essa conta percente a um administrador.');
+          break;
+        case 200:
+          toast.success('Seja bem vindo');
+          break;
+        default:
+          toast.success('Ocorreu um erro ao tentar realizar o login');
+      }
+    } catch (err) {
+      console.log(err);
+      toast.warn('Credenciais incorretas. Tente novamente');
+    }
+  };
   const goToProducts = () => {
     Router.push('/products');
   };
@@ -85,7 +104,7 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <S.SubTitle>Recuperar Senha</S.SubTitle>
+            <S.SubTitle>Esqueci a senha</S.SubTitle>
             <p />
             <S.ButtonLogin onClick={() => handleLogin()}>Acessar</S.ButtonLogin>
             <S.ButtonLogin onClick={() => Router.push('/register')}>
@@ -99,13 +118,11 @@ const Login = () => {
           <p>Cooperativa Camponesa - Veredas da Terra</p>
           <p>CNPJ: 10.286.881/0001-02</p>
         </div>
-
         <div>
           <p>Contato</p>
-          <p>email@veredasdaterra.com.br</p>
+          <p>contato@veredasdaterra.com.br</p>
           <p>(38) 9 9900-0000</p>
         </div>
-
         <div>
           <S.Logo
             src={veredaslogo}

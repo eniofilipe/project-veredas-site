@@ -41,7 +41,7 @@ export const Header = styled.menu<MenuProps>`
 
 export const HeaderWrapper = styled.div<MenuProps>`
   ${({ position }) => css`
-    position: fixed;
+    position: relative;
     opacity: ${position !== 0 ? 1 : 0.8};
     background-color: ${position !== 0
       ? 'rgba(250, 250, 250, 1)'
