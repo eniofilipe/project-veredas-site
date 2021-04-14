@@ -14,39 +14,16 @@ import ValidadeContext from '../../contexts/validade';
 import logomst from '../../assets/logo-mst-rurais.png';
 import logoif from '../../assets/logo-if.png';
 
-const Login = () => {
+import { postRecuperarSenha } from '../../api/RecuperarSenha';
+import { PostRecuperarSenhaProps } from '../../types/index';
+
+const PasswordRecovery = () => {
   const { validade } = useContext(ValidadeContext);
   const Router = useRouter();
 
   const { signIn } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const handleLogin = async () => {
-    try {
-      const code = await signIn({
-        email,
-        password,
-      });
-
-      switch (code) {
-        case 404:
-          toast.warn('Credenciais incorretas. Tente novamente');
-          break;
-        case 403:
-          toast.warn('Essa conta percente a um administrador.');
-          break;
-        case 200:
-          toast.success('Seja bem vindo');
-          break;
-        default:
-          toast.success('Ocorreu um erro ao tentar realizar o login');
-      }
-    } catch (err) {
-      console.log(err);
-      toast.warn('Credenciais incorretas. Tente novamente');
-    }
-  };
   const goToProducts = () => {
     Router.push('/products');
   };
@@ -54,9 +31,22 @@ const Login = () => {
   const goToLogin = () => {
     Router.push('/register');
   };
-  const goToPasswordRecovery = () => {
-    Router.push('/passwordRecovery');
+
+  // const [email, setEmail] = useState('');
+
+  const setRecuperarSenha = async (data: PostRecuperarSenhaProps) => {
+    try {
+      const response = await postRecuperarSenha(data);
+      console.log(data);
+      toast.success('Confira seu email!');
+      Router.push('/login');
+
+      // setProdutosOferta(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   return (
     <div>
       <Head>
@@ -84,7 +74,7 @@ const Login = () => {
         </S.HeaderWrapper>
         <S.Content>
           <S.LoginContainer>
-            <h1>Acesso</h1>
+            <h1>Recuperar Senha</h1>
             <div>
               <S.Icon>
                 <EmailIcon />
@@ -96,24 +86,8 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div>
-              <S.Icon>
-                <LockIcon />
-              </S.Icon>
-              <span>Senha</span>
-              <S.InputLogin
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <S.SubTitle onClick={goToPasswordRecovery}>
-              Esqueci a senha
-            </S.SubTitle>
-            <p />
-            <S.ButtonLogin onClick={() => handleLogin()}>Acessar</S.ButtonLogin>
-            <S.ButtonLogin onClick={() => Router.push('/register')}>
-              Criar conta
+            <S.ButtonLogin onClick={() => setRecuperarSenha({ email })}>
+              Enviar
             </S.ButtonLogin>
           </S.LoginContainer>
         </S.Content>
@@ -123,11 +97,13 @@ const Login = () => {
           <p>Cooperativa Camponesa - Veredas da Terra</p>
           <p>CNPJ: 10.286.881/0001-02</p>
         </div>
+
         <div>
           <p>Contato</p>
-          <p>contato@veredasdaterra.com.br</p>
+          <p>email@veredasdaterra.com.br</p>
           <p>(38) 9 9900-0000</p>
         </div>
+
         <div>
           <S.Logo
             src={veredaslogo}
@@ -141,4 +117,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default PasswordRecovery;

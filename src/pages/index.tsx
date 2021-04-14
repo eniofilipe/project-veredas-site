@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import veredaslogo from '../assets/logo.png';
 import * as S from './styles';
 import logomst from '../assets/logo-mst-rurais.png';
-import imagecampo from '../assets/Campo-cidade.png';
 import logoif from '../assets/logo-if.png';
+import imagecampo from '../assets/Campo-cidade.png';
 import ValidadeContext from '../contexts/validade';
 
 const Home = () => {
@@ -157,13 +157,11 @@ const Home = () => {
           <p>Cooperativa Camponesa - Veredas da Terra</p>
           <p>CNPJ: 10.286.881/0001-02</p>
         </div>
-
         <div>
           <p>Contato:</p>
           <p>contato@veredasdaterra.com.br</p>
           <p>+55 38 9 9900-0000</p>
         </div>
-
         <div>
           <S.Logo
             src={veredaslogo}
