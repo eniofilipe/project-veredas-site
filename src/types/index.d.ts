@@ -160,6 +160,18 @@ export interface ResponseValidaToken {
   email: string;
 }
 
+export interface PostRecuperarSenhaProps {
+  email: string;
+}
+
+export interface ResponseRecuperarSenha {
+  ok: boolean;
+}
+
+export interface PostResetarSenhaProps {
+  password: string;
+  token: string | string[];
+
 export interface Product {
   product: string;
   quantity: number;
@@ -210,4 +222,5 @@ export interface PedidosProps {
   };
   subtotal: number;
   total: number;
+
 }
