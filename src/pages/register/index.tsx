@@ -270,16 +270,14 @@ const Profile = () => {
 
       <S.WrapperFooter>
         <div>
-          <p>Cooperativa Veredas da Terra</p>
-          <p>CNPJ: 33.870.746/0001-05</p>
+          <p>Cooperativa Camponesa - Veredas da Terra</p>
+          <p>CNPJ: 10.286.881/0001-02</p>
         </div>
-
         <div>
           <p>Contato</p>
-          <p>email@veredasdaterra.com.br</p>
-          <p>+55 38 9 995133333</p>
+          <p>contato@veredasdaterra.com.br</p>
+          <p>(38) 9 9900-0000</p>
         </div>
-
         <div>
           <S.Logo src={logowhite} alt="Logo da cooperativa Veredas da Terra" />
           <S.Logo src={logomst} alt="Logo do MST" />
