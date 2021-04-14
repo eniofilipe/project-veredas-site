@@ -104,7 +104,6 @@ const Home = () => {
           </S.CentralizeWrapper>
         </S.BGHome>
       </S.HomeSectionWrapper>
-
       <S.WrapperSecondSection ref={sectionTwoRef}>
         <S.Card1>
           <p> Do campo à cidade</p>
@@ -142,19 +141,16 @@ const Home = () => {
           </p>
         </S.TextWrapper>
       </S.WrapperThreeSection>
-
       <S.WrapperFooter>
         <div>
-          <p>Cooperativa Veredas da Terra</p>
-          <p>CNPJ: 33.870.746/0001-05</p>
+          <p>Cooperativa Camponesa - Veredas da Terra</p>
+          <p>CNPJ: 10.286.881/0001-02</p>
         </div>
-
         <div>
           <p>Contato</p>
-          <p>email@veredasdaterra.com.br</p>
-          <p>+55 38 9 995133333</p>
+          <p>contato@veredasdaterra.com.br</p>
+          <p>(38) 9 9900-0000</p>
         </div>
-
         <div>
           <S.Logo
             src={veredaslogo}

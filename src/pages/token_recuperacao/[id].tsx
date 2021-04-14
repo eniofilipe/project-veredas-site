@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-/* eslint-disable import/no-unresolved */
+import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 
 import EmailIcon from '@material-ui/icons/Email';
 import LockIcon from '@material-ui/icons/Lock';
@@ -13,40 +11,16 @@ import veredaslogo from '../../assets/logo.png';
 import ValidadeContext from '../../contexts/validade';
 import logomst from '../../assets/logo-mst-rurais.png';
 import logoif from '../../assets/logo-if.png';
+import { postResetarSenha } from '../../api/ResetarSenha';
+import { PostResetarSenhaProps } from '../../types/index';
 
-const Login = () => {
-  const { validade } = useContext(ValidadeContext);
+const ResetarSenha = () => {
   const Router = useRouter();
-
-  const { signIn } = useContext(AuthContext);
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordRepeat, setPasswordRepeat] = useState('');
+  const { validade } = useContext(ValidadeContext);
 
-  const handleLogin = async () => {
-    try {
-      const code = await signIn({
-        email,
-        password,
-      });
-
-      switch (code) {
-        case 404:
-          toast.warn('Credenciais incorretas. Tente novamente');
-          break;
-        case 403:
-          toast.warn('Essa conta percente a um administrador.');
-          break;
-        case 200:
-          toast.success('Seja bem vindo');
-          break;
-        default:
-          toast.success('Ocorreu um erro ao tentar realizar o login');
-      }
-    } catch (err) {
-      console.log(err);
-      toast.warn('Credenciais incorretas. Tente novamente');
-    }
-  };
+  const { id } = Router.query;
   const goToProducts = () => {
     Router.push('/products');
   };
@@ -54,8 +28,29 @@ const Login = () => {
   const goToLogin = () => {
     Router.push('/register');
   };
-  const goToPasswordRecovery = () => {
-    Router.push('/passwordRecovery');
+  const setResetarSenha = async (
+    _password: string,
+    _passwordRepeat: string,
+  ) => {
+    if (_password !== _passwordRepeat) {
+      console.log('senhas nao conferem');
+    }
+    if (_password.length < 6) {
+      console.log('senha pequena demais');
+    }
+    try {
+      const obj = { password: _password, token: id };
+      console.log(obj);
+      const response = await postResetarSenha(obj);
+      if (!response.data.error) {
+        toast.success('sucesso ao atualizar senha');
+        Router.push('/login');
+      }
+
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div>
@@ -84,36 +79,34 @@ const Login = () => {
         </S.HeaderWrapper>
         <S.Content>
           <S.LoginContainer>
-            <h1>Acesso</h1>
-            <div>
-              <S.Icon>
-                <EmailIcon />
-              </S.Icon>
-              <span>Email</span>
-              <S.InputLogin
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
+            <h1>Resetar Senha</h1>
             <div>
               <S.Icon>
                 <LockIcon />
               </S.Icon>
-              <span>Senha</span>
+              <span>Nova Senha</span>
               <S.InputLogin
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <S.SubTitle onClick={goToPasswordRecovery}>
-              Esqueci a senha
-            </S.SubTitle>
-            <p />
-            <S.ButtonLogin onClick={() => handleLogin()}>Acessar</S.ButtonLogin>
-            <S.ButtonLogin onClick={() => Router.push('/register')}>
-              Criar conta
+            <div>
+              <S.Icon>
+                <LockIcon />
+              </S.Icon>
+              <span>Repetir Senha</span>
+              <S.InputLogin
+                type="password"
+                value={passwordRepeat}
+                onChange={(e) => setPasswordRepeat(e.target.value)}
+              />
+            </div>
+
+            <S.ButtonLogin
+              onClick={() => setResetarSenha(password, passwordRepeat)}
+            >
+              Enviar
             </S.ButtonLogin>
           </S.LoginContainer>
         </S.Content>
@@ -123,11 +116,13 @@ const Login = () => {
           <p>Cooperativa Camponesa - Veredas da Terra</p>
           <p>CNPJ: 10.286.881/0001-02</p>
         </div>
+
         <div>
           <p>Contato</p>
-          <p>contato@veredasdaterra.com.br</p>
+          <p>email@veredasdaterra.com.br</p>
           <p>(38) 9 9900-0000</p>
         </div>
+
         <div>
           <S.Logo
             src={veredaslogo}
@@ -141,4 +136,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ResetarSenha;
