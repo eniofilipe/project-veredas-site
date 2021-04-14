@@ -39,6 +39,7 @@ export const MenuLink = styled.a`
     }
   }
 `;
+
 export const HomeSectionWrapper = styled.div`
   position: absolute;
   top: 0;

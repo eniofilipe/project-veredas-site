@@ -1,6 +1,4 @@
-import {
- useEffect, useState, useRef, useContext 
-} from 'react';
+import { useEffect, useState, useRef, useContext } from 'react';
 import { useRouter } from 'next/router';
 import veredaslogo from '../assets/logo.png';
 import * as S from './styles';
@@ -163,7 +161,7 @@ const Home = () => {
         <div>
           <p>Contato:</p>
           <p>contato@veredasdaterra.com.br</p>
-          <p>+55 38 9 99508136</p>
+          <p>+55 38 9 9900-0000</p>
         </div>
 
         <div>
