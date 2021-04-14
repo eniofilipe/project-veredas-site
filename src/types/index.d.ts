@@ -99,13 +99,6 @@ export interface Login {
   email: string;
   password: string;
 }
-
-export interface LoginResponse {
-  option: string;
-  client: ClienteLogin;
-  token: string;
-}
-
 export interface Validade {
   id: number;
   validade: string;
@@ -184,8 +177,15 @@ export interface Address {
   neighborhood: string;
   cep: string;
   complement?: string;
+  city: string;
 }
 
+export interface LoginResponse {
+  option: string;
+  client: ClienteLogin;
+  token: string;
+  endereco: Address;
+}
 export interface CartProps {
   address: Address;
   frete: number;

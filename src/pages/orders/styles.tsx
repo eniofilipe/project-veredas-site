@@ -8,16 +8,10 @@ export const MenuNav = styled.div`
   margin-right: 4rem;
 `;
 
-// export const Header = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   width: 100%;
-//   background: rgba(30, 149, 31, 0.4);
-//   justify-content: center;
-//   align-items: center;
-//   padding: 2.5rem 1%;
-// `;
-
+type MenuProps = {
+  background?: string;
+  position?: number;
+};
 export const Header = styled.menu<MenuProps>`
   ${({ background }) => css`
     display: flex;
@@ -33,12 +27,6 @@ export const Header = styled.menu<MenuProps>`
     width: 200px;
   }
 `;
-
-type MenuProps = {
-  background?: string;
-  position?: number;
-};
-
 export const HeaderWrapper = styled.div<MenuProps>`
   ${({ position }) => css`
     position: fixed;
