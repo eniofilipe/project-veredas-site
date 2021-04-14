@@ -54,6 +54,9 @@ const Login = () => {
   const goToLogin = () => {
     Router.push('/register');
   };
+  const goToPasswordRecovery = () => {
+    Router.push('/passwordRecovery');
+  };
   return (
     <div>
       <Head>
@@ -104,7 +107,9 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <S.SubTitle>Esqueci a senha</S.SubTitle>
+            <S.SubTitle onClick={goToPasswordRecovery}>
+              Esqueci a senha
+            </S.SubTitle>
             <p />
             <S.ButtonLogin onClick={() => handleLogin()}>Acessar</S.ButtonLogin>
             <S.ButtonLogin onClick={() => Router.push('/register')}>

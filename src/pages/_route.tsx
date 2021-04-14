@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useContext, useEffect } from 'react';
 import { AppProps } from 'next/app';
 
@@ -14,18 +15,19 @@ const Route = ({ pageProps, Component, router }: AppProps) => {
   const { cliente } = useContext(AuthContext);
 
   useEffect(() => {
-    if (!cliente)
-      if (
-        router.asPath !== '/login' &&
-        router.asPath !== '/' &&
-        router.asPath !== '/register' &&
-        !cliente
-      ) {
-        router.push('/login');
-      }
-    if (!validade) {
-      router.push('/');
-    }
+    // if (!cliente) {
+    //   if (
+    //     router.asPath !== '/login'
+    //     && router.asPath !== '/'
+    //     && router.asPath !== '/register'
+    //     && !cliente
+    //   ) {
+    //     router.push('/login');
+    //   }
+    // }
+    // if (!validade) {
+    //   router.push('/');
+    // }
   }, []);
 
   return <Component {...pageProps} />;
