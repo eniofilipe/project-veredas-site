@@ -26,7 +26,29 @@ const products = () => {
   const { addProduct } = useContext(CartContext);
   const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [produtosOferta, setProdutosOferta] = useState<Oferta[]>([]);
+  const [quantidade, setQuantidade] = useState<number[]>([1]);
 
+  const aumentarQuantidade = (index: number) => {
+    const temp = quantidade;
+
+    console.log(temp);
+    if (!temp[index]) {
+      temp[index] = 1;
+    }
+    temp[index] += 1;
+    setQuantidade([...temp]);
+    console.log(quantidade);
+  };
+  const diminuirQuantidade = (index: number) => {
+    const temp = quantidade;
+    if (!temp[index]) {
+      temp[index] = 1;
+    }
+    if (temp[index] !== 1) {
+      temp[index] -= 1;
+      setQuantidade([...temp]);
+    }
+  };
   const fetchCategorias = async () => {
     try {
       const response = await getCategorias();
@@ -97,14 +119,18 @@ const products = () => {
               ))}
           </S.WrapperCategory>
           <S.WrapperProduct>
-            {produtosOferta.map((prod) => (
+            {produtosOferta.map((prod, index) => (
               <CardProduct
                 key={`${prod.id}`}
                 category={prod.produtos.categorias.map((cat) => cat.nome)}
                 comment={prod.produtos.descricao}
                 name={prod.produtos.nome}
                 value={prod.valor_unitario}
-                onChange={() => addProduct(prod)}
+                quantity={quantidade[index] ? quantidade[index] : 1}
+                onChange={() => addProduct(prod, quantidade[index] ? quantidade[index] : 1)
+                }
+                PlusQuantityOnChange={() => aumentarQuantidade(index)}
+                MinusQuantityOnChange={() => diminuirQuantidade(index)}
                 image={prod.produtos.imagem.url}
               />
             ))}

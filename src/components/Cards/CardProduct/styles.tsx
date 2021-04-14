@@ -35,7 +35,7 @@ export const Categories = styled.span`
 `;
 
 export const Container = styled.div`
-  width: 220px;
+  width: 250px;
   border-radius: 10px;
   border: 1px solid #000;
   background-color: #fff;
@@ -49,4 +49,29 @@ export const ImageHeader = styled.img`
 export const ButtonBuy = styled(Button)`
   width: 80px;
   height: 25px;
+`;
+
+export const QuantityContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+`;
+
+export const ButtonMinus = styled.div`
+  cursor: pointer;
+  margin-right: 14px;
+`;
+export const ButtonPlus = styled.div`
+  margin-left: 14px;
+  cursor: pointer;
+`;
+
+export const Quantity = styled.span`
+  font-weight: bold;
+`;
+
+export const AddQuantityWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 2px;
 `;
