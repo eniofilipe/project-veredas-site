@@ -34,11 +34,19 @@ import { FormatDateByFNS } from '../../Utils/Masks';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '60%',
+    width: '80%',
     backgroundColor: theme.palette.background.paper,
+    // backgroundColor: 'rgba(211, 211, 211, 0.8)',
   },
   nested: {
     paddingLeft: theme.spacing(4),
+  },
+  item: {
+    marginBottom: theme.spacing(0.3),
+    backgroundColor: 'rgba(211, 211, 211, 0.8)',
+  },
+  tabela: {
+    marginBottom: theme.spacing(1),
   },
 }));
 
@@ -118,7 +126,11 @@ const Order = () => {
                   const controle = open[i];
                   return (
                     <div key={`${pedido.id}`}>
-                      <ListItem button onClick={() => handleClick(!open[i])}>
+                      <ListItem
+                        button
+                        className={classes.item}
+                        onClick={() => handleClick(!open[i])}
+                      >
                         <ListItemText
                           primary={`Pedido #${
                             pedido.id
@@ -129,7 +141,10 @@ const Order = () => {
                         {controle ? <ExpandLess /> : <ExpandMore />}
                       </ListItem>
                       <Collapse in={controle} timeout="auto" unmountOnExit>
-                        <TableContainer component={Paper}>
+                        <TableContainer
+                          className={classes.tabela}
+                          component={Paper}
+                        >
                           <Table aria-label="spanning table">
                             <TableHead>
                               <TableRow>

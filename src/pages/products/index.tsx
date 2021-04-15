@@ -162,6 +162,7 @@ const products = () => {
                     type="checkbox"
                     id={`${cat.id}`}
                     name={cat.nome}
+                    color="default"
                   />{' '}
                   {cat.nome}
                 </S.DivCategory>

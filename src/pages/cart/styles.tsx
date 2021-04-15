@@ -140,7 +140,7 @@ export const WrapperDelivery = styled.div`
 `;
 export const WrapperSelect = styled.div`
   display: flex;
-  padding-top: 2rem;
+  padding-top: 3rem;
   width: 100%;
   padding-left: 50%;
   gap: 5%;
@@ -169,7 +169,7 @@ export const Address = styled.div`
 export const WrapperButtons = styled.div`
   display: flex;
   width: 80%;
-  margin: 1rem auto;
+  margin: 4rem auto;
   justify-content: space-between;
 `;
 export const CancelButton = styled.button`
@@ -214,7 +214,7 @@ export const WrapperFooter = styled.footer`
   width: 100%;
   align-items: center;
   justify-content: center;
-  padding-top: 4vw;
+  padding-top: 6vw;
   padding-bottom: 6vw;
   gap: 4rem;
   background-color: #444;
