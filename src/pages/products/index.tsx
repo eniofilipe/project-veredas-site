@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable operator-linebreak */
 /* eslint-disable import/no-unresolved */
@@ -11,6 +12,15 @@ import {
   SearchAlt2 as SearchIcon,
 } from '@styled-icons/boxicons-regular';
 
+import {
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  FormHelperText,
+  FormLabel,
+} from '@material-ui/core';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
 import CardProduct from '../../components/Cards/CardProduct';
@@ -21,12 +31,23 @@ import CartContext from '../../contexts/cart';
 import { getCategorias } from '../../api/Categorias';
 import { getProdutosOfertas } from '../../api/Ofertas';
 
+const useStyles = makeStyles((theme: Theme) => createStyles({
+  root: {
+    display: 'flex',
+  },
+  formControl: {
+    margin: theme.spacing(3),
+  },
+}));
+
 const products = () => {
   const Router = useRouter();
   const { addProduct } = useContext(CartContext);
   const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [produtosOferta, setProdutosOferta] = useState<Oferta[]>([]);
+  const [produtosOfertaAux, setProdutosOfertaAux] = useState<Oferta[]>([]);
   const [quantidade, setQuantidade] = useState<number[]>([1]);
+  const classes = useStyles();
 
   const aumentarQuantidade = (index: number) => {
     const temp = quantidade;
@@ -39,6 +60,7 @@ const products = () => {
     setQuantidade([...temp]);
     console.log(quantidade);
   };
+
   const diminuirQuantidade = (index: number) => {
     const temp = quantidade;
     if (!temp[index]) {
@@ -49,6 +71,7 @@ const products = () => {
       setQuantidade([...temp]);
     }
   };
+
   const fetchCategorias = async () => {
     try {
       const response = await getCategorias();
@@ -64,14 +87,37 @@ const products = () => {
       const response = await getProdutosOfertas();
 
       setProdutosOferta(response.data);
+      setProdutosOfertaAux(response.data);
     } catch (error) {
       console.log(error);
     }
   };
+
   useEffect(() => {
     fetchCategorias();
     fetchProdutos();
-  }, []);
+  }, [produtosOferta]);
+
+  const [state, setState] = React.useState([]);
+
+  const handleChange = (name: string) => (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setState({ ...state, [name]: event.target.checked });
+
+    if (name === 'todos') {
+      setProdutosOferta(produtosOfertaAux);
+    } else {
+      produtosOferta.map((prod) => setProdutosOfertaAux(
+        prod.produtos.categorias.filter((cat) => cat.nome === name),
+        // eslint-disable-next-line prettier/prettier
+      ));
+
+      setProdutosOferta(produtosOfertaAux);
+    }
+  };
+
+  const { aux } = state;
 
   return (
     <S.Wrapper>
@@ -97,26 +143,38 @@ const products = () => {
         </S.HeaderWrapper>
         <S.WrapperContent>
           <S.WrapperCategory>
-            <div>
-              <S.Checkbox
-                type="checkbox"
-                id="todos"
-                name="todos"
-                defaultChecked
-              />
-              <S.Label>Todos</S.Label>
-            </div>
-            {categorias &&
-              categorias.map((cat) => (
-                <div key={`${cat.id}`}>
-                  <S.Checkbox
-                    type="checkbox"
-                    id={`${cat.id}`}
-                    name={cat.nome}
+            <div className={classes.root}>
+              <FormControl component="fieldset" className={classes.formControl}>
+                <FormLabel component="legend" />
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={aux}
+                        onChange={handleChange('todos')}
+                        value="todos"
+                      />
+                    }
+                    label="Todos"
                   />
-                  <S.Label>{cat.nome}</S.Label>
-                </div>
-              ))}
+                  {categorias &&
+                    categorias.map((cat) => (
+                      <div key={`${cat.id}`}>
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={aux}
+                              onChange={handleChange('diversos')}
+                              value="diversos"
+                            />
+                          }
+                          label={cat.nome}
+                        />
+                      </div>
+                    ))}
+                </FormGroup>
+              </FormControl>
+            </div>
           </S.WrapperCategory>
           <S.WrapperProduct>
             {produtosOferta.map((prod, index) => (
