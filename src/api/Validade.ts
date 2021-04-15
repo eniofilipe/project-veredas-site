@@ -8,6 +8,7 @@ export const getValidade = async () => api.get<Validade[]>('/validade-oferta');
 export const getOpened = async () =>
   api.get<GetStatusLojaProps>('/status-loja');
 
-export const getValidaToken = async (token: string) => api.post<ResponseValidaToken>("/valida-token", { data: { token } });
+export const getValidaToken = async (token: string) =>
+  api.post<ResponseValidaToken>('/valida-token', { token });
 
 export default { getValidade };
