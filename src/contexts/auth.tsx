@@ -2,6 +2,7 @@
 /* eslint-disable import/no-unresolved */
 import { createContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Cookie from 'js-cookie';
 import { getLogin } from '../api/Login';
 import { ClienteLogin, Login, Address } from '../types';
 import { getValidaToken } from '../api/Validade';
@@ -22,8 +23,9 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [endereco, setEndereco] = useState<Address | null>(null);
   const [token, setToken] = useState<string | null>(null);
 
-  const handleToken = async () => {
-    const localToken = localStorage.getItem('token');
+  /* const handleToken = async () => {
+    const localToken = Cookie.get('token');
+
     try {
       const response = await getValidaToken(localToken);
 
@@ -40,7 +42,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     handleToken();
-  }, []);
+  }, []); */
 
   const signIn = async (data: Login) => {
     localStorage.clear();
@@ -56,6 +58,8 @@ export const AuthProvider: React.FC = ({ children }) => {
       setToken(response.data.token);
       setCliente(response.data.client);
       localStorage.setItem('token', response.data.token);
+      Cookie.set('token', response.data.token);
+      Cookie.set('cliente', JSON.stringify(cliente));
       router.push('/products');
       return 200;
     } catch (error) {
@@ -67,6 +71,8 @@ export const AuthProvider: React.FC = ({ children }) => {
   function signOut() {
     setCliente(null);
     setToken(null);
+    Cookie.remove('token');
+    Cookie.remove('cliente');
     localStorage.clear();
     router.push('/');
   }

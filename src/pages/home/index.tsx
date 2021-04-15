@@ -1,4 +1,10 @@
-import { useEffect, useState, useRef } from 'react';
+import {
+  useEffect,
+  useState,
+  useRef,
+  useLayoutEffect,
+  useContext,
+} from 'react';
 import { useRouter } from 'next/router';
 import veredaslogo from '../../assets/logo.png';
 import * as S from './styles';
@@ -6,11 +12,12 @@ import logomst from '../../assets/logo-mst-rurais.png';
 import logoif from '../../assets/logo-if.png';
 import imagecampo from '../../assets/Campo-cidade.png';
 import { getOpened } from '../../api/Validade';
+import ValidadeContext from '../../contexts/validade';
 
 const Home = () => {
   const router = useRouter();
   const [scrollY, setScrollY] = useState(0);
-  const [opened, setOpened] = useState(false);
+  const { validade } = useContext(ValidadeContext);
 
   const sectionOneRef = useRef<null | HTMLDivElement>(null);
   const sectionTwoRef = useRef<null | HTMLDivElement>(null);
@@ -29,6 +36,7 @@ const Home = () => {
       window.removeEventListener('scroll', logit);
     };
   }, []);
+
   function handleChange(newValue: string) {
     switch (newValue) {
       case 'sectionOneRef':
@@ -54,7 +62,7 @@ const Home = () => {
     }
   }
 
-  useEffect(() => {
+  /* useLayoutEffect(() => {
     async function loadData() {
       try {
         const { data } = await getOpened();
@@ -62,13 +70,14 @@ const Home = () => {
           setOpened(true);
           return;
         }
+        console.log(data);
         setOpened(true);
       } catch (err) {
         console.log(err);
       }
     }
     loadData();
-  }, []);
+  }); */
 
   return (
     <S.Wrapper>
@@ -85,11 +94,11 @@ const Home = () => {
             <S.MenuLink onClick={() => handleChange('sectionThreeRef')}>
               Como Funciona
             </S.MenuLink>
-            {opened ? (
+            {validade ? (
               <S.Button>Entrar na feirinha</S.Button>
             ) : (
               <S.Button onClick={() => router.push('/login')}>
-                Acessar conta
+                Acessar contas
               </S.Button>
             )}
           </S.MenuNav>

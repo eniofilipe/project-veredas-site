@@ -11,6 +11,7 @@ import {
   SearchAlt2 as SearchIcon,
 } from '@styled-icons/boxicons-regular';
 
+import { GetServerSideProps } from 'next';
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
 import CardProduct from '../../components/Cards/CardProduct';
@@ -20,6 +21,8 @@ import { Categoria, Oferta } from '../../types';
 import CartContext from '../../contexts/cart';
 import { getCategorias } from '../../api/Categorias';
 import { getProdutosOfertas } from '../../api/Ofertas';
+import ValidadeContext from '../../contexts/validade';
+import { getOpened, getOpenedWithoutToken } from '../../api/Validade';
 
 const products = () => {
   const Router = useRouter();
@@ -127,7 +130,8 @@ const products = () => {
                 name={prod.produtos.nome}
                 value={prod.valor_unitario}
                 quantity={quantidade[index] ? quantidade[index] : 1}
-                onChange={() => addProduct(prod, quantidade[index] ? quantidade[index] : 1)
+                onChange={() =>
+                  addProduct(prod, quantidade[index] ? quantidade[index] : 1)
                 }
                 PlusQuantityOnChange={() => aumentarQuantidade(index)}
                 MinusQuantityOnChange={() => diminuirQuantidade(index)}
@@ -142,3 +146,27 @@ const products = () => {
 };
 
 export default products;
+
+export const getServerSideProps: GetServerSideProps = async ({}) => {
+  let validade = false;
+
+  try {
+    const response = await getOpenedWithoutToken();
+    if (response.data.success === 'aberta') validade = true;
+  } catch (error) {
+    console.log(error);
+  }
+
+  if (!validade) {
+    return {
+      redirect: {
+        destination: '/profile',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
