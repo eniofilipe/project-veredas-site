@@ -95,7 +95,7 @@ export const WrapperFooter = styled.footer`
   width: 100%;
   align-items: center;
   justify-content: center;
-  padding-top: 4vw;
+  padding-top: 6vw;
   padding-bottom: 6vw;
   gap: 4rem;
   background-color: #444;

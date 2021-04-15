@@ -1,13 +1,14 @@
 /* eslint-disable indent */
 import styled, { css } from 'styled-components';
-import bg1 from '../../assets/bg1.png';
-import bg2 from '../../assets/cesta.png';
+import bg1 from '../assets/bg1.png';
+import bg2 from '../assets/cesta.png';
 
 export const Wrapper = styled.div``;
 export const Logo = styled.img``;
 export const MenuNav = styled.div`
   margin-right: 4rem;
 `;
+
 export const MenuLink = styled.a`
   position: relative;
   color: #961913;
@@ -17,7 +18,6 @@ export const MenuLink = styled.a`
   text-align: center;
   cursor: pointer;
   font-weight: 300;
-
   &:hover {
     &::after {
       content: '';
@@ -39,6 +39,7 @@ export const MenuLink = styled.a`
     }
   }
 `;
+
 export const HomeSectionWrapper = styled.div`
   position: absolute;
   top: 0;
@@ -56,6 +57,7 @@ export const BGHome = styled.div`
 `;
 export const CentralizeWrapper = styled.div`
   display: flex;
+  text-align: center;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -81,6 +83,7 @@ export const WrapperSecondSection = styled.div`
   display: flex;
   padding-bottom: 10vh;
 `;
+
 export const Card1 = styled.div`
   margin-left: 5%;
   background-color: #961913;
@@ -105,8 +108,8 @@ export const Image = styled.img``;
 export const Card2 = styled.div`
   ${Image} {
     margin: 2rem;
-    width: 100%;
-    height: 90%;
+    width: 90%;
+    height: 80%;
     border-radius: 4px;
   }
   padding-top: 1rem;
@@ -114,7 +117,7 @@ export const Card2 = styled.div`
 `;
 export const WrapperThreeSection = styled.div`
   background-image: url(${bg2});
-  height: 50rem;
+  height: 60rem;
   width: 100vw;
 
   /* Create the parallax scrolling effect */
@@ -129,10 +132,11 @@ export const WrapperThreeSection = styled.div`
   align-items: center;
   position: relative;
 `;
+
 export const TextWrapper = styled.div`
   width: 100%;
-  height: 100%;
-  padding: 5%;
+  height: 24%;
+  padding: 2%;
   p:nth-child(1) {
     font-size: 4rem;
     font-weight: 600;
@@ -140,17 +144,55 @@ export const TextWrapper = styled.div`
   }
 
   p:nth-child(3) {
-    padding-left: 30%;
-    padding-top: 5%;
-    padding-bottom: 5%;
+    padding-left: 0%;
+    padding-top: 2%;
+    padding-bottom: 4%;
   }
 
   p {
     color: #fff;
     font-size: 1.5rem;
-    line-height: 1.85;
+    line-height: 1.8;
   }
 `;
+
+export const TextDivPrincipal = styled.div`
+  text-align: center;
+  width: 100%;
+`;
+
+export const TextDiv1 = styled.div`
+  float: left;
+  width: 30%;
+  text-align: left;
+  color: #fff;
+  font-size: 1.8rem;
+  line-height: 1.8;
+  margin-right: 2rem;
+  margin-left: 2.8rem;
+`;
+
+export const TextDiv2 = styled.div`
+  float: left;
+  width: 30%;
+  text-align: left;
+  color: #fff;
+  font-size: 1.8rem;
+  line-height: 2;
+  margin-right: 2rem;
+`;
+
+export const TextDiv3 = styled.div`
+  float: left;
+  width: 30%;
+  text-align: left;
+  color: #fff;
+  font-size: 1.8rem;
+  line-height: 2;
+  margin-right: 1rem;
+  /* margin-bottom: 2rem; */
+`;
+
 export const WrapperFooter = styled.footer`
   height: 10vh;
   display: flex;
@@ -175,6 +217,7 @@ export const WrapperFooter = styled.footer`
     padding: 1rem;
   }
 `;
+
 export const Button = styled.button`
   background: #961913;
   color: #fff;
@@ -193,6 +236,27 @@ export const Button = styled.button`
     cursor: pointer;
   }
 `;
+
+export const ButtonSecond = styled.button`
+  background: #961913;
+  color: #fff;
+  border-radius: 8px;
+  padding: 1rem 2rem;
+  border: none;
+  outline: none;
+  margin-left: 2rem;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 3rem;
+
+  &:hover {
+    color: #961913;
+    background: rgba(205, 205, 205, 0.7);
+    border: 1px solid #961913;
+    cursor: pointer;
+  }
+`;
+
 type MenuProps = {
   background?: string;
   position?: number;

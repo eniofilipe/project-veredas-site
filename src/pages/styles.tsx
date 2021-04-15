@@ -118,7 +118,7 @@ export const Card2 = styled.div`
 export const WrapperThreeSection = styled.div`
   background-image: url(${bg2});
   height: 60rem;
-  width: 100vw;
+  width: 100%;
 
   /* Create the parallax scrolling effect */
   background-attachment: fixed;
@@ -135,18 +135,19 @@ export const WrapperThreeSection = styled.div`
 
 export const TextWrapper = styled.div`
   width: 100%;
-  height: 24%;
-  padding: 2%;
+  height: 18%;
+  /* padding: 4%; */
+  padding: 0px 50px 50px 25px;
   p:nth-child(1) {
     font-size: 4rem;
     font-weight: 600;
-    padding-bottom: 4%;
+    /* padding-bottom: 20px; */
   }
 
   p:nth-child(3) {
     padding-left: 0%;
-    padding-top: 2%;
-    padding-bottom: 4%;
+    padding-top: 0;
+    padding-bottom: 20px;
   }
 
   p {
@@ -163,34 +164,47 @@ export const TextDivPrincipal = styled.div`
 
 export const TextDiv1 = styled.div`
   float: left;
-  width: 30%;
+  width: 42%;
+  height: 50%;
   text-align: left;
-  color: #fff;
+  color: #961913;
+  background-color: rgba(211, 211, 211, 0.8);
   font-size: 1.8rem;
   line-height: 1.8;
-  margin-right: 2rem;
-  margin-left: 2.8rem;
+  margin-right: 3rem;
+  margin-left: 8rem;
+  border-radius: 10px;
+  padding: 0px 50px 50px 25px;
 `;
 
 export const TextDiv2 = styled.div`
   float: left;
-  width: 30%;
+  width: 42%;
+  height: 55%;
   text-align: left;
-  color: #fff;
+  color: #961913;
+  background-color: rgba(211, 211, 211, 0.8);
   font-size: 1.8rem;
   line-height: 2;
+  margin-top: 10rem;
   margin-right: 2rem;
+  border-radius: 10px;
+  padding: 0px 50px 50px 25px;
 `;
 
 export const TextDiv3 = styled.div`
   float: left;
   width: 30%;
+  height: 100%;
   text-align: left;
-  color: #fff;
+  color: #961913;
+  background-color: rgba(211, 211, 211, 0.8);
   font-size: 1.8rem;
   line-height: 2;
   margin-right: 1rem;
   /* margin-bottom: 2rem; */
+  border-radius: 10px;
+  padding: 0px 50px 50px 25px;
 `;
 
 export const WrapperFooter = styled.footer`
@@ -240,13 +254,14 @@ export const Button = styled.button`
 export const ButtonSecond = styled.button`
   background: #961913;
   color: #fff;
+
   border-radius: 8px;
-  padding: 1rem 2rem;
+  padding: 1.2rem 1.2rem;
   border: none;
   outline: none;
   margin-left: 2rem;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.4rem;
   margin-top: 3rem;
 
   &:hover {

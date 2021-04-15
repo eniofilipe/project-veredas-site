@@ -1,3 +1,5 @@
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable operator-linebreak */
 /* eslint-disable import/no-unresolved */
@@ -11,6 +13,11 @@ import {
   SearchAlt2 as SearchIcon,
 } from '@styled-icons/boxicons-regular';
 
+<
+import { Checkbox } from '@material-ui/core';
+
+import { GetServerSideProps } from 'next';
+
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
 import CardProduct from '../../components/Cards/CardProduct';
@@ -20,6 +27,8 @@ import { Categoria, Oferta } from '../../types';
 import CartContext from '../../contexts/cart';
 import { getCategorias } from '../../api/Categorias';
 import { getProdutosOfertas } from '../../api/Ofertas';
+import ValidadeContext from '../../contexts/validade';
+import { getOpened, getOpenedWithoutToken } from '../../api/Validade';
 
 const products = () => {
   const Router = useRouter();
@@ -28,16 +37,29 @@ const products = () => {
   const [produtosOferta, setProdutosOferta] = useState<Oferta[]>([]);
   const [quantidade, setQuantidade] = useState<number[]>([1]);
 
+  function produtoPossui(prod: Oferta) {
+    let categoriasP;
+    let tem = false;
+
+    categoriasP = categorias.filter((elem, index) => elem.isvalid === true);
+    categoriasP = categoriasP.map((elem) => elem.nome);
+    prod.produtos.categorias.forEach((el) => {
+      categoriasP.forEach((xxx) => {
+        if (xxx === el.nome) {
+          tem = true;
+        }
+      });
+    });
+
+    return tem;
+  }
   const aumentarQuantidade = (index: number) => {
     const temp = quantidade;
-
-    console.log(temp);
     if (!temp[index]) {
       temp[index] = 1;
     }
     temp[index] += 1;
     setQuantidade([...temp]);
-    console.log(quantidade);
   };
   const diminuirQuantidade = (index: number) => {
     const temp = quantidade;
@@ -53,7 +75,10 @@ const products = () => {
     try {
       const response = await getCategorias();
 
-      setCategorias(response.data);
+      setCategorias([
+        { id: -1, nome: 'Todos', isvalid: true },
+        ...response.data,
+      ]);
     } catch (error) {
       console.log(error);
     }
@@ -68,6 +93,42 @@ const products = () => {
       console.log(error);
     }
   };
+
+  function removeElement(array, elem) {
+    const index2 = array.indexOf(elem);
+    if (index2 > -1) {
+      array.splice(index2, 1);
+    }
+  }
+
+  const handleChange = (e: any, categoryName: string) => {
+    const { checked } = e.target;
+
+    if (categoryName === 'Todos') {
+      // todo
+      const states = [...categorias];
+      states.forEach((s) => {
+        // eslint-disable-next-line no-param-reassign
+        s.isvalid = checked;
+      });
+      setCategorias(states);
+    } else {
+      const states = [...categorias];
+
+      // eslint-disable-next-line no-multiple-empty-lines
+
+      const indexOfCheckBox = categorias.findIndex(
+        (el) => el.nome === categoryName
+      );
+
+      if (indexOfCheckBox !== -1) {
+        states[indexOfCheckBox].isvalid = checked;
+      }
+
+      setCategorias(states);
+    }
+  };
+
   useEffect(() => {
     fetchCategorias();
     fetchProdutos();
@@ -97,29 +158,24 @@ const products = () => {
         </S.HeaderWrapper>
         <S.WrapperContent>
           <S.WrapperCategory>
-            <div>
-              <S.Checkbox
-                type="checkbox"
-                id="todos"
-                name="todos"
-                defaultChecked
-              />
-              <S.Label>Todos</S.Label>
-            </div>
             {categorias &&
-              categorias.map((cat) => (
-                <div key={`${cat.id}`}>
-                  <S.Checkbox
+              categorias.map((cat, index) => (
+                <S.DivCategory key={cat.id}>
+                  <Checkbox
+                    key={`${cat.id}`}
+                    onChange={(e) => handleChange(e, cat.nome)}
+                    checked={!!categorias[index].isvalid}
                     type="checkbox"
                     id={`${cat.id}`}
                     name={cat.nome}
-                  />
-                  <S.Label>{cat.nome}</S.Label>
-                </div>
+                    color="default"
+                  />{' '}
+                  {cat.nome}
+                </S.DivCategory>
               ))}
           </S.WrapperCategory>
           <S.WrapperProduct>
-            {produtosOferta.map((prod, index) => (
+            {produtosOferta.filter(produtoPossui).map((prod, index) => (
               <CardProduct
                 key={`${prod.id}`}
                 category={prod.produtos.categorias.map((cat) => cat.nome)}
@@ -127,7 +183,10 @@ const products = () => {
                 name={prod.produtos.nome}
                 value={prod.valor_unitario}
                 quantity={quantidade[index] ? quantidade[index] : 1}
-                onChange={() => addProduct(prod, quantidade[index] ? quantidade[index] : 1)
+                onChange={() =>
+                  // eslint-disable-next-line implicit-arrow-linebreak
+
+                  addProduct(prod, quantidade[index] ? quantidade[index] : 1)
                 }
                 PlusQuantityOnChange={() => aumentarQuantidade(index)}
                 MinusQuantityOnChange={() => diminuirQuantidade(index)}
@@ -142,3 +201,27 @@ const products = () => {
 };
 
 export default products;
+
+export const getServerSideProps: GetServerSideProps = async ({}) => {
+  let validade = false;
+
+  try {
+    const response = await getOpenedWithoutToken();
+    if (response.data.success === 'aberta') validade = true;
+  } catch (error) {
+    console.log(error);
+  }
+
+  if (!validade) {
+    return {
+      redirect: {
+        destination: '/profile',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};

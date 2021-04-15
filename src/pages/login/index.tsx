@@ -68,12 +68,12 @@ const Login = () => {
             <S.Logo src={veredaslogo} alt="" />
             <S.MenuNav>
               <S.MenuLink onClick={() => Router.push('/')}>Home</S.MenuLink>
-              <S.MenuLink onClick={() => Router.push('/')}>
+              {/* <S.MenuLink onClick={() => Router.push('/')}>
                 Quem somos
               </S.MenuLink>
               <S.MenuLink onClick={() => Router.push('/')}>
                 Como Funciona
-              </S.MenuLink>
+              </S.MenuLink> */}
               {!validade ? (
                 <S.Button onClick={goToLogin}>Criar conta</S.Button>
               ) : (
@@ -122,6 +122,7 @@ const Login = () => {
         <div>
           <p>Cooperativa Camponesa - Veredas da Terra</p>
           <p>CNPJ: 10.286.881/0001-02</p>
+          <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
         </div>
         <div>
           <p>Contato</p>

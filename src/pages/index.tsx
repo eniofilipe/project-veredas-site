@@ -1,5 +1,10 @@
-import { useEffect, useState, useRef, useContext } from 'react';
+/* eslint-disable max-len */
+/* eslint-disable prettier/prettier */
+import {
+  useEffect, useState, useRef, useContext,
+} from 'react';
 import { useRouter } from 'next/router';
+import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import veredaslogo from '../assets/logo.png';
 import * as S from './styles';
 import logomst from '../assets/logo-mst-rurais.png';
@@ -104,9 +109,7 @@ const Home = () => {
         <S.Card1>
           <p> Do campo à cidade</p>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-            dapibus neque felis, sed fermentum metus tristique in. Phasellus
-            imperdiet dui eu euismod tincidunt.
+            A Cooperativa que veio trazer saúde e ótimos produtos para dentro da sua casa, com tudo feito organicamente, sem fertilizantes, diretamente da nossa família para a sua.
           </p>
         </S.Card1>
         <S.Card2>
@@ -119,30 +122,24 @@ const Home = () => {
         </S.TextWrapper>
         <S.TextDivPrincipal>
           <S.TextDiv1>
-            Na loja se encontra todos os produtos ofertados na semana. É
-            possível escolher o produto, a quantidade e adicionar ao carrinho.
-            Assim que finalizar o pedido, é solicitado uma conta, caso não tenha
-            pode criar uma conta nova. <p />
-            Informe seus dados corretamente para poder ser efetuado a entrega.{' '}
+          &nbsp; Todos os produtos ofertados na semana estão na loja. <p/>
+          &nbsp; Escolha o produto, a quantidade e adicione ao carrinho. <p/>
+          &nbsp; Clique em finalizar o pedido. <p />
+          &nbsp; Informe seus dados corretamente. <p />
             <p />
           </S.TextDiv1>
           <S.TextDiv2>
-            Período de funcionamento: <p />
-            &nbsp; &nbsp; &nbsp; Pedidos: Segunda-Feira até Quarta-Feira. <p />
-            &nbsp; &nbsp; &nbsp; Entregas: A partir de Sexta-Feira. <p />
-            &nbsp; &nbsp; &nbsp;Só aceitamos alteração do pedido até as &nbsp;
-            &nbsp; &nbsp; &nbsp;Quarta-Feira 23:59hrs. <p />
-            <br />
-            <p /> Caso surja algum imprevisto entraremos em contato! <p />
+          &nbsp; Pedidos: Segunda-Feira até Quarta-Feira. <p />
+          &nbsp; Entregas: A partir de Sexta-Feira. <p />
+          {/* &nbsp; &nbsp; &nbsp; Alteração do pedido até as Quarta-Feira 23:59hrs. <p /> */}
+          &nbsp; Frete: R$ 5,00. <p />
+          &nbsp; Entraremos em contato caso ocorra algum imprevisto! <p />
           </S.TextDiv2>
-          <S.TextDiv3>
-            Frete: R$ 5,00. <p />
-            Entregas realizadas somente na cidade de Montes Claros/MG. <p />
-            <br />
+          {/* <S.TextDiv3>
             Endereço: Assentamento Estrela do Norte, Estrada da Produção, Km 14,
             CEP: 39410-000, Zona Rural, Município de Montes Claros/MG CEP:
             39410-000.
-          </S.TextDiv3>
+          </S.TextDiv3> */}
         </S.TextDivPrincipal>
         {!validade ? (
           <S.ButtonSecond onClick={goToLogin}>Acessar Conta</S.ButtonSecond>
@@ -156,6 +153,7 @@ const Home = () => {
         <div>
           <p>Cooperativa Camponesa - Veredas da Terra</p>
           <p>CNPJ: 10.286.881/0001-02</p>
+          <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
         </div>
         <div>
           <p>Contato:</p>
