@@ -36,6 +36,7 @@ export const Categories = styled.span`
 
 export const Container = styled.div`
   width: 250px;
+  height: 350px;
   border-radius: 10px;
   border: 1px solid #000;
   background-color: #fff;
@@ -43,6 +44,7 @@ export const Container = styled.div`
 
 export const ImageHeader = styled.img`
   width: 100%;
+  height: 50%;
   border-radius: 8px 8px 0 0;
 `;
 

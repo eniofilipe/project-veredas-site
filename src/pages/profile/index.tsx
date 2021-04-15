@@ -345,6 +345,7 @@ const Profile = () => {
         <div>
           <p>Cooperativa Camponesa - Veredas da Terra</p>
           <p>CNPJ: 10.286.881/0001-02</p>
+          <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
         </div>
         <div>
           <p>Contato</p>
