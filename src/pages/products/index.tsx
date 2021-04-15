@@ -13,6 +13,7 @@ import {
   SearchAlt2 as SearchIcon,
 } from '@styled-icons/boxicons-regular';
 
+import { Checkbox } from '@material-ui/core';
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
 import CardProduct from '../../components/Cards/CardProduct';
@@ -76,6 +77,7 @@ const products = () => {
       console.log(error);
     }
   };
+
   const fetchProdutos = async () => {
     try {
       const response = await getProdutosOfertas();
@@ -110,7 +112,7 @@ const products = () => {
       // eslint-disable-next-line no-multiple-empty-lines
 
       const indexOfCheckBox = categorias.findIndex(
-        (el) => el.nome === categoryName
+        (el) => el.nome === categoryName,
       );
 
       if (indexOfCheckBox !== -1) {
@@ -152,18 +154,17 @@ const products = () => {
           <S.WrapperCategory>
             {categorias &&
               categorias.map((cat, index) => (
-                <div>
-                  <S.Label key={`${cat.id}`}>
-                    {cat.nome}
-                    <S.Checkbox
-                      key={`${cat.id}`}
-                      onChange={(e) => handleChange(e, cat.nome)}
-                      checked={!!categorias[index].isvalid}
-                      type="checkbox"
-                      id={`${cat.id}`}
-                      name={cat.nome}
-                    />
-                  </S.Label>
+                <div key={`${cat.id}`}>
+                  <Checkbox
+                    key={`${cat.id}`}
+                    onChange={(e) => handleChange(e, cat.nome)}
+                    checked={!!categorias[index].isvalid}
+                    type="checkbox"
+                    id={`${cat.id}`}
+                    name={cat.nome}
+                    label={cat.nome}
+                  />{' '}
+                  {cat.nome}
                 </div>
               ))}
           </S.WrapperCategory>

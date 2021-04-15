@@ -63,7 +63,7 @@ export const HeaderWrapper = styled.div<MenuProps>`
 export const WrapperProduct = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16rem, auto));
-  width: 80%;
+  width: 100%;
   margin-left: 2rem;
   row-gap: 3rem;
   padding-top: 3rem;
