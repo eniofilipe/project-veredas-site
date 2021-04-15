@@ -109,9 +109,7 @@ const Home = () => {
         <S.Card1>
           <p> Do campo à cidade</p>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-            dapibus neque felis, sed fermentum metus tristique in. Phasellus
-            imperdiet dui eu euismod tincidunt.
+            A Cooperativa que veio trazer saúde e ótimos produtos para dentro da sua casa, com tudo feito organicamente, sem fertilizantes, diretamente da nossa família para a sua.
           </p>
         </S.Card1>
         <S.Card2>
