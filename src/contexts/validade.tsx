@@ -16,9 +16,11 @@ export const ValidadeProvider: React.FC = ({ children }) => {
     try {
       const response = await getOpened();
 
-      console.log(response);
-
-      setValidade(!response.data.success);
+      if (response.data.success === 'aberta') {
+        setValidade(true);
+      } else {
+        setValidade(false);
+      }
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);

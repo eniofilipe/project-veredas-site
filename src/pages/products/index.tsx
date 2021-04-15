@@ -13,7 +13,11 @@ import {
   SearchAlt2 as SearchIcon,
 } from '@styled-icons/boxicons-regular';
 
+<
 import { Checkbox } from '@material-ui/core';
+
+import { GetServerSideProps } from 'next';
+
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
 import CardProduct from '../../components/Cards/CardProduct';
@@ -23,6 +27,8 @@ import { Categoria, Oferta } from '../../types';
 import CartContext from '../../contexts/cart';
 import { getCategorias } from '../../api/Categorias';
 import { getProdutosOfertas } from '../../api/Ofertas';
+import ValidadeContext from '../../contexts/validade';
+import { getOpened, getOpenedWithoutToken } from '../../api/Validade';
 
 const products = () => {
   const Router = useRouter();
@@ -179,6 +185,7 @@ const products = () => {
                 quantity={quantidade[index] ? quantidade[index] : 1}
                 onChange={() =>
                   // eslint-disable-next-line implicit-arrow-linebreak
+
                   addProduct(prod, quantidade[index] ? quantidade[index] : 1)
                 }
                 PlusQuantityOnChange={() => aumentarQuantidade(index)}
@@ -194,3 +201,27 @@ const products = () => {
 };
 
 export default products;
+
+export const getServerSideProps: GetServerSideProps = async ({}) => {
+  let validade = false;
+
+  try {
+    const response = await getOpenedWithoutToken();
+    if (response.data.success === 'aberta') validade = true;
+  } catch (error) {
+    console.log(error);
+  }
+
+  if (!validade) {
+    return {
+      redirect: {
+        destination: '/profile',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};

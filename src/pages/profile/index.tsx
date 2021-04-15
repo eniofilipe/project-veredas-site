@@ -7,16 +7,17 @@ import { useContext, useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+import { GetServerSideProps } from 'next';
+import Cookie from 'js-cookie';
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
 import AuthContext from '../../contexts/auth';
 import logomst from '../../assets/logo-mst-rurais.png';
 import logoif from '../../assets/logo-if.png';
 import logowhite from '../../assets/logo-white.png';
-import { Cliente } from '../../types';
+import { Cliente, ClienteLogin } from '../../types';
 import { cleanObject, isEmail, validarCPF } from '../../Utils/Validation';
 import { cepMask, cellphoneeMask, cpfMask } from '../../Utils/Masks';
-
 import { getDetails, updateProfile } from '../../api/Clientes';
 
 const Profile = () => {
@@ -25,7 +26,8 @@ const Profile = () => {
   const [roEndereco, setRoE] = useState(true);
 
   const Router = useRouter();
-  const { cliente, signOut } = useContext(AuthContext);
+  const { signOut } = useContext(AuthContext);
+  const cliente = (Cookie.get('cliente') as unknown) as ClienteLogin;
 
   const [profileData, setProfileData] = useState<Cliente>();
 
@@ -135,7 +137,7 @@ const Profile = () => {
             break;
           case 404:
             toast.warn(
-              'Usuário não encontrado. Recomendamos que saia e faça o login novamente.',
+              'Usuário não encontrado. Recomendamos que saia e faça o login novamente.'
             );
             break;
 
@@ -180,17 +182,11 @@ const Profile = () => {
               <S.CardHeader>
                 <S.Title>Dados Pessoais</S.Title>
                 {roDadosPessoais ? (
-                  <S.Button onClick={() => setRoDP(false)}>
-                    Editar
-                  </S.Button>
+                  <S.Button onClick={() => setRoDP(false)}>Editar</S.Button>
                 ) : (
                   <S.EditButtons>
-                    <S.Button onClick={() => putProfile()}>
-                      Confirmar
-                    </S.Button>
-                    <S.Button onClick={() => reset()}>
-                      Cancelar
-                    </S.Button>
+                    <S.Button onClick={() => putProfile()}>Confirmar</S.Button>
+                    <S.Button onClick={() => reset()}>Cancelar</S.Button>
                   </S.EditButtons>
                 )}
               </S.CardHeader>
@@ -217,8 +213,10 @@ const Profile = () => {
                   <S.Input
                     value={telefone}
                     readOnly={roDadosPessoais}
-                    onChange={(e) => setTelefone(cellphoneeMask(e.target.value))}
-                    />
+                    onChange={(e) =>
+                      setTelefone(cellphoneeMask(e.target.value))
+                    }
+                  />
                 </S.Row>
               </S.Form>
             </S.WrapperData>
@@ -239,9 +237,7 @@ const Profile = () => {
                       <S.Button onClick={() => putProfile()}>
                         Confirmar
                       </S.Button>
-                      <S.Button onClick={() => reset()}>
-                        Cancelar
-                      </S.Button>
+                      <S.Button onClick={() => reset()}>Cancelar</S.Button>
                     </S.EditButtons>
                   )}
                 </S.Row>
@@ -286,12 +282,8 @@ const Profile = () => {
                 <S.Button onClick={() => setRoE(false)}>Editar</S.Button>
               ) : (
                 <S.EditButtons>
-                  <S.Button onClick={() => putProfile()}>
-                    Confirmar
-                  </S.Button>
-                  <S.Button onClick={() => reset()}>
-                    Cancelar
-                  </S.Button>
+                  <S.Button onClick={() => putProfile()}>Confirmar</S.Button>
+                  <S.Button onClick={() => reset()}>Cancelar</S.Button>
                 </S.EditButtons>
               )}
             </S.CardHeader>
@@ -371,3 +363,20 @@ const Profile = () => {
 };
 
 export default Profile;
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const { token } = req.cookies;
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
