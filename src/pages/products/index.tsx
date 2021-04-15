@@ -13,7 +13,6 @@ import {
   SearchAlt2 as SearchIcon,
 } from '@styled-icons/boxicons-regular';
 
-<
 import { Checkbox } from '@material-ui/core';
 
 import { GetServerSideProps } from 'next';
@@ -118,7 +117,7 @@ const products = () => {
       // eslint-disable-next-line no-multiple-empty-lines
 
       const indexOfCheckBox = categorias.findIndex(
-        (el) => el.nome === categoryName
+        (el) => el.nome === categoryName,
       );
 
       if (indexOfCheckBox !== -1) {
@@ -184,7 +183,7 @@ const products = () => {
                 value={prod.valor_unitario}
                 quantity={quantidade[index] ? quantidade[index] : 1}
                 onChange={() =>
-                  // eslint-disable-next-line implicit-arrow-linebreak
+                // eslint-disable-next-line implicit-arrow-linebreak
 
                   addProduct(prod, quantidade[index] ? quantidade[index] : 1)
                 }
