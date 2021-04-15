@@ -3,7 +3,9 @@
 /* eslint-disable operator-linebreak */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import React, { useState, useEffect, useContext } from 'react';
+import React, {
+  Fragment, useState, useEffect, useContext,
+} from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import {
@@ -44,7 +46,7 @@ const products = () => {
   const Router = useRouter();
   const { addProduct } = useContext(CartContext);
   const [categorias, setCategorias] = useState<Categoria[]>([]);
-  const [produtosOferta, setProdutosOferta] = useState<Oferta[]>([]);
+  const [produtosOferta, setProdutosOferta] = useState<Oferta[]>([]); // Estático
   const [produtosOfertaAux, setProdutosOfertaAux] = useState<Oferta[]>([]);
   const [quantidade, setQuantidade] = useState<number[]>([1]);
   const classes = useStyles();
@@ -93,31 +95,36 @@ const products = () => {
     }
   };
 
-  useEffect(() => {
-    fetchCategorias();
-    fetchProdutos();
-  }, [produtosOferta]);
-
   const [state, setState] = React.useState([]);
 
-  const handleChange = (name: string) => (
+  const handleChange = (name: string, value: number) => (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setState({ ...state, [name]: event.target.checked });
 
-    if (name === 'todos') {
-      setProdutosOferta(produtosOfertaAux);
+    if (value === -1) {
+      setProdutosOfertaAux(produtosOferta);
     } else {
-      produtosOferta.map((prod) => setProdutosOfertaAux(
-        prod.produtos.categorias.filter((cat) => cat.nome === name),
-        // eslint-disable-next-line prettier/prettier
-      ));
+      const aux = produtosOferta.map((prod) => (prod.produtos.categorias.filter((cat) => cat.id === value)));
+      const list = produtosOferta;
 
-      setProdutosOferta(produtosOfertaAux);
+      for (let i = 0; i < aux.length; i++) {
+        if (aux[i].length === 0) {
+          list[i].id = -2;
+        }
+      }
+
+      setProdutosOfertaAux([...list]);
+      console.log(produtosOfertaAux);
     }
   };
 
   const { aux } = state;
+
+  useEffect(() => {
+    fetchCategorias();
+    fetchProdutos();
+  }, [produtosOfertaAux]);
 
   return (
     <S.Wrapper>
@@ -151,7 +158,7 @@ const products = () => {
                     control={
                       <Checkbox
                         checked={aux}
-                        onChange={handleChange('todos')}
+                        onChange={handleChange('todos', -1)}
                         value="todos"
                       />
                     }
@@ -164,7 +171,7 @@ const products = () => {
                           control={
                             <Checkbox
                               checked={aux}
-                              onChange={handleChange('diversos')}
+                              onChange={handleChange('diversos', cat.id)}
                               value="diversos"
                             />
                           }
@@ -177,20 +184,24 @@ const products = () => {
             </div>
           </S.WrapperCategory>
           <S.WrapperProduct>
-            {produtosOferta.map((prod, index) => (
-              <CardProduct
-                key={`${prod.id}`}
-                category={prod.produtos.categorias.map((cat) => cat.nome)}
-                comment={prod.produtos.descricao}
-                name={prod.produtos.nome}
-                value={prod.valor_unitario}
-                quantity={quantidade[index] ? quantidade[index] : 1}
-                onChange={() => addProduct(prod, quantidade[index] ? quantidade[index] : 1)
-                }
-                PlusQuantityOnChange={() => aumentarQuantidade(index)}
-                MinusQuantityOnChange={() => diminuirQuantidade(index)}
-                image={prod.produtos.imagem.url}
-              />
+            {produtosOferta && produtosOferta.map((prod, index) => (
+              produtosOferta[index].id !== -2 ?
+              // <div key={`${prod.id}`}>
+                  <CardProduct
+                      key={`${prod.id}`}
+                      category={prod.produtos.categorias.map((cat) => cat.nome)}
+                      comment={prod.produtos.descricao}
+                      name={prod.produtos.nome}
+                      value={prod.valor_unitario}
+                      quantity={quantidade[index] ? quantidade[index] : 1}
+                      onChange={() => addProduct(prod, quantidade[index] ? quantidade[index] : 1)
+                      }
+                      PlusQuantityOnChange={() => aumentarQuantidade(index)}
+                      MinusQuantityOnChange={() => diminuirQuantidade(index)}
+                      image={prod.produtos.imagem.url}
+                    />
+                //  </div>
+                : ''
             ))}
           </S.WrapperProduct>
         </S.WrapperContent>
