@@ -23,6 +23,7 @@ import Paper from '@material-ui/core/Paper';
 import Head from 'next/head';
 import { useState, useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { GetServerSideProps } from 'next';
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
 import AuthContext from '../../contexts/auth';
@@ -207,3 +208,20 @@ const Order = () => {
 };
 
 export default Order;
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const { token } = req.cookies;
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};

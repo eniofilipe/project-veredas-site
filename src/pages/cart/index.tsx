@@ -5,9 +5,10 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable operator-linebreak */
 // eslint-disable-next-line import/no-unresolved
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useLayoutEffect } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+import { GetServerSideProps } from 'next';
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
 import CartContext from '../../contexts/cart';
@@ -17,11 +18,17 @@ import { cepMask } from '../../Utils/Masks';
 import logomst from '../../assets/logo-mst-rurais.png';
 import logoif from '../../assets/logo-if.png';
 import { postPedido } from '../../api/Pedidos';
+import ValidadeContext from '../../contexts/validade';
+import {
+  getOpenedWithoutToken,
+  getValidaTokenWithoutToken,
+} from '../../api/Validade';
 
 const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
   const Router = useRouter();
   const { signOut } = useContext(AuthContext);
   const { products } = useContext(CartContext);
+  const { validade } = useContext(ValidadeContext);
   const { cliente, endereco } = useContext(AuthContext);
   const [subtotal, setSubtotal] = useState(0);
   const [total, setTotal] = useState(0);
@@ -29,12 +36,12 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
 
   useEffect(() => {
     const resultAux = products.map(
-      (prod) => prod.quantidadeCart * prod.valor_unitario,
+      (prod) => prod.quantidadeCart * prod.valor_unitario
     );
 
     const result = resultAux.reduce(
       (prev, curr) => Number(prev) + Number(curr),
-      0,
+      0
     );
 
     setSubtotal(result);
@@ -46,7 +53,8 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
     try {
       await postPedido({
         ofertas: products.map(
-          (c) => ({ oferta_id: c.id, quantidade: c.quantidadeCart } as OfertaPedido),
+          (c) =>
+            ({ oferta_id: c.id, quantidade: c.quantidadeCart } as OfertaPedido)
         ),
         cliente_id: cliente.id,
         tipo_frete_id: 1,
@@ -91,22 +99,21 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
               </S.Value>
             </S.WrapperItem>
           ))}
-              <S.WrapperSubtotal>
-                <S.Row>
-                <S.SubTotal> Subtotal</S.SubTotal>
-                <S.SubTotal>{`R$ ${subtotal.toFixed(2)}`}</S.SubTotal>
-                </S.Row>
-                <S.Row>
-                <S.SubTotal>Frete</S.SubTotal>
-                <S.SubTotal>R${frete.toFixed(2)}</S.SubTotal>
-                </S.Row>
-                <S.Line/>
-                <S.Row>
-                <S.SubTotal>Total </S.SubTotal>
-                <S.SubTotal>R$ {(subtotal + frete).toFixed(2)}</S.SubTotal>
-                </S.Row>
-
-              </S.WrapperSubtotal>
+          <S.WrapperSubtotal>
+            <S.Row>
+              <S.SubTotal> Subtotal</S.SubTotal>
+              <S.SubTotal>{`R$ ${subtotal.toFixed(2)}`}</S.SubTotal>
+            </S.Row>
+            <S.Row>
+              <S.SubTotal>Frete</S.SubTotal>
+              <S.SubTotal>R${frete.toFixed(2)}</S.SubTotal>
+            </S.Row>
+            <S.Line />
+            <S.Row>
+              <S.SubTotal>Total </S.SubTotal>
+              <S.SubTotal>R$ {(subtotal + frete).toFixed(2)}</S.SubTotal>
+            </S.Row>
+          </S.WrapperSubtotal>
         </S.Items>
 
         <S.WrapperItem>
@@ -166,3 +173,38 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
 };
 
 export default Cart;
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const { token } = req.cookies;
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+
+  let validade = false;
+
+  try {
+    const response = await getOpenedWithoutToken();
+    if (response.data.success === 'aberta') validade = true;
+  } catch (error) {
+    console.log(error);
+  }
+
+  if (!validade) {
+    return {
+      redirect: {
+        destination: '/profile',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
