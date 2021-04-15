@@ -112,7 +112,7 @@ const products = () => {
       // eslint-disable-next-line no-multiple-empty-lines
 
       const indexOfCheckBox = categorias.findIndex(
-        (el) => el.nome === categoryName,
+        (el) => el.nome === categoryName
       );
 
       if (indexOfCheckBox !== -1) {
@@ -154,7 +154,7 @@ const products = () => {
           <S.WrapperCategory>
             {categorias &&
               categorias.map((cat, index) => (
-                <div key={`${cat.id}`}>
+                <S.DivCategory key={cat.id}>
                   <Checkbox
                     key={`${cat.id}`}
                     onChange={(e) => handleChange(e, cat.nome)}
@@ -162,10 +162,9 @@ const products = () => {
                     type="checkbox"
                     id={`${cat.id}`}
                     name={cat.nome}
-                    label={cat.nome}
                   />{' '}
                   {cat.nome}
-                </div>
+                </S.DivCategory>
               ))}
           </S.WrapperCategory>
           <S.WrapperProduct>

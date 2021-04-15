@@ -62,21 +62,28 @@ export const HeaderWrapper = styled.div<MenuProps>`
 
 export const WrapperProduct = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16rem, auto));
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 18rem));
   width: 100%;
-  margin-left: 2rem;
+  /* height: 250px; */
   row-gap: 3rem;
   padding-top: 3rem;
   padding-bottom: 3rem;
+`;
+
+export const DivCategory = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: left;
 `;
 
 export const WrapperCategory = styled.div`
   background-color: #fff;
   border: 1px solid #444;
   margin: 2rem;
-  margin-top: 9rem;
+  margin-top: 3rem;
   /* margin-right: 0; */
   padding: 1rem;
+  padding-right: 4rem;
   border-radius: 1rem;
   height: 100%;
 `;
