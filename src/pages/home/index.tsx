@@ -1,16 +1,21 @@
-import { useEffect, useState, useRef } from 'react';
+/* eslint-disable prettier/prettier */
+// eslint-disable-next-line object-curly-spacing
+import {
+  useEffect, useState, useRef, useContext,
+} from 'react';
 import { useRouter } from 'next/router';
 import veredaslogo from '../../assets/logo.png';
 import * as S from './styles';
 import logomst from '../../assets/logo-mst-rurais.png';
 import logoif from '../../assets/logo-if.png';
 import imagecampo from '../../assets/Campo-cidade.png';
-import { getOpened } from '../../api/Validade';
+import ValidadeContext from '../../contexts/validade';
 
 const Home = () => {
-  const router = useRouter();
+  const { validade } = useContext(ValidadeContext);
   const [scrollY, setScrollY] = useState(0);
-  const [opened, setOpened] = useState(false);
+
+  const router = useRouter();
 
   const sectionOneRef = useRef<null | HTMLDivElement>(null);
   const sectionTwoRef = useRef<null | HTMLDivElement>(null);
@@ -19,6 +24,14 @@ const Home = () => {
   function logit() {
     setScrollY(window.pageYOffset);
   }
+
+  const goToProducts = () => {
+    router.push('/products');
+  };
+
+  const goToLogin = () => {
+    router.push('/login');
+  };
 
   useEffect(() => {
     function watchScroll() {
@@ -54,22 +67,6 @@ const Home = () => {
     }
   }
 
-  useEffect(() => {
-    async function loadData() {
-      try {
-        const { data } = await getOpened();
-        if (data.success === 'aberta') {
-          setOpened(true);
-          return;
-        }
-        setOpened(true);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-    loadData();
-  }, []);
-
   return (
     <S.Wrapper>
       <S.HeaderWrapper position={scrollY}>
@@ -85,21 +82,24 @@ const Home = () => {
             <S.MenuLink onClick={() => handleChange('sectionThreeRef')}>
               Como Funciona
             </S.MenuLink>
-            {opened ? (
-              <S.Button>Entrar na feirinha</S.Button>
+            {!validade ? (
+              <S.Button onClick={goToLogin}>Acessar Conta</S.Button>
             ) : (
-              <S.Button onClick={() => router.push('/login')}>
-                Acessar conta
-              </S.Button>
+              <S.Button onClick={goToProducts}>Entrar na Feirinha</S.Button>
             )}
           </S.MenuNav>
         </S.Header>
       </S.HeaderWrapper>
+
       <S.HomeSectionWrapper ref={sectionOneRef}>
         <S.BGHome>
           <S.CentralizeWrapper>
-            <p>Alimentos saudáveis e de qualidade</p>
-            <p>Cestas Agroecologicas</p>
+            <p>BEM VINDO À CESTA AGROECOLOGICA</p>
+            <p>
+              Aqui nós oferecemos os alimentos orgânicos de melhor qualidade,{' '}
+              <p />
+              direto do campo da agricultura familiar.
+            </p>
             <S.Logo src={logomst} alt="Logo do MST" />
           </S.CentralizeWrapper>
         </S.BGHome>
@@ -120,36 +120,52 @@ const Home = () => {
       <S.WrapperThreeSection ref={sectionThreeRef}>
         <S.TextWrapper>
           <p>Como funciona? </p>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-            dapibus neque felis, sed fermentum metus tristique in. Phasellus
-            imperdiet dui eu euismod tincidunt. Donec varius, mi eu cursus
-            dignissim, eros libero scelerisque metus, a ullamcorper tellus elit
-            ac tortor. Pellentesque lobortis elit eu ex aliquam, nec eleifend
-            erat dapibus.{' '}
-          </p>
-          <p>
-            Nullam vel molestie odio. Cras in lacinia sem. Integer consectetur
-            dolor et odio venenatis eleifend. Maecenas ipsum risus, lobortis
-            vitae velit ut, interdum fermentum mi. Sed ullamcorper dictum libero
-            vel facilisis.
-          </p>
-          <p>
-            Aliquam ac maximus lacus. Duis a lacus varius, viverra massa quis,
-            bibendum risus. Mauris tempor nisi nisi, a condimentum ex tincidunt
-            in. Fusce hendrerit dolor gravida imperdiet viverra.{' '}
-          </p>
         </S.TextWrapper>
+        <S.TextDivPrincipal>
+          <S.TextDiv1>
+            Na loja se encontra todos os produtos ofertados na semana. É
+            possível escolher o produto, a quantidade e adicionar ao carrinho.
+            Assim que finalizar o pedido, é solicitado uma conta, caso não tenha
+            pode criar uma conta nova. <p />
+            Informe seus dados corretamente para poder ser efetuado a entrega.{' '}
+            <p />
+          </S.TextDiv1>
+          <S.TextDiv2>
+            Período de funcionamento: <p />
+            &nbsp; &nbsp; &nbsp; Pedidos: Segunda-Feira até Quarta-Feira. <p />
+            &nbsp; &nbsp; &nbsp; Entregas: A partir de Sexta-Feira. <p />
+            &nbsp; &nbsp; &nbsp;Só aceitamos alteração do pedido até as &nbsp;
+            &nbsp; &nbsp; &nbsp;Quarta-Feira 23:59hrs. <p />
+            <br />
+            <p /> Caso surja algum imprevisto entraremos em contato! <p />
+          </S.TextDiv2>
+          <S.TextDiv3>
+            Frete: R$ 5,00. <p />
+            Entregas realizadas somente na cidade de Montes Claros/MG. <p />
+            <br />
+            Endereço: Assentamento Estrela do Norte, Estrada da Produção, Km 14,
+            CEP: 39410-000, Zona Rural, Município de Montes Claros/MG CEP:
+            39410-000.
+          </S.TextDiv3>
+        </S.TextDivPrincipal>
+        {!validade ? (
+          <S.ButtonSecond onClick={goToLogin}>Acessar Conta</S.ButtonSecond>
+        ) : (
+          <S.ButtonSecond onClick={goToProducts}>
+            Entrar na Feirinha
+          </S.ButtonSecond>
+        )}
       </S.WrapperThreeSection>
       <S.WrapperFooter>
         <div>
           <p>Cooperativa Camponesa - Veredas da Terra</p>
           <p>CNPJ: 10.286.881/0001-02</p>
+          <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
         </div>
         <div>
-          <p>Contato</p>
+          <p>Contato:</p>
           <p>contato@veredasdaterra.com.br</p>
-          <p>(38) 9 9900-0000</p>
+          <p>+55 38 9 9900-0000</p>
         </div>
         <div>
           <S.Logo
