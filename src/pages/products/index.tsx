@@ -28,10 +28,11 @@ import { getCategorias } from '../../api/Categorias';
 import { getProdutosOfertas } from '../../api/Ofertas';
 import ValidadeContext from '../../contexts/validade';
 import { getOpened, getOpenedWithoutToken } from '../../api/Validade';
+import { toast } from 'react-toastify';
 
 const products = () => {
   const Router = useRouter();
-  const { addProduct } = useContext(CartContext);
+  const { addProduct, removeProduct, checkInCart, getCartLenght } = useContext(CartContext);
   const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [produtosOferta, setProdutosOferta] = useState<Oferta[]>([]);
   const [quantidade, setQuantidade] = useState<number[]>([1]);
@@ -133,6 +134,15 @@ const products = () => {
     fetchProdutos();
   }, []);
 
+
+  function handleGoCart(){
+    if(getCartLenght() > 0){
+      Router.push('/cart')
+      return
+    }
+    toast.warn("Carrinho Vazio")
+  }
+
   return (
     <S.Wrapper>
       <Head>
@@ -146,7 +156,8 @@ const products = () => {
             <S.MenuNav>
               <S.WrapperIcons>
                 <S.Icon>
-                  <CartIcon onClick={() => Router.push('/cart')} />
+                  <span>{getCartLenght()}</span>
+                  <CartIcon onClick={() => handleGoCart()} />
                 </S.Icon>
                 <S.Icon>
                   <ProfileIcon onClick={() => Router.push('profile')} />
@@ -164,7 +175,6 @@ const products = () => {
                     key={`${cat.id}`}
                     onChange={(e) => handleChange(e, cat.nome)}
                     checked={!!categorias[index].isvalid}
-                    type="checkbox"
                     id={`${cat.id}`}
                     name={cat.nome}
                     color="default"
@@ -183,13 +193,14 @@ const products = () => {
                 value={prod.valor_unitario}
                 quantity={quantidade[index] ? quantidade[index] : 1}
                 onChange={() =>
-                // eslint-disable-next-line implicit-arrow-linebreak
-
+                  // eslint-disable-next-line implicit-arrow-linebreak
                   addProduct(prod, quantidade[index] ? quantidade[index] : 1)
                 }
+                handleRemove={() => removeProduct(prod)}
                 PlusQuantityOnChange={() => aumentarQuantidade(index)}
                 MinusQuantityOnChange={() => diminuirQuantidade(index)}
                 image={prod.produtos.imagem.url}
+                inCart={checkInCart(prod)}
               />
             ))}
           </S.WrapperProduct>

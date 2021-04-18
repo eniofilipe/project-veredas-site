@@ -127,6 +127,18 @@ export const Icon = styled.div`
   height: 4rem;
   margin-right: 2rem;
   cursor: pointer;
+  position: relative;
+  span{
+    position: absolute;
+    right: -20px;
+    top: -10px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background: #333;
+    color: white;
+    font-weight: 800;
+  }
 `;
+
 
 export default Icon;
