@@ -164,6 +164,7 @@ export interface ResponseRecuperarSenha {
 export interface PostResetarSenhaProps {
   password: string;
   token: string | string[];
+}
 
 export interface Product {
   product: string;
@@ -222,5 +223,4 @@ export interface PedidosProps {
   };
   subtotal: number;
   total: number;
-
 }

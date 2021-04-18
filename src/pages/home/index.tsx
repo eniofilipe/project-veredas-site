@@ -1,4 +1,3 @@
-
 /* eslint-disable prettier/prettier */
 // eslint-disable-next-line object-curly-spacing
 
@@ -17,7 +16,6 @@ import logomst from '../../assets/logo-mst-rurais.png';
 import logoif from '../../assets/logo-if.png';
 import imagecampo from '../../assets/Campo-cidade.png';
 
-
 import { getOpened } from '../../api/Validade';
 
 import ValidadeContext from '../../contexts/validade';
@@ -25,7 +23,6 @@ import ValidadeContext from '../../contexts/validade';
 const Home = () => {
   const { validade } = useContext(ValidadeContext);
   const [scrollY, setScrollY] = useState(0);
-
 
   const router = useRouter();
   const sectionOneRef = useRef<null | HTMLDivElement>(null);
@@ -78,7 +75,6 @@ const Home = () => {
         });
     }
   }
-
 
   return (
     <S.Wrapper>
@@ -157,7 +153,7 @@ const Home = () => {
             <p /> Caso surja algum imprevisto entraremos em contato! <p />
           </S.TextDiv2>
           <S.TextDiv3>
-            Frete: R$ 5,00. <p />
+            Taxa de Entrega: R$ 5,00. <p />
             Entregas realizadas somente na cidade de Montes Claros/MG. <p />
             <br />
             Endereço: Assentamento Estrela do Norte, Estrada da Produção, Km 14,

@@ -5,7 +5,9 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable operator-linebreak */
 // eslint-disable-next-line import/no-unresolved
-import { useContext, useState, useEffect, useLayoutEffect } from 'react';
+import {
+  useContext, useState, useEffect, useLayoutEffect,
+} from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { GetServerSideProps } from 'next';
@@ -36,12 +38,12 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
 
   useEffect(() => {
     const resultAux = products.map(
-      (prod) => prod.quantidadeCart * prod.valor_unitario
+      (prod) => prod.quantidadeCart * prod.valor_unitario,
     );
 
     const result = resultAux.reduce(
       (prev, curr) => Number(prev) + Number(curr),
-      0
+      0,
     );
 
     setSubtotal(result);
@@ -53,8 +55,7 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
     try {
       await postPedido({
         ofertas: products.map(
-          (c) =>
-            ({ oferta_id: c.id, quantidade: c.quantidadeCart } as OfertaPedido)
+          (c) => ({ oferta_id: c.id, quantidade: c.quantidadeCart } as OfertaPedido),
         ),
         cliente_id: cliente.id,
         tipo_frete_id: 1,
@@ -101,11 +102,11 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
           ))}
           <S.WrapperSubtotal>
             <S.Row>
-              <S.SubTotal> Subtotal</S.SubTotal>
+              <S.SubTotal>Subtotal</S.SubTotal>
               <S.SubTotal>{`R$ ${subtotal.toFixed(2)}`}</S.SubTotal>
             </S.Row>
             <S.Row>
-              <S.SubTotal>Frete</S.SubTotal>
+              <S.SubTotal>Taxa de Entrega</S.SubTotal>
               <S.SubTotal>R${frete.toFixed(2)}</S.SubTotal>
             </S.Row>
             <S.Line />

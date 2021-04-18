@@ -134,7 +134,7 @@ const Home = () => {
           &nbsp; Pedidos: Segunda-Feira até Quarta-Feira. <p />
           &nbsp; Entregas: A partir de Sexta-Feira. <p />
           {/* &nbsp; &nbsp; &nbsp; Alteração do pedido até as Quarta-Feira 23:59hrs. <p /> */}
-          &nbsp; Frete: R$ 5,00. <p />
+          &nbsp; Taxa de Entrega: R$ 5,00. <p />
           &nbsp; Entraremos em contato caso ocorra algum imprevisto! <p />
           </S.TextDiv2>
           {/* <S.TextDiv3>
