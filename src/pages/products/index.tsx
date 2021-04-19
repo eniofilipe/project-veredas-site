@@ -33,8 +33,7 @@ import { getOpened, getOpenedWithoutToken } from '../../api/Validade';
 const products = () => {
   const Router = useRouter();
   const {
- addProduct, removeProduct, checkInCart, getCartLenght
-} = useContext(
+ addProduct, removeProduct, checkInCart, getCartLenght, } = useContext(
     CartContext,
   );
   const [categorias, setCategorias] = useState<Categoria[]>([]);
@@ -80,7 +79,7 @@ const products = () => {
       const response = await getCategorias();
 
       setCategorias([
-        { id: -1, nome: 'Todos', isvalid: true },
+        { id: -1, nome: 'Todas', isvalid: true },
         ...response.data,
       ]);
     } catch (error) {
@@ -108,7 +107,7 @@ const products = () => {
   const handleChange = (e: any, categoryName: string) => {
     const { checked } = e.target;
 
-    if (categoryName === 'Todos') {
+    if (categoryName === 'Todas') {
       // todo
       const states = [...categorias];
       states.forEach((s) => {
