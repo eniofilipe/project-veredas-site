@@ -35,7 +35,7 @@ const products = () => {
   const {
  addProduct, removeProduct, checkInCart, getCartLenght
 } = useContext(
-    CartContext
+    CartContext,
   );
   const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [produtosOferta, setProdutosOferta] = useState<Oferta[]>([]);
@@ -122,7 +122,7 @@ const products = () => {
       // eslint-disable-next-line no-multiple-empty-lines
 
       const indexOfCheckBox = categorias.findIndex(
-        (el) => el.nome === categoryName,
+        (el) => el.nome === categoryName
       );
 
       if (indexOfCheckBox !== -1) {

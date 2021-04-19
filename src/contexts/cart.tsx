@@ -13,8 +13,8 @@ interface ICartContext {
   products: OfertaCart[];
   addProduct: (prod: Oferta, quantidade: number) => void;
   removeProduct: (prod: Oferta) => void;
-  checkInCart: (prod: Oferta ) => boolean;
-  getCartLenght:() => number;
+  checkInCart: (prod: Oferta) => boolean;
+  getCartLenght: () => number;
 }
 
 const CartContext = createContext<ICartContext>({} as ICartContext);
@@ -23,25 +23,24 @@ export const CartProvider: React.FC = ({ children }) => {
   const [products, setProducts] = useState<OfertaCart[]>([]);
 
   const removeProduct = (prod: Oferta) => {
-    setProducts(products.filter(p => p.id !== prod.id))
-    toast.error('Produto Removido', { position: "bottom-right",});
-  }
-  const checkInCart =(prod: Oferta) => {
-    return products.findIndex(p => p.id === prod.id) > - 1
-  }
+    setProducts(products.filter((p) => p.id !== prod.id));
+    toast.error('Produto Removido', { position: 'bottom-right' });
+  };
+  const checkInCart = (prod: Oferta) =>
+    products.findIndex((p) => p.id === prod.id) > -1;
 
   const getCartLenght = () => {
-    var qtd = 0;
-    products.forEach(prod => {
-      qtd += prod.quantidadeCart
+    let qtd = 0;
+    products.forEach((prod) => {
+      qtd += prod.quantidadeCart;
     });
     return qtd;
-  }
+  };
 
   const addProduct = (prod: Oferta, quantidade: number) => {
     const index = products.findIndex((value) => value.id === prod.id);
 
-    console.log(index);
+    // console.log(index);
 
     if (index !== -1) {
       const productsAux = products;
@@ -52,13 +51,12 @@ export const CartProvider: React.FC = ({ children }) => {
       };
 
       setProducts(productsAux);
-      toast.success('Produto adicionado', { position: "bottom-right",});
+      toast.success('Produto adicionado', { position: 'bottom-right' });
     } else {
       const productAux = { ...prod, quantidadeCart: quantidade } as OfertaCart;
 
       setProducts(products.concat(productAux));
-      toast.success('Produto adicionado', { position: "bottom-right",});
-
+      toast.success('Produto adicionado', { position: 'bottom-right' });
     }
   };
   useEffect(() => {
@@ -72,7 +70,7 @@ export const CartProvider: React.FC = ({ children }) => {
         addProduct,
         removeProduct,
         checkInCart,
-        getCartLenght
+        getCartLenght,
       }}
     >
       {children}

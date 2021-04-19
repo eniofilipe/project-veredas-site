@@ -37,6 +37,7 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
   const router = useRouter();
   const [endereco, setAddress] = useState(null);
   const [cliente, setCliente] = useState(null);
+  const [renderizando, setRenderizando] = useState<number>();
 
   useEffect(() => {
     const resultAux = products.map(
@@ -53,10 +54,16 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
     setTotal(result + 5);
   }, [products]);
 
+  const aumentarQuantidade = (index: number) => {
+    products[index].quantidadeCart += 1;
+    console.log(products[index].quantidadeCart);
+    setRenderizando(products[index].quantidadeCart);
+  };
+
   useEffect(() => {
     setAddress(getAddress());
     setCliente(getCliente());
-  }, []);
+  }, [renderizando]);
 
   async function handlePedido() {
     try {
@@ -91,12 +98,12 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
       <S.WrapperContent>
         <S.H1>Carrinho</S.H1>
         <S.Items>
-          {products.map((offer) => (
+          {products.map((offer, index) => (
             <S.WrapperItem>
               <S.WrapperControl>
                 <S.SubButton />
                 <S.Text>{offer.quantidadeCart}</S.Text>
-                <S.SumButton />
+                <S.SumButton onClick={() => aumentarQuantidade(index)}/>
                 <S.WrapperProd>
                   <S.Text>{offer.produtos.nome}</S.Text>
                   {/* <S.Text>{offer.produtos.descricao}</S.Text> */}
