@@ -151,7 +151,12 @@ const Order = () => {
                               <TableRow>
                                 <TableCell>Quantidade</TableCell>
                                 <TableCell align="center">Produto</TableCell>
-                                <TableCell align="right">Valor</TableCell>
+                                {/* <TableCell align="right">
+                                  Valor Unitário
+                                </TableCell> */}
+                                <TableCell colSpan={2} align="right">
+                                  Total Unitário{' '}
+                                </TableCell>
                               </TableRow>
                             </TableHead>
                             <TableBody>
@@ -164,26 +169,35 @@ const Order = () => {
                                     <TableCell align="center">
                                       {prod.produtos.nome}
                                     </TableCell>
-                                    <TableCell align="right">
+                                    {/* <TableCell align="right">
                                       R$ {prod.valor_unitario}
+                                    </TableCell> */}
+                                    <TableCell colSpan={2} align="right">
+                                      R${' '}
+                                      {(
+                                        prod.valor_unitario *
+                                        prod.oferta_pedidos.quantidade
+                                      ).toFixed(2)}
                                     </TableCell>
                                   </TableRow>
                                 ))}
                               <TableRow>
                                 <TableCell rowSpan={3} />
-                                <TableCell colSpan={1}>Subtotal</TableCell>
+                                <TableCell colSpan={2}>Subtotal</TableCell>
                                 <TableCell align="right">
                                   R$ {handleSubtotal(pedido.ofertas)}
                                 </TableCell>
                               </TableRow>
                               <TableRow>
-                                <TableCell>Taxa de entrega</TableCell>
+                                <TableCell colSpan={2}>
+                                  Taxa de entrega
+                                </TableCell>
                                 <TableCell align="right">
                                   R$ {pedido.frete.valor_frete.toFixed(2)}
                                 </TableCell>
                               </TableRow>
                               <TableRow>
-                                <TableCell>Total</TableCell>
+                                <TableCell colSpan={2}>Total</TableCell>
                                 <TableCell align="right">
                                   R${' '}
                                   {Number(
