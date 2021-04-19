@@ -77,16 +77,31 @@ export const DivCategory = styled.div`
 `;
 
 export const WrapperCategory = styled.div`
+  display: flex;
+  width: 15%;
+  flex-direction: column;
   background-color: #fff;
   border: 1px solid #444;
   margin: 2rem;
-  margin-top: 3rem;
+   margin-top: 3rem;
   /* margin-right: 0; */
   padding: 1rem;
-  padding-right: 4rem;
-  border-radius: 1rem;
-  height: 100%;
+  padding-bottom: 4rem;
+  // padding-right: 4rem;
+  border-radius: 8px;
+  //  height: 100%;
 `;
+
+
+export const HeadCategory = styled.h1`
+  align-self: center;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  color: rgba(0,0,0,0.54);
+  font-size: 1.3rem;
+`;
+
+
 export const Checkbox = styled.input`
   margin-bottom: 1rem;
 `;

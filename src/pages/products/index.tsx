@@ -80,7 +80,7 @@ const products = () => {
       const response = await getCategorias();
 
       setCategorias([
-        { id: -1, nome: 'Todos', isvalid: true },
+        { id: -1, nome: 'Todas', isvalid: true },
         ...response.data,
       ]);
     } catch (error) {
@@ -108,18 +108,14 @@ const products = () => {
   const handleChange = (e: any, categoryName: string) => {
     const { checked } = e.target;
 
-    if (categoryName === 'Todos') {
-      // todo
+    if (categoryName === 'Todas') {
       const states = [...categorias];
       states.forEach((s) => {
-        // eslint-disable-next-line no-param-reassign
         s.isvalid = checked;
       });
       setCategorias(states);
     } else {
       const states = [...categorias];
-
-      // eslint-disable-next-line no-multiple-empty-lines
 
       const indexOfCheckBox = categorias.findIndex(
         (el) => el.nome === categoryName
@@ -131,6 +127,35 @@ const products = () => {
 
       setCategorias(states);
     }
+
+    if(categorias[0].isvalid){
+      let allMarked = true;
+      const states = [...categorias];
+      states.forEach((s) => {
+        if(!s.isvalid)
+        allMarked = false
+      });
+      if(!allMarked){
+        states[0].isvalid = false;
+        setCategorias(states);
+      }
+    }
+    else if(!categorias[0].isvalid){
+      let allMarked = true;
+      const states = [...categorias];
+      states.forEach((s) => {
+        if(!s.isvalid){
+          if(s.nome!== 'Todas')
+            allMarked = false
+        }
+      });
+      if(allMarked){
+        console.log('alguem desmarcado')
+        states[0].isvalid = true;
+        setCategorias(states);
+      }
+    }
+
   };
 
   useEffect(() => {
@@ -171,6 +196,7 @@ const products = () => {
         </S.HeaderWrapper>
         <S.WrapperContent>
           <S.WrapperCategory>
+            <S.HeadCategory>Categorias</S.HeadCategory>
             {categorias &&
               categorias.map((cat, index) => (
                 <S.DivCategory key={cat.id}>
