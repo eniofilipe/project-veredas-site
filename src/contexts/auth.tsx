@@ -11,11 +11,10 @@ interface IAuthContext {
   signed: boolean;
   cliente: ClienteLogin | null;
   endereco: Address | null;
-  getCliente:() =>  ClienteLogin;
+  getCliente: () => ClienteLogin;
   signIn: (data: Login) => Promise<404 | 200 | 403>;
   signOut: () => void;
   getAddress: () => Address;
-
 }
 
 const AuthContext = createContext<IAuthContext>({} as IAuthContext);
@@ -64,7 +63,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       localStorage.setItem('endereco', JSON.stringify(response.data.endereco));
       Cookie.set('token', response.data.token);
       Cookie.set('cliente', JSON.stringify(response.data.client));
-      Cookie.set('endereco', response.data.endereco)
+      Cookie.set('endereco', response.data.endereco);
       router.push('/products');
       return 200;
     } catch (error) {
@@ -83,11 +82,11 @@ export const AuthProvider: React.FC = ({ children }) => {
     router.push('/');
   }
 
-  function getAddress(){
-    return Cookie.getJSON('endereco')
+  function getAddress() {
+    return Cookie.getJSON('endereco');
   }
-  function getCliente(){
-    return Cookie.getJSON('cliente')
+  function getCliente() {
+    return Cookie.getJSON('cliente');
   }
 
   return (
@@ -99,7 +98,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         signIn,
         signOut,
         getAddress,
-        getCliente
+        getCliente,
       }}
     >
       {children}

@@ -29,7 +29,7 @@ import {
 const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
   const Router = useRouter();
   const { signOut } = useContext(AuthContext);
-  const { products } = useContext(CartContext);
+  const { products, removeProduct } = useContext(CartContext);
   const { validade } = useContext(ValidadeContext);
   const { getCliente, getAddress } = useContext(AuthContext);
   const [subtotal, setSubtotal] = useState(0);
@@ -56,7 +56,15 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
 
   const aumentarQuantidade = (index: number) => {
     products[index].quantidadeCart += 1;
-    console.log(products[index].quantidadeCart);
+    setRenderizando(products[index].quantidadeCart);
+  };
+
+  const diminuirQuantidade = (index: number) => {
+    if (products[index].quantidadeCart === 1) {
+      removeProduct(products[index]);
+    } else {
+      products[index].quantidadeCart -= 1;
+    }
     setRenderizando(products[index].quantidadeCart);
   };
 
@@ -101,7 +109,7 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
           {products.map((offer, index) => (
             <S.WrapperItem>
               <S.WrapperControl>
-                <S.SubButton />
+                <S.SubButton onClick={() => diminuirQuantidade(index)}/>
                 <S.Text>{offer.quantidadeCart}</S.Text>
                 <S.SumButton onClick={() => aumentarQuantidade(index)}/>
                 <S.WrapperProd>

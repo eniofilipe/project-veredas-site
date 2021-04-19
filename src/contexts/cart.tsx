@@ -26,8 +26,7 @@ export const CartProvider: React.FC = ({ children }) => {
     setProducts(products.filter((p) => p.id !== prod.id));
     toast.error('Produto Removido', { position: 'bottom-right' });
   };
-  const checkInCart = (prod: Oferta) =>
-    products.findIndex((p) => p.id === prod.id) > -1;
+  const checkInCart = (prod: Oferta) => products.findIndex((p) => p.id === prod.id) > -1;
 
   const getCartLenght = () => {
     let qtd = 0;
