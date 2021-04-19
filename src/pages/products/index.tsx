@@ -33,8 +33,7 @@ import { getOpened, getOpenedWithoutToken } from '../../api/Validade';
 const products = () => {
   const Router = useRouter();
   const {
- addProduct, removeProduct, checkInCart, getCartLenght
-} = useContext(
+ addProduct, removeProduct, checkInCart, getCartLenght, } = useContext(
     CartContext,
   );
   const [categorias, setCategorias] = useState<Categoria[]>([]);
