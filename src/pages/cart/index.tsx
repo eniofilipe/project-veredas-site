@@ -35,8 +35,8 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
   const [subtotal, setSubtotal] = useState(0);
   const [total, setTotal] = useState(0);
   const router = useRouter();
-  const [endereco, setAddress] = useState(null)
-  const [cliente, setCliente] = useState(null)
+  const [endereco, setAddress] = useState(null);
+  const [cliente, setCliente] = useState(null);
 
   useEffect(() => {
     const resultAux = products.map(
@@ -51,15 +51,12 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
     setSubtotal(result);
 
     setTotal(result + 5);
-
-
   }, [products]);
 
   useEffect(() => {
-    setAddress(getAddress())
-    setCliente(getCliente())
-  }, [])
-
+    setAddress(getAddress());
+    setCliente(getCliente());
+  }, []);
 
   async function handlePedido() {
     try {
@@ -97,16 +94,17 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
           {products.map((offer) => (
             <S.WrapperItem>
               <S.WrapperControl>
-                <S.SumButton />
-                <S.Text>{offer.quantidadeCart}</S.Text>
                 <S.SubButton />
+                <S.Text>{offer.quantidadeCart}</S.Text>
+                <S.SumButton />
                 <S.WrapperProd>
                   <S.Text>{offer.produtos.nome}</S.Text>
-                  <S.Text>{offer.produtos.descricao}</S.Text>
+                  {/* <S.Text>{offer.produtos.descricao}</S.Text> */}
+                  <S.Text>R$ {offer.valor_unitario}</S.Text>
                 </S.WrapperProd>
               </S.WrapperControl>
               <S.Value>
-                R${(offer.valor_unitario * offer.quantidadeCart).toFixed(2)}{' '}
+                R$ {(offer.valor_unitario * offer.quantidadeCart).toFixed(2)}{' '}
               </S.Value>
             </S.WrapperItem>
           ))}

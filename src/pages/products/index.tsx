@@ -17,6 +17,7 @@ import { Checkbox } from '@material-ui/core';
 
 import { GetServerSideProps } from 'next';
 
+import { toast } from 'react-toastify';
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
 import CardProduct from '../../components/Cards/CardProduct';
@@ -28,11 +29,14 @@ import { getCategorias } from '../../api/Categorias';
 import { getProdutosOfertas } from '../../api/Ofertas';
 import ValidadeContext from '../../contexts/validade';
 import { getOpened, getOpenedWithoutToken } from '../../api/Validade';
-import { toast } from 'react-toastify';
 
 const products = () => {
   const Router = useRouter();
-  const { addProduct, removeProduct, checkInCart, getCartLenght } = useContext(CartContext);
+  const {
+ addProduct, removeProduct, checkInCart, getCartLenght
+} = useContext(
+    CartContext
+  );
   const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [produtosOferta, setProdutosOferta] = useState<Oferta[]>([]);
   const [quantidade, setQuantidade] = useState<number[]>([1]);
@@ -134,13 +138,12 @@ const products = () => {
     fetchProdutos();
   }, []);
 
-
-  function handleGoCart(){
-    if(getCartLenght() > 0){
-      Router.push('/cart')
-      return
+  function handleGoCart() {
+    if (getCartLenght() > 0) {
+      Router.push('/cart');
+      return;
     }
-    toast.warn("Carrinho Vazio")
+    toast.warn('Carrinho Vazio');
   }
 
   return (
