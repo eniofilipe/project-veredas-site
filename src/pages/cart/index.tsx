@@ -40,6 +40,7 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
   const [renderizando, setRenderizando] = useState<number>();
 
   useEffect(() => {
+
     const resultAux = products.map(
       (prod) => prod.quantidadeCart * prod.valor_unitario,
     );
@@ -52,11 +53,26 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
     setSubtotal(result);
 
     setTotal(result + 5);
+
   }, [products]);
 
   const aumentarQuantidade = (index: number) => {
+
     products[index].quantidadeCart += 1;
     setRenderizando(products[index].quantidadeCart);
+
+    const resultAux = products.map(
+      (prod) => prod.quantidadeCart * prod.valor_unitario,
+    );
+
+    const result = resultAux.reduce(
+      (prev, curr) => Number(prev) + Number(curr),
+      0,
+    );
+
+    setSubtotal(result);
+
+    setTotal(result + 5);
   };
 
   const diminuirQuantidade = (index: number) => {
@@ -64,14 +80,28 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
       removeProduct(products[index]);
     } else {
       products[index].quantidadeCart -= 1;
+
+      const resultAux = products.map(
+        (prod) => prod.quantidadeCart * prod.valor_unitario,
+      );
+
+      const result = resultAux.reduce(
+        (prev, curr) => Number(prev) + Number(curr),
+        0,
+      );
+
+      setSubtotal(result);
+
+      setTotal(result + 5);
     }
     setRenderizando(products[index].quantidadeCart);
+
   };
 
   useEffect(() => {
     setAddress(getAddress());
     setCliente(getCliente());
-  }, [renderizando]);
+  }, [products]);
 
   async function handlePedido() {
     try {
@@ -102,7 +132,6 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
           <S.Title onClick={signOut}>Sair</S.Title>
         </S.WrapperMenu>
       </S.Header>
-
       <S.WrapperContent>
         <S.H1>Carrinho</S.H1>
         <S.Items>
@@ -126,20 +155,19 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
           <S.WrapperSubtotal>
             <S.Row>
               <S.SubTotal>Subtotal</S.SubTotal>
-              <S.SubTotal>{`R$ ${subtotal.toFixed(2)}`}</S.SubTotal>
+              <S.SubTotal>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;{`R$ ${subtotal.toFixed(2)}`}</S.SubTotal>
             </S.Row>
             <S.Row>
               <S.SubTotal>Taxa de Entrega</S.SubTotal>
-              <S.SubTotal>R${frete.toFixed(2)}</S.SubTotal>
+              <S.SubTotal>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;R$ &ensp;&ensp;{frete.toFixed(2)}</S.SubTotal>
             </S.Row>
             <S.Line />
             <S.Row>
               <S.SubTotal>Total </S.SubTotal>
-              <S.SubTotal>R$ {(subtotal + frete).toFixed(2)}</S.SubTotal>
+              <S.SubTotal>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;R$ {total.toFixed(2)}</S.SubTotal>
             </S.Row>
           </S.WrapperSubtotal>
         </S.Items>
-
         <S.WrapperItem>
           <S.Label>Endereço</S.Label>
           <S.Address>
@@ -152,7 +180,6 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
             )}
           </S.Address>
         </S.WrapperItem>
-
         <S.WrapperSelect>
           <S.Label>Tipo de Pagamento</S.Label>
           {tipoPagamento && (

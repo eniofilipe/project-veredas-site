@@ -275,5 +275,5 @@ export const Line = styled.div`
   height: 2px;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  width: 95%;
+  width: 98%;
 `;
