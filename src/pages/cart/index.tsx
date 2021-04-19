@@ -31,10 +31,12 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
   const { signOut } = useContext(AuthContext);
   const { products } = useContext(CartContext);
   const { validade } = useContext(ValidadeContext);
-  const { cliente, endereco } = useContext(AuthContext);
+  const { getCliente, getAddress } = useContext(AuthContext);
   const [subtotal, setSubtotal] = useState(0);
   const [total, setTotal] = useState(0);
   const router = useRouter();
+  const [endereco, setAddress] = useState(null)
+  const [cliente, setCliente] = useState(null)
 
   useEffect(() => {
     const resultAux = products.map(
@@ -49,7 +51,15 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
     setSubtotal(result);
 
     setTotal(result + 5);
+
+
   }, [products]);
+
+  useEffect(() => {
+    setAddress(getAddress())
+    setCliente(getCliente())
+  }, [])
+
 
   async function handlePedido() {
     try {

@@ -1,9 +1,11 @@
-import React, { ReactChildren } from 'react';
+import React, { ReactChildren, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faShoppingBasket,
   faPlus,
   faMinus,
+  faCheckCircle,
+  faTrash
 } from '@fortawesome/free-solid-svg-icons';
 
 import {
@@ -21,6 +23,7 @@ import {
   Quantity,
   QuantityContainer,
   AddQuantityWrapper,
+  ButtonRemove
 } from './styles';
 import alface from '../../../assets/images/alface.jpeg';
 import Money from '../../StylesText/Money';
@@ -31,11 +34,13 @@ interface CardProductProps {
   MinusQuantityOnChange: (e: any) => void;
   PlusQuantityOnChange: (e: any) => void;
   onChange: (e: any) => void;
+  handleRemove: (e: any) => void;
   name: string;
   comment: string;
   category: string[];
   image?: string;
   quantity: number;
+  inCart?: boolean;
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -45,12 +50,17 @@ const cardProduct = ({
   name,
   comment,
   onChange,
+  handleRemove,
   MinusQuantityOnChange,
   PlusQuantityOnChange,
   quantity,
   category,
   image,
-}: CardProductProps) => (
+  inCart
+}: CardProductProps) => {
+  const [HoverIcon, setHoverIcon] = useState(false)
+
+  return(
   <Container>
     <ImageHeader src={`http://${image}` || alface} alt="" />
     <InfoContainer>
@@ -61,7 +71,7 @@ const cardProduct = ({
           <Money value={value} />
         </Price>
 
-        <AddQuantityWrapper>
+        {!inCart ? <AddQuantityWrapper>
           <QuantityContainer>
             <ButtonMinus onClick={MinusQuantityOnChange}>
               <FontAwesomeIcon icon={faMinus} />
@@ -76,11 +86,18 @@ const cardProduct = ({
           <ButtonBuy onClick={onChange}>
             <FontAwesomeIcon icon={faShoppingBasket} />
           </ButtonBuy>
-        </AddQuantityWrapper>
+        </AddQuantityWrapper> :
+         <AddQuantityWrapper>
+         <ButtonRemove  onMouseOver={() => setHoverIcon(true)} onMouseOut={() => setHoverIcon(false)} onClick={handleRemove}>
+           <FontAwesomeIcon  icon={ HoverIcon ?  faTrash : faCheckCircle } />
+         </ButtonRemove>
+       </AddQuantityWrapper>
+        }
+
       </PriceContainer>
       <Categories>{category.map((item) => `${item},`)}</Categories>
     </InfoContainer>
   </Container>
-);
+)};
 
 export default cardProduct;
