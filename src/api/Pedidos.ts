@@ -1,5 +1,5 @@
 import api from './Api';
-import { PostPedidoProps, PedidosProps } from '../types';
+import { PostPedidoProps, PedidosProps, Pagamento } from '../types';
 
 export const postPedido = async (data: PostPedidoProps) =>
   api.post('/pedido', data);
@@ -11,5 +11,7 @@ export const getPedidos = async () =>
     limite: '2147483640',
   },
 });
+
+export const getPagamento = async () => api.get<Pagamento[]>('/tipo-pagamento');
 
 export default { getPedidos, postPedido };

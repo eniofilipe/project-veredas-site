@@ -224,3 +224,9 @@ export interface PedidosProps {
   subtotal: number;
   total: number;
 }
+
+export interface Pagamento {
+  id: number;
+  titulo: string;
+  updatedAt: string;
+}

@@ -15,18 +15,18 @@ import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
 import CartContext from '../../contexts/cart';
 import AuthContext from '../../contexts/auth';
-import { OfertaPedido, Address, CartProps } from '../../types';
+import { OfertaPedido, Address, CartProps, Pagamento } from '../../types';
 import { cepMask } from '../../Utils/Masks';
 import logomst from '../../assets/logo-mst-rurais.png';
 import logoif from '../../assets/logo-if.png';
-import { postPedido } from '../../api/Pedidos';
+import { postPedido, getPagamento } from '../../api/Pedidos';
 import ValidadeContext from '../../contexts/validade';
 import {
   getOpenedWithoutToken,
   getValidaTokenWithoutToken,
 } from '../../api/Validade';
 
-const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
+const Cart = ({ frete = 5 }: CartProps) => {
   const Router = useRouter();
   const { signOut } = useContext(AuthContext);
   const { products, removeProduct } = useContext(CartContext);
@@ -38,6 +38,18 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
   const [endereco, setAddress] = useState(null);
   const [cliente, setCliente] = useState(null);
   const [renderizando, setRenderizando] = useState<number>();
+  const [tipoPagamento, setTipoPagamento] = useState<Pagamento[]>([]);
+  const [pagamento, setPagamento] = useState<number>();
+
+  const pegarPagamento = async () => {
+    try {
+      const response = await getPagamento();
+
+      setTipoPagamento(response.data);
+    } catch (error){
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
 
@@ -98,11 +110,6 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
 
   };
 
-  useEffect(() => {
-    setAddress(getAddress());
-    setCliente(getCliente());
-  }, [products]);
-
   async function handlePedido() {
     try {
       await postPedido({
@@ -111,7 +118,7 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
         ),
         cliente_id: cliente.id,
         tipo_frete_id: 1,
-        tipo_pagamento_id: 1,
+        tipo_pagamento_id: pagamento,
         valor_frete: 5,
       });
       toast.success('Pedido realizado com sucesso!');
@@ -122,6 +129,16 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
       console.log(err);
     }
   }
+
+  const handlePagamento = (e) =>{
+    setPagamento(e.target.value);
+  }
+
+  useEffect(() => {
+    setAddress(getAddress());
+    setCliente(getCliente());
+    pegarPagamento();
+  }, [products]);
 
   return (
     <S.Wrapper>
@@ -182,16 +199,13 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
         </S.WrapperItem>
         <S.WrapperSelect>
           <S.Label>Tipo de Pagamento</S.Label>
-          {tipoPagamento && (
-            <S.Select>
-              {tipoPagamento.map((tipo, i) => (
-                <option key={i}>{tipo}</option>
-              ))}
-            </S.Select>
-          )}
+          <S.Select value={pagamento} onChange={handlePagamento} >
+            {tipoPagamento.map((tipo) =>
+              <option value={tipo.id}> {tipo.titulo} </option>
+            )}
+          </S.Select>
         </S.WrapperSelect>
       </S.WrapperContent>
-
       <S.WrapperButtons>
         <S.CancelButton onClick={() => router.back()}>Cancelar</S.CancelButton>
         <S.AcceptButton onClick={() => handlePedido()}>
