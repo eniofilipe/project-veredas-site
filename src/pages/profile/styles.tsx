@@ -250,7 +250,8 @@ export const WrapperFooter = styled.footer`
 
 
   div {
-    color: #fff;
+    /* color: #fff; */
+    color: #961913;
     font-size: 1.5rem;
   }
   ${Logo}:nth-child(1) {

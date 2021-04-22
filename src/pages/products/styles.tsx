@@ -157,3 +157,34 @@ export const Icon = styled.div`
 
 
 export default Icon;
+
+export const WrapperFooter = styled.footer`
+  height: 10vh;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding-top: 4vw;
+  padding-bottom: 6vw;
+  gap: 4rem;
+  background-color: rgba(211, 211, 211, 0.8);
+
+  div {
+    color: #961913;
+    font-size: 1.5rem;
+  }
+  ${Logo}:nth-child(1) {
+    width: 200px;
+    padding: 1rem;
+  }
+
+  ${Logo}:nth-child(2) {
+    width: 100px;
+    padding: 1rem;
+  }
+  ${Logo}:nth-child(3) {
+    width: 120px;
+    padding: 1rem;
+    border-radius: 30px;
+  }
+`;

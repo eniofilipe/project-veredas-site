@@ -101,7 +101,7 @@ export const WrapperFooter = styled.footer`
   background-color: #444;
 
   div {
-    color: #fff;
+    color: #961913;
     font-size: 1.5rem;
   }
   ${Logo}:nth-child(1) {

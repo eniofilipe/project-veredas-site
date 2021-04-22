@@ -92,3 +92,37 @@ export const WrapperContent = styled.div`
 export const Body = styled.body``;
 
 export default Body;
+export const WrapperFooter = styled.footer`
+  margin-top: 5vh;
+  height: 8vh;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding-top: 6vw;
+  padding-bottom: 6vw;
+  gap: 4rem;
+  background-color: rgba(211, 211, 211, 0.8);
+
+
+  div {
+    /* color: #fff; */
+    color: #961913;
+    font-size: 1.5rem;
+  }
+  ${Logo}:nth-child(1) {
+    width: 250px;
+    padding-left: 1rem;
+  }
+
+  ${Logo}:nth-child(2) {
+    width: 120px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  ${Logo}:nth-child(3) {
+    width: 110px;
+    border-radius: 18px;
+  }
+`;

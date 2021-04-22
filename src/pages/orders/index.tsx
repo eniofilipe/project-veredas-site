@@ -19,6 +19,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Pagination from '@material-ui/lab/Pagination';
 
 import Head from 'next/head';
 import { useState, useContext, useEffect } from 'react';
@@ -26,6 +27,9 @@ import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
+import logomst from '../../assets/logo-mst-rurais.png';
+import logoif from '../../assets/logo-if.png';
+import logo from '../../assets/logo.png';
 import AuthContext from '../../contexts/auth';
 
 import { PedidosProps } from '../../types';
@@ -215,7 +219,27 @@ const Order = () => {
                 })}
             </List>
           </S.WrapperContent>
-        </S.Body>
+          <S.WrapperFooter>
+            <div>
+              <p>Cooperativa Camponesa - Veredas da Terra</p>
+              <p>CNPJ: 10.286.881/0001-02</p>
+              <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
+            </div>
+            <div>
+              <p>Contato</p>
+              <p>contato@veredasdaterra.com.br</p>
+              <p>(38) 9 9900-0000</p>
+            </div>
+            <div>
+              <S.Logo
+                src={veredaslogo}
+                alt="Logo da cooperativa Veredas da Terra"
+              />
+              <S.Logo src={logomst} alt="Logo do MST" />
+              <S.Logo src={logoif} alt="Logo do IFNMG" />
+            </div>
+          </S.WrapperFooter>
+      </S.Body>
       </body>
     </S.Wrapper>
   );
