@@ -13,12 +13,20 @@ import {
   SearchAlt2 as SearchIcon,
 } from '@styled-icons/boxicons-regular';
 
-import { Checkbox } from '@material-ui/core';
+import { Checkbox,TextField  } from '@material-ui/core';
+import { createFilterOptions } from '@material-ui/lab/Autocomplete';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+
 
 import { GetServerSideProps } from 'next';
 
+import { toast } from 'react-toastify';
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
+
+import ValidadeContext from '../../contexts/validade';
+import logomst from '../../assets/logo-mst-rurais.png';
+import logoif from '../../assets/logo-if.png';
 import CardProduct from '../../components/Cards/CardProduct';
 
 import { Categoria, Oferta } from '../../types';
@@ -26,15 +34,21 @@ import { Categoria, Oferta } from '../../types';
 import CartContext from '../../contexts/cart';
 import { getCategorias } from '../../api/Categorias';
 import { getProdutosOfertas } from '../../api/Ofertas';
-import ValidadeContext from '../../contexts/validade';
 import { getOpened, getOpenedWithoutToken } from '../../api/Validade';
 
 const products = () => {
   const Router = useRouter();
-  const { addProduct } = useContext(CartContext);
+  const {
+ addProduct, removeProduct, checkInCart, getCartLenght, } = useContext(
+    CartContext,
+  );
   const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [produtosOferta, setProdutosOferta] = useState<Oferta[]>([]);
   const [quantidade, setQuantidade] = useState<number[]>([1]);
+  const [searchBoxBeingUsed, setSearchBoxBeingUsed] = useState<boolean>(false)
+  const [searchedName, setSearchedName] = useState<string>('')
+
+
 
   function produtoPossui(prod: Oferta) {
     let categoriasP;
@@ -75,7 +89,7 @@ const products = () => {
       const response = await getCategorias();
 
       setCategorias([
-        { id: -1, nome: 'Todos', isvalid: true },
+        { id: -1, nome: 'Todas', isvalid: true },
         ...response.data,
       ]);
     } catch (error) {
@@ -100,24 +114,32 @@ const products = () => {
     }
   }
 
+  const handleChangeSearchBar = (e: any) => {
+    setSearchBoxBeingUsed(true)
+    setSearchedName(e.target.innerHTML);
+    console.log(e.target.innerHTML);
+     let cat = [...categorias];
+    cat.forEach((elem) => {
+      elem.isvalid = false
+    })
+    setCategorias(cat)
+    console.log(categorias)
+  }
   const handleChange = (e: any, categoryName: string) => {
+    setSearchBoxBeingUsed(false)
     const { checked } = e.target;
 
-    if (categoryName === 'Todos') {
-      // todo
+    if (categoryName === 'Todas') {
       const states = [...categorias];
       states.forEach((s) => {
-        // eslint-disable-next-line no-param-reassign
         s.isvalid = checked;
       });
       setCategorias(states);
     } else {
       const states = [...categorias];
 
-      // eslint-disable-next-line no-multiple-empty-lines
-
       const indexOfCheckBox = categorias.findIndex(
-        (el) => el.nome === categoryName,
+        (el) => el.nome === categoryName
       );
 
       if (indexOfCheckBox !== -1) {
@@ -126,12 +148,54 @@ const products = () => {
 
       setCategorias(states);
     }
+
+    if(categorias[0].isvalid){
+      let allMarked = true;
+      const states = [...categorias];
+      states.forEach((s) => {
+        if(!s.isvalid)
+        allMarked = false
+      });
+      if(!allMarked){
+        states[0].isvalid = false;
+        setCategorias(states);
+      }
+    }
+    else if(!categorias[0].isvalid){
+      let allMarked = true;
+      const states = [...categorias];
+      states.forEach((s) => {
+        if(!s.isvalid){
+          if(s.nome!== 'Todas')
+            allMarked = false
+        }
+      });
+      if(allMarked){
+        console.log('alguem desmarcado')
+        states[0].isvalid = true;
+        setCategorias(states);
+      }
+    }
+
   };
 
   useEffect(() => {
     fetchCategorias();
     fetchProdutos();
   }, []);
+
+  function handleGoCart() {
+    if (getCartLenght() > 0) {
+      Router.push('/cart');
+      return;
+    }
+    toast.warn('Carrinho Vazio');
+  }
+
+  const filterOptions = createFilterOptions({
+    limit: null
+  }
+  );
 
   return (
     <S.Wrapper>
@@ -141,12 +205,25 @@ const products = () => {
       <body>
         <S.HeaderWrapper>
           <S.Header>
-            <S.Logo src={veredaslogo} alt="" />
-            <S.SearchBar placeholder="Buscar" />
+            <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')}/>
+            <div style={{ width: 800 }}>
+              <Autocomplete
+                id="searchBar"
+                freeSolo
+                options={produtosOferta.map((option) => option.produtos.nome)}
+                renderInput={(params) => (
+                  <TextField {...params} label="Pesquisar pelo nome" margin="normal" variant="outlined" InputProps={{ ...params.InputProps ,type: 'search' }} />
+
+                )}
+                onChange = {(e) => handleChangeSearchBar(e)}
+                filterOptions={filterOptions}
+              />
+            </div>
             <S.MenuNav>
               <S.WrapperIcons>
                 <S.Icon>
-                  <CartIcon onClick={() => Router.push('/cart')} />
+                  <span>{getCartLenght()}</span>
+                  <CartIcon onClick={() => handleGoCart()} />
                 </S.Icon>
                 <S.Icon>
                   <ProfileIcon onClick={() => Router.push('profile')} />
@@ -157,6 +234,7 @@ const products = () => {
         </S.HeaderWrapper>
         <S.WrapperContent>
           <S.WrapperCategory>
+            <S.HeadCategory>Categorias</S.HeadCategory>
             {categorias &&
               categorias.map((cat, index) => (
                 <S.DivCategory key={cat.id}>
@@ -164,7 +242,6 @@ const products = () => {
                     key={`${cat.id}`}
                     onChange={(e) => handleChange(e, cat.nome)}
                     checked={!!categorias[index].isvalid}
-                    type="checkbox"
                     id={`${cat.id}`}
                     name={cat.nome}
                     color="default"
@@ -174,7 +251,8 @@ const products = () => {
               ))}
           </S.WrapperCategory>
           <S.WrapperProduct>
-            {produtosOferta.filter(produtoPossui).map((prod, index) => (
+            { !searchBoxBeingUsed?
+            produtosOferta.filter(produtoPossui).map((prod, index) => (
               <CardProduct
                 key={`${prod.id}`}
                 category={prod.produtos.categorias.map((cat) => cat.nome)}
@@ -183,17 +261,71 @@ const products = () => {
                 value={prod.valor_unitario}
                 quantity={quantidade[index] ? quantidade[index] : 1}
                 onChange={() =>
-                // eslint-disable-next-line implicit-arrow-linebreak
-
+                  // eslint-disable-next-line implicit-arrow-linebreak
                   addProduct(prod, quantidade[index] ? quantidade[index] : 1)
                 }
+                handleRemove={() => removeProduct(prod)}
                 PlusQuantityOnChange={() => aumentarQuantidade(index)}
                 MinusQuantityOnChange={() => diminuirQuantidade(index)}
                 image={prod.produtos.imagem.url}
+                inCart={checkInCart(prod)}
               />
-            ))}
+            )):
+
+            (
+
+              produtosOferta.map((prod, index) => (
+                prod.produtos.nome.toUpperCase().includes(searchedName.toUpperCase())   ?
+                <CardProduct
+                  key={`${prod.id}`}
+                  category={prod.produtos.categorias.map((cat) => cat.nome)}
+                  comment={prod.produtos.descricao}
+                  name={prod.produtos.nome}
+                  value={prod.valor_unitario}
+                  quantity={quantidade[index] ? quantidade[index] : 1}
+                  onChange={() =>
+                    // eslint-disable-next-line implicit-arrow-linebreak
+                    addProduct(prod, quantidade[index] ? quantidade[index] : 1)
+                  }
+                  handleRemove={() => removeProduct(prod)}
+                  PlusQuantityOnChange={() => aumentarQuantidade(index)}
+                  MinusQuantityOnChange={() => diminuirQuantidade(index)}
+                  image={prod.produtos.imagem.url}
+                  inCart={checkInCart(prod)}
+                />
+                : ''
+              ))
+
+
+
+            )
+
+
+            }
           </S.WrapperProduct>
         </S.WrapperContent>
+        <S.WrapperFooter>
+        <div>
+          <p>Cooperativa Camponesa - Veredas da Terra</p>
+          <p>CNPJ: 10.286.881/0001-02</p>
+          <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
+        </div>
+
+        <div>
+          <p>Contato</p>
+          <p>email@veredasdaterra.com.br</p>
+          <p>(38) 9 9900-0000</p>
+        </div>
+
+        <div>
+          <S.Logo
+            src={veredaslogo}
+            alt="Logo da cooperativa Veredas da Terra"
+          />
+          <S.Logo src={logomst} alt="Logo do MST" />
+          <S.Logo src={logoif} alt="Logo do IFNMG" />
+        </div>
+      </S.WrapperFooter>
       </body>
     </S.Wrapper>
   );

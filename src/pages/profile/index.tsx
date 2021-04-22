@@ -14,7 +14,8 @@ import veredaslogo from '../../assets/logo.png';
 import AuthContext from '../../contexts/auth';
 import logomst from '../../assets/logo-mst-rurais.png';
 import logoif from '../../assets/logo-if.png';
-import logowhite from '../../assets/logo-white.png';
+import logo from '../../assets/logo.png';
+
 import { Cliente, ClienteLogin } from '../../types';
 import { cleanObject, isEmail, validarCPF } from '../../Utils/Validation';
 import { cepMask, cellphoneeMask, cpfMask } from '../../Utils/Masks';
@@ -168,7 +169,7 @@ const Profile = () => {
       <body>
         <S.HeaderWrapper>
           <S.Header>
-            <S.Logo src={veredaslogo} alt="" />
+            <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')}/>
             <S.TitlePerfil>Perfil</S.TitlePerfil>
             <S.WrapperMenu>
               <S.Title onClick={() => Router.push('/orders')}> Pedidos</S.Title>
@@ -353,7 +354,7 @@ const Profile = () => {
           <p>(38) 9 9900-0000</p>
         </div>
         <div>
-          <S.Logo src={logowhite} alt="Logo da cooperativa Veredas da Terra" />
+          <S.Logo src={logo} alt="Logo da cooperativa Veredas da Terra" />
           <S.Logo src={logomst} alt="Logo do MST" />
           <S.Logo src={logoif} alt="Logo do IFNMG" />
         </div>

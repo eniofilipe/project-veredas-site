@@ -106,6 +106,7 @@ export const WrapperContent = styled.div`
   padding-right: 14%;
   justify-content: space-between;
 `;
+
 export const Form = styled.div`
   padding-left: 2rem;
   display: flex;
@@ -191,10 +192,10 @@ export const WrapperFooter = styled.footer`
   padding-top: 6vw;
   padding-bottom: 6vw;
   gap: 4rem;
-  background-color: #444;
+  background-color: rgba(211, 211, 211, 0.8);
 
   div {
-    color: #fff;
+    color: #961913;
     font-size: 1.5rem;
   }
   ${Logo}:nth-child(1) {

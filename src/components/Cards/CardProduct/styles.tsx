@@ -53,6 +53,29 @@ export const ButtonBuy = styled(Button)`
   height: 25px;
 `;
 
+export const ButtonRemove = styled.button`
+  width: 80px;
+  height: 25px;
+  color: #2ECC71;
+  background: #fff;
+  border-radius: 8px;
+  align-self: center;
+  border: 0px;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 18px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  outline: none;
+
+  &:hover {
+    color:#fff;
+    background: #961913;
+    border: 1px solid #961913;
+  }
+`;
+
+
 export const QuantityContainer = styled.div`
   display: flex;
   justify-content: center;

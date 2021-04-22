@@ -77,16 +77,31 @@ export const DivCategory = styled.div`
 `;
 
 export const WrapperCategory = styled.div`
+  display: flex;
+  width: 15%;
+  flex-direction: column;
   background-color: #fff;
   border: 1px solid #444;
   margin: 2rem;
-  margin-top: 3rem;
+   margin-top: 3rem;
   /* margin-right: 0; */
   padding: 1rem;
-  padding-right: 4rem;
-  border-radius: 1rem;
-  height: 100%;
+  padding-bottom: 4rem;
+  // padding-right: 4rem;
+  border-radius: 8px;
+  //  height: 100%;
 `;
+
+
+export const HeadCategory = styled.h1`
+  align-self: center;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  color: rgba(0,0,0,0.54);
+  font-size: 1.3rem;
+`;
+
+
 export const Checkbox = styled.input`
   margin-bottom: 1rem;
 `;
@@ -127,6 +142,49 @@ export const Icon = styled.div`
   height: 4rem;
   margin-right: 2rem;
   cursor: pointer;
+  position: relative;
+  span{
+    position: absolute;
+    right: -20px;
+    top: -10px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background: #333;
+    color: white;
+    font-weight: 800;
+  }
 `;
 
+
 export default Icon;
+
+export const WrapperFooter = styled.footer`
+  height: 10vh;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding-top: 4vw;
+  padding-bottom: 6vw;
+  gap: 4rem;
+  background-color: rgba(211, 211, 211, 0.8);
+
+  div {
+    color: #961913;
+    font-size: 1.5rem;
+  }
+  ${Logo}:nth-child(1) {
+    width: 200px;
+    padding: 1rem;
+  }
+
+  ${Logo}:nth-child(2) {
+    width: 100px;
+    padding: 1rem;
+  }
+  ${Logo}:nth-child(3) {
+    width: 120px;
+    padding: 1rem;
+    border-radius: 30px;
+  }
+`;

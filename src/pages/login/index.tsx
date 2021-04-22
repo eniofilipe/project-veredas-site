@@ -65,7 +65,7 @@ const Login = () => {
       <body>
         <S.HeaderWrapper>
           <S.Header>
-            <S.Logo src={veredaslogo} alt="" />
+            <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')}/>
             <S.MenuNav>
               <S.MenuLink onClick={() => Router.push('/')}>Home</S.MenuLink>
               {/* <S.MenuLink onClick={() => Router.push('/')}>

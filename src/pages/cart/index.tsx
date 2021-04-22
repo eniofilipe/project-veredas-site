@@ -5,7 +5,9 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable operator-linebreak */
 // eslint-disable-next-line import/no-unresolved
-import { useContext, useState, useEffect, useLayoutEffect } from 'react';
+import {
+  useContext, useState, useEffect, useLayoutEffect,
+} from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { GetServerSideProps } from 'next';
@@ -13,52 +15,116 @@ import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
 import CartContext from '../../contexts/cart';
 import AuthContext from '../../contexts/auth';
-import { OfertaPedido, Address, CartProps } from '../../types';
+import { OfertaPedido, Address, CartProps, Pagamento } from '../../types';
 import { cepMask } from '../../Utils/Masks';
 import logomst from '../../assets/logo-mst-rurais.png';
 import logoif from '../../assets/logo-if.png';
-import { postPedido } from '../../api/Pedidos';
+import { postPedido, getPagamento } from '../../api/Pedidos';
 import ValidadeContext from '../../contexts/validade';
 import {
   getOpenedWithoutToken,
   getValidaTokenWithoutToken,
 } from '../../api/Validade';
 
-const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
+const Cart = ({ frete = 5 }: CartProps) => {
   const Router = useRouter();
   const { signOut } = useContext(AuthContext);
-  const { products } = useContext(CartContext);
+  const { products, removeProduct } = useContext(CartContext);
   const { validade } = useContext(ValidadeContext);
-  const { cliente, endereco } = useContext(AuthContext);
+  const { getCliente, getAddress } = useContext(AuthContext);
   const [subtotal, setSubtotal] = useState(0);
   const [total, setTotal] = useState(0);
   const router = useRouter();
+  const [endereco, setAddress] = useState(null);
+  const [cliente, setCliente] = useState(null);
+  const [renderizando, setRenderizando] = useState<number>();
+  const [tipoPagamento, setTipoPagamento] = useState<Pagamento[]>([]);
+  const [pagamento, setPagamento] = useState<number>(1);
+  const [controle, setControle] = useState(1);
+
+  const pegarPagamento = async () => {
+    try {
+      const response = await getPagamento();
+
+      setTipoPagamento(response.data);
+    } catch (error){
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
+
     const resultAux = products.map(
-      (prod) => prod.quantidadeCart * prod.valor_unitario
+      (prod) => prod.quantidadeCart * prod.valor_unitario,
     );
 
     const result = resultAux.reduce(
       (prev, curr) => Number(prev) + Number(curr),
-      0
+      0,
     );
 
     setSubtotal(result);
 
     setTotal(result + 5);
+
   }, [products]);
 
+  const aumentarQuantidade = (index: number) => {
+
+    products[index].quantidadeCart += 1;
+    setRenderizando(products[index].quantidadeCart);
+
+    const resultAux = products.map(
+      (prod) => prod.quantidadeCart * prod.valor_unitario,
+    );
+
+    const result = resultAux.reduce(
+      (prev, curr) => Number(prev) + Number(curr),
+      0,
+    );
+
+    setSubtotal(result);
+
+    setTotal(result + 5);
+  };
+
+  const diminuirQuantidade = (index: number) => {
+    if (products[index].quantidadeCart === 1) {
+      removeProduct(products[index]);
+    } else {
+      products[index].quantidadeCart -= 1;
+
+      const resultAux = products.map(
+        (prod) => prod.quantidadeCart * prod.valor_unitario,
+      );
+
+      const result = resultAux.reduce(
+        (prev, curr) => Number(prev) + Number(curr),
+        0,
+      );
+
+      setSubtotal(result);
+
+      setTotal(result + 5);
+    }
+    setRenderizando(products[index].quantidadeCart);
+
+  };
+
   async function handlePedido() {
+    setControle(controle+1)
+    if(controle > 1){
+      return;
+    }
     try {
+
       await postPedido({
         ofertas: products.map(
-          (c) =>
-            ({ oferta_id: c.id, quantidade: c.quantidadeCart } as OfertaPedido)
+          (c) => ({ oferta_id: c.id, quantidade: c.quantidadeCart } as OfertaPedido),
         ),
         cliente_id: cliente.id,
         tipo_frete_id: 1,
-        tipo_pagamento_id: 1,
+        tipo_pagamento_id: pagamento,
         valor_frete: 5,
       });
       toast.success('Pedido realizado com sucesso!');
@@ -70,52 +136,61 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
     }
   }
 
+  const handlePagamento = (e) =>{
+    setPagamento(e.target.value);
+  }
+
+  useEffect(() => {
+    setAddress(getAddress());
+    setCliente(getCliente());
+    pegarPagamento();
+  }, [products]);
+
   return (
     <S.Wrapper>
       <S.Header>
-        <S.Logo src={veredaslogo} alt="" />
+        <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')}/>
         <S.WrapperMenu>
           <S.Title onClick={() => Router.push('profile')}>Perfil</S.Title>
           <S.Title onClick={signOut}>Sair</S.Title>
         </S.WrapperMenu>
       </S.Header>
-
       <S.WrapperContent>
         <S.H1>Carrinho</S.H1>
         <S.Items>
-          {products.map((offer) => (
+          {products.map((offer, index) => (
             <S.WrapperItem>
               <S.WrapperControl>
-                <S.SumButton />
+                <S.SubButton onClick={() => diminuirQuantidade(index)}/>
                 <S.Text>{offer.quantidadeCart}</S.Text>
-                <S.SubButton />
+                <S.SumButton onClick={() => aumentarQuantidade(index)}/>
                 <S.WrapperProd>
                   <S.Text>{offer.produtos.nome}</S.Text>
-                  <S.Text>{offer.produtos.descricao}</S.Text>
+                  {/* <S.Text>{offer.produtos.descricao}</S.Text> */}
+                  <S.Text>R$ {offer.valor_unitario}</S.Text>
                 </S.WrapperProd>
               </S.WrapperControl>
               <S.Value>
-                R${(offer.valor_unitario * offer.quantidadeCart).toFixed(2)}{' '}
+                R$ {(offer.valor_unitario * offer.quantidadeCart).toFixed(2)}{' '}
               </S.Value>
             </S.WrapperItem>
           ))}
           <S.WrapperSubtotal>
             <S.Row>
-              <S.SubTotal> Subtotal</S.SubTotal>
-              <S.SubTotal>{`R$ ${subtotal.toFixed(2)}`}</S.SubTotal>
+              <S.SubTotal>Subtotal</S.SubTotal>
+              <S.SubTotal>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;{`R$ ${subtotal.toFixed(2)}`}</S.SubTotal>
             </S.Row>
             <S.Row>
-              <S.SubTotal>Frete</S.SubTotal>
-              <S.SubTotal>R${frete.toFixed(2)}</S.SubTotal>
+              <S.SubTotal>Taxa de Entrega</S.SubTotal>
+              <S.SubTotal>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;R$ &ensp;&ensp;{frete.toFixed(2)}</S.SubTotal>
             </S.Row>
             <S.Line />
             <S.Row>
               <S.SubTotal>Total </S.SubTotal>
-              <S.SubTotal>R$ {(subtotal + frete).toFixed(2)}</S.SubTotal>
+              <S.SubTotal>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;R$ {total.toFixed(2)}</S.SubTotal>
             </S.Row>
           </S.WrapperSubtotal>
         </S.Items>
-
         <S.WrapperItem>
           <S.Label>Endereço</S.Label>
           <S.Address>
@@ -128,19 +203,15 @@ const Cart = ({ frete = 5, tipoPagamento = ['Dinheiro'] }: CartProps) => {
             )}
           </S.Address>
         </S.WrapperItem>
-
         <S.WrapperSelect>
           <S.Label>Tipo de Pagamento</S.Label>
-          {tipoPagamento && (
-            <S.Select>
-              {tipoPagamento.map((tipo, i) => (
-                <option key={i}>{tipo}</option>
-              ))}
-            </S.Select>
-          )}
+          <S.Select value={pagamento} onChange={handlePagamento} >
+            {tipoPagamento.map((tipo) =>
+              <option value={tipo.id}> {tipo.titulo} </option>
+            )}
+          </S.Select>
         </S.WrapperSelect>
       </S.WrapperContent>
-
       <S.WrapperButtons>
         <S.CancelButton onClick={() => router.back()}>Cancelar</S.CancelButton>
         <S.AcceptButton onClick={() => handlePedido()}>

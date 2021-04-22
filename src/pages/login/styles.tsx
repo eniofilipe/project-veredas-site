@@ -98,10 +98,10 @@ export const WrapperFooter = styled.footer`
   padding-top: 6vw;
   padding-bottom: 6vw;
   gap: 4rem;
-  background-color: #444;
+  background-color: rgba(211, 211, 211, 0.8);
 
   div {
-    color: #fff;
+    color: #961913;
     font-size: 1.5rem;
   }
   ${Logo}:nth-child(1) {

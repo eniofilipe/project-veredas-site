@@ -19,6 +19,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Pagination from '@material-ui/lab/Pagination';
 
 import Head from 'next/head';
 import { useState, useContext, useEffect } from 'react';
@@ -26,6 +27,9 @@ import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
+import logomst from '../../assets/logo-mst-rurais.png';
+import logoif from '../../assets/logo-if.png';
+import logo from '../../assets/logo.png';
 import AuthContext from '../../contexts/auth';
 
 import { PedidosProps } from '../../types';
@@ -103,7 +107,7 @@ const Order = () => {
       </Head>
       <body>
         <S.Header>
-          <S.Logo src={veredaslogo} alt="" />
+          <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')}/>
           <S.TitlePedidos>Pedidos</S.TitlePedidos>
           <S.WrapperMenu>
             <S.Title onClick={() => Router.push('profile')}>Perfil</S.Title>
@@ -151,7 +155,12 @@ const Order = () => {
                               <TableRow>
                                 <TableCell>Quantidade</TableCell>
                                 <TableCell align="center">Produto</TableCell>
-                                <TableCell align="right">Valor</TableCell>
+                                <TableCell align="right">
+                                  Valor Unitário
+                                </TableCell>
+                                <TableCell colSpan={2} align="right">
+                                  Total{' '}
+                                </TableCell>
                               </TableRow>
                             </TableHead>
                             <TableBody>
@@ -167,23 +176,32 @@ const Order = () => {
                                     <TableCell align="right">
                                       R$ {prod.valor_unitario}
                                     </TableCell>
+                                    <TableCell colSpan={2} align="right">
+                                      R${' '}
+                                      {(
+                                        prod.valor_unitario *
+                                        prod.oferta_pedidos.quantidade
+                                      ).toFixed(2)}
+                                    </TableCell>
                                   </TableRow>
                                 ))}
                               <TableRow>
                                 <TableCell rowSpan={3} />
-                                <TableCell colSpan={1}>Subtotal</TableCell>
+                                <TableCell colSpan={2}>Subtotal</TableCell>
                                 <TableCell align="right">
                                   R$ {handleSubtotal(pedido.ofertas)}
                                 </TableCell>
                               </TableRow>
                               <TableRow>
-                                <TableCell>Taxa de entrega</TableCell>
+                                <TableCell colSpan={2}>
+                                  Taxa de entrega
+                                </TableCell>
                                 <TableCell align="right">
                                   R$ {pedido.frete.valor_frete.toFixed(2)}
                                 </TableCell>
                               </TableRow>
                               <TableRow>
-                                <TableCell>Total</TableCell>
+                                <TableCell colSpan={2}>Total</TableCell>
                                 <TableCell align="right">
                                   R${' '}
                                   {Number(
@@ -201,7 +219,27 @@ const Order = () => {
                 })}
             </List>
           </S.WrapperContent>
-        </S.Body>
+          <S.WrapperFooter>
+            <div>
+              <p>Cooperativa Camponesa - Veredas da Terra</p>
+              <p>CNPJ: 10.286.881/0001-02</p>
+              <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
+            </div>
+            <div>
+              <p>Contato</p>
+              <p>contato@veredasdaterra.com.br</p>
+              <p>(38) 9 9900-0000</p>
+            </div>
+            <div>
+              <S.Logo
+                src={veredaslogo}
+                alt="Logo da cooperativa Veredas da Terra"
+              />
+              <S.Logo src={logomst} alt="Logo do MST" />
+              <S.Logo src={logoif} alt="Logo do IFNMG" />
+            </div>
+          </S.WrapperFooter>
+      </S.Body>
       </body>
     </S.Wrapper>
   );
