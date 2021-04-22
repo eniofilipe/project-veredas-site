@@ -13,7 +13,10 @@ import {
   SearchAlt2 as SearchIcon,
 } from '@styled-icons/boxicons-regular';
 
-import { Checkbox } from '@material-ui/core';
+import { Checkbox,TextField  } from '@material-ui/core';
+import { createFilterOptions } from '@material-ui/lab/Autocomplete';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+
 
 import { GetServerSideProps } from 'next';
 
@@ -30,6 +33,7 @@ import { getProdutosOfertas } from '../../api/Ofertas';
 import ValidadeContext from '../../contexts/validade';
 import { getOpened, getOpenedWithoutToken } from '../../api/Validade';
 
+
 const products = () => {
   const Router = useRouter();
   const {
@@ -39,6 +43,10 @@ const products = () => {
   const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [produtosOferta, setProdutosOferta] = useState<Oferta[]>([]);
   const [quantidade, setQuantidade] = useState<number[]>([1]);
+  const [searchBoxBeingUsed, setSearchBoxBeingUsed] = useState<boolean>(false)
+  const [searchedName, setSearchedName] = useState<string>('')
+
+
 
   function produtoPossui(prod: Oferta) {
     let categoriasP;
@@ -104,7 +112,19 @@ const products = () => {
     }
   }
 
+  const handleChangeSearchBar = (e: any) => {
+    setSearchBoxBeingUsed(true)
+    setSearchedName(e.target.innerHTML);
+    console.log(e.target.innerHTML);
+     let cat = [...categorias];
+    cat.forEach((elem) => {
+      elem.isvalid = false
+    })
+    setCategorias(cat)
+    console.log(categorias)
+  }
   const handleChange = (e: any, categoryName: string) => {
+    setSearchBoxBeingUsed(false)
     const { checked } = e.target;
 
     if (categoryName === 'Todas') {
@@ -170,6 +190,11 @@ const products = () => {
     toast.warn('Carrinho Vazio');
   }
 
+  const filterOptions = createFilterOptions({
+    limit: null
+  }
+  );
+
   return (
     <S.Wrapper>
       <Head>
@@ -179,7 +204,19 @@ const products = () => {
         <S.HeaderWrapper>
           <S.Header>
             <S.Logo src={veredaslogo} alt="" />
-            <S.SearchBar placeholder="Buscar" />
+            <div style={{ width: 800 }}>
+              <Autocomplete
+                id="searchBar"
+                freeSolo
+                options={produtosOferta.map((option) => option.produtos.nome)}
+                renderInput={(params) => (
+                  <TextField {...params} label="Pesquisar pelo nome" margin="normal" variant="outlined" InputProps={{ ...params.InputProps ,type: 'search' }} />
+
+                )}
+                onChange = {(e) => handleChangeSearchBar(e)}
+                filterOptions={filterOptions}
+              />
+            </div>
             <S.MenuNav>
               <S.WrapperIcons>
                 <S.Icon>
@@ -212,7 +249,8 @@ const products = () => {
               ))}
           </S.WrapperCategory>
           <S.WrapperProduct>
-            {produtosOferta.filter(produtoPossui).map((prod, index) => (
+            { !searchBoxBeingUsed?
+            produtosOferta.filter(produtoPossui).map((prod, index) => (
               <CardProduct
                 key={`${prod.id}`}
                 category={prod.produtos.categorias.map((cat) => cat.nome)}
@@ -230,7 +268,38 @@ const products = () => {
                 image={prod.produtos.imagem.url}
                 inCart={checkInCart(prod)}
               />
-            ))}
+            )):
+
+            (
+
+              produtosOferta.map((prod, index) => (
+                prod.produtos.nome.toUpperCase().includes(searchedName.toUpperCase())   ?
+                <CardProduct
+                  key={`${prod.id}`}
+                  category={prod.produtos.categorias.map((cat) => cat.nome)}
+                  comment={prod.produtos.descricao}
+                  name={prod.produtos.nome}
+                  value={prod.valor_unitario}
+                  quantity={quantidade[index] ? quantidade[index] : 1}
+                  onChange={() =>
+                    // eslint-disable-next-line implicit-arrow-linebreak
+                    addProduct(prod, quantidade[index] ? quantidade[index] : 1)
+                  }
+                  handleRemove={() => removeProduct(prod)}
+                  PlusQuantityOnChange={() => aumentarQuantidade(index)}
+                  MinusQuantityOnChange={() => diminuirQuantidade(index)}
+                  image={prod.produtos.imagem.url}
+                  inCart={checkInCart(prod)}
+                />
+                : ''
+              ))
+
+
+
+            )
+
+
+            }
           </S.WrapperProduct>
         </S.WrapperContent>
       </body>
