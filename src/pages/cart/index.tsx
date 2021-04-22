@@ -40,6 +40,7 @@ const Cart = ({ frete = 5 }: CartProps) => {
   const [renderizando, setRenderizando] = useState<number>();
   const [tipoPagamento, setTipoPagamento] = useState<Pagamento[]>([]);
   const [pagamento, setPagamento] = useState<number>(1);
+  const [controle, setControle] = useState(1);
 
   const pegarPagamento = async () => {
     try {
@@ -111,7 +112,12 @@ const Cart = ({ frete = 5 }: CartProps) => {
   };
 
   async function handlePedido() {
+    setControle(controle+1)
+    if(controle > 1){
+      return;
+    }
     try {
+
       await postPedido({
         ofertas: products.map(
           (c) => ({ oferta_id: c.id, quantidade: c.quantidadeCart } as OfertaPedido),
