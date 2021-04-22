@@ -8,8 +8,8 @@ export const getPedidos = async () =>
   api.get<PedidosProps[]>('/pedido', {
   params: {
     pagina: '1',
-    // limite: '2147483640',
-    limite: '10',
+    limite: '2147483640',
+    // limite: '10',
   },
 });
 

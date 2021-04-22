@@ -107,7 +107,7 @@ const Order = () => {
       </Head>
       <body>
         <S.Header>
-          <S.Logo src={veredaslogo} alt="" />
+          <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')}/>
           <S.TitlePedidos>Pedidos</S.TitlePedidos>
           <S.WrapperMenu>
             <S.Title onClick={() => Router.push('profile')}>Perfil</S.Title>
@@ -155,11 +155,11 @@ const Order = () => {
                               <TableRow>
                                 <TableCell>Quantidade</TableCell>
                                 <TableCell align="center">Produto</TableCell>
-                                {/* <TableCell align="right">
+                                <TableCell align="right">
                                   Valor Unitário
-                                </TableCell> */}
+                                </TableCell>
                                 <TableCell colSpan={2} align="right">
-                                  Total Unitário{' '}
+                                  Total{' '}
                                 </TableCell>
                               </TableRow>
                             </TableHead>
@@ -173,9 +173,9 @@ const Order = () => {
                                     <TableCell align="center">
                                       {prod.produtos.nome}
                                     </TableCell>
-                                    {/* <TableCell align="right">
+                                    <TableCell align="right">
                                       R$ {prod.valor_unitario}
-                                    </TableCell> */}
+                                    </TableCell>
                                     <TableCell colSpan={2} align="right">
                                       R${' '}
                                       {(

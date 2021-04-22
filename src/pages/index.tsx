@@ -13,6 +13,7 @@ import imagecampo from '../assets/Campo-cidade.png';
 import ValidadeContext from '../contexts/validade';
 
 const Home = () => {
+  const Router = useRouter();
   const { validade } = useContext(ValidadeContext);
   const [scrollY, setScrollY] = useState(0);
 
@@ -72,7 +73,8 @@ const Home = () => {
     <S.Wrapper>
       <S.HeaderWrapper position={scrollY}>
         <S.Header>
-          <S.Logo src={veredaslogo} alt="" />
+          {/* <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')}/> */}
+          <S.Logo src={veredaslogo} alt="Home"/>
           <S.MenuNav>
             <S.MenuLink onClick={() => handleChange('sectionOneRef')}>
               Home
@@ -168,7 +170,7 @@ const Home = () => {
             alt="Logo da cooperativa Veredas da Terra"
           />
           <S.Logo src={logomst} alt="Logo do MST" />
-          <S.Logo src={logoif} alt="Logo do IFNMG" />
+          <S.Logo src={logoif} alt="Logo do IFNMG" onClick={() => Router.push('if')}/>
         </div>
       </S.WrapperFooter>
     </S.Wrapper>

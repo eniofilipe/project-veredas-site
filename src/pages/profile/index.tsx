@@ -169,7 +169,7 @@ const Profile = () => {
       <body>
         <S.HeaderWrapper>
           <S.Header>
-            <S.Logo src={veredaslogo} alt="" />
+            <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')}/>
             <S.TitlePerfil>Perfil</S.TitlePerfil>
             <S.WrapperMenu>
               <S.Title onClick={() => Router.push('/orders')}> Pedidos</S.Title>

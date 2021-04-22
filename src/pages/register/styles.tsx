@@ -106,6 +106,7 @@ export const WrapperContent = styled.div`
   padding-right: 14%;
   justify-content: space-between;
 `;
+
 export const Form = styled.div`
   padding-left: 2rem;
   display: flex;

@@ -205,7 +205,7 @@ const products = () => {
       <body>
         <S.HeaderWrapper>
           <S.Header>
-            <S.Logo src={veredaslogo} alt="" />
+            <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')}/>
             <div style={{ width: 800 }}>
               <Autocomplete
                 id="searchBar"

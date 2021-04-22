@@ -138,7 +138,7 @@ const Profile = () => {
     <S.Wrapper>
       <S.HeaderWrapper>
         <S.Header>
-          <S.Logo src={veredaslogo} alt="" />
+          <S.Logo src={veredaslogo} alt="Home" onClick={() => router.push('/')}/>
           <S.MenuNav>
             <S.MenuLink onClick={() => router.push('/')}>Home</S.MenuLink>
             <S.MenuLink onClick={() => router.push('/')}>Quem somos</S.MenuLink>

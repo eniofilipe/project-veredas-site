@@ -39,7 +39,7 @@ const Cart = ({ frete = 5 }: CartProps) => {
   const [cliente, setCliente] = useState(null);
   const [renderizando, setRenderizando] = useState<number>();
   const [tipoPagamento, setTipoPagamento] = useState<Pagamento[]>([]);
-  const [pagamento, setPagamento] = useState<number>();
+  const [pagamento, setPagamento] = useState<number>(1);
 
   const pegarPagamento = async () => {
     try {
@@ -143,7 +143,7 @@ const Cart = ({ frete = 5 }: CartProps) => {
   return (
     <S.Wrapper>
       <S.Header>
-        <S.Logo src={veredaslogo} alt="" />
+        <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')}/>
         <S.WrapperMenu>
           <S.Title onClick={() => Router.push('profile')}>Perfil</S.Title>
           <S.Title onClick={signOut}>Sair</S.Title>
