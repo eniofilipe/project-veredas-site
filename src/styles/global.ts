@@ -9,9 +9,10 @@ export default createGlobalStyle`
   }
 
   body {
-    background: ${(props) => props.theme.colors.background};
-
-    font: 400 16px Roboto, sans-serif;
+    background: #f3f3f3;
+    /* background: ${(props) => props.theme.colors.background}; */
+    font: 400 16px 'Poppins',Roboto, sans-serif;
+    /* font: 400 16px Roboto, sans-serif; */
   }
 
 

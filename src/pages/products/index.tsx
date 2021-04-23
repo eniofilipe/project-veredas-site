@@ -13,10 +13,11 @@ import {
   SearchAlt2 as SearchIcon,
 } from '@styled-icons/boxicons-regular';
 
-import { Checkbox,TextField  } from '@material-ui/core';
+import { Checkbox,TextField, CheckboxProps, FormControlLabel  } from '@material-ui/core';
 import { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-
+import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import { GetServerSideProps } from 'next';
 
@@ -35,6 +36,53 @@ import CartContext from '../../contexts/cart';
 import { getCategorias } from '../../api/Categorias';
 import { getProdutosOfertas } from '../../api/Ofertas';
 import { getOpened, getOpenedWithoutToken } from '../../api/Validade';
+
+import styled from 'styled-components';
+
+
+  const StyledTextField = styled(TextField)`
+  label.Mui-focused {
+    color: #552200;
+  }
+  .MuiOutlinedInput-root {
+    fieldset {
+      border-color: #ccc;
+    }
+    &:hover fieldset {
+      border-color: #552200;
+    }
+    &.Mui-focused fieldset {
+      border-color: #552200;
+    }
+  }
+`;
+
+const GreenCheckbox = withStyles({
+  root: {
+    color: '#017C00',
+    '&$checked': {
+      color: '#017C00',
+    },
+  },
+  checked: {},
+  FormControlLabel:{
+    color: 'blue'
+  }
+})((props: CheckboxProps) => <Checkbox color="default" {...props} />);
+
+
+const CustomCartIcon = styled(CartIcon)`
+  color: #552200;
+`
+
+const CustomProfileIcon= styled(ProfileIcon)`
+  color: #552200;
+`
+
+
+
+
+
 
 const products = () => {
   const Router = useRouter();
@@ -197,6 +245,7 @@ const products = () => {
   }
   );
 
+
   return (
     <S.Wrapper>
       <Head>
@@ -208,11 +257,12 @@ const products = () => {
             <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')}/>
             <div style={{ width: 800 }}>
               <Autocomplete
+
                 id="searchBar"
                 freeSolo
                 options={produtosOferta.map((option) => option.produtos.nome)}
                 renderInput={(params) => (
-                  <TextField {...params} label="Pesquisar pelo nome" margin="normal" variant="outlined" InputProps={{ ...params.InputProps ,type: 'search' }} />
+                  <StyledTextField {...params} label="Pesquisar pelo nome" margin="normal" variant="outlined" InputProps={{ ...params.InputProps ,type: 'search' }} />
 
                 )}
                 onChange = {(e) => handleChangeSearchBar(e)}
@@ -223,10 +273,10 @@ const products = () => {
               <S.WrapperIcons>
                 <S.Icon>
                   <span>{getCartLenght()}</span>
-                  <CartIcon onClick={() => handleGoCart()} />
+                  <CustomCartIcon onClick={() => handleGoCart()} />
                 </S.Icon>
                 <S.Icon>
-                  <ProfileIcon onClick={() => Router.push('profile')} />
+                  <CustomProfileIcon onClick={() => Router.push('profile')} />
                 </S.Icon>
               </S.WrapperIcons>
             </S.MenuNav>
@@ -238,15 +288,16 @@ const products = () => {
             {categorias &&
               categorias.map((cat, index) => (
                 <S.DivCategory key={cat.id}>
-                  <Checkbox
+                  <GreenCheckbox
                     key={`${cat.id}`}
                     onChange={(e) => handleChange(e, cat.nome)}
                     checked={!!categorias[index].isvalid}
                     id={`${cat.id}`}
                     name={cat.nome}
-                    color="default"
+                    // color="default"
+
                   />{' '}
-                  {cat.nome}
+                  <span style={{color: '#552200'}}>{cat.nome}</span>
                 </S.DivCategory>
               ))}
           </S.WrapperCategory>
@@ -305,26 +356,34 @@ const products = () => {
           </S.WrapperProduct>
         </S.WrapperContent>
         <S.WrapperFooter>
-        <div>
+
+        <div id='contato'>
+          <h1 id='contato-info'>Contato</h1>
+          <p>email@veredasdaterra.com.br</p>
+          <p>(38) 9 9900-0000</p>
+        </div>
+
+        <div id='info'>
+          <h1 id='title-info'>Informações</h1>
           <p>Cooperativa Camponesa - Veredas da Terra</p>
           <p>CNPJ: 10.286.881/0001-02</p>
           <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
         </div>
 
-        <div>
-          <p>Contato</p>
-          <p>email@veredasdaterra.com.br</p>
-          <p>(38) 9 9900-0000</p>
-        </div>
 
-        <div>
-          <S.Logo
+
+
+        <div id='logo'>
+        <S.Logo
             src={veredaslogo}
             alt="Logo da cooperativa Veredas da Terra"
           />
-          <S.Logo src={logomst} alt="Logo do MST" />
-          <S.Logo src={logoif} alt="Logo do IFNMG" />
+        <S.Logo src={logomst} alt="Logo do MST" />
+        <S.Logo src={logoif} alt="Logo do IFNMG" />
         </div>
+
+
+
       </S.WrapperFooter>
       </body>
     </S.Wrapper>
