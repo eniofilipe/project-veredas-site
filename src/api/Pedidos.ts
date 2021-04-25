@@ -15,4 +15,6 @@ export const getPedidos = async () =>
 
 export const getPagamento = async () => api.get<Pagamento[]>('/tipo-pagamento');
 
+export const deletePedido = async (id: number) => api.delete<PedidosProps[]>(`/pedido/${id}`);
+
 export default { getPedidos, postPedido };

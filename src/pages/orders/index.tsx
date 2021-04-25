@@ -11,6 +11,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import { toast } from 'react-toastify';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -33,7 +34,7 @@ import logo from '../../assets/logo.png';
 import AuthContext from '../../contexts/auth';
 
 import { PedidosProps } from '../../types';
-import { getPedidos } from '../../api/Pedidos';
+import { getPedidos, deletePedido } from '../../api/Pedidos';
 
 import { FormatDateByFNS } from '../../Utils/Masks';
 
@@ -61,12 +62,15 @@ const Order = () => {
   const { signOut } = useContext(AuthContext);
   const [open, setOpen] = useState([false]);
   const [pedidos, setPedidos] = useState<PedidosProps[]>([]);
+  var [ajuda, setAjuda] = useState<string>("");
+  var [render, setRender] = useState<number>(0);
 
   const fetchPedidos = async () => {
     try {
       const response = await getPedidos();
 
       setPedidos(response.data.reverse());
+
       const control = [];
       for (const i of response.data) {
         control.push(false);
@@ -77,9 +81,24 @@ const Order = () => {
     }
   };
 
+  const deleteOrder = async (id: number) => {
+
+    deletePedido(id);
+
+    const response = await getPedidos();
+
+    setPedidos(response.data.reverse());
+
+    setAjuda("cancelado");
+    setRender(id);
+
+    toast.success('Pedido Cancelado', { position: 'bottom-right' });
+
+  }
+
   useEffect(() => {
     fetchPedidos();
-  }, []);
+  }, [ajuda, render]);
 
   // function handleSubtotal(prods) {
   //   let sub = 0;
@@ -121,102 +140,109 @@ const Order = () => {
               aria-labelledby="nested-list-subheader"
               className={classes.root}
             >
-              {pedidos &&
-                pedidos.map((pedido, i) => {
-                  const handleClick = (option) => {
-                    const array = open.map((e) => false);
-                    array[i] = option;
-                    setOpen(array);
-                  };
-                  const controle = open[i];
-                  return (
-                    <div key={`${pedido.id}`}>
-                      <ListItem
-                        button
-                        className={classes.item}
-                        onClick={() => handleClick(!open[i])}
-                      >
-                        <ListItemText
-                          primary={`Pedido #${
-                            pedido.id
-                          }\xa0\xa0\xa0\xa0\xa0\xa0\xa0${FormatDateByFNS(
-                            pedido.createdAt
-                          )}\xa0\xa0\xa0\xa0\xa0\xa0\xa0${pedido.status}`}
-                        />
-                        {controle ? <ExpandLess /> : <ExpandMore />}
-                      </ListItem>
-                      <Collapse in={controle} timeout="auto" unmountOnExit>
-                        <TableContainer
-                          className={classes.tabela}
-                          component={Paper}
-                        >
-                          <Table aria-label="spanning table">
-                            <TableHead>
-                              <TableRow>
-                                <TableCell>Quantidade</TableCell>
-                                <TableCell align="center">Produto</TableCell>
-                                <TableCell align="right">
-                                  Valor Unitário
-                                </TableCell>
-                                <TableCell colSpan={2} align="right">
-                                  Total{' '}
-                                </TableCell>
-                              </TableRow>
-                            </TableHead>
-                            <TableBody>
-                              {pedido.ofertas &&
-                                pedido.ofertas.map((prod) => (
-                                  <TableRow key={prod.id}>
-                                    <TableCell>
-                                      {prod.oferta_pedidos.quantidade}
-                                    </TableCell>
-                                    <TableCell align="center">
-                                      {prod.produtos.nome}
-                                    </TableCell>
-                                    <TableCell align="right">
-                                      R$ {prod.valor_unitario}
-                                    </TableCell>
-                                    <TableCell colSpan={2} align="right">
-                                      R${' '}
-                                      {(
-                                        prod.valor_unitario *
-                                        prod.oferta_pedidos.quantidade
-                                      ).toFixed(2)}
-                                    </TableCell>
-                                  </TableRow>
-                                ))}
-                              <TableRow>
-                                <TableCell rowSpan={3} />
-                                <TableCell colSpan={2}>Subtotal</TableCell>
-                                <TableCell align="right">
-                                  R$ {handleSubtotal(pedido.ofertas)}
-                                </TableCell>
-                              </TableRow>
-                              <TableRow>
-                                <TableCell colSpan={2}>
-                                  Taxa de entrega
-                                </TableCell>
-                                <TableCell align="right">
-                                  R$ {pedido.frete.valor_frete.toFixed(2)}
-                                </TableCell>
-                              </TableRow>
-                              <TableRow>
-                                <TableCell colSpan={2}>Total</TableCell>
-                                <TableCell align="right">
-                                  R${' '}
-                                  {Number(
-                                    pedido.frete.valor_frete +
-                                      Number(handleSubtotal(pedido.ofertas))
-                                  ).toFixed(2)}
-                                </TableCell>
-                              </TableRow>
-                            </TableBody>
-                          </Table>
-                        </TableContainer>
+            {pedidos &&
+              pedidos.map((pedido, i) => {
+              const handleClick = (option) => {
+              const array = open.map((e) => false);
+                array[i] = option;
+                setOpen(array);
+              };
+              const controle = open[i];
+              ajuda = pedido.status;
+              return (
+                <div key={`${pedido.id}`}>
+                  <ListItem
+                    button
+                    className={classes.item}
+                    onClick={() => handleClick(!open[i])}
+                  >
+                    <ListItemText
+                      primary={`Pedido #${
+                        pedido.id
+                      }
+                      \xa0\xa0\xa0\xa0\xa0\xa0\xa0
+                      ${FormatDateByFNS(
+                        pedido.createdAt
+                      )}
+                      \xa0\xa0\xa0\xa0\xa0\xa0\xa0
+                      \xa0\xa0\xa0\xa0\xa0\xa0\xa0
+                      `}
+                    />
+                    <span align-text="right">{ajuda}</span>
+                    {controle ? <ExpandLess /> : <ExpandMore />}
+                  </ListItem>
+                  <Collapse in={controle} timeout="auto" unmountOnExit>
+                    <TableContainer
+                      className={classes.tabela}
+                      component={Paper}
+                    >
+                      <Table aria-label="spanning table">
+                        <TableHead>
+                          <TableRow>
+                            <TableCell>Quantidade</TableCell>
+                            <TableCell align="center">Produto</TableCell>
+                            <TableCell align="right">
+                              Valor Unitário
+                            </TableCell>
+                            <TableCell colSpan={2} align="right">
+                              Total{' '}
+                            </TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                        {pedido.ofertas &&
+                          pedido.ofertas.map((prod) => (
+                          <TableRow key={prod.id}>
+                            <TableCell>
+                              {prod.oferta_pedidos.quantidade}
+                            </TableCell>
+                            <TableCell align="center">
+                              {prod.produtos.nome}
+                            </TableCell>
+                            <TableCell align="right">
+                              R$ {prod.valor_unitario}
+                            </TableCell>
+                            <TableCell colSpan={2} align="right">
+                              R${' '}
+                              {(
+                                prod.valor_unitario *
+                                prod.oferta_pedidos.quantidade
+                              ).toFixed(2)}
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                        <TableRow>
+                        <S.Button>Editar</S.Button>
+                          <TableCell colSpan={3}>Subtotal</TableCell>
+                          <TableCell align="right">
+                            R$ {handleSubtotal(pedido.ofertas)}
+                          </TableCell>
+                        </TableRow>
+                        <TableRow>
+                        <S.Button onClick={() => deleteOrder(pedido.id)}>Cancelar</S.Button>
+                          <TableCell colSpan={3}>
+                            Taxa de entrega
+                          </TableCell>
+                          <TableCell align="right">
+                            R$ {pedido.frete.valor_frete.toFixed(2)}
+                          </TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell/>
+                          <TableCell colSpan={3}>Total</TableCell>
+                          <TableCell align="right">
+                            R${' '}
+                            {Number(
+                              pedido.frete.valor_frete +
+                                Number(handleSubtotal(pedido.ofertas))
+                            ).toFixed(2)}
+                          </TableCell>
+                        </TableRow>
+                      </TableBody>
+                      </Table>
+                      </TableContainer>
                       </Collapse>
-                    </div>
-                  );
-                })}
+                      </div>);})}
             </List>
           </S.WrapperContent>
           <S.WrapperFooter>

@@ -48,8 +48,6 @@ const products = () => {
   const [searchBoxBeingUsed, setSearchBoxBeingUsed] = useState<boolean>(false)
   const [searchedName, setSearchedName] = useState<string>('')
 
-
-
   function produtoPossui(prod: Oferta) {
     let categoriasP;
     let tem = false;
@@ -295,12 +293,7 @@ const products = () => {
                 />
                 : ''
               ))
-
-
-
             )
-
-
             }
           </S.WrapperProduct>
         </S.WrapperContent>

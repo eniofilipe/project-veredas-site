@@ -37,7 +37,7 @@ const Cart = ({ frete = 5 }: CartProps) => {
   const router = useRouter();
   const [endereco, setAddress] = useState(null);
   const [cliente, setCliente] = useState(null);
-  const [renderizando, setRenderizando] = useState<number>();
+  // const [renderizando, setRenderizando] = useState<number>();
   const [tipoPagamento, setTipoPagamento] = useState<Pagamento[]>([]);
   const [pagamento, setPagamento] = useState<number>(1);
   const [controle, setControle] = useState(1);
@@ -72,7 +72,7 @@ const Cart = ({ frete = 5 }: CartProps) => {
   const aumentarQuantidade = (index: number) => {
 
     products[index].quantidadeCart += 1;
-    setRenderizando(products[index].quantidadeCart);
+    // setRenderizando(products[index].quantidadeCart);
 
     const resultAux = products.map(
       (prod) => prod.quantidadeCart * prod.valor_unitario,
@@ -107,7 +107,7 @@ const Cart = ({ frete = 5 }: CartProps) => {
 
       setTotal(result + 5);
     }
-    setRenderizando(products[index].quantidadeCart);
+    // setRenderizando(products[index].quantidadeCart);
 
   };
 
@@ -127,10 +127,10 @@ const Cart = ({ frete = 5 }: CartProps) => {
         tipo_pagamento_id: pagamento,
         valor_frete: 5,
       });
-      toast.success('Pedido realizado com sucesso!');
+      toast.success('Pedido realizado com sucesso!', { position: 'bottom-right' });
       setTimeout(() => Router.push('/orders'), 1000);
     } catch (err) {
-      toast.error('Erro ao realizar pedido!');
+      toast.error('Erro ao realizar pedido!', { position: 'bottom-right' });
 
       console.log(err);
     }

@@ -126,3 +126,42 @@ export const WrapperFooter = styled.footer`
     border-radius: 18px;
   }
 `;
+
+export const CancelButton = styled.button`
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  height: 4rem;
+  width: 6rem;
+  border: none;
+  font-size: 1.2rem;
+  :hover {
+    background: #961913;
+    color: white;
+    transition: 0.4s;
+    cursor:pointer;
+  }
+`;
+
+export const Button = styled.button`
+  background: #961913;
+  color: #fff;
+  border: 1px solid #961913;
+  border-radius: 8px;
+  padding: 1rem 2rem;
+  outline: none;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  height: 2rem;
+  margin-top: 1rem;
+  margin-left: 4rem;
+  margin-right: -4rem;
+
+  &:hover {
+    color: #961913;
+    background: rgba(205, 205, 205, 0.7);
+    border: 1px solid #961913;
+    cursor: pointer;
+  }
+`;

@@ -50,12 +50,12 @@ export const CartProvider: React.FC = ({ children }) => {
       };
 
       setProducts(productsAux);
-      toast.success('Produto adicionado', { position: 'bottom-right' });
+      toast.success('Produto Adicionado', { position: 'bottom-right' });
     } else {
       const productAux = { ...prod, quantidadeCart: quantidade } as OfertaCart;
 
       setProducts(products.concat(productAux));
-      toast.success('Produto adicionado', { position: 'bottom-right' });
+      toast.success('Produto Adicionado', { position: 'bottom-right' });
     }
   };
   useEffect(() => {
