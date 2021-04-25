@@ -168,7 +168,7 @@ const Order = () => {
                       \xa0\xa0\xa0\xa0\xa0\xa0\xa0
                       `}
                     />
-                    <span align-text="right">{ajuda}</span>
+                    <span align-text="left">{`${ajuda}\xa0\xa0\xa0\xa0\xa0\xa0\xa0`}</span>
                     {controle ? <ExpandLess /> : <ExpandMore />}
                   </ListItem>
                   <Collapse in={controle} timeout="auto" unmountOnExit>
@@ -213,14 +213,19 @@ const Order = () => {
                         ))}
                         <TableRow>
                         <S.Button>Editar</S.Button>
-                          <TableCell colSpan={3}>Subtotal</TableCell>
+                          <TableCell/>
+                          <TableCell colSpan={2}>Subtotal</TableCell>
                           <TableCell align="right">
                             R$ {handleSubtotal(pedido.ofertas)}
                           </TableCell>
                         </TableRow>
                         <TableRow>
-                        <S.Button onClick={() => deleteOrder(pedido.id)}>Cancelar</S.Button>
-                          <TableCell colSpan={3}>
+                        {pedido.status === "aberto" ?
+                          <S.Button onClick={() => deleteOrder(pedido.id)}>Cancelar</S.Button>
+                        : <TableCell/>
+                        }
+                          <TableCell/>
+                          <TableCell colSpan={2}>
                             Taxa de entrega
                           </TableCell>
                           <TableCell align="right">
@@ -229,7 +234,8 @@ const Order = () => {
                         </TableRow>
                         <TableRow>
                           <TableCell/>
-                          <TableCell colSpan={3}>Total</TableCell>
+                          <TableCell/>
+                          <TableCell colSpan={2}>Total</TableCell>
                           <TableCell align="right">
                             R${' '}
                             {Number(

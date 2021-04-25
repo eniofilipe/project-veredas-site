@@ -230,3 +230,11 @@ export interface Pagamento {
   titulo: string;
   updatedAt: string;
 }
+
+export interface Frete {
+  id: number;
+  nome: string;
+  valor_frete: number;
+  createdAt: string;
+  updatedAt: string;
+}

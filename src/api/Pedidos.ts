@@ -1,5 +1,5 @@
 import api from './Api';
-import { PostPedidoProps, PedidosProps, Pagamento } from '../types';
+import { PostPedidoProps, PedidosProps, Pagamento, Frete} from '../types';
 
 export const postPedido = async (data: PostPedidoProps) =>
   api.post('/pedido', data);
@@ -16,5 +16,7 @@ export const getPedidos = async () =>
 export const getPagamento = async () => api.get<Pagamento[]>('/tipo-pagamento');
 
 export const deletePedido = async (id: number) => api.delete<PedidosProps[]>(`/pedido/${id}`);
+
+export const getFrete = async () => api.get<Frete[]>(`/frete`);
 
 export default { getPedidos, postPedido };
