@@ -37,7 +37,7 @@ const Login = () => {
           toast.warn('Essa conta percente a um administrador.');
           break;
         case 200:
-          toast.success('Seja bem vindo');
+          toast.success('Seja bem vindo', { position: 'bottom-right' });
           break;
         default:
           toast.success('Ocorreu um erro ao tentar realizar o login');

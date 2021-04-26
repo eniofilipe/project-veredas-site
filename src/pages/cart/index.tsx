@@ -15,18 +15,18 @@ import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
 import CartContext from '../../contexts/cart';
 import AuthContext from '../../contexts/auth';
-import { OfertaPedido, Address, CartProps, Pagamento } from '../../types';
+import { OfertaPedido, Address, CartProps, Pagamento, Frete } from '../../types';
 import { cepMask } from '../../Utils/Masks';
 import logomst from '../../assets/logo-mst-rurais.png';
 import logoif from '../../assets/logo-if.png';
-import { postPedido, getPagamento } from '../../api/Pedidos';
+import { postPedido, getPagamento, getFrete } from '../../api/Pedidos';
 import ValidadeContext from '../../contexts/validade';
 import {
   getOpenedWithoutToken,
   getValidaTokenWithoutToken,
 } from '../../api/Validade';
 
-const Cart = ({ frete = 5 }: CartProps) => {
+const Cart = () => {
   const Router = useRouter();
   const { signOut } = useContext(AuthContext);
   const { products, removeProduct } = useContext(CartContext);
@@ -37,10 +37,11 @@ const Cart = ({ frete = 5 }: CartProps) => {
   const router = useRouter();
   const [endereco, setAddress] = useState(null);
   const [cliente, setCliente] = useState(null);
-  const [renderizando, setRenderizando] = useState<number>();
   const [tipoPagamento, setTipoPagamento] = useState<Pagamento[]>([]);
   const [pagamento, setPagamento] = useState<number>(1);
   const [controle, setControle] = useState(1);
+  var [freteFixo, setFreteFixo] = useState<number>(0);
+  var [idFixo, setIdFixo] = useState<number>(0);
 
   const pegarPagamento = async () => {
     try {
@@ -48,6 +49,18 @@ const Cart = ({ frete = 5 }: CartProps) => {
 
       setTipoPagamento(response.data);
     } catch (error){
+      console.log(error);
+    }
+  }
+
+  const pegarFrete = async () => {
+    try {
+      const response = await getFrete();
+
+      setFreteFixo(response.data[0].valor_frete);
+      setIdFixo(response.data[0].id);
+
+    } catch (error) {
       console.log(error);
     }
   }
@@ -72,7 +85,7 @@ const Cart = ({ frete = 5 }: CartProps) => {
   const aumentarQuantidade = (index: number) => {
 
     products[index].quantidadeCart += 1;
-    setRenderizando(products[index].quantidadeCart);
+    // setRenderizando(products[index].quantidadeCart);
 
     const resultAux = products.map(
       (prod) => prod.quantidadeCart * prod.valor_unitario,
@@ -107,7 +120,7 @@ const Cart = ({ frete = 5 }: CartProps) => {
 
       setTotal(result + 5);
     }
-    setRenderizando(products[index].quantidadeCart);
+    // setRenderizando(products[index].quantidadeCart);
 
   };
 
@@ -123,14 +136,15 @@ const Cart = ({ frete = 5 }: CartProps) => {
           (c) => ({ oferta_id: c.id, quantidade: c.quantidadeCart } as OfertaPedido),
         ),
         cliente_id: cliente.id,
-        tipo_frete_id: 1,
+        tipo_frete_id: idFixo,
         tipo_pagamento_id: pagamento,
-        valor_frete: 5,
+        valor_frete: freteFixo,
       });
-      toast.success('Pedido realizado com sucesso!');
+      // {console.log(cliente.id, idFixo, pagamento, freteFixo);}
+      toast.success('Pedido realizado com sucesso!', { position: 'bottom-right' });
       setTimeout(() => Router.push('/orders'), 1000);
     } catch (err) {
-      toast.error('Erro ao realizar pedido!');
+      toast.error('Erro ao realizar pedido!', { position: 'bottom-right' });
 
       console.log(err);
     }
@@ -144,6 +158,7 @@ const Cart = ({ frete = 5 }: CartProps) => {
     setAddress(getAddress());
     setCliente(getCliente());
     pegarPagamento();
+    pegarFrete();
   }, [products]);
 
   return (
@@ -182,7 +197,7 @@ const Cart = ({ frete = 5 }: CartProps) => {
             </S.Row>
             <S.Row>
               <S.SubTotal>Taxa de Entrega</S.SubTotal>
-              <S.SubTotal>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;R$ &ensp;&ensp;{frete.toFixed(2)}</S.SubTotal>
+              <S.SubTotal>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;R$ &ensp;&ensp;{freteFixo.toFixed(2)}</S.SubTotal>
             </S.Row>
             <S.Line />
             <S.Row>
