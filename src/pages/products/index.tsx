@@ -17,7 +17,6 @@ import { Checkbox,TextField, CheckboxProps, FormControlLabel  } from '@material-
 import { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { withStyles } from '@material-ui/core/styles';
-import { makeStyles } from '@material-ui/core/styles';
 
 import { GetServerSideProps } from 'next';
 
@@ -25,7 +24,6 @@ import { toast } from 'react-toastify';
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
 
-import ValidadeContext from '../../contexts/validade';
 import logomst from '../../assets/logo-mst-rurais.png';
 import logoif from '../../assets/logo-if.png';
 import CardProduct from '../../components/Cards/CardProduct';
@@ -35,10 +33,9 @@ import { Categoria, Oferta } from '../../types';
 import CartContext from '../../contexts/cart';
 import { getCategorias } from '../../api/Categorias';
 import { getProdutosOfertas } from '../../api/Ofertas';
-import { getOpened, getOpenedWithoutToken } from '../../api/Validade';
+import { getOpenedWithoutToken } from '../../api/Validade';
 
 import styled from 'styled-components';
-
 
   const StyledTextField = styled(TextField)`
   label.Mui-focused {
@@ -79,15 +76,10 @@ const CustomProfileIcon= styled(ProfileIcon)`
   color: #552200;
 `
 
-
-
-
-
-
 const products = () => {
   const Router = useRouter();
   const {
- addProduct, removeProduct, checkInCart, getCartLenght, } = useContext(
+  addProduct, removeProduct, checkInCart, getCartLenght, } = useContext(
     CartContext,
   );
   const [categorias, setCategorias] = useState<Categoria[]>([]);
@@ -95,8 +87,6 @@ const products = () => {
   const [quantidade, setQuantidade] = useState<number[]>([1]);
   const [searchBoxBeingUsed, setSearchBoxBeingUsed] = useState<boolean>(false)
   const [searchedName, setSearchedName] = useState<string>('')
-
-
 
   function produtoPossui(prod: Oferta) {
     let categoriasP;
@@ -154,13 +144,6 @@ const products = () => {
       console.log(error);
     }
   };
-
-  function removeElement(array, elem) {
-    const index2 = array.indexOf(elem);
-    if (index2 > -1) {
-      array.splice(index2, 1);
-    }
-  }
 
   const handleChangeSearchBar = (e: any) => {
     setSearchBoxBeingUsed(true)
@@ -245,25 +228,21 @@ const products = () => {
   }
   );
 
-
   return (
     <S.Wrapper>
       <Head>
         <title>Veredas da terra</title>
       </Head>
-      <body>
         <S.HeaderWrapper>
           <S.Header>
             <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')}/>
             <div style={{ width: 800 }}>
               <Autocomplete
-
                 id="searchBar"
                 freeSolo
                 options={produtosOferta.map((option) => option.produtos.nome)}
                 renderInput={(params) => (
-                  <StyledTextField {...params} label="Pesquisar pelo nome" margin="normal" variant="outlined" InputProps={{ ...params.InputProps ,type: 'search' }} />
-
+                  <StyledTextField {...{...params,size: 'small'}} label="Pesquisar pelo nome" margin="normal" variant="outlined" InputProps={{ ...params.InputProps }} />
                 )}
                 onChange = {(e) => handleChangeSearchBar(e)}
                 filterOptions={filterOptions}
@@ -294,8 +273,6 @@ const products = () => {
                     checked={!!categorias[index].isvalid}
                     id={`${cat.id}`}
                     name={cat.nome}
-                    // color="default"
-
                   />{' '}
                   <span style={{color: '#552200'}}>{cat.nome}</span>
                 </S.DivCategory>
@@ -310,9 +287,9 @@ const products = () => {
                 comment={prod.produtos.descricao}
                 name={prod.produtos.nome}
                 value={prod.valor_unitario}
+                availableStock={prod.quantidade}
                 quantity={quantidade[index] ? quantidade[index] : 1}
                 onChange={() =>
-                  // eslint-disable-next-line implicit-arrow-linebreak
                   addProduct(prod, quantidade[index] ? quantidade[index] : 1)
                 }
                 handleRemove={() => removeProduct(prod)}
@@ -322,9 +299,7 @@ const products = () => {
                 inCart={checkInCart(prod)}
               />
             )):
-
             (
-
               produtosOferta.map((prod, index) => (
                 prod.produtos.nome.toUpperCase().includes(searchedName.toUpperCase())   ?
                 <CardProduct
@@ -333,9 +308,9 @@ const products = () => {
                   comment={prod.produtos.descricao}
                   name={prod.produtos.nome}
                   value={prod.valor_unitario}
+                  availableStock={prod.quantidade}
                   quantity={quantidade[index] ? quantidade[index] : 1}
                   onChange={() =>
-                    // eslint-disable-next-line implicit-arrow-linebreak
                     addProduct(prod, quantidade[index] ? quantidade[index] : 1)
                   }
                   handleRemove={() => removeProduct(prod)}
@@ -346,17 +321,11 @@ const products = () => {
                 />
                 : ''
               ))
-
-
-
             )
-
-
             }
           </S.WrapperProduct>
         </S.WrapperContent>
         <S.WrapperFooter>
-
         <div id='contato'>
           <h1 id='contato-info'>Contato</h1>
           <p>email@veredasdaterra.com.br</p>
@@ -370,9 +339,6 @@ const products = () => {
           <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
         </div>
 
-
-
-
         <div id='logo'>
         <S.Logo
             src={veredaslogo}
@@ -382,10 +348,7 @@ const products = () => {
         <S.Logo src={logoif} alt="Logo do IFNMG" />
         </div>
 
-
-
       </S.WrapperFooter>
-      </body>
     </S.Wrapper>
   );
 };

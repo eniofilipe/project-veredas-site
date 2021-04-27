@@ -3,7 +3,6 @@
 /* eslint-disable operator-linebreak */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import Head from 'next/head';
 import { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
@@ -16,7 +15,7 @@ import { cepMask, cellphoneeMask, cpfMask } from '../../Utils/Masks';
 import ValidadeContext from '../../contexts/validade';
 import logomst from '../../assets/logo-mst-rurais.png';
 import logoif from '../../assets/logo-if.png';
-import logowhite from '../../assets/logo-white.png';
+
 
 export type ProfileProps = {
   name: string;
@@ -32,7 +31,7 @@ export type ProfileProps = {
 };
 
 const Profile = () => {
-  const router = useRouter();
+  const Router = useRouter();
   const { validade } = useContext(ValidadeContext);
 
   const [name, setName] = useState('');
@@ -109,7 +108,7 @@ const Profile = () => {
         telefone: phone.replace(/\D/g, ''),
       });
       toast.success('Cadastro realizado com sucesso.');
-      router.push('/login');
+      Router.push('/login');
     } catch (error) {
       const { status } = error.response;
       switch (status) {
@@ -128,34 +127,30 @@ const Profile = () => {
   };
 
   const goToProducts = () => {
-    router.push('/products');
+    Router.push('/products');
   };
 
   const goToLogin = () => {
-    router.push('/login');
+    Router.push('/login');
   };
   return (
     <S.Wrapper>
       <S.HeaderWrapper>
-        <S.Header>
-          <S.Logo src={veredaslogo} alt="Home" onClick={() => router.push('/')}/>
-          <S.MenuNav>
-            <S.MenuLink onClick={() => router.push('/')}>Home</S.MenuLink>
-            <S.MenuLink onClick={() => router.push('/')}>Quem somos</S.MenuLink>
-            <S.MenuLink onClick={() => router.push('/')}>
-              Como Funciona
-            </S.MenuLink>
-            {!validade ? (
-              <S.Button onClick={goToLogin}>Acessar Conta</S.Button>
-            ) : (
-              <S.Button onClick={goToProducts}>Entrar na Feirinha</S.Button>
-            )}
-          </S.MenuNav>
-        </S.Header>
-      </S.HeaderWrapper>
+          <S.Header>
+            <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')} />
+            <S.MenuNav>
+              <S.MenuLink onClick={() => Router.push('/')}>Home</S.MenuLink>
+              {!validade ? (
+                <S.Button onClick={goToLogin}>Criar conta</S.Button>
+              ) : (
+                <S.Button onClick={goToProducts}>Entrar na Feirinha</S.Button>
+              )}
+            </S.MenuNav>
+          </S.Header>
+        </S.HeaderWrapper>
       <S.Body>
         <S.WrapperController>
-          <S.Title>Cadastro</S.Title>
+          <S.Title id="principal">Cadastro</S.Title>
           <S.WrapperContent>
             <S.WrapperData>
               <S.Title>Dados Pessoais</S.Title>
@@ -261,7 +256,7 @@ const Profile = () => {
           </S.WrapperAddress>
         </S.WrapperController>
         <S.WrapperButtons>
-          <S.Button onClick={() => router.push('/login')}>
+          <S.Button onClick={() => Router.push('/login')}>
             Já tenho conta
           </S.Button>
           <S.Button onClick={() => register()}>Finalizar</S.Button>
@@ -269,21 +264,29 @@ const Profile = () => {
       </S.Body>
 
       <S.WrapperFooter>
-        <div>
+
+        <div id='contato'>
+          <h1 id='contato-info'>Contato</h1>
+          <p>email@veredasdaterra.com.br</p>
+          <p>(38) 9 9900-0000</p>
+        </div>
+
+        <div id='info'>
+          <h1 id='title-info'>Informações</h1>
           <p>Cooperativa Camponesa - Veredas da Terra</p>
           <p>CNPJ: 10.286.881/0001-02</p>
           <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
         </div>
-        <div>
-          <p>Contato</p>
-          <p>contato@veredasdaterra.com.br</p>
-          <p>(38) 9 9900-0000</p>
-        </div>
-        <div>
-          <S.Logo src={logowhite} alt="Logo da cooperativa Veredas da Terra" />
+
+        <div id='logo'>
+          <S.Logo
+            src={veredaslogo}
+            alt="Logo da cooperativa Veredas da Terra"
+          />
           <S.Logo src={logomst} alt="Logo do MST" />
           <S.Logo src={logoif} alt="Logo do IFNMG" />
         </div>
+
       </S.WrapperFooter>
     </S.Wrapper>
   );

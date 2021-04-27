@@ -43,6 +43,7 @@ interface CardProductProps {
   image?: string;
   quantity: number;
   inCart?: boolean;
+  availableStock: number;
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -57,6 +58,7 @@ const cardProduct = ({
   PlusQuantityOnChange,
   quantity,
   category,
+  availableStock,
   image,
   inCart
 }: CardProductProps) => {
@@ -91,7 +93,7 @@ const cardProduct = ({
             </PriceAndQuantityWrapper>
 
             <StockBuyWrapper>
-              <Stock>Estoque: 350</Stock>
+              <Stock>Estoque: {availableStock}</Stock>
               <ButtonBuy onClick={onChange}>
                 <FontAwesomeIcon icon={faShoppingBasket} />
               </ButtonBuy>
@@ -118,7 +120,7 @@ const cardProduct = ({
             </PriceAndQuantityWrapper>
 
             <StockBuyWrapper>
-              <Stock>Estoque: 350</Stock>
+              <Stock>Estoque: {availableStock}</Stock>
               <ButtonRemove onMouseOver={() => setHoverIcon(true)} onMouseOut={() => setHoverIcon(false)} onClick={handleRemove}>
                 <FontAwesomeIcon icon={HoverIcon ? faTrash : faCheckCircle} />
               </ButtonRemove>
