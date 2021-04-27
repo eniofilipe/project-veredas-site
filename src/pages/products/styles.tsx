@@ -1,22 +1,15 @@
 /* eslint-disable indent */
 import styled, { css } from 'styled-components';
-import bg1 from '../../assets/bg1.png';
-import bg2 from '../../assets/cesta.png';
 
-export const Logo = styled.img``;
+export const Logo = styled.img`
+&:nth-child(1) {
+  cursor: pointer;
+}
+`;
+
 export const MenuNav = styled.div`
   margin-right: 4rem;
 `;
-
-// export const Header = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   width: 100%;
-//   background: rgba(30, 149, 31, 0.4);
-//   justify-content: center;
-//   align-items: center;
-//   padding: 2.5rem 1%;
-// `;
 
 type MenuProps = {
   background?: string;
@@ -31,12 +24,13 @@ export const Header = styled.menu<MenuProps>`
     justify-content: space-between;
     background-color: ${background && background === 'white'
       ? '#FFF'
-      : 'rgba(211, 211, 211, 0.8)'};
+      : '#FFF'};
   `}
 
   ${Logo} {
     width: 200px;
   }
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 `;
 
 export const HeaderWrapper = styled.div<MenuProps>`
@@ -53,18 +47,10 @@ export const HeaderWrapper = styled.div<MenuProps>`
   `}
 `;
 
-// export const Logo = styled.img`
-//   width: auto;
-//   position: absolute;
-//   left: 2rem;
-//   top: 1rem;
-// `;
-
 export const WrapperProduct = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16rem, 18rem));
   width: 100%;
-  /* height: 250px; */
   row-gap: 3rem;
   padding-top: 3rem;
   padding-bottom: 3rem;
@@ -73,7 +59,6 @@ export const WrapperProduct = styled.div`
 export const DivCategory = styled.div`
   align-items: center;
   display: flex;
-  justify-content: left;
 `;
 
 export const WrapperCategory = styled.div`
@@ -81,34 +66,28 @@ export const WrapperCategory = styled.div`
   width: 15%;
   flex-direction: column;
   background-color: #fff;
-  border: 1px solid #444;
   margin: 2rem;
-   margin-top: 3rem;
-  /* margin-right: 0; */
+  margin-top: 3rem;
   padding: 1rem;
-  padding-bottom: 4rem;
-  // padding-right: 4rem;
-  border-radius: 8px;
-  //  height: 100%;
+  padding-bottom: 2rem;
+  border-radius: 10px;
+  box-shadow:  0px 0px 30px 1px #cdcdcd;
+  align-self: flex-start;
 `;
-
 
 export const HeadCategory = styled.h1`
   align-self: center;
   padding: 0.5rem;
   margin-bottom: 1rem;
-  color: rgba(0,0,0,0.54);
+  color: #552200;
   font-size: 1.3rem;
 `;
 
-
-export const Checkbox = styled.input`
-  margin-bottom: 1rem;
-`;
 export const Label = styled.label`
   padding-left: 0.4rem;
   font-size: 1.3rem;
 `;
+
 export const Wrapper = styled.div`
   body {
     background-color: rgba(196, 196, 196, 0.1);
@@ -117,25 +96,18 @@ export const Wrapper = styled.div`
     height: 100%;
   }
 `;
+
 export const WrapperContent = styled.div`
   display: flex;
 `;
-export const SearchBar = styled.input`
-  display: flex;
-  height: 2.5rem;
-  width: 40%;
-  border-radius: 8px;
-  border: none;
-  outline: none;
-  /* padding-left: 1rem;
-  margin-left: 40%; */
-`;
+
 export const WrapperIcons = styled.div`
   display: flex;
   margin-left: auto;
   margin-right: -5rem;
   gap: 10%;
 `;
+
 export const Icon = styled.div`
   color: #fff;
   width: 4rem;
@@ -145,46 +117,68 @@ export const Icon = styled.div`
   position: relative;
   span{
     position: absolute;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     right: -20px;
     top: -10px;
-    padding: 5px 10px;
+    padding: 5px;
     border-radius: 50%;
-    background: #333;
-    color: white;
-    font-weight: 800;
+    background: #017C00;
+    width: 1.8rem;
+    height: 1.8rem;
+    color: #fff;
+    font-weight: 600;
   }
 `;
 
-
-export default Icon;
-
 export const WrapperFooter = styled.footer`
-  height: 10vh;
+  height: 20vh;
   display: flex;
   width: 100%;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  padding-top: 4vw;
-  padding-bottom: 6vw;
-  gap: 4rem;
-  background-color: rgba(211, 211, 211, 0.8);
+  justify-content: space-between;
+  background-color: #fff;
 
-  div {
-    color: #961913;
+  div p{
+    color: #552200;
+    font-size: 1.1rem;
+  }
+  div h1{
+    font-weight: bold;
+    color: #017C00;
     font-size: 1.5rem;
+    margin-bottom: 10px;
   }
-  ${Logo}:nth-child(1) {
-    width: 200px;
-    padding: 1rem;
+  #info{
+    text-align: center;
+    margin-left: 12.3rem;
   }
-
+  #logo{
+    margin-right: 4rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+  #contato{
+    margin-left: 8rem;
+    text-align: center;
+  }
+   ${Logo}:nth-child(1) {
+    width: 250px;
+    padding: 0.8rem;
+  }
   ${Logo}:nth-child(2) {
-    width: 100px;
+    width: 120px;
     padding: 1rem;
   }
   ${Logo}:nth-child(3) {
-    width: 120px;
+    width: 150px;
     padding: 1rem;
     border-radius: 30px;
   }
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px -1.95px 6px;
 `;

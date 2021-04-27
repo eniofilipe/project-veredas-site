@@ -14,7 +14,6 @@ import veredaslogo from '../../assets/logo.png';
 import AuthContext from '../../contexts/auth';
 import logomst from '../../assets/logo-mst-rurais.png';
 import logoif from '../../assets/logo-if.png';
-import logo from '../../assets/logo.png';
 
 import { Cliente, ClienteLogin } from '../../types';
 import { cleanObject, isEmail, validarCPF } from '../../Utils/Validation';
@@ -162,21 +161,24 @@ const Profile = () => {
   }
 
   return (
-    <S.Wrapper>
-      <Head>
-        <title>Veredas da terra</title>
-      </Head>
-      <body>
-        <S.HeaderWrapper>
-          <S.Header>
-            <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')}/>
-            <S.TitlePerfil>Perfil</S.TitlePerfil>
-            <S.WrapperMenu>
-              <S.Title onClick={() => Router.push('/orders')}> Pedidos</S.Title>
-              <S.Title onClick={signOut}>Sair</S.Title>
-            </S.WrapperMenu>
-          </S.Header>
-        </S.HeaderWrapper>
+    <>
+      <S.Wrapper>
+        <Head>
+          <title>Veredas da terra</title>
+        </Head>
+        <S.Header>
+          <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')} />
+          <S.TitlePage>Perfil</S.TitlePage>
+          <S.MenuNav>
+            <S.MenuLink onClick={() => Router.push('/orders')}>
+              Pedidos
+            </S.MenuLink>
+            <S.MenuLink onClick={signOut}>
+              Sair
+            </S.MenuLink>
+          </S.MenuNav>
+        </S.Header>
+
         <S.WrapperController>
           <S.WrapperContent>
             <S.WrapperData>
@@ -224,7 +226,7 @@ const Profile = () => {
             <S.WrapperData>
               <S.Title>Dados de Acesso</S.Title>
               <S.Form>
-                <S.Row>
+                <S.Row id="field">
                   <S.Label> E-Mail: </S.Label>
                   <S.Input value={email} readOnly />
                 </S.Row>
@@ -341,25 +343,34 @@ const Profile = () => {
             </S.WrapperDataAddress>
           </S.WrapperAddress>
         </S.WrapperController>
-      </body>
+
+      </S.Wrapper>
       <S.WrapperFooter>
-        <div>
+
+        <div id='contato'>
+          <h1 id='contato-info'>Contato</h1>
+          <p>email@veredasdaterra.com.br</p>
+          <p>(38) 9 9900-0000</p>
+        </div>
+
+        <div id='info'>
+          <h1 id='title-info'>Informações</h1>
           <p>Cooperativa Camponesa - Veredas da Terra</p>
           <p>CNPJ: 10.286.881/0001-02</p>
           <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
         </div>
-        <div>
-          <p>Contato</p>
-          <p>contato@veredasdaterra.com.br</p>
-          <p>(38) 9 9900-0000</p>
-        </div>
-        <div>
-          <S.Logo src={logo} alt="Logo da cooperativa Veredas da Terra" />
+
+        <div id='logo'>
+          <S.Logo
+            src={veredaslogo}
+            alt="Logo da cooperativa Veredas da Terra"
+          />
           <S.Logo src={logomst} alt="Logo do MST" />
           <S.Logo src={logoif} alt="Logo do IFNMG" />
         </div>
+
       </S.WrapperFooter>
-    </S.Wrapper>
+    </>
   );
 };
 
