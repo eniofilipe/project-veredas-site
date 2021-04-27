@@ -275,6 +275,7 @@ export const WrapperFooter = styled.footer`
   align-items: center;
   justify-content: space-between;
   background-color: #fff;
+
   div p{
     color: #552200;
     font-size: 1.1rem;

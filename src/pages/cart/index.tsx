@@ -86,7 +86,7 @@ const Cart = () => {
 
     setSubtotal(result);
 
-    setTotal(result + 5);
+    setTotal(result + freteFixo);
 
   }, [products]);
 
@@ -106,7 +106,7 @@ const Cart = () => {
 
     setSubtotal(result);
 
-    setTotal(result + 5);
+    setTotal(result + freteFixo);
   };
 
   const diminuirQuantidade = (index: number) => {
@@ -126,7 +126,7 @@ const Cart = () => {
 
       setSubtotal(result);
 
-      setTotal(result + 5);
+      setTotal(result + freteFixo);
     }
     // setRenderizando(products[index].quantidadeCart);
 
@@ -214,7 +214,7 @@ const Cart = () => {
             </S.Row>
             <S.Row>
               <S.Text>Taxa de Entrega</S.Text>
-              <S.Value>R$: {frete.toFixed(2)}</S.Value>
+              <S.Value>R$: {freteFixo.toFixed(2)}</S.Value>
             </S.Row>
             <S.Line />
             <S.Row>
