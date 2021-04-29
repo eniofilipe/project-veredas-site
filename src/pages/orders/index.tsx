@@ -61,13 +61,12 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: 'rgba(0, 0, 0, 0.18) 0px 2px 4px',
     '& th': {
       fontSize: '1.1rem',
-      color: '#016300'
+      color: '#016300',
     },
     '& td': {
       fontSize: '1.0rem',
-      color: '#441b00'
-    }
-
+      color: '#441b00',
+    },
   },
 
 
@@ -190,9 +189,13 @@ const Order = () => {
                       )}
                       \xa0\xa0\xa0\xa0\xa0\xa0\xa0
                       \xa0\xa0\xa0\xa0\xa0\xa0\xa0
+                      ${`${pedido.status}\xa0\xa0\xa0\xa0\xa0\xa0\xa0`}
                       `}
                     />
-                    <span align-text="left">{`${ajuda}\xa0\xa0\xa0\xa0\xa0\xa0\xa0`}</span>
+                    {pedido.status === "aberto" ?
+                      <ListItemText  align="right"><S.Button onClick={() => deleteOrder(pedido.id)}>Cancelar</S.Button></ListItemText>
+                    : <ListItemText />
+                    }
                     {controle ? <ExpandLess /> : <ExpandMore />}
                   </ListItem>
                   <Collapse in={controle} timeout="auto" unmountOnExit>
@@ -204,8 +207,8 @@ const Order = () => {
                         <TableHead>
                           <TableRow>
                             <TableCell>Quantidade</TableCell>
-                            <TableCell align="center">Produto</TableCell>
-                            <TableCell align="right">
+                            <TableCell align="left">Produto</TableCell>
+                            <TableCell align="center">
                               Valor Unitário
                             </TableCell>
                             <TableCell colSpan={2} align="right">
@@ -220,10 +223,10 @@ const Order = () => {
                             <TableCell>
                               {prod.oferta_pedidos.quantidade}
                             </TableCell>
-                            <TableCell align="center">
+                            <TableCell align="left">
                               {prod.produtos.nome}
                             </TableCell>
-                            <TableCell align="right">
+                            <TableCell align="center">
                               R$ {prod.valor_unitario}
                             </TableCell>
                             <TableCell colSpan={2} align="right">
@@ -236,31 +239,28 @@ const Order = () => {
                           </TableRow>
                         ))}
                         <TableRow>
-                          <S.Button>Editar</S.Button>
-                          <TableCell/>
+                          <TableCell rowSpan={3}/>
+                        {/* <TableCell><S.Button>Editar</S.Button></TableCell> */}
                           <TableCell colSpan={2}>Subtotal</TableCell>
-                          <TableCell align="right">
+                          <TableCell  align="right">
                             R$ {handleSubtotal(pedido.ofertas)}
                           </TableCell>
                         </TableRow>
-                        <TableRow>
-                        {pedido.status === "aberto" ?
-                          <S.Button onClick={() => deleteOrder(pedido.id)}>Cancelar</S.Button>
-                        : <TableCell/>
-                        }
-                          <TableCell/>
-                          <TableCell colSpan={2}>
-                            Taxa de entrega
+                        <TableRow >
+                        {/* {pedido.status === "aberto" ?
+                           <TableCell>
+                            <S.Button onClick={() => deleteOrder(pedido.id)}>Cancelar</S.Button>
                           </TableCell>
-                          <TableCell align="right">
+                        : <TableCell/>
+                        } */}
+                          <TableCell>Taxa de entrega</TableCell>
+                          <TableCell colSpan={2} align="right">
                             R$ {pedido.frete.valor_frete.toFixed(2)}
                           </TableCell>
                         </TableRow>
                         <TableRow>
-                          <TableCell/>
-                          <TableCell/>
                           <TableCell colSpan={2}>Total</TableCell>
-                          <TableCell align="right">
+                          <TableCell  align="right">
                             R${' '}
                             {Number(
                               pedido.frete.valor_frete +
