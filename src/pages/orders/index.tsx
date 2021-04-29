@@ -239,9 +239,9 @@ const Order = () => {
                           </TableRow>
                         ))}
                         <TableRow>
-                          <TableCell rowSpan={2}/>
+                          <TableCell rowSpan={3}/>
                         {/* <TableCell><S.Button>Editar</S.Button></TableCell> */}
-                          <TableCell colSpan={3}>Subtotal</TableCell>
+                          <TableCell colSpan={2}>Subtotal</TableCell>
                           <TableCell  align="right">
                             R$ {handleSubtotal(pedido.ofertas)}
                           </TableCell>
@@ -253,14 +253,12 @@ const Order = () => {
                           </TableCell>
                         : <TableCell/>
                         } */}
-                          <TableCell/>
                           <TableCell>Taxa de entrega</TableCell>
-                          <TableCell  align="right">
+                          <TableCell colSpan={2} align="right">
                             R$ {pedido.frete.valor_frete.toFixed(2)}
                           </TableCell>
                         </TableRow>
                         <TableRow>
-                        <TableCell rowSpan={3}/>
                           <TableCell colSpan={2}>Total</TableCell>
                           <TableCell  align="right">
                             R${' '}
