@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { GetServerSideProps } from 'next';
 import Cookie from 'js-cookie';
-import * as S from './styles';
+import * as S from '../../styles/profile/styles';
 import veredaslogo from '../../assets/logo.png';
 import AuthContext from '../../contexts/auth';
 import logomst from '../../assets/logo-mst-rurais.png';

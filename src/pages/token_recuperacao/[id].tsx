@@ -4,7 +4,7 @@ import Head from 'next/head';
 
 import LockIcon from '@material-ui/icons/Lock';
 import { toast } from 'react-toastify';
-import * as S from './styles';
+import * as S from '../../styles/token_recuperacao/styles';
 import veredaslogo from '../../assets/logo.png';
 import ValidadeContext from '../../contexts/validade';
 import logomst from '../../assets/logo-mst-rurais.png';

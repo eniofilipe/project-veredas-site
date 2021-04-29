@@ -8,7 +8,7 @@ import EmailIcon from '@material-ui/icons/Email';
 import LockIcon from '@material-ui/icons/Lock';
 import { toast } from 'react-toastify';
 import AuthContext from '../../contexts/auth';
-import * as S from './styles';
+import * as S from '../../styles/login/styles';
 import veredaslogo from '../../assets/logo.png';
 import ValidadeContext from '../../contexts/validade';
 import logomst from '../../assets/logo-mst-rurais.png';
@@ -62,6 +62,7 @@ const Login = () => {
       <Head>
         <title>Veredas da terra</title>
       </Head>
+
       <S.HeaderWrapper>
         <S.Header>
           <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')} />

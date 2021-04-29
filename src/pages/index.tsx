@@ -5,7 +5,7 @@ import {
 } from 'react';
 import { useRouter } from 'next/router';
 import veredaslogo from '../assets/logo.png';
-import * as S from './styles';
+import * as S from '../styles/styles';
 import logomst from '../assets/logo-mst-rurais.png';
 import logoif from '../assets/logo-if.png';
 import imagecampo from '../assets/Campo-cidade.png';
@@ -111,9 +111,11 @@ const Home = () => {
         <S.Card1>
           <p> Do campo à cidade</p>
           <p>
+
             A Cooperativa Camponesa Veredas da Terra produz produtos orgânicos,
               livres de agrotóxicos, trazendo mais segurança, saúde e qualidade de vida. <br />
               Tudo isso para que você no conforto da sua casa, receba os melhores produtos da região!
+
           </p>
         </S.Card1>
         <S.Card2>

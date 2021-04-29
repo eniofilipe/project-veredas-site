@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 
 import EmailIcon from '@material-ui/icons/Email';
 import { toast } from 'react-toastify';
-import * as S from './styles';
+import * as S from '../../styles/passwordRecovery/styles';
 import veredaslogo from '../../assets/logo.png';
 import ValidadeContext from '../../contexts/validade';
 import logomst from '../../assets/logo-mst-rurais.png';
