@@ -17,6 +17,9 @@ export const SubTitle = styled.span`
   font-weight: 400;
   color: #6e798c;
   margin: 5px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const Price = styled.span`
@@ -31,11 +34,13 @@ export const Categories = styled.span`
 
 export const Container = styled.div`
   width: 260px;
+  /* overflow: hidden; */
   height: 430px;
   border-radius: 10px;
   border: 1px solid #ddd;
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  /* border: 1px solid magenta; */
 `;
 
 export const ImageHeader = styled.img`

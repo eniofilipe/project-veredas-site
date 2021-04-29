@@ -89,12 +89,10 @@ export const Label = styled.label`
 `;
 
 export const Wrapper = styled.div`
-  body {
-    background-color: rgba(196, 196, 196, 0.1);
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
 `;
 
 export const WrapperContent = styled.div`
