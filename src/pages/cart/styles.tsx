@@ -2,6 +2,11 @@
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.main`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+
 `;
 export const Logo = styled.img`
 
@@ -184,7 +189,7 @@ export const Value = styled.span`
 export const Items = styled.div`
   margin-top: 1rem;
   padding: 0;
-  background: #fafafa;
+  background: #fff;
   padding-bottom: 2rem;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
