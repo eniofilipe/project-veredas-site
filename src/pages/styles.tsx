@@ -169,7 +169,7 @@ export const TextDivPrincipal = styled.div`
 export const TextDiv1 = styled.div`
   /* float: left;
   width: 42%;
-  height: 46%;
+  height: 50%;
   text-align: left;
   color: #552200;
   background-color: rgba(211, 211, 211, 0.8);
@@ -207,7 +207,7 @@ export const TextDiv2 = styled.div`
   line-height: 1.8;
   /* float: left;
   width: 42%;
-  height: 52%;
+  height: 55%;
   text-align: left;
   color: #017C00;
   background-color: rgba(211, 211, 211, 0.8);
@@ -331,12 +331,12 @@ export const ButtonSecond = styled.button`
   color: #fff;
 
   border-radius: 8px;
-  padding: 1.5rem 1.5rem;
+  padding: 1.2rem 1.2rem;
   border: none;
   outline: none;
   margin-left: 2rem;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.4rem;
   margin-top: 3rem;
 
   &:hover {

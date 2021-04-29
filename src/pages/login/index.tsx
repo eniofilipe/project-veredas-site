@@ -62,6 +62,7 @@ const Login = () => {
       <Head>
         <title>Veredas da terra</title>
       </Head>
+
       <S.HeaderWrapper>
         <S.Header>
           <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')} />
