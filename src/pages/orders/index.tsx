@@ -21,7 +21,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
-import * as S from './styles';
+import * as S from '../../styles/orders/styles';
 import veredaslogo from '../../assets/logo.png';
 import logomst from '../../assets/logo-mst-rurais.png';
 import logoif from '../../assets/logo-if.png';

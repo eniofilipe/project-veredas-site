@@ -11,7 +11,7 @@ import {
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { GetServerSideProps } from 'next';
-import * as S from './styles';
+import * as S from '../../styles/cart/styles';
 import veredaslogo from '../../assets/logo.png';
 import CartContext from '../../contexts/cart';
 import AuthContext from '../../contexts/auth';

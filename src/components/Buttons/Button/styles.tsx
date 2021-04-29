@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Button = styled.button<{ clear?: boolean, font_size: string }>`
+export const Button = styled.button<{ clear?: boolean }>`
   color: ${(props) => (props.clear ? '#000' : '#fff')};
   background: ${(props) => (props.clear ? '#fff' : '#017C00')};
   border-radius: 8px;
