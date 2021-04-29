@@ -24,6 +24,7 @@ export interface Produto {
   id: number;
   nome: string;
   descricao: string;
+  quantidade: number;
   categorias: Categoria[];
   imagem: Imagem;
 }
@@ -164,6 +165,7 @@ export interface ResponseRecuperarSenha {
 export interface PostResetarSenhaProps {
   password: string;
   token: string | string[];
+}
 
 export interface Product {
   product: string;
@@ -222,5 +224,18 @@ export interface PedidosProps {
   };
   subtotal: number;
   total: number;
+}
 
+export interface Pagamento {
+  id: number;
+  titulo: string;
+  updatedAt: string;
+}
+
+export interface Frete {
+  id: number;
+  nome: string;
+  valor_frete: number;
+  createdAt: string;
+  updatedAt: string;
 }

@@ -4,27 +4,28 @@ import bg1 from '../assets/bg1.png';
 import bg2 from '../assets/cesta.png';
 
 export const Wrapper = styled.div``;
-export const Logo = styled.img``;
+export const Logo = styled.img`
+`;
 export const MenuNav = styled.div`
   margin-right: 4rem;
 `;
 
 export const MenuLink = styled.a`
   position: relative;
-  color: #961913;
+  color: #552200;
   font-size: 1.5rem;
   margin: 0.3rem 0.8rem 0;
   text-decoration: none;
   text-align: center;
   cursor: pointer;
-  font-weight: 300;
+  font-weight: 500;
   &:hover {
     &::after {
       content: '';
       position: absolute;
       display: block;
       height: 0.3rem;
-      background-color: #961913;
+      background-color: #017C00;
       animation: hoverAnimation 0.2s forwards;
     }
     @keyframes hoverAnimation {
@@ -86,7 +87,7 @@ export const WrapperSecondSection = styled.div`
 
 export const Card1 = styled.div`
   margin-left: 5%;
-  background-color: #961913;
+  background-color: #016300;
   height: 100%;
   width: 40vw;
   padding: 2rem;
@@ -160,36 +161,62 @@ export const TextWrapper = styled.div`
 export const TextDivPrincipal = styled.div`
   text-align: center;
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 `;
 
 export const TextDiv1 = styled.div`
-  float: left;
+  /* float: left;
   width: 42%;
   height: 50%;
   text-align: left;
-  color: #961913;
+  color: #552200;
   background-color: rgba(211, 211, 211, 0.8);
   font-size: 1.8rem;
   line-height: 1.8;
   margin-right: 3rem;
   margin-left: 8rem;
   border-radius: 10px;
-  padding: 0px 50px 50px 25px;
+  padding: 0px 50px 50px 25px; */
+  color: #552200;
+  background: rgba(255,255,255,0.92);
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem;
+  box-shadow: inset 0px 0px 11px 2px #fff;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1.4rem;
+  line-height: 1.8;
 `;
 
 export const TextDiv2 = styled.div`
-  float: left;
+ border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 400px;
+  color: #552200;
+  background: rgba(255,255,255,0.92);
+  padding: 4rem;
+  font-weight: 600;
+  font-size: 1.4rem;
+  line-height: 1.8;
+  /* float: left;
   width: 42%;
   height: 55%;
   text-align: left;
-  color: #961913;
+  color: #017C00;
   background-color: rgba(211, 211, 211, 0.8);
   font-size: 1.8rem;
   line-height: 2;
   margin-top: 10rem;
   margin-right: 2rem;
   border-radius: 10px;
-  padding: 0px 50px 50px 25px;
+  padding: 0px 50px 50px 25px; */
 `;
 
 export const TextDiv3 = styled.div`
@@ -208,32 +235,80 @@ export const TextDiv3 = styled.div`
 `;
 
 export const WrapperFooter = styled.footer`
-  height: 10vh;
+  height: 20vh;
   display: flex;
   width: 100%;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  padding-top: 6vw;
-  padding-bottom: 6vw;
-  gap: 4rem;
+  justify-content: space-between;
+  /* padding-top: 4vw; */
+  /* padding-bottom: 6vw; */
+  /* gap: 4rem; */
+  background-color: #fff;
 
-  div {
-    color: #961913;
+  div p{
+    color: #552200;
+    font-size: 1.1rem;
+  }
+  div h1{
+    font-weight: bold;
+    color: #017C00;
     font-size: 1.5rem;
+    margin-bottom: 10px;
   }
-  ${Logo}:nth-child(1) {
-    width: 200px;
+  #info{
+    text-align: center;
+    /* border: 1px solid black; */
+    margin-left: 12.3rem;
+
+    /* padding-left: 2.8rem; */
+  }
+  #logo{
+    margin-right: 4rem;
+    display: flex;
+    /* border: 1px solid black; */
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    /* padding-right: 8rem; */
+  }
+  #contato{
+    /* border: 1px solid black; */
+    margin-left: 8rem;
+    text-align: center;
+    /* padding-right: 8rem; */
+    /* margin-right: 14rem; */
+  }
+   ${Logo}:nth-child(1) {
+    width: 250px;
+    padding: 0.8rem;
+  }
+  ${Logo}:nth-child(2) {
+    width: 120px;
     padding: 1rem;
+    /* margin-left: 2rem; */
+  }
+  ${Logo}:nth-child(3) {
+    width: 150px;
+    padding: 1rem;
+    border-radius: 30px;
   }
 
-  ${Logo}:nth-child(2) {
-    width: 100px;
+  /* ${Logo}:nth-child(2) {
+    width: 150px;
     padding: 1rem;
-  }
+    margin-left: 2rem;
+  } */
+  /* ${Logo}:nth-child(3) {
+    width: 175px;
+    padding: 1rem;
+    border-radius: 30px;
+  } */
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px -1.95px 6px;
 `;
 
 export const Button = styled.button`
-  background: #961913;
+  background: #017C00;
   color: #fff;
   border-radius: 8px;
   padding: 1rem 2rem;
@@ -244,15 +319,15 @@ export const Button = styled.button`
   font-size: 1rem;
 
   &:hover {
-    color: #961913;
-    background: rgba(205, 205, 205, 0.7);
-    border: 1px solid #961913;
+    transition: 0.4s;
+    color: #fff;
+    background: #016300;
     cursor: pointer;
   }
 `;
 
 export const ButtonSecond = styled.button`
-  background: #961913;
+  background: #017C00;
   color: #fff;
 
   border-radius: 8px;
@@ -265,9 +340,9 @@ export const ButtonSecond = styled.button`
   margin-top: 3rem;
 
   &:hover {
-    color: #961913;
-    background: rgba(205, 205, 205, 0.7);
-    border: 1px solid #961913;
+    transition: 0.4s;
+    color: #fff;
+    background: #016300;
     cursor: pointer;
   }
 `;

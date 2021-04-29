@@ -5,9 +5,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import EmailIcon from '@material-ui/icons/Email';
-import LockIcon from '@material-ui/icons/Lock';
 import { toast } from 'react-toastify';
-import AuthContext from '../../contexts/auth';
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
 import ValidadeContext from '../../contexts/validade';
@@ -21,9 +19,7 @@ const PasswordRecovery = () => {
   const { validade } = useContext(ValidadeContext);
   const Router = useRouter();
 
-  const { signIn } = useContext(AuthContext);
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const goToProducts = () => {
     Router.push('/products');
   };
@@ -32,16 +28,12 @@ const PasswordRecovery = () => {
     Router.push('/register');
   };
 
-  // const [email, setEmail] = useState('');
-
   const setRecuperarSenha = async (data: PostRecuperarSenhaProps) => {
     try {
       const response = await postRecuperarSenha(data);
       console.log(data);
       toast.success('Confira seu email!');
       Router.push('/login');
-
-      // setProdutosOferta(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -52,67 +44,62 @@ const PasswordRecovery = () => {
       <Head>
         <title>Veredas da terra</title>
       </Head>
-      <body>
-        <S.HeaderWrapper>
-          <S.Header>
-            <S.Logo src={veredaslogo} alt="" />
-            <S.MenuNav>
-              <S.MenuLink onClick={() => Router.push('/')}>Home</S.MenuLink>
-              <S.MenuLink onClick={() => Router.push('/')}>
-                Quem somos
-              </S.MenuLink>
-              <S.MenuLink onClick={() => Router.push('/')}>
-                Como Funciona
-              </S.MenuLink>
-              {!validade ? (
-                <S.Button onClick={goToLogin}>Criar conta</S.Button>
-              ) : (
-                <S.Button onClick={goToProducts}>Entrar na Feirinha</S.Button>
-              )}
-            </S.MenuNav>
-          </S.Header>
-        </S.HeaderWrapper>
-        <S.Content>
-          <S.LoginContainer>
-            <h1>Recuperar Senha</h1>
-            <div>
-              <S.Icon>
-                <EmailIcon />
-              </S.Icon>
-              <span>Email</span>
-              <S.InputLogin
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <S.ButtonLogin onClick={() => setRecuperarSenha({ email })}>
-              Enviar
+      <S.HeaderWrapper>
+        <S.Header>
+          <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')} />
+          <S.MenuNav>
+            <S.MenuLink onClick={() => Router.push('/')}>Home</S.MenuLink>
+            {!validade ? (
+              <S.Button onClick={goToLogin}>Criar conta</S.Button>
+            ) : (
+              <S.Button onClick={goToProducts}>Entrar na Feirinha</S.Button>
+            )}
+          </S.MenuNav>
+        </S.Header>
+      </S.HeaderWrapper>
+      <S.Content>
+        <S.LoginContainer>
+          <h1>Recuperar Senha</h1>
+          <div>
+            <S.Icon>
+              <EmailIcon id="email-icon" />
+            </S.Icon>
+            <span>Email</span>
+            <S.InputLogin
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <S.ButtonLogin onClick={() => setRecuperarSenha({ email })}>
+            Enviar
             </S.ButtonLogin>
-          </S.LoginContainer>
-        </S.Content>
-      </body>
+        </S.LoginContainer>
+      </S.Content>
       <S.WrapperFooter>
-        <div>
+
+        <div id='contato'>
+          <h1 id='contato-info'>Contato</h1>
+          <p>contato@veredasdaterra.com.br</p>
+          <p>(38) 9 9900-0000</p>
+        </div>
+
+        <div id='info'>
+          <h1 id='title-info'>Informações</h1>
           <p>Cooperativa Camponesa - Veredas da Terra</p>
           <p>CNPJ: 10.286.881/0001-02</p>
           <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
         </div>
 
-        <div>
-          <p>Contato</p>
-          <p>email@veredasdaterra.com.br</p>
-          <p>(38) 9 9900-0000</p>
-        </div>
-
-        <div>
+        <div id='logo'>
           <S.Logo
             src={veredaslogo}
             alt="Logo da cooperativa Veredas da Terra"
           />
           <S.Logo src={logomst} alt="Logo do MST" />
-          <S.Logo src={logoif} alt="Logo do IFNMG" />
+          <S.Logo src={logoif} alt="Logo do IFNMG" onClick={() => Router.push('/if')}/>
         </div>
+
       </S.WrapperFooter>
     </div>
   );

@@ -2,17 +2,14 @@ import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import Head from 'next/head';
 
-import EmailIcon from '@material-ui/icons/Email';
 import LockIcon from '@material-ui/icons/Lock';
 import { toast } from 'react-toastify';
-import AuthContext from '../../contexts/auth';
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
 import ValidadeContext from '../../contexts/validade';
 import logomst from '../../assets/logo-mst-rurais.png';
 import logoif from '../../assets/logo-if.png';
 import { postResetarSenha } from '../../api/ResetarSenha';
-import { PostResetarSenhaProps } from '../../types/index';
 
 const ResetarSenha = () => {
   const Router = useRouter();
@@ -57,80 +54,76 @@ const ResetarSenha = () => {
       <Head>
         <title>Veredas da terra</title>
       </Head>
-      <body>
-        <S.HeaderWrapper>
-          <S.Header>
-            <S.Logo src={veredaslogo} alt="" />
-            <S.MenuNav>
-              <S.MenuLink onClick={() => Router.push('/')}>Home</S.MenuLink>
-              <S.MenuLink onClick={() => Router.push('/')}>
-                Quem somos
-              </S.MenuLink>
-              <S.MenuLink onClick={() => Router.push('/')}>
-                Como Funciona
-              </S.MenuLink>
-              {!validade ? (
-                <S.Button onClick={goToLogin}>Criar conta</S.Button>
-              ) : (
-                <S.Button onClick={goToProducts}>Entrar na Feirinha</S.Button>
-              )}
-            </S.MenuNav>
-          </S.Header>
-        </S.HeaderWrapper>
-        <S.Content>
-          <S.LoginContainer>
-            <h1>Resetar Senha</h1>
-            <div>
-              <S.Icon>
-                <LockIcon />
-              </S.Icon>
-              <span>Nova Senha</span>
-              <S.InputLogin
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <div>
-              <S.Icon>
-                <LockIcon />
-              </S.Icon>
-              <span>Repetir Senha</span>
-              <S.InputLogin
-                type="password"
-                value={passwordRepeat}
-                onChange={(e) => setPasswordRepeat(e.target.value)}
-              />
-            </div>
+      <S.HeaderWrapper>
+        <S.Header>
+          <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')} />
+          <S.MenuNav>
+            <S.MenuLink onClick={() => Router.push('/')}>Home</S.MenuLink>
+            {!validade ? (
+              <S.Button onClick={goToLogin}>Criar conta</S.Button>
+            ) : (
+              <S.Button onClick={goToProducts}>Entrar na Feirinha</S.Button>
+            )}
+          </S.MenuNav>
+        </S.Header>
+      </S.HeaderWrapper>
+      <S.Content>
+        <S.LoginContainer>
+          <h1>Resetar Senha</h1>
+          <div>
+            <S.Icon>
+              <LockIcon />
+            </S.Icon>
+            <span>Nova Senha</span>
+            <S.InputLogin
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div>
+            <S.Icon>
+              <LockIcon />
+            </S.Icon>
+            <span>Repetir Senha</span>
+            <S.InputLogin
+              type="password"
+              value={passwordRepeat}
+              onChange={(e) => setPasswordRepeat(e.target.value)}
+            />
+          </div>
 
-            <S.ButtonLogin
-              onClick={() => setResetarSenha(password, passwordRepeat)}
-            >
-              Enviar
+          <S.ButtonLogin
+            onClick={() => setResetarSenha(password, passwordRepeat)}
+          >
+            Enviar
             </S.ButtonLogin>
-          </S.LoginContainer>
-        </S.Content>
-      </body>
+        </S.LoginContainer>
+      </S.Content>
       <S.WrapperFooter>
-        <div>
+
+        <div id='contato'>
+          <h1 id='contato-info'>Contato</h1>
+          <p>contato@veredasdaterra.com.br</p>
+          <p>(38) 9 9900-0000</p>
+        </div>
+
+        <div id='info'>
+          <h1 id='title-info'>Informações</h1>
           <p>Cooperativa Camponesa - Veredas da Terra</p>
           <p>CNPJ: 10.286.881/0001-02</p>
           <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
         </div>
-        <div>
-          <p>Contato</p>
-          <p>email@veredasdaterra.com.br</p>
-          <p>(38) 9 9900-0000</p>
-        </div>
 
-        <div>
+        <div id='logo'>
           <S.Logo
             src={veredaslogo}
             alt="Logo da cooperativa Veredas da Terra"
           />
           <S.Logo src={logomst} alt="Logo do MST" />
-          <S.Logo src={logoif} alt="Logo do IFNMG" />
+          <S.Logo src={logoif} alt="Logo do IFNMG" onClick={() => Router.push('/if')}/>
         </div>
+
       </S.WrapperFooter>
     </div>
   );

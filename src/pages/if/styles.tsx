@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div``;
@@ -90,72 +91,41 @@ export const HeaderWrapper = styled.div<MenuProps>`
   `}
 `;
 
-export const Button = styled.button`
-  background: #017C00;
-  color: #fff;
-  border-radius: 8px;
-  padding: 1rem 2rem;
-  border: none;
-  outline: none;
-  margin-left: 2rem;
-  font-weight: bold;
-  font-size: 1rem;
 
-  &:hover {
-    transition: 0.4s;
-    color: #fff;
-    background: #016300;
-    cursor: pointer;
-  }
-`;
-export const Title = styled.h1`
+export const TitleDesenvolvedores = styled.p`
   font-size: 2rem;
-  color: #552200;
+  color: #444;
   cursor: default;
-  margin-right: 2rem;
-  margin-left: 2rem;
-  font-weight: 600;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-
-  &#principal{
-    margin-top: 3rem;
-  margin-bottom: 0rem;
-    text-align: center;
-    margin-bottom: 1rem;
-  }
+  display: flex;
+  width: 50%;
 `;
 
-export const WrapperContent = styled.div`
-  padding: 4rem 12rem;
-`;
-
-export const Body = styled.div``;
-export const WrapperController = styled.div``;
-
-
-export const WrapperButtons = styled.div`
+export const WrapperBody = styled.div`
+  height: 10vh;
   display: flex;
   width: 100%;
-  padding-left: 12%;
-  padding-right: 14%;
+  align-items: center;
   justify-content: space-between;
-  padding-top: 0.25%;
-  padding-bottom: 5%;
-  ${Button} {
-    width: 24rem;
+  padding-top: 8vw;
+  padding-left: 10vh;
+  padding-right: 10vh;
+  padding-bottom: 14vh;
+  gap: 6rem;
+  div {
+    color: #000000;
+    font-size: 1.5rem;
   }
-  ${Button}:nth-child(1) {
-    background: #961913;
-    border-radius: 8px;
-    color: #fff;
-    border: 1px solid #78140f;
-    &:hover {
-      color: #fff;
-      background: #78140f;
-    }
+  ${Logo}:nth-child(1) {
+    width: 200px;
+    padding: 1rem;
+  }
+
+  ${Logo}:nth-child(2) {
+    width: 200px;
+    padding: 1rem;
   }
 `;
+
 export const WrapperFooter = styled.footer`
   height: 20vh;
   display: flex;
@@ -164,6 +134,8 @@ export const WrapperFooter = styled.footer`
   align-items: center;
   justify-content: space-between;
   background-color: #fff;
+  position:fixed;
+  bottom:0;
 
   div p{
     color: #552200;
@@ -206,41 +178,5 @@ export const WrapperFooter = styled.footer`
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px -1.95px 6px;
 `;
 
-export const CancelButton = styled.button`
-  background: #ffffff;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 8px;
-  height: 4rem;
-  width: 6rem;
-  border: none;
-  font-size: 1.2rem;
-  :hover {
-    background: #961913;
-    color: white;
-    transition: 0.4s;
-    cursor:pointer;
-  }
-`;
 
-// export const Button = styled.button`
-//   background: #961913;
-//   color: #fff;
-//   border: 1px solid #961913;
-//   border-radius: 8px;
-//   padding: 1rem 2rem;
-//   outline: none;
-//   font-weight: bold;
-//   font-size: 1rem;
-//   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-//   height: 2rem;
-//   margin-top: 1rem;
-//   margin-left: 4rem;
-//   margin-right: -4rem;
-
-//   &:hover {
-//     color: #961913;
-//     background: rgba(205, 205, 205, 0.7);
-//     border: 1px solid #961913;
-//     cursor: pointer;
-//   }
-// `;
+export const Body = styled.body``;
