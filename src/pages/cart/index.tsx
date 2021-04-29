@@ -88,7 +88,7 @@ const Cart = () => {
 
     setTotal(result + freteFixo);
 
-  }, [products]);
+  }, [products, freteFixo]);
 
   const aumentarQuantidade = (index: number) => {
 
