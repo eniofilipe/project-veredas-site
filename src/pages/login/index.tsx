@@ -114,7 +114,7 @@ const Login = () => {
 
         <div id='contato'>
           <h1 id='contato-info'>Contato</h1>
-          <p>email@veredasdaterra.com.br</p>
+          <p>contato@veredasdaterra.com.br</p>
           <p>(38) 9 9900-0000</p>
         </div>
 
