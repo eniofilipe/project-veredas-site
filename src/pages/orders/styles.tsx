@@ -97,6 +97,7 @@ export const Button = styled.button`
   padding: 0.5rem 1rem;
   margin-top: -5rem;
   margin-bottom: -5rem;
+  margin-right: 1rem;
   border: none;
   outline: none;
   margin-left: 2rem;

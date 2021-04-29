@@ -189,9 +189,13 @@ const Order = () => {
                       )}
                       \xa0\xa0\xa0\xa0\xa0\xa0\xa0
                       \xa0\xa0\xa0\xa0\xa0\xa0\xa0
+                      ${`${pedido.status}\xa0\xa0\xa0\xa0\xa0\xa0\xa0`}
                       `}
                     />
-                    <span align-text="left">{`${ajuda}\xa0\xa0\xa0\xa0\xa0\xa0\xa0`}</span>
+                    {pedido.status === "aberto" ?
+                      <ListItemText  align="right"><S.Button onClick={() => deleteOrder(pedido.id)}>Cancelar</S.Button></ListItemText>
+                    : <ListItemText />
+                    }
                     {controle ? <ExpandLess /> : <ExpandMore />}
                   </ListItem>
                   <Collapse in={controle} timeout="auto" unmountOnExit>
@@ -235,7 +239,7 @@ const Order = () => {
                           </TableRow>
                         ))}
                         <TableRow>
-                          <TableCell/>
+                          <TableCell rowSpan={2}/>
                         {/* <TableCell><S.Button>Editar</S.Button></TableCell> */}
                           <TableCell colSpan={3}>Subtotal</TableCell>
                           <TableCell  align="right">
@@ -243,22 +247,21 @@ const Order = () => {
                           </TableCell>
                         </TableRow>
                         <TableRow >
-                        {pedido.status === "aberto" ?
+                        {/* {pedido.status === "aberto" ?
                            <TableCell>
                             <S.Button onClick={() => deleteOrder(pedido.id)}>Cancelar</S.Button>
                           </TableCell>
                         : <TableCell/>
-                        }
-                          <TableCell  colSpan={3}>
-                            Taxa de entrega
-                          </TableCell>
+                        } */}
+                          <TableCell/>
+                          <TableCell>Taxa de entrega</TableCell>
                           <TableCell  align="right">
                             R$ {pedido.frete.valor_frete.toFixed(2)}
                           </TableCell>
                         </TableRow>
                         <TableRow>
-                          <TableCell />
-                          <TableCell  colSpan={3} align="left">Total</TableCell>
+                        <TableCell rowSpan={3}/>
+                          <TableCell colSpan={2}>Total</TableCell>
                           <TableCell  align="right">
                             R${' '}
                             {Number(
