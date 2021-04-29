@@ -366,7 +366,7 @@ const Profile = () => {
             alt="Logo da cooperativa Veredas da Terra"
           />
           <S.Logo src={logomst} alt="Logo do MST" />
-          <S.Logo src={logoif} alt="Logo do IFNMG" />
+          <S.Logo src={logoif} alt="Logo do IFNMG" onClick={() => Router.push('/if')}/>
         </div>
 
       </S.WrapperFooter>
