@@ -94,7 +94,10 @@ export const Button = styled.button`
   background: #017C00;
   color: #fff;
   border-radius: 8px;
-  padding: 1rem 2rem;
+  padding: 0.5rem 1rem;
+  margin-top: -5rem;
+  margin-bottom: -5rem;
+  margin-right: 1rem;
   border: none;
   outline: none;
   margin-left: 2rem;
@@ -221,26 +224,3 @@ export const CancelButton = styled.button`
     cursor:pointer;
   }
 `;
-
-// export const Button = styled.button`
-//   background: #961913;
-//   color: #fff;
-//   border: 1px solid #961913;
-//   border-radius: 8px;
-//   padding: 1rem 2rem;
-//   outline: none;
-//   font-weight: bold;
-//   font-size: 1rem;
-//   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-//   height: 2rem;
-//   margin-top: 1rem;
-//   margin-left: 4rem;
-//   margin-right: -4rem;
-
-//   &:hover {
-//     color: #961913;
-//     background: rgba(205, 205, 205, 0.7);
-//     border: 1px solid #961913;
-//     cursor: pointer;
-//   }
-// `;
