@@ -13,10 +13,10 @@ import {
   SearchAlt2 as SearchIcon,
 } from '@styled-icons/boxicons-regular';
 
-import { Checkbox,TextField  } from '@material-ui/core';
+import { Checkbox,TextField, CheckboxProps, FormControlLabel  } from '@material-ui/core';
 import { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-
+import { withStyles } from '@material-ui/core/styles';
 
 import { GetServerSideProps } from 'next';
 
@@ -24,7 +24,6 @@ import { toast } from 'react-toastify';
 import * as S from './styles';
 import veredaslogo from '../../assets/logo.png';
 
-import ValidadeContext from '../../contexts/validade';
 import logomst from '../../assets/logo-mst-rurais.png';
 import logoif from '../../assets/logo-if.png';
 import CardProduct from '../../components/Cards/CardProduct';
@@ -34,12 +33,53 @@ import { Categoria, Oferta } from '../../types';
 import CartContext from '../../contexts/cart';
 import { getCategorias } from '../../api/Categorias';
 import { getProdutosOfertas } from '../../api/Ofertas';
-import { getOpened, getOpenedWithoutToken } from '../../api/Validade';
+import { getOpenedWithoutToken } from '../../api/Validade';
+
+import styled from 'styled-components';
+
+  const StyledTextField = styled(TextField)`
+  label.Mui-focused {
+    color: #552200;
+  }
+  .MuiOutlinedInput-root {
+    fieldset {
+      border-color: #ccc;
+    }
+    &:hover fieldset {
+      border-color: #552200;
+    }
+    &.Mui-focused fieldset {
+      border-color: #552200;
+    }
+  }
+`;
+
+const GreenCheckbox = withStyles({
+  root: {
+    color: '#017C00',
+    '&$checked': {
+      color: '#017C00',
+    },
+  },
+  checked: {},
+  FormControlLabel:{
+    color: 'blue'
+  }
+})((props: CheckboxProps) => <Checkbox color="default" {...props} />);
+
+
+const CustomCartIcon = styled(CartIcon)`
+  color: #552200;
+`
+
+const CustomProfileIcon= styled(ProfileIcon)`
+  color: #552200;
+`
 
 const products = () => {
   const Router = useRouter();
   const {
- addProduct, removeProduct, checkInCart, getCartLenght, } = useContext(
+  addProduct, removeProduct, checkInCart, getCartLenght, } = useContext(
     CartContext,
   );
   const [categorias, setCategorias] = useState<Categoria[]>([]);
@@ -104,13 +144,6 @@ const products = () => {
       console.log(error);
     }
   };
-
-  function removeElement(array, elem) {
-    const index2 = array.indexOf(elem);
-    if (index2 > -1) {
-      array.splice(index2, 1);
-    }
-  }
 
   const handleChangeSearchBar = (e: any) => {
     setSearchBoxBeingUsed(true)
@@ -200,7 +233,6 @@ const products = () => {
       <Head>
         <title>Veredas da terra</title>
       </Head>
-      <body>
         <S.HeaderWrapper>
           <S.Header>
             <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')}/>
@@ -210,8 +242,7 @@ const products = () => {
                 freeSolo
                 options={produtosOferta.map((option) => option.produtos.nome)}
                 renderInput={(params) => (
-                  <TextField {...params} label="Pesquisar pelo nome" margin="normal" variant="outlined" InputProps={{ ...params.InputProps ,type: 'search' }} />
-
+                  <StyledTextField {...{...params,size: 'small'}} label="Pesquisar pelo nome" margin="normal" variant="outlined" InputProps={{ ...params.InputProps }} />
                 )}
                 onChange = {(e) => handleChangeSearchBar(e)}
                 filterOptions={filterOptions}
@@ -221,10 +252,10 @@ const products = () => {
               <S.WrapperIcons>
                 <S.Icon>
                   <span>{getCartLenght()}</span>
-                  <CartIcon onClick={() => handleGoCart()} />
+                  <CustomCartIcon onClick={() => handleGoCart()} />
                 </S.Icon>
                 <S.Icon>
-                  <ProfileIcon onClick={() => Router.push('profile')} />
+                  <CustomProfileIcon onClick={() => Router.push('profile')} />
                 </S.Icon>
               </S.WrapperIcons>
             </S.MenuNav>
@@ -236,15 +267,14 @@ const products = () => {
             {categorias &&
               categorias.map((cat, index) => (
                 <S.DivCategory key={cat.id}>
-                  <Checkbox
+                  <GreenCheckbox
                     key={`${cat.id}`}
                     onChange={(e) => handleChange(e, cat.nome)}
                     checked={!!categorias[index].isvalid}
                     id={`${cat.id}`}
                     name={cat.nome}
-                    color="default"
                   />{' '}
-                  {cat.nome}
+                  <span style={{color: '#552200'}}>{cat.nome}</span>
                 </S.DivCategory>
               ))}
           </S.WrapperCategory>
@@ -257,9 +287,9 @@ const products = () => {
                 comment={prod.produtos.descricao}
                 name={prod.produtos.nome}
                 value={prod.valor_unitario}
+                availableStock={prod.quantidade}
                 quantity={quantidade[index] ? quantidade[index] : 1}
                 onChange={() =>
-                  // eslint-disable-next-line implicit-arrow-linebreak
                   addProduct(prod, quantidade[index] ? quantidade[index] : 1)
                 }
                 handleRemove={() => removeProduct(prod)}
@@ -269,9 +299,7 @@ const products = () => {
                 inCart={checkInCart(prod)}
               />
             )):
-
             (
-
               produtosOferta.map((prod, index) => (
                 prod.produtos.nome.toUpperCase().includes(searchedName.toUpperCase())   ?
                 <CardProduct
@@ -280,9 +308,9 @@ const products = () => {
                   comment={prod.produtos.descricao}
                   name={prod.produtos.nome}
                   value={prod.valor_unitario}
+                  availableStock={prod.quantidade}
                   quantity={quantidade[index] ? quantidade[index] : 1}
                   onChange={() =>
-                    // eslint-disable-next-line implicit-arrow-linebreak
                     addProduct(prod, quantidade[index] ? quantidade[index] : 1)
                   }
                   handleRemove={() => removeProduct(prod)}
@@ -298,28 +326,29 @@ const products = () => {
           </S.WrapperProduct>
         </S.WrapperContent>
         <S.WrapperFooter>
-        <div>
+        <div id='contato'>
+          <h1 id='contato-info'>Contato</h1>
+          <p>contato@veredasdaterra.com.br</p>
+          <p>(38) 9 9900-0000</p>
+        </div>
+
+        <div id='info'>
+          <h1 id='title-info'>Informações</h1>
           <p>Cooperativa Camponesa - Veredas da Terra</p>
           <p>CNPJ: 10.286.881/0001-02</p>
           <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
         </div>
 
-        <div>
-          <p>Contato</p>
-          <p>email@veredasdaterra.com.br</p>
-          <p>(38) 9 9900-0000</p>
-        </div>
-
-        <div>
-          <S.Logo
+        <div id='logo'>
+        <S.Logo
             src={veredaslogo}
             alt="Logo da cooperativa Veredas da Terra"
           />
-          <S.Logo src={logomst} alt="Logo do MST" />
-          <S.Logo src={logoif} alt="Logo do IFNMG" />
+        <S.Logo src={logomst} alt="Logo do MST" />
+        <S.Logo src={logoif} alt="Logo do IFNMG" onClick={() => Router.push('/if')}/>
         </div>
+
       </S.WrapperFooter>
-      </body>
     </S.Wrapper>
   );
 };

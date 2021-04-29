@@ -1,22 +1,72 @@
 /* eslint-disable prettier/prettier */
 import styled, { css } from 'styled-components';
 
-export const Wrapper = styled.main``;
-export const Logo = styled.img``;
-
-export const WrapperHeader = styled.header`
+export const Wrapper = styled.main`
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  background: rgba(30, 149, 31, 0.4);
-  justify-content: flex-start;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+
 `;
+export const Logo = styled.img`
+
+&:nth-child(1) {
+  cursor: pointer;
+  }
+`;
+
+
 
 type MenuProps = {
   background?: string;
   position?: number;
 };
+
+export const MenuNav = styled.div`
+  /* margin-right: 4rem; */
+`;
+
+
+export const MenuLink = styled.a`
+  position: relative;
+  color: #552200;
+  font-size: 1.5rem;
+  margin: 0.3rem 0.8rem 0;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 400;
+  &:hover {
+    &::after {
+      content: '';
+      position: absolute;
+      display: block;
+      height: 0.15rem;
+      background-color: #017C00;
+      animation: hoverAnimation 0.2s forwards;
+    }
+    @keyframes hoverAnimation {
+      from {
+        width: 0;
+        left: 50%;
+      }
+      to {
+        width: 100%;
+        left: 0;
+      }
+    }
+  }
+`;
+
+export const TitlePage = styled.h1`
+  position: absolute;
+  right: 50%;
+  -webkit-transform: translate(50%, 0);
+  transform: translate(50%, 0);
+  font-weight: 400;
+  font-size: 1.5rem;
+  cursor: default;
+`;
 
 export const Header = styled.menu<MenuProps>`
   ${({ background }) => css`
@@ -25,14 +75,19 @@ export const Header = styled.menu<MenuProps>`
     padding: 0.8rem 2rem;
     justify-content: space-between;
     background-color: ${background && background === 'white'
-    ? '#FFF'
-    : 'rgba(211, 211, 211, 0.8)'};
+      ? '#FFF'
+      : '#FFF'};
   `}
+
 
   ${Logo} {
     width: 200px;
   }
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 `;
+
+
+
 export const Title = styled.p`
   white-space: nowrap;
   align-self: center;
@@ -40,13 +95,6 @@ export const Title = styled.p`
   font-size: 2.5rem;
 `;
 
-export const TitleCart = styled.p`
-  font-size: 2rem;
-  color: #444;
-  cursor: default;
-  display: flex;
-  width: 50%;
-`;
 
 export const WrapperMenu = styled.div`
   display: flex;
@@ -63,183 +111,217 @@ export const WrapperContent = styled.div`
   width: 80%;
   margin: 1.5rem auto;
 `;
-export const Label = styled.p`
+
+export const Label = styled.span`
   align-self: flex-start;
-  color: #961913;
+  color: #016300;
   font-weight: 500;
-  font-size: 1.8rem;
 `;
 export const WrapperItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #fafafa;
+  background: #fff;
   padding-left: 5%;
   margin-top: 0.4rem;
   padding: 1rem;
   justify-content: space-between;
+  border-radius: 8px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 export const WrapperControl = styled.div`
-  display: flex;
+   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 1.2rem;
+  margin-right: 10px;
+
+  #quantity {
+    font-weight: bold;
+    text-align: center;
+    width: 32px;
+  };
 `;
 export const SumButton = styled.button`
-  padding: 0.6rem;
-  width: 2.8rem;
-  background: #961913;
-  outline: none;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border: none;
-  border-radius: 8px;
+  background: none;
   cursor: pointer;
+  margin-right: 14px;
   ::after {
     content: '+';
-    color: #fafafa;
-    font-weight: 600;
-    font-size: 1rem;
   }
 `;
 export const SubButton = styled.button`
-  padding: 0.6rem;
-  width: 2.8rem;
-  background: #961913;
-  outline: none;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 8px;
   border: none;
+  background: none;
+  margin-left: 14px;
   cursor: pointer;
   ::after {
     content: '-';
-    color: #fafafa;
-    font-weight: 600;
-    font-size: 1rem;
   }
 `;
-export const Text = styled.p`
-  color: rgba(95, 30, 31, 0.7);
-  font-size: 1.4rem;
+export const Text = styled.span`
+  color: #552200;
+  font-size: 1rem;
+  max-width: 400px;
+  &#prodNameDesc{
+    width: 600px;
+    color: #552200;
+    margin-right: 40px;
+  }
+  &#prodPriceDesc{
+    color: #552200;
+  }
+  #boldPrice{
+    font-weight: 600;
+    color: green;
+  }
+
 `;
-export const Value = styled.p`
-  color: rgba(95, 30, 31, 0.7);
-  font-size: 1.4rem;
+export const Value = styled.span`
+  color: #016300;
+  font-size: 1rem;
+  padding: 2px;
+  width: 12rem;
+  text-align: center;
+  margin-left: 40px;
+  font-weight: 600;
+  width: 120px;
 `;
 export const Items = styled.div`
   margin-top: 1rem;
   padding: 0;
-  background: #fafafa;
+  background: #fff;
   padding-bottom: 2rem;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
 `;
 
-export const WrapperDelivery = styled.div`
-  border-bottom: 1px solid #aa5e5a;
-`;
+
 export const WrapperSelect = styled.div`
+margin-top: 0.5rem;
+background: #fff;
+border-radius: 8px;
   display: flex;
-  padding-top: 3rem;
   width: 100%;
-  padding-left: 50%;
+  align-items: center;
+  justify-content: center;
   gap: 5%;
   ${Label} {
-    font-size: 1.5rem;
+    color: #552200;
+    font-size: 1rem;
     align-self: flex-end;
     font-weight: 400;
   }
 `;
 export const Select = styled.select`
-  color: #aa5e5a;
+  color: #016300;
   outline: none;
-  padding: 0 1rem;
+  padding: 0.5rem 2rem;
 `;
 export const Address = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
-  padding-top: 3rem;
+  gap: 0.5rem;
   padding-bottom: 1rem;
   ${Text} {
-    font-size: 1.5rem;
+    font-size: 1rem;
     width: 90%;
   }
 `;
 
 export const WrapperButtons = styled.div`
   display: flex;
-  width: 80%;
-  margin: 4rem auto;
   justify-content: space-between;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 `;
 export const CancelButton = styled.button`
-  background: #ffffff;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background: #017C00;
+  color: #fff;
   border-radius: 8px;
-  height: 4rem;
-  width: 6rem;
+  padding: 1rem 2rem;
   border: none;
-  font-size: 1.2rem;
-  :hover {
-    background: #961913;
-    color: white;
+  outline: none;
+  font-weight: bold;
+  font-size: 1rem;
+  width: 24rem;
+
+  &:hover {
     transition: 0.4s;
-    cursor:pointer;
+    color: #fff;
+    background: #016300;
+    cursor: pointer;
   }
 `;
 export const AcceptButton = styled.button`
-  background: #961913;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+ background: #017C00;
+  color: #fff;
   border-radius: 8px;
-  height: 3rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  font-weight: 500;
+  padding: 1rem 2rem;
   border: none;
-  color: white;
-  font-size: 1.2rem;
-  :hover {
-    border: 2px solid  #961913;
-    background: white;
-    color:  #961913;
-    font-weight: bold;
+  outline: none;
+  font-weight: bold;
+  font-size: 1rem;
+  width: 24rem;
+
+  &:hover {
     transition: 0.4s;
-    cursor:pointer;
+    color: #fff;
+    background: #016300;
+    cursor: pointer;
   }
 `;
 
 export const WrapperFooter = styled.footer`
-  height: 10vh;
+  height: 20vh;
   display: flex;
   width: 100%;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  padding-top: 6vw;
-  padding-bottom: 6vw;
-  gap: 4rem;
-  background-color: rgba(211, 211, 211, 0.8);
+  justify-content: space-between;
+  background-color: #fff;
 
-  div {
-    color: #961913;
+  div p{
+    color: #552200;
+    font-size: 1.1rem;
+  }
+  div h1{
+    font-weight: bold;
+    color: #017C00;
     font-size: 1.5rem;
+    margin-bottom: 10px;
   }
-  ${Logo}:nth-child(1) {
-    width: 200px;
-    padding: 1rem;
+  #info{
+    text-align: center;
+    margin-left: 12.3rem;
   }
-
+  #logo{
+    margin-right: 4rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+  #contato{
+    margin-left: 8rem;
+    text-align: center;
+  }
+   ${Logo}:nth-child(1) {
+    width: 250px;
+    padding: 0.8rem;
+  }
   ${Logo}:nth-child(2) {
-    width: 100px;
+    width: 120px;
     padding: 1rem;
   }
   ${Logo}:nth-child(3) {
-    width: 120px;
+    width: 150px;
     padding: 1rem;
     border-radius: 30px;
   }
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px -1.95px 6px;
 `;
 
-export default AcceptButton;
 
 export const H1 = styled.h1`
   text-align: center;
@@ -248,27 +330,27 @@ export const H1 = styled.h1`
   font-size: 1.8rem;
 `;
 export const WrapperProd = styled.div`
-  padding-left: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: auto;
 `;
 
-export const SubTotal = styled.p`
-  width: 100%;
-  color: rgba(95, 30, 31, 0.7);
-  font-size: 1.4rem;
-`;
 
 export const WrapperSubtotal = styled.div`
   margin-top: 1rem;
-  margin-left: 65%;
+  margin-left: 50%;
+  display: flex;
+  flex-direction: column;
 `;
+
 export const Row = styled.div`
   display: flex;
   width: 100%;
   padding-top: 0.6rem;
+  margin-top: 2px;
   justify-content: space-between;
-  ${WrapperSubtotal} {
-    padding: 1rem;
-  }
+  padding-right: 1rem;
 `;
 export const Line = styled.div`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
@@ -276,4 +358,41 @@ export const Line = styled.div`
   margin-top: 1rem;
   margin-bottom: 1rem;
   width: 98%;
+`;
+
+
+export const QuantityContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-right: 40px;
+`;
+
+export const ButtonMinus = styled.button`
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin-right: 14px;
+  color: #017C00;
+`;
+export const ButtonPlus = styled.button`
+  border: none;
+  background: none;
+  margin-left: 14px;
+  cursor: pointer;
+  color: #017C00;
+`;
+
+export const Quantity = styled.span`
+  font-weight: bold;
+  text-align: center;
+  width: 32px;
+  color: #552200;
+  cursor: default;
+`;
+
+export const AddQuantityWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 2px;
+  margin: 4px;
 `;

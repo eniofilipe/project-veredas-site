@@ -25,6 +25,14 @@ import {
   getOpenedWithoutToken,
   getValidaTokenWithoutToken,
 } from '../../api/Validade';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faShoppingBasket,
+  faPlus,
+  faMinus,
+  faCheckCircle,
+  faTrash
+} from '@fortawesome/free-solid-svg-icons';
 
 const Cart = () => {
   const Router = useRouter();
@@ -48,7 +56,7 @@ const Cart = () => {
       const response = await getPagamento();
 
       setTipoPagamento(response.data);
-    } catch (error){
+    } catch (error) {
       console.log(error);
     }
   }
@@ -78,9 +86,9 @@ const Cart = () => {
 
     setSubtotal(result);
 
-    setTotal(result + 5);
+    setTotal(result + freteFixo);
 
-  }, [products]);
+  }, [products, freteFixo]);
 
   const aumentarQuantidade = (index: number) => {
 
@@ -98,7 +106,7 @@ const Cart = () => {
 
     setSubtotal(result);
 
-    setTotal(result + 5);
+    setTotal(result + freteFixo);
   };
 
   const diminuirQuantidade = (index: number) => {
@@ -118,15 +126,15 @@ const Cart = () => {
 
       setSubtotal(result);
 
-      setTotal(result + 5);
+      setTotal(result + freteFixo);
     }
     // setRenderizando(products[index].quantidadeCart);
 
   };
 
   async function handlePedido() {
-    setControle(controle+1)
-    if(controle > 1){
+    setControle(controle + 1)
+    if (controle > 1) {
       return;
     }
     try {
@@ -150,7 +158,7 @@ const Cart = () => {
     }
   }
 
-  const handlePagamento = (e) =>{
+  const handlePagamento = (e) => {
     setPagamento(e.target.value);
   }
 
@@ -164,27 +172,36 @@ const Cart = () => {
   return (
     <S.Wrapper>
       <S.Header>
-        <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')}/>
-        <S.WrapperMenu>
-          <S.Title onClick={() => Router.push('profile')}>Perfil</S.Title>
-          <S.Title onClick={signOut}>Sair</S.Title>
-        </S.WrapperMenu>
+        <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')} />
+        <S.TitlePage>Meu Carrinho</S.TitlePage>
+        <S.MenuNav>
+          <S.MenuLink onClick={() => Router.push('profile')}>
+            Perfil
+          </S.MenuLink>
+          <S.MenuLink onClick={signOut}>
+            Sair
+          </S.MenuLink>
+        </S.MenuNav>
       </S.Header>
       <S.WrapperContent>
-        <S.H1>Carrinho</S.H1>
         <S.Items>
           {products.map((offer, index) => (
             <S.WrapperItem>
-              <S.WrapperControl>
-                <S.SubButton onClick={() => diminuirQuantidade(index)}/>
-                <S.Text>{offer.quantidadeCart}</S.Text>
-                <S.SumButton onClick={() => aumentarQuantidade(index)}/>
-                <S.WrapperProd>
-                  <S.Text>{offer.produtos.nome}</S.Text>
-                  {/* <S.Text>{offer.produtos.descricao}</S.Text> */}
-                  <S.Text>R$ {offer.valor_unitario}</S.Text>
-                </S.WrapperProd>
-              </S.WrapperControl>
+              <S.QuantityContainer>
+
+                <S.ButtonMinus onClick={() => diminuirQuantidade(index)}>
+                  <FontAwesomeIcon icon={faMinus} />
+                </S.ButtonMinus>
+
+                <S.Quantity>{offer.quantidadeCart}</S.Quantity>
+                <S.ButtonPlus onClick={() => aumentarQuantidade(index)}>
+                  <FontAwesomeIcon icon={faPlus} />
+                </S.ButtonPlus>
+              </S.QuantityContainer>
+              <S.WrapperProd>
+                <S.Text id="prodNameDesc">Produto: {offer.produtos.nome}</S.Text>
+                <S.Text id="prodPriceDesc">Preço unitário: <S.Text id="boldPrice">R$ {offer.valor_unitario}</S.Text></S.Text>
+              </S.WrapperProd>
               <S.Value>
                 R$ {(offer.valor_unitario * offer.quantidadeCart).toFixed(2)}{' '}
               </S.Value>
@@ -192,23 +209,31 @@ const Cart = () => {
           ))}
           <S.WrapperSubtotal>
             <S.Row>
-              <S.SubTotal>Subtotal</S.SubTotal>
-              <S.SubTotal>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;{`R$ ${subtotal.toFixed(2)}`}</S.SubTotal>
+              <S.Text>Subtotal</S.Text>
+              <S.Value>{`R$: ${subtotal.toFixed(2)}`}</S.Value>
             </S.Row>
             <S.Row>
-              <S.SubTotal>Taxa de Entrega</S.SubTotal>
-              <S.SubTotal>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;R$ &ensp;&ensp;{freteFixo.toFixed(2)}</S.SubTotal>
+              <S.Text>Taxa de Entrega</S.Text>
+              <S.Value>R$: {freteFixo.toFixed(2)}</S.Value>
             </S.Row>
             <S.Line />
             <S.Row>
-              <S.SubTotal>Total </S.SubTotal>
-              <S.SubTotal>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;R$ {total.toFixed(2)}</S.SubTotal>
+              <S.Text>Total </S.Text>
+              <S.Value>R$: {total.toFixed(2)}</S.Value>
             </S.Row>
           </S.WrapperSubtotal>
         </S.Items>
         <S.WrapperItem>
-          <S.Label>Endereço</S.Label>
+          <S.WrapperSelect>
+            <S.Label>Tipo de Pagamento</S.Label>
+            <S.Select value={pagamento} onChange={handlePagamento} >
+              {tipoPagamento.map((tipo) =>
+                <option value={tipo.id}> {tipo.titulo} </option>
+              )}
+            </S.Select>
+          </S.WrapperSelect>
           <S.Address>
+            <S.Label>Endereço</S.Label>
             {endereco && (
               <S.Text>
                 {endereco?.cep.toString().replace(/(\d{5})(\d)/, '$1-$2')};{' '}
@@ -218,41 +243,39 @@ const Cart = () => {
             )}
           </S.Address>
         </S.WrapperItem>
-        <S.WrapperSelect>
-          <S.Label>Tipo de Pagamento</S.Label>
-          <S.Select value={pagamento} onChange={handlePagamento} >
-            {tipoPagamento.map((tipo) =>
-              <option value={tipo.id}> {tipo.titulo} </option>
-            )}
-          </S.Select>
-        </S.WrapperSelect>
-      </S.WrapperContent>
-      <S.WrapperButtons>
-        <S.CancelButton onClick={() => router.back()}>Cancelar</S.CancelButton>
-        <S.AcceptButton onClick={() => handlePedido()}>
-          CONFIRMAR PEDIDO
+
+        <S.WrapperButtons>
+          <S.CancelButton onClick={() => router.back()}>Cancelar</S.CancelButton>
+          <S.AcceptButton onClick={() => handlePedido()}>
+            CONFIRMAR PEDIDO
         </S.AcceptButton>
-      </S.WrapperButtons>
+        </S.WrapperButtons>
+      </S.WrapperContent>
 
       <S.WrapperFooter>
-        <div>
+
+        <div id='contato'>
+          <h1 id='contato-info'>Contato</h1>
+          <p>contato@veredasdaterra.com.br</p>
+          <p>(38) 9 9900-0000</p>
+        </div>
+
+        <div id='info'>
+          <h1 id='title-info'>Informações</h1>
           <p>Cooperativa Camponesa - Veredas da Terra</p>
           <p>CNPJ: 10.286.881/0001-02</p>
           <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
         </div>
-        <div>
-          <p>Contato</p>
-          <p>contato@veredasdaterra.com.br</p>
-          <p>(38) 9 9900-0000</p>
-        </div>
-        <div>
+
+        <div id='logo'>
           <S.Logo
             src={veredaslogo}
             alt="Logo da cooperativa Veredas da Terra"
           />
           <S.Logo src={logomst} alt="Logo do MST" />
-          <S.Logo src={logoif} alt="Logo do IFNMG" />
+          <S.Logo src={logoif} alt="Logo do IFNMG" onClick={() => Router.push('/if')}/>
         </div>
+
       </S.WrapperFooter>
     </S.Wrapper>
   );

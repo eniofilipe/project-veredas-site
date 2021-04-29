@@ -4,7 +4,6 @@ import {
   useEffect, useState, useRef, useContext,
 } from 'react';
 import { useRouter } from 'next/router';
-import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import veredaslogo from '../assets/logo.png';
 import * as S from './styles';
 import logomst from '../assets/logo-mst-rurais.png';
@@ -74,7 +73,7 @@ const Home = () => {
       <S.HeaderWrapper position={scrollY}>
         <S.Header>
           {/* <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')}/> */}
-          <S.Logo src={veredaslogo} alt="Home"/>
+          <S.Logo src={veredaslogo} alt="Home" />
           <S.MenuNav>
             <S.MenuLink onClick={() => handleChange('sectionOneRef')}>
               Home
@@ -100,7 +99,8 @@ const Home = () => {
             <p>BEM VINDO À CESTA AGROECOLOGICA</p>
             <p>
               Aqui nós oferecemos os alimentos orgânicos de melhor qualidade,{' '}
-              <p />
+            </p>
+            <p>
               direto do campo da agricultura familiar.
             </p>
             <S.Logo src={logomst} alt="Logo do MST" />
@@ -111,8 +111,8 @@ const Home = () => {
         <S.Card1>
           <p> Do campo à cidade</p>
           <p>
-              A Cooperativa Camponesa Veredas da Terra produz produtos orgânicos,
-              livres de agrotóxicos, trazendo mais segurança, saúde e qualidade de vida. <br/>
+            A Cooperativa Camponesa Veredas da Terra produz produtos orgânicos,
+              livres de agrotóxicos, trazendo mais segurança, saúde e qualidade de vida. <br />
               Tudo isso para que você no conforto da sua casa, receba os melhores produtos da região!
           </p>
         </S.Card1>
@@ -126,18 +126,17 @@ const Home = () => {
         </S.TextWrapper>
         <S.TextDivPrincipal>
           <S.TextDiv1>
-          &nbsp; Todos os produtos ofertados na semana estão na loja. <p/>
-          &nbsp; Escolha o produto, a quantidade e adicione ao carrinho. <p/>
-          &nbsp; Clique em finalizar o pedido. <p />
-          &nbsp; Informe seus dados corretamente. <p />
-            <p />
+          <p>&nbsp; Todos os produtos ofertados na semana estão na loja. </p>
+          <p>&nbsp; Escolha o produto, a quantidade e adicione ao carrinho. </p>
+          <p>&nbsp; Clique em finalizar o pedido. </p>
+          <p> &nbsp; Informe seus dados corretamente. </p>
           </S.TextDiv1>
           <S.TextDiv2>
-          &nbsp; Pedidos: Segunda-Feira até Quarta-Feira. <p />
-          &nbsp; Entregas: A partir de Sexta-Feira. <p />
-          {/* &nbsp; &nbsp; &nbsp; Alteração do pedido até as Quarta-Feira 23:59hrs. <p /> */}
-          &nbsp; Taxa de Entrega: R$ 5,00. <p />
-          &nbsp; Entraremos em contato caso ocorra algum imprevisto! <p />
+          <p>&nbsp; Pedidos: Segunda-Feira até Quarta-Feira. </p>
+          <p>&nbsp; Entregas: A partir de Sexta-Feira. </p>
+            {/* &nbsp; &nbsp; &nbsp; Alteração do pedido até as Quarta-Feira 23:59hrs. <p /> */}
+            <p>&nbsp; Taxa de Entrega: R$ 5,00. </p>
+            <p>&nbsp; Entraremos em contato caso ocorra algum imprevisto! </p>
           </S.TextDiv2>
           {/* <S.TextDiv3>
             Endereço: Assentamento Estrela do Norte, Estrada da Produção, Km 14,
@@ -154,24 +153,29 @@ const Home = () => {
         )}
       </S.WrapperThreeSection>
       <S.WrapperFooter>
-        <div>
+
+        <div id='contato'>
+          <h1 id='contato-info'>Contato</h1>
+          <p>contato@veredasdaterra.com.br</p>
+          <p>(38) 9 9900-0000</p>
+        </div>
+
+        <div id='info'>
+          <h1 id='title-info'>Informações</h1>
           <p>Cooperativa Camponesa - Veredas da Terra</p>
           <p>CNPJ: 10.286.881/0001-02</p>
           <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
         </div>
-        <div>
-          <p>Contato:</p>
-          <p>contato@veredasdaterra.com.br</p>
-          <p>+55 38 9 9900-0000</p>
-        </div>
-        <div>
+
+        <div id='logo'>
           <S.Logo
             src={veredaslogo}
             alt="Logo da cooperativa Veredas da Terra"
           />
           <S.Logo src={logomst} alt="Logo do MST" />
-          <S.Logo src={logoif} alt="Logo do IFNMG" onClick={() => Router.push('if')}/>
+          <S.Logo src={logoif} alt="Logo do IFNMG" onClick={() => Router.push('/if')}/>
         </div>
+
       </S.WrapperFooter>
     </S.Wrapper>
   );

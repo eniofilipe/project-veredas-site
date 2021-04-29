@@ -12,7 +12,6 @@ import {
   InfoContainer,
   Title,
   SubTitle,
-  PriceContainer,
   Price,
   Categories,
   Container,
@@ -22,8 +21,11 @@ import {
   ButtonPlus,
   Quantity,
   QuantityContainer,
-  AddQuantityWrapper,
-  ButtonRemove
+  ButtonRemove,
+  AditionalInfo,
+  StockBuyWrapper,
+  Stock,
+  PriceAndQuantityWrapper
 } from './styles';
 import alface from '../../../assets/images/alface.jpeg';
 import Money from '../../StylesText/Money';
@@ -41,6 +43,7 @@ interface CardProductProps {
   image?: string;
   quantity: number;
   inCart?: boolean;
+  availableStock: number;
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -55,49 +58,83 @@ const cardProduct = ({
   PlusQuantityOnChange,
   quantity,
   category,
+  availableStock,
   image,
   inCart
 }: CardProductProps) => {
   const [HoverIcon, setHoverIcon] = useState(false)
 
-  return(
-  <Container>
-    <ImageHeader src={`http://${image}` || alface} alt="" />
-    <InfoContainer>
-      <Title>{name}</Title>
-      <SubTitle>{comment}</SubTitle>
-      <PriceContainer>
-        <Price>
-          <Money value={value} />
-        </Price>
+  return (
+    <Container>
+      <ImageHeader src={`http://${image}` || alface} alt="" />
+      <InfoContainer>
+        <Title>{name}</Title>
+        <SubTitle>{comment}</SubTitle>
+        {/* <PriceContainer> */}
 
-        {!inCart ? <AddQuantityWrapper>
-          <QuantityContainer>
-            <ButtonMinus onClick={MinusQuantityOnChange}>
-              <FontAwesomeIcon icon={faMinus} />
-            </ButtonMinus>
 
-            <Quantity>{quantity}</Quantity>
-            <ButtonPlus onClick={PlusQuantityOnChange}>
-              <FontAwesomeIcon icon={faPlus} />
-            </ButtonPlus>
-          </QuantityContainer>
+        {!inCart ?
+          <>
+            <PriceAndQuantityWrapper>
+              <Price>
+                <Money value={value} />
+              </Price>
+              <QuantityContainer>
 
-          <ButtonBuy onClick={onChange}>
-            <FontAwesomeIcon icon={faShoppingBasket} />
-          </ButtonBuy>
-        </AddQuantityWrapper> :
-         <AddQuantityWrapper>
-         <ButtonRemove  onMouseOver={() => setHoverIcon(true)} onMouseOut={() => setHoverIcon(false)} onClick={handleRemove}>
-           <FontAwesomeIcon  icon={ HoverIcon ?  faTrash : faCheckCircle } />
-         </ButtonRemove>
-       </AddQuantityWrapper>
+                <ButtonMinus onClick={MinusQuantityOnChange}>
+                  <FontAwesomeIcon icon={faMinus} />
+                </ButtonMinus>
+
+                <Quantity>{quantity}</Quantity>
+                <ButtonPlus onClick={PlusQuantityOnChange}>
+                  <FontAwesomeIcon icon={faPlus} />
+                </ButtonPlus>
+              </QuantityContainer>
+            </PriceAndQuantityWrapper>
+
+            <StockBuyWrapper>
+              <Stock>Estoque: {availableStock}</Stock>
+              <ButtonBuy onClick={onChange}>
+                <FontAwesomeIcon icon={faShoppingBasket} />
+              </ButtonBuy>
+            </StockBuyWrapper>
+
+          </> :
+
+          <>
+            <PriceAndQuantityWrapper>
+              <Price>
+                <Money value={value} />
+              </Price>
+              <QuantityContainer>
+
+                <ButtonMinus onClick={MinusQuantityOnChange}>
+                  <FontAwesomeIcon icon={faMinus} />
+                </ButtonMinus>
+
+                <Quantity>{quantity}</Quantity>
+                <ButtonPlus onClick={PlusQuantityOnChange}>
+                  <FontAwesomeIcon icon={faPlus} />
+                </ButtonPlus>
+              </QuantityContainer>
+            </PriceAndQuantityWrapper>
+
+            <StockBuyWrapper>
+              <Stock>Estoque: {availableStock}</Stock>
+              <ButtonRemove onMouseOver={() => setHoverIcon(true)} onMouseOut={() => setHoverIcon(false)} onClick={handleRemove}>
+                <FontAwesomeIcon icon={HoverIcon ? faTrash : faCheckCircle} />
+              </ButtonRemove>
+
+            </StockBuyWrapper>
+
+          </>
+
         }
-
-      </PriceContainer>
-      <Categories>{category.map((item) => `${item},`)}</Categories>
-    </InfoContainer>
-  </Container>
-)};
+        <Categories>{category.map((item) => `${item},`)}</Categories>
+      </InfoContainer>
+      <AditionalInfo>Imagem meramente ilustrativa</AditionalInfo>
+    </Container>
+  )
+};
 
 export default cardProduct;

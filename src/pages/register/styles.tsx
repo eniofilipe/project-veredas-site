@@ -1,7 +1,16 @@
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div``;
-export const Logo = styled.img``;
+export const Logo = styled.img`
+&:nth-child(1) {
+  cursor: pointer;
+}
+`;
+
+type MenuProps = {
+  background?: string;
+  position?: number;
+};
 export const MenuNav = styled.div`
   margin-right: 4rem;
 `;
@@ -35,72 +44,93 @@ export const MenuLink = styled.a`
     }
   }
 `;
-export const HeaderWrapper = styled.div`
-  position: relative;
-  opacity: 1;
-  background-color: rgba(250, 250, 240, 0.8);
-  top: 0;
-  left: 0;
-  z-index: 2;
-  width: 100%;
+export const Header = styled.menu<MenuProps>`
+  ${({ background }) => css`
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 2rem;
+    justify-content: space-between;
+    background-color: ${background && background === 'white'
+      ? '#FFF'
+      : '#FFF'};
+  `}
+
+  ${Logo} {
+    width: 200px;
+  }
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+`;
+
+export const HeaderWrapper = styled.div<MenuProps>`
+  ${({ position }) => css`
+    position: relative;
+    opacity: ${position !== 0 ? 1 : 0.8};
+    background-color: ${position !== 0
+      ? 'rgba(250, 250, 250, 1)'
+      : 'rgba(250, 250, 240, 0.8)'};
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+  `}
 `;
 
 export const Button = styled.button`
-  background: #961913;
+  background: #017C00;
   color: #fff;
-  border: 1px solid #961913;
   border-radius: 8px;
   padding: 1rem 2rem;
+  border: none;
   outline: none;
   margin-left: 2rem;
   font-weight: bold;
   font-size: 1rem;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
   &:hover {
-    color: #961913;
-    background: rgba(205, 205, 205, 0.7);
-    border: 1px solid #961913;
+    transition: 0.4s;
+    color: #fff;
+    background: #016300;
     cursor: pointer;
   }
 `;
 export const Title = styled.h1`
   font-size: 2rem;
-  color: #961913;
+  color: #552200;
+  cursor: default;
+  margin-right: 2rem;
+  margin-left: 2rem;
   font-weight: 600;
-  text-align: center;
-  padding-top: 2rem;
-`;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 
-export const Header = styled.menu`
-  display: flex;
-  align-items: center;
-  padding: 0.8rem 2rem;
-  justify-content: space-between;
-  background-color: rgba(211, 211, 211, 0.8);
-  ${Logo} {
-    width: 200px;
+  &#principal{
+    margin-top: 3rem;
+  margin-bottom: 0rem;
+    text-align: center;
+    margin-bottom: 1rem;
   }
 `;
 
+
 export const WrapperData = styled.div`
-  display: flex;
+ display: flex;
   flex-direction: column;
   width: 48%;
-  background-color: #fafafa;
+  background-color: #fff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
   padding: 1rem;
   margin-top: 2rem;
-  padding-bottom: 2rem;
+  padding-bottom: 4rem;
   ${Title} {
     text-align: left;
     padding-top: 0.8rem;
     padding-bottom: 1.2rem;
   }
+  padding-right: 3rem;
 `;
 export const WrapperContent = styled.div`
-  display: flex;
+ display: flex;
   width: 100%;
   padding-left: 14%;
   padding-right: 14%;
@@ -114,15 +144,23 @@ export const Form = styled.div`
   gap: 1rem;
 `;
 export const Label = styled.label`
-  font-size: 1.3rem;
+   font-size: 1.4rem;
+  color: #552200;
+  margin-top: 14px;
 `;
 export const Input = styled.input`
-  font-size: 1.3rem;
-  border-radius: 4px;
+  margin-left: auto;
+  width: 60%;
+  background: #f4f4f4;
+  border: 2px solid #c3c3c3;
+  height: 60px;
+  border-radius: 0.4rem;
   outline: none;
-  padding: 4px;
-  overflow: hidden;
-  margin-left: 10px;
+  font-size: 1.4rem;
+  color: #552200;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 14px;
 `;
 export const Body = styled.div``;
 export const WrapperController = styled.div``;
@@ -137,12 +175,13 @@ export const WrapperAddress = styled.div`
   flex-direction: column;
   width: 72%;
   margin-left: 14%;
-  background-color: #fafafa;
+  background-color: #fff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
   padding: 1.2rem;
   margin-top: 2rem;
   padding-bottom: 2rem;
+  margin-bottom: 4rem;
   ${Title} {
     text-align: left;
     padding-top: 0.8rem;
@@ -158,6 +197,7 @@ export const WrapperDataAddress = styled.div`
   padding-right: 30%;
   justify-content: space-between;
   gap: 1rem;
+  padding-bottom: 2rem;
 `;
 
 export const WrapperButtons = styled.div`
@@ -166,51 +206,68 @@ export const WrapperButtons = styled.div`
   padding-left: 12%;
   padding-right: 14%;
   justify-content: space-between;
-  padding-top: 2%;
+  padding-top: 0.25%;
   padding-bottom: 5%;
   ${Button} {
-    width: 12rem;
+    width: 24rem;
   }
   ${Button}:nth-child(1) {
-    background: #ffffff;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background: #961913;
     border-radius: 8px;
-    color: #000;
-    border: 1px solid #ffffff;
+    color: #fff;
+    border: 1px solid #78140f;
     &:hover {
-      color: #961913;
-      box-shadow: 0px 6px 6px #961913;
+      color: #fff;
+      background: #78140f;
     }
   }
 `;
 export const WrapperFooter = styled.footer`
-  height: 8vh;
+  height: 20vh;
   display: flex;
   width: 100%;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  padding-top: 6vw;
-  padding-bottom: 6vw;
-  gap: 4rem;
-  background-color: rgba(211, 211, 211, 0.8);
+  justify-content: space-between;
+  background-color: #fff;
 
-  div {
-    color: #961913;
+  div p{
+    color: #552200;
+    font-size: 1.1rem;
+  }
+  div h1{
+    font-weight: bold;
+    color: #017C00;
     font-size: 1.5rem;
+    margin-bottom: 10px;
   }
-  ${Logo}:nth-child(1) {
+  #info{
+    text-align: center;
+    margin-left: 12.3rem;
+  }
+  #logo{
+    margin-right: 4rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+  #contato{
+    margin-left: 8rem;
+    text-align: center;
+  }
+   ${Logo}:nth-child(1) {
     width: 250px;
-    padding-left: 1rem;
+    padding: 0.8rem;
   }
-
   ${Logo}:nth-child(2) {
     width: 120px;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding: 1rem;
   }
-
   ${Logo}:nth-child(3) {
-    width: 110px;
-    border-radius: 18px;
+    width: 150px;
+    padding: 1rem;
+    border-radius: 30px;
   }
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px -1.95px 6px;
 `;

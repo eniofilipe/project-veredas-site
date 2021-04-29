@@ -58,87 +58,84 @@ const Login = () => {
     Router.push('/passwordRecovery');
   };
   return (
-    <div>
+    <>
       <Head>
         <title>Veredas da terra</title>
       </Head>
-      <body>
-        <S.HeaderWrapper>
-          <S.Header>
-            <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')}/>
-            <S.MenuNav>
-              <S.MenuLink onClick={() => Router.push('/')}>Home</S.MenuLink>
-              {/* <S.MenuLink onClick={() => Router.push('/')}>
-                Quem somos
-              </S.MenuLink>
-              <S.MenuLink onClick={() => Router.push('/')}>
-                Como Funciona
-              </S.MenuLink> */}
-              {!validade ? (
-                <S.Button onClick={goToLogin}>Criar conta</S.Button>
-              ) : (
-                <S.Button onClick={goToProducts}>Entrar na Feirinha</S.Button>
-              )}
-            </S.MenuNav>
-          </S.Header>
-        </S.HeaderWrapper>
-        <S.Content>
-          <S.LoginContainer>
-            <h1>Acesso</h1>
-            <div>
-              <S.Icon>
-                <EmailIcon />
-              </S.Icon>
-              <span>Email</span>
-              <S.InputLogin
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div>
-              <S.Icon>
-                <LockIcon />
-              </S.Icon>
-              <span>Senha</span>
-              <S.InputLogin
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <S.SubTitle onClick={goToPasswordRecovery}>
-              Esqueci a senha
+      <S.HeaderWrapper>
+        <S.Header>
+          <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')} />
+          <S.MenuNav>
+            <S.MenuLink onClick={() => Router.push('/')}>Home</S.MenuLink>
+            {!validade ? (
+              <S.Button onClick={goToLogin}>Criar conta</S.Button>
+            ) : (
+              <S.Button onClick={goToProducts}>Entrar na Feirinha</S.Button>
+            )}
+          </S.MenuNav>
+        </S.Header>
+      </S.HeaderWrapper>
+      <S.Content>
+        <S.LoginContainer>
+          <h1>Acesso</h1>
+          <div>
+            <S.Icon>
+              <EmailIcon className="login-icon" />
+            </S.Icon>
+            <span>Email</span>
+            <S.InputLogin
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div>
+            <S.Icon>
+              <LockIcon className="login-icon" />
+            </S.Icon>
+            <span>Senha</span>
+            <S.InputLogin
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <S.SubTitle onClick={goToPasswordRecovery}>
+            Esqueci a senha
             </S.SubTitle>
-            <p />
-            <S.ButtonLogin onClick={() => handleLogin()}>Acessar</S.ButtonLogin>
-            <S.ButtonLogin onClick={() => Router.push('/register')}>
-              Criar conta
+          <p />
+          <S.ButtonLogin onClick={() => handleLogin()}>Acessar</S.ButtonLogin>
+          <S.ButtonLogin onClick={() => Router.push('/register')}>
+            Criar conta
             </S.ButtonLogin>
-          </S.LoginContainer>
-        </S.Content>
-      </body>
+        </S.LoginContainer>
+      </S.Content>
       <S.WrapperFooter>
-        <div>
+
+        <div id='contato'>
+          <h1 id='contato-info'>Contato</h1>
+          <p>contato@veredasdaterra.com.br</p>
+          <p>(38) 9 9900-0000</p>
+        </div>
+
+        <div id='info'>
+          <h1 id='title-info'>Informações</h1>
           <p>Cooperativa Camponesa - Veredas da Terra</p>
           <p>CNPJ: 10.286.881/0001-02</p>
           <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
         </div>
-        <div>
-          <p>Contato</p>
-          <p>contato@veredasdaterra.com.br</p>
-          <p>(38) 9 9900-0000</p>
-        </div>
-        <div>
+
+        <div id='logo'>
           <S.Logo
             src={veredaslogo}
             alt="Logo da cooperativa Veredas da Terra"
           />
           <S.Logo src={logomst} alt="Logo do MST" />
-          <S.Logo src={logoif} alt="Logo do IFNMG" />
+          <S.Logo src={logoif} alt="Logo do IFNMG" onClick={() => Router.push('/if')}/>
         </div>
+
       </S.WrapperFooter>
-    </div>
+    </>
   );
 };
 

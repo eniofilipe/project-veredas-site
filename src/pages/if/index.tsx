@@ -51,8 +51,16 @@ const Home = () => {
   return (
     <S.Wrapper>
       <S.Header>
-        <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')}/>
-        <S.TitleDesenvolvedores>Desenvolvedores</S.TitleDesenvolvedores>
+        <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')} />
+        <S.TitlePage>Desenvolvedores</S.TitlePage>
+        <S.MenuNav>
+          {/* <S.MenuLink onClick={() => Router.push('profile')}>
+            Perfil
+            </S.MenuLink>
+          <S.MenuLink>
+            Sair
+            </S.MenuLink> */}
+        </S.MenuNav>
       </S.Header>
       <S.Body>
         <S.WrapperBody>
@@ -165,25 +173,30 @@ const Home = () => {
           </Card>
         </S.WrapperBody>
         <S.WrapperFooter>
-          <div>
-            <p>Cooperativa Camponesa - Veredas da Terra</p>
-            <p>CNPJ: 10.286.881/0001-02</p>
-            <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
-          </div>
-          <div>
-            <p>Contato:</p>
-            <p>contato@veredasdaterra.com.br</p>
-            <p>+55 38 9 9900-0000</p>
-          </div>
-          <div>
-            <S.Logo
-              src={veredaslogo}
-              alt="Logo da cooperativa Veredas da Terra"
-            />
-            <S.Logo src={logomst} alt="Logo do MST" />
-            <S.Logo src={logoif} alt="Logo do IFNMG" />
-          </div>
-        </S.WrapperFooter>
+
+<div id='contato'>
+  <h1 id='contato-info'>Contato</h1>
+  <p>contato@veredasdaterra.com.br</p>
+  <p>(38) 9 9900-0000</p>
+</div>
+
+<div id='info'>
+  <h1 id='title-info'>Informações</h1>
+  <p>Cooperativa Camponesa - Veredas da Terra</p>
+  <p>CNPJ: 10.286.881/0001-02</p>
+  <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
+</div>
+
+<div id='logo'>
+  <S.Logo
+    src={veredaslogo}
+    alt="Logo da cooperativa Veredas da Terra"
+  />
+  <S.Logo src={logomst} alt="Logo do MST" />
+  <S.Logo src={logoif} alt="Logo do IFNMG" onClick={() => Router.push('/if')}/>
+</div>
+
+</S.WrapperFooter>
       </S.Body>
     </S.Wrapper>
   );
