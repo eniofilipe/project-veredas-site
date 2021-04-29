@@ -7,7 +7,7 @@ import { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import searchCep from 'cep-promise';
-import * as S from './styles';
+import * as S from '../../styles/register/styles';
 import veredaslogo from '../../assets/logo.png';
 import { postClientes } from '../../api/Clientes';
 import { isEmail, validarCPF } from '../../Utils/Validation';

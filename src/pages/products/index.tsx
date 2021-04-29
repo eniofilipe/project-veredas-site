@@ -21,7 +21,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { GetServerSideProps } from 'next';
 
 import { toast } from 'react-toastify';
-import * as S from './styles';
+import * as S from '../../styles/products/styles';
 import veredaslogo from '../../assets/logo.png';
 
 import logomst from '../../assets/logo-mst-rurais.png';

@@ -5,7 +5,7 @@ import {
 } from 'react';
 import { useRouter } from 'next/router';
 import veredaslogo from '../assets/logo.png';
-import * as S from './styles';
+import * as S from '../styles/styles';
 import logomst from '../assets/logo-mst-rurais.png';
 import logoif from '../assets/logo-if.png';
 import imagecampo from '../assets/Campo-cidade.png';

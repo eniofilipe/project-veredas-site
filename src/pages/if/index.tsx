@@ -4,7 +4,7 @@ import {
   useEffect, useState, useRef, useContext,
 } from 'react';
 import { useRouter } from 'next/router';
-import * as S from './styles';
+import * as S from '../../styles/if/styles';
 import ValidadeContext from '../../contexts/validade';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Link, Card, CardContent, CardMedia,Typography } from "@material-ui/core";
