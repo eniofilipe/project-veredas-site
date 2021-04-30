@@ -22,10 +22,10 @@ import { GetServerSideProps } from 'next';
 
 import { toast } from 'react-toastify';
 import * as S from '../../styles/products/styles';
-import veredaslogo from '../../assets/logo.png';
+import veredaslogo from '../../assets/images/logo.png';
 
-import logomst from '../../assets/logo-mst-rurais.png';
-import logoif from '../../assets/logo-if.png';
+import logomst from '../../assets/images/logo-mst-rurais.png';
+import logoif from '../../assets/images/logo-if.png';
 import CardProduct from '../../components/Cards/CardProduct';
 
 import { Categoria, Oferta } from '../../types';

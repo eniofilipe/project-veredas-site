@@ -10,10 +10,10 @@ import { toast } from 'react-toastify';
 import { GetServerSideProps } from 'next';
 import Cookie from 'js-cookie';
 import * as S from '../../styles/profile/styles';
-import veredaslogo from '../../assets/logo.png';
+import veredaslogo from '../../assets/images/logo.png';
 import AuthContext from '../../contexts/auth';
-import logomst from '../../assets/logo-mst-rurais.png';
-import logoif from '../../assets/logo-if.png';
+import logomst from '../../assets/images/logo-mst-rurais.png';
+import logoif from '../../assets/images/logo-if.png';
 
 import { Cliente, ClienteLogin } from '../../types';
 import { cleanObject, isEmail, validarCPF } from '../../Utils/Validation';

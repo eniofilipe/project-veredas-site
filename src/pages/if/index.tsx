@@ -9,9 +9,9 @@ import ValidadeContext from '../../contexts/validade';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Link, Card, CardContent, CardMedia,Typography } from "@material-ui/core";
 
-import veredaslogo from '../../assets/logo.png';
-import logomst from '../../assets/logo-mst-rurais.png';
-import logoif from '../../assets/logo-if.png';
+import veredaslogo from '../../assets/images/logo.png';
+import logomst from '../../assets/images/logo-mst-rurais.png';
+import logoif from '../../assets/images/logo-if.png';
 
 import deise from '../../assets/desenvolvedores/deise.jpg';
 import jefeson from '../../assets/desenvolvedores/jefeson.jpg';

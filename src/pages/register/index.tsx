@@ -8,13 +8,13 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import searchCep from 'cep-promise';
 import * as S from '../../styles/register/styles';
-import veredaslogo from '../../assets/logo.png';
+import veredaslogo from '../../assets/images/logo.png';
 import { postClientes } from '../../api/Clientes';
 import { isEmail, validarCPF } from '../../Utils/Validation';
 import { cepMask, cellphoneeMask, cpfMask } from '../../Utils/Masks';
 import ValidadeContext from '../../contexts/validade';
-import logomst from '../../assets/logo-mst-rurais.png';
-import logoif from '../../assets/logo-if.png';
+import logomst from '../../assets/images/logo-mst-rurais.png';
+import logoif from '../../assets/images/logo-if.png';
 
 
 export type ProfileProps = {

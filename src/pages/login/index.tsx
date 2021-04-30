@@ -9,10 +9,10 @@ import LockIcon from '@material-ui/icons/Lock';
 import { toast } from 'react-toastify';
 import AuthContext from '../../contexts/auth';
 import * as S from '../../styles/login/styles';
-import veredaslogo from '../../assets/logo.png';
+import veredaslogo from '../../assets/images/logo.png';
 import ValidadeContext from '../../contexts/validade';
-import logomst from '../../assets/logo-mst-rurais.png';
-import logoif from '../../assets/logo-if.png';
+import logomst from '../../assets/images/logo-mst-rurais.png';
+import logoif from '../../assets/images/logo-if.png';
 
 const Login = () => {
   const { validade } = useContext(ValidadeContext);

@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import styled, { css } from 'styled-components';
-import bg1 from '../assets/bg1.png';
-import bg2 from '../assets/cesta.png';
+import bg1 from '../assets/images/bg1.png';
+import bg2 from '../assets/images/cesta.png';
 
 export const Wrapper = styled.div``;
 export const Logo = styled.img`
