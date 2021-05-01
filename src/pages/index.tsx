@@ -59,6 +59,8 @@ const Home = () => {
       case 'sectionThreeRef':
         sectionThreeRef.current?.scrollIntoView({
           behavior: 'smooth',
+          block: 'end',
+
         });
         return;
       default:
@@ -101,13 +103,13 @@ const Home = () => {
               Aqui nós oferecemos os alimentos orgânicos de melhor qualidade,{' '}
             </p>
             <p>
-              direto do campo da agricultura familiar.
+              Direto do campo da agricultura familiar.
             </p>
             <S.Logo src={logomst} alt="Logo do MST" />
           </S.CentralizeWrapper>
         </S.BGHome>
       </S.HomeSectionWrapper>
-      <S.WrapperSecondSection ref={sectionTwoRef}>
+      <S.WrapperSecondSection >
         <S.Card1>
           <p> Do campo à cidade</p>
           <p>
@@ -118,11 +120,11 @@ const Home = () => {
 
           </p>
         </S.Card1>
-        <S.Card2>
+        <S.Card2 ref={sectionTwoRef}>
           <S.Image src={imagecampo} />
         </S.Card2>
       </S.WrapperSecondSection>
-      <S.WrapperThreeSection ref={sectionThreeRef}>
+      <S.WrapperThreeSection >
         <S.TextWrapper>
           <p>Como funciona? </p>
         </S.TextWrapper>
@@ -133,29 +135,32 @@ const Home = () => {
           <p>&nbsp; Clique em finalizar o pedido. </p>
           <p> &nbsp; Informe seus dados corretamente. </p>
           </S.TextDiv1>
-          <S.TextDiv2>
+          <S.TextDiv1>
           <p>&nbsp; Pedidos: Segunda-Feira até Quarta-Feira. </p>
           <p>&nbsp; Entregas: A partir de Sexta-Feira. </p>
             {/* &nbsp; &nbsp; &nbsp; Alteração do pedido até as Quarta-Feira 23:59hrs. <p /> */}
             <p>&nbsp; Taxa de Entrega: R$ 5,00. </p>
             <p>&nbsp; Entraremos em contato caso ocorra algum imprevisto! </p>
-          </S.TextDiv2>
+          </S.TextDiv1>
           {/* <S.TextDiv3>
             Endereço: Assentamento Estrela do Norte, Estrada da Produção, Km 14,
             CEP: 39410-000, Zona Rural, Município de Montes Claros/MG CEP:
             39410-000.
           </S.TextDiv3> */}
         </S.TextDivPrincipal>
+        <div ref={sectionThreeRef}>
+
         {!validade ? (
           <S.ButtonSecond onClick={goToLogin}>Acessar Conta</S.ButtonSecond>
-        ) : (
-          <S.ButtonSecond onClick={goToProducts}>
+          ) : (
+            <S.ButtonSecond onClick={goToProducts}>
             Entrar na Feirinha
           </S.ButtonSecond>
         )}
+        </div>
       </S.WrapperThreeSection>
       <S.WrapperFooter>
-
+        <div id='footer-responsive'>
         <div id='contato'>
           <h1 id='contato-info'>Contato</h1>
           <p>contato@veredasdaterra.com.br</p>
@@ -168,7 +173,7 @@ const Home = () => {
           <p>CNPJ: 10.286.881/0001-02</p>
           <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
         </div>
-
+        </div>
         <div id='logo'>
           <S.Logo
             src={veredaslogo}

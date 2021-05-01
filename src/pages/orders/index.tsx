@@ -193,7 +193,7 @@ const Order = () => {
                       `}
                     />
                     {pedido.status === "aberto" ?
-                      <ListItemText  align="right"><S.Button onClick={() => deleteOrder(pedido.id)}>Cancelar</S.Button></ListItemText>
+                      <ListItemText><S.Button onClick={() => deleteOrder(pedido.id)}>Cancelar</S.Button></ListItemText>
                     : <ListItemText />
                     }
                     {controle ? <ExpandLess /> : <ExpandMore />}

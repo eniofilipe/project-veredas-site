@@ -3,7 +3,8 @@ import styled, { css } from 'styled-components';
 import bg1 from '../assets/images/bg1.png';
 import bg2 from '../assets/images/cesta.png';
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div`
+`;
 export const Logo = styled.img`
 `;
 export const MenuNav = styled.div`
@@ -46,6 +47,7 @@ export const HomeSectionWrapper = styled.div`
   top: 0;
   left: 0;
   z-index: -1;
+
 `;
 
 export const BGHome = styled.div`
@@ -55,6 +57,10 @@ export const BGHome = styled.div`
   background-position: center center;
   width: 100vw;
   height: 100vh;
+  max-width: 100vw;
+  @media (max-width: 1367px) {
+    width: 98.93vw;
+  }
 `;
 export const CentralizeWrapper = styled.div`
   display: flex;
@@ -75,8 +81,18 @@ export const CentralizeWrapper = styled.div`
     font-weight: 300;
     color: #fff;
   }
-
   padding-top: 15vh;
+
+  @media (max-width: 1367px) {
+    p {
+      font-size: 2.5rem;
+    }
+    p:nth-child(2) {
+    font-size: 2rem;
+    font-weight: 400;
+
+  }
+  }
 `;
 
 export const WrapperSecondSection = styled.div`
@@ -89,7 +105,7 @@ export const Card1 = styled.div`
   margin-left: 5%;
   background-color: #016300;
   height: 100%;
-  width: 40vw;
+  width: 50vw;
   padding: 2rem;
   border-radius: 4px;
   p {
@@ -103,8 +119,26 @@ export const Card1 = styled.div`
     font-size: 3rem;
     padding-bottom: 2rem;
   }
+
+  @media (max-width: 1367px) {
+    margin-left: 4%;
+    padding: 1.8rem;
+    padding-bottom: 3rem;
+    padding-top: 2rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    p {
+      font-size: 1.5rem;
+      line-height: 1.3;
+  }
+  p:nth-child(1) {
+    font-size: 2.3rem;
+    padding-bottom: 1.8rem;
+  }
+  }
 `;
-export const Image = styled.img``;
+export const Image = styled.img`
+`;
 
 export const Card2 = styled.div`
   ${Image} {
@@ -113,12 +147,11 @@ export const Card2 = styled.div`
     height: 80%;
     border-radius: 4px;
   }
-  padding-top: 1rem;
   padding-left: 2rem;
 `;
 export const WrapperThreeSection = styled.div`
   background-image: url(${bg2});
-  height: 60rem;
+  height: 100vh;
   width: 100%;
 
   /* Create the parallax scrolling effect */
@@ -132,6 +165,8 @@ export const WrapperThreeSection = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+
+
 `;
 
 export const TextWrapper = styled.div`
@@ -177,20 +212,13 @@ export const TextDiv1 = styled.div`
   font-weight: 600;
   font-size: 1.4rem;
   line-height: 1.8;
-`;
+  @media (max-width: 1367px) {
+    height: 42vh;
+    width: 40vw;
+    background: rgba(255,255,255,0.75);
+    padding: 1.5rem;
 
-export const TextDiv2 = styled.div`
- border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 400px;
-  color: #552200;
-  background: rgba(255,255,255,0.92);
-  padding: 4rem;
-  font-weight: 600;
-  font-size: 1.4rem;
-  line-height: 1.8;
+  }
 `;
 
 export const TextDiv3 = styled.div`
@@ -215,7 +243,9 @@ export const WrapperFooter = styled.footer`
   align-items: center;
   justify-content: space-between;
   background-color: #fff;
-
+  #footer-responsive{
+    display:flex;
+  }
   div p{
     color: #552200;
     font-size: 1.1rem;
@@ -229,6 +259,7 @@ export const WrapperFooter = styled.footer`
   #info{
     text-align: center;
     margin-left: 12.3rem;
+    align-self: inherit;
   }
   #logo{
     margin-right: 4rem;
@@ -254,7 +285,108 @@ export const WrapperFooter = styled.footer`
     padding: 1rem;
     border-radius: 30px;
   }
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px -1.95px 6px;
+
+  @media (max-width: 1367px) {
+    height: 38vh;
+    padding-bottom: 2rem;
+    #info{
+      text-align: center;
+      margin-left: 0rem;
+      margin-top: 4.2rem;
+      padding-left: 1rem;
+    }
+    #logo{
+      margin-right: 4rem;
+    }
+    #contato{
+      margin-top: 4rem;
+    }
+   ${Logo}:nth-child(1) {
+    width: 240px;
+  }
+  ${Logo}:nth-child(2) {
+    width: 110px;
+  }
+  ${Logo}:nth-child(3) {
+    width: 140px;
+  }
+  }
+  @media (max-width: 1200px) {
+    height: 40vh;
+    #info{
+      margin-top: 1rem;
+    }
+    #logo{
+      margin-top: 0rem;
+    }
+    #contato{
+
+      margin-left: 1rem;
+    }
+
+  }
+  @media (max-width: 1100px) {
+    height: 50vh;
+    #info{
+      margin-top: 4rem;
+      align-self: start;
+    }
+    #logo{
+      margin-top: 3rem;
+      align-self: end;
+    }
+    #contato{
+      margin-left: 1rem;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    height: 52vh;
+    #info{
+      margin-top: 1rem;
+      align-self: start;
+    }
+    #logo{
+      margin-top: 0rem;
+      align-self: end;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+    #contato{
+      margin-left: 1rem;
+    }
+  }
+  @media (max-width: 720px) {
+    #footer-responsive{
+      display: block;
+      width: 100vw;
+    }
+  }
+  @media (max-width: 530px){
+    flex-direction: column;
+    #footer-responsive{
+      display: flex;
+      flex-direction: column;
+
+    }
+    #logo{
+      display: flex;
+      flex-direction: row;
+    }
+  }
+  @media (max-width: 514px){
+    height: 80vh;
+    justify-content: inherit;
+    #logo{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items:center;
+      justify-content:flex-start;
+    }
+  }
 `;
 
 export const Button = styled.button`
@@ -329,3 +461,5 @@ export const HeaderWrapper = styled.div<MenuProps>`
     width: 100%;
   `}
 `;
+
+
