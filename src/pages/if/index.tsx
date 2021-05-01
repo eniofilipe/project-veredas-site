@@ -8,7 +8,7 @@ import * as S from '../../styles/if/styles';
 import ValidadeContext from '../../contexts/validade';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import { Link, Card, CardContent, CardMedia,Typography } from "@material-ui/core";
-
+import Footer from '../../components/Footer';
 import veredaslogo from '../../assets/images/logo.png';
 import logomst from '../../assets/images/logo-mst-rurais.png';
 import logoif from '../../assets/images/logo-if.png';
@@ -172,31 +172,7 @@ const Home = () => {
             </div>
           </Card>
         </S.WrapperBody>
-        <S.WrapperFooter>
-
-<div id='contato'>
-  <h1 id='contato-info'>Contato</h1>
-  <p>contato@veredasdaterra.com.br</p>
-  <p>(38) 9 9900-0000</p>
-</div>
-
-<div id='info'>
-  <h1 id='title-info'>Informações</h1>
-  <p>Cooperativa Camponesa - Veredas da Terra</p>
-  <p>CNPJ: 10.286.881/0001-02</p>
-  <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
-</div>
-
-<div id='logo'>
-  <S.Logo
-    src={veredaslogo}
-    alt="Logo da cooperativa Veredas da Terra"
-  />
-  <S.Logo src={logomst} alt="Logo do MST" />
-  <S.Logo src={logoif} alt="Logo do IFNMG" onClick={() => Router.push('/if')}/>
-</div>
-
-</S.WrapperFooter>
+       <Footer/>
       </S.Body>
     </S.Wrapper>
   );

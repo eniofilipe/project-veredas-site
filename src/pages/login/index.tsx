@@ -3,6 +3,7 @@
 import { useContext, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import Footer from '../../components/Footer';
 
 import EmailIcon from '@material-ui/icons/Email';
 import LockIcon from '@material-ui/icons/Lock';
@@ -111,31 +112,7 @@ const Login = () => {
             </S.ButtonLogin>
         </S.LoginContainer>
       </S.Content>
-      <S.WrapperFooter>
-
-        <div id='contato'>
-          <h1 id='contato-info'>Contato</h1>
-          <p>contato@veredasdaterra.com.br</p>
-          <p>(38) 9 9900-0000</p>
-        </div>
-
-        <div id='info'>
-          <h1 id='title-info'>Informações</h1>
-          <p>Cooperativa Camponesa - Veredas da Terra</p>
-          <p>CNPJ: 10.286.881/0001-02</p>
-          <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
-        </div>
-
-        <div id='logo'>
-          <S.Logo
-            src={veredaslogo}
-            alt="Logo da cooperativa Veredas da Terra"
-          />
-          <S.Logo src={logomst} alt="Logo do MST" />
-          <S.Logo src={logoif} alt="Logo do IFNMG" onClick={() => Router.push('/if')}/>
-        </div>
-
-      </S.WrapperFooter>
+      <Footer/>
     </>
   );
 };
