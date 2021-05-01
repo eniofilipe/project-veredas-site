@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components';
 import Input from '../../components/Inputs/Input';
 
 export const Wrapper = styled.div``;
+
 export const Logo = styled.img`
 &:nth-child(1) {
   cursor: pointer;
@@ -45,7 +46,6 @@ export const HeaderWrapper = styled.div<MenuProps>`
   `}
 `;
 
-
 export const Button = styled.button`
   background: #017C00;
   color: #fff;
@@ -84,7 +84,6 @@ export const ButtonLogin = styled.button`
     cursor: pointer;
   }
 `;
-
 
 export const Content = styled.div`
   display: flex;
@@ -135,13 +134,13 @@ export const LoginContainer = styled.div`
     color: #016300;
   }
 `;
+
 export const SubTitle = styled.a`
   font-size: 1rem;
   font-weight: 400;
   text-align: right;
   cursor: pointer;
-  color: #017C00
-
+  color: #017C00;
 `;
 
 export const Icon = styled.div`

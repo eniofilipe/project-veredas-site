@@ -2,21 +2,21 @@
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div``;
+
 export const Logo = styled.img`
 &:nth-child(1) {
   cursor: pointer;
 }
 `;
 
-
 type MenuProps = {
   background?: string;
   position?: number;
 };
+
 export const MenuNav = styled.div`
   /* margin-right: 4rem; */
 `;
-
 
 export const MenuLink = styled.a`
   position: relative;
@@ -90,7 +90,6 @@ export const HeaderWrapper = styled.div<MenuProps>`
     width: 100%;
   `}
 `;
-
 
 export const TitleDesenvolvedores = styled.p`
   font-size: 2rem;
@@ -177,6 +176,5 @@ export const WrapperFooter = styled.footer`
   }
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px -1.95px 6px;
 `;
-
 
 export const Body = styled.body``;

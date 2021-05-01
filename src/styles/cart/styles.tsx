@@ -8,6 +8,7 @@ export const Wrapper = styled.main`
   min-height: 100vh;
 
 `;
+
 export const Logo = styled.img`
 
 &:nth-child(1) {
@@ -15,17 +16,12 @@ export const Logo = styled.img`
   }
 `;
 
-
-
 type MenuProps = {
   background?: string;
   position?: number;
 };
 
-export const MenuNav = styled.div`
-  /* margin-right: 4rem; */
-`;
-
+export const MenuNav = styled.div``;
 
 export const MenuLink = styled.a`
   position: relative;
@@ -86,15 +82,12 @@ export const Header = styled.menu<MenuProps>`
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 `;
 
-
-
 export const Title = styled.p`
   white-space: nowrap;
   align-self: center;
   margin: 0 25%;
   font-size: 2.5rem;
 `;
-
 
 export const WrapperMenu = styled.div`
   display: flex;
@@ -117,6 +110,7 @@ export const Label = styled.span`
   color: #016300;
   font-weight: 500;
 `;
+
 export const WrapperItem = styled.div`
   display: flex;
   justify-content: center;
@@ -129,6 +123,7 @@ export const WrapperItem = styled.div`
   border-radius: 8px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
+
 export const WrapperControl = styled.div`
    display: flex;
   justify-content: center;
@@ -140,6 +135,7 @@ export const WrapperControl = styled.div`
     width: 32px;
   };
 `;
+
 export const SumButton = styled.button`
   border: none;
   background: none;
@@ -149,6 +145,7 @@ export const SumButton = styled.button`
     content: '+';
   }
 `;
+
 export const SubButton = styled.button`
   border: none;
   background: none;
@@ -158,6 +155,7 @@ export const SubButton = styled.button`
     content: '-';
   }
 `;
+
 export const Text = styled.span`
   color: #552200;
   font-size: 1rem;
@@ -174,8 +172,8 @@ export const Text = styled.span`
     font-weight: 600;
     color: green;
   }
-
 `;
+
 export const Value = styled.span`
   color: #016300;
   font-size: 1rem;
@@ -186,6 +184,7 @@ export const Value = styled.span`
   font-weight: 600;
   width: 120px;
 `;
+
 export const Items = styled.div`
   margin-top: 1rem;
   padding: 0;
@@ -194,7 +193,6 @@ export const Items = styled.div`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
 `;
-
 
 export const WrapperSelect = styled.div`
 margin-top: 0.5rem;
@@ -212,11 +210,13 @@ border-radius: 8px;
     font-weight: 400;
   }
 `;
+
 export const Select = styled.select`
   color: #016300;
   outline: none;
   padding: 0.5rem 2rem;
 `;
+
 export const Address = styled.div`
   display: flex;
   flex-direction: column;
@@ -235,6 +235,7 @@ export const WrapperButtons = styled.div`
   margin-top: 2rem;
   margin-bottom: 2rem;
 `;
+
 export const CancelButton = styled.button`
   background: #017C00;
   color: #fff;
@@ -253,6 +254,7 @@ export const CancelButton = styled.button`
     cursor: pointer;
   }
 `;
+
 export const AcceptButton = styled.button`
  background: #017C00;
   color: #fff;
@@ -322,20 +324,19 @@ export const WrapperFooter = styled.footer`
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px -1.95px 6px;
 `;
 
-
 export const H1 = styled.h1`
   text-align: center;
   color: #961913;
   font-weight: 500;
   font-size: 1.8rem;
 `;
+
 export const WrapperProd = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-right: auto;
 `;
-
 
 export const WrapperSubtotal = styled.div`
   margin-top: 1rem;
@@ -352,6 +353,7 @@ export const Row = styled.div`
   justify-content: space-between;
   padding-right: 1rem;
 `;
+
 export const Line = styled.div`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
   height: 2px;
@@ -359,7 +361,6 @@ export const Line = styled.div`
   margin-bottom: 1rem;
   width: 98%;
 `;
-
 
 export const QuantityContainer = styled.div`
   display: flex;
@@ -374,6 +375,7 @@ export const ButtonMinus = styled.button`
   margin-right: 14px;
   color: #017C00;
 `;
+
 export const ButtonPlus = styled.button`
   border: none;
   background: none;

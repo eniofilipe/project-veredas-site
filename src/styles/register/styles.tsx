@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div``;
+
 export const Logo = styled.img`
 &:nth-child(1) {
   cursor: pointer;
@@ -11,9 +12,11 @@ type MenuProps = {
   background?: string;
   position?: number;
 };
+
 export const MenuNav = styled.div`
   margin-right: 4rem;
 `;
+
 export const MenuLink = styled.a`
   position: relative;
   color: #961913;
@@ -44,6 +47,7 @@ export const MenuLink = styled.a`
     }
   }
 `;
+
 export const Header = styled.menu<MenuProps>`
   ${({ background }) => css`
     display: flex;
@@ -93,6 +97,7 @@ export const Button = styled.button`
     cursor: pointer;
   }
 `;
+
 export const Title = styled.h1`
   font-size: 2rem;
   color: #552200;
@@ -111,7 +116,6 @@ export const Title = styled.h1`
   }
 `;
 
-
 export const WrapperData = styled.div`
  display: flex;
   flex-direction: column;
@@ -129,6 +133,7 @@ export const WrapperData = styled.div`
   }
   padding-right: 3rem;
 `;
+
 export const WrapperContent = styled.div`
  display: flex;
   width: 100%;
@@ -143,11 +148,13 @@ export const Form = styled.div`
   flex-direction: column;
   gap: 1rem;
 `;
+
 export const Label = styled.label`
    font-size: 1.4rem;
   color: #552200;
   margin-top: 14px;
 `;
+
 export const Input = styled.input`
   margin-left: auto;
   width: 60%;
@@ -162,14 +169,18 @@ export const Input = styled.input`
   padding-bottom: 2px;
   padding-left: 14px;
 `;
+
 export const Body = styled.div``;
+
 export const WrapperController = styled.div``;
+
 export const Row = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
   white-space: nowrap;
 `;
+
 export const WrapperAddress = styled.div`
   display: flex;
   flex-direction: column;
@@ -189,6 +200,7 @@ export const WrapperAddress = styled.div`
     margin-left: 16%;
   }
 `;
+
 export const WrapperDataAddress = styled.div`
   display: flex;
   flex-direction: column;
@@ -222,6 +234,7 @@ export const WrapperButtons = styled.div`
     }
   }
 `;
+
 export const WrapperFooter = styled.footer`
   height: 20vh;
   display: flex;

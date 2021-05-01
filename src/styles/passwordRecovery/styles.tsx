@@ -3,12 +3,12 @@ import styled, { css } from 'styled-components';
 import Input from '../../components/Inputs/Input';
 
 export const Wrapper = styled.div``;
+
 export const Logo = styled.img`
 &:nth-child(1) {
   cursor: pointer;
 }
 `;
-
 
 export const WrapperFooter = styled.footer`
   height: 20vh;
@@ -135,7 +135,6 @@ export const HeaderWrapper = styled.div<MenuProps>`
   `}
 `;
 
-
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -185,6 +184,7 @@ export const LoginContainer = styled.div`
     color: #016300;
   }
 `;
+
 export const SubTitle = styled.a`
   font-size: 1rem;
   font-weight: 400;

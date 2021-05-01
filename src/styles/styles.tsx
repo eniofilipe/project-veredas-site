@@ -137,12 +137,10 @@ export const WrapperThreeSection = styled.div`
 export const TextWrapper = styled.div`
   width: 100%;
   height: 18%;
-  /* padding: 4%; */
   padding: 0px 50px 50px 25px;
   p:nth-child(1) {
     font-size: 4rem;
     font-weight: 600;
-    /* padding-bottom: 20px; */
   }
 
   p:nth-child(3) {
@@ -167,18 +165,6 @@ export const TextDivPrincipal = styled.div`
 `;
 
 export const TextDiv1 = styled.div`
-  /* float: left;
-  width: 42%;
-  height: 50%;
-  text-align: left;
-  color: #552200;
-  background-color: rgba(211, 211, 211, 0.8);
-  font-size: 1.8rem;
-  line-height: 1.8;
-  margin-right: 3rem;
-  margin-left: 8rem;
-  border-radius: 10px;
-  padding: 0px 50px 50px 25px; */
   color: #552200;
   background: rgba(255,255,255,0.92);
   height: 400px;
@@ -205,18 +191,6 @@ export const TextDiv2 = styled.div`
   font-weight: 600;
   font-size: 1.4rem;
   line-height: 1.8;
-  /* float: left;
-  width: 42%;
-  height: 55%;
-  text-align: left;
-  color: #017C00;
-  background-color: rgba(211, 211, 211, 0.8);
-  font-size: 1.8rem;
-  line-height: 2;
-  margin-top: 10rem;
-  margin-right: 2rem;
-  border-radius: 10px;
-  padding: 0px 50px 50px 25px; */
 `;
 
 export const TextDiv3 = styled.div`
@@ -229,7 +203,6 @@ export const TextDiv3 = styled.div`
   font-size: 1.8rem;
   line-height: 2;
   margin-right: 1rem;
-  /* margin-bottom: 2rem; */
   border-radius: 10px;
   padding: 0px 50px 50px 25px;
 `;
@@ -241,9 +214,6 @@ export const WrapperFooter = styled.footer`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  /* padding-top: 4vw; */
-  /* padding-bottom: 6vw; */
-  /* gap: 4rem; */
   background-color: #fff;
 
   div p{
@@ -258,26 +228,18 @@ export const WrapperFooter = styled.footer`
   }
   #info{
     text-align: center;
-    /* border: 1px solid black; */
     margin-left: 12.3rem;
-
-    /* padding-left: 2.8rem; */
   }
   #logo{
     margin-right: 4rem;
     display: flex;
-    /* border: 1px solid black; */
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    /* padding-right: 8rem; */
   }
   #contato{
-    /* border: 1px solid black; */
     margin-left: 8rem;
     text-align: center;
-    /* padding-right: 8rem; */
-    /* margin-right: 14rem; */
   }
    ${Logo}:nth-child(1) {
     width: 250px;
@@ -286,24 +248,12 @@ export const WrapperFooter = styled.footer`
   ${Logo}:nth-child(2) {
     width: 120px;
     padding: 1rem;
-    /* margin-left: 2rem; */
   }
   ${Logo}:nth-child(3) {
     width: 150px;
     padding: 1rem;
     border-radius: 30px;
   }
-
-  /* ${Logo}:nth-child(2) {
-    width: 150px;
-    padding: 1rem;
-    margin-left: 2rem;
-  } */
-  /* ${Logo}:nth-child(3) {
-    width: 175px;
-    padding: 1rem;
-    border-radius: 30px;
-  } */
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px -1.95px 6px;
 `;
 

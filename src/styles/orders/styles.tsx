@@ -1,21 +1,25 @@
 import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div``;
+
+export const Body = styled.div``;
+
+export const WrapperController = styled.div``;
+
 export const Logo = styled.img`
 &:nth-child(1) {
   cursor: pointer;
 }
 `;
 
-
 type MenuProps = {
   background?: string;
   position?: number;
 };
+
 export const MenuNav = styled.div`
   /* margin-right: 4rem; */
 `;
-
 
 export const MenuLink = styled.a`
   position: relative;
@@ -69,7 +73,6 @@ export const Header = styled.menu<MenuProps>`
       : '#FFF'};
   `}
 
-
   ${Logo} {
     width: 200px;
   }
@@ -111,6 +114,7 @@ export const Button = styled.button`
     cursor: pointer;
   }
 `;
+
 export const Title = styled.h1`
   font-size: 2rem;
   color: #552200;
@@ -132,10 +136,6 @@ export const Title = styled.h1`
 export const WrapperContent = styled.div`
   padding: 4rem 12rem;
 `;
-
-export const Body = styled.div``;
-export const WrapperController = styled.div``;
-
 
 export const WrapperButtons = styled.div`
   display: flex;
@@ -159,6 +159,7 @@ export const WrapperButtons = styled.div`
     }
   }
 `;
+
 export const WrapperFooter = styled.footer`
   height: 20vh;
   display: flex;

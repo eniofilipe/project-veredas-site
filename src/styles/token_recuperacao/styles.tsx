@@ -2,7 +2,6 @@
 /* eslint-disable import/no-unresolved */
 import styled, { css } from 'styled-components';
 
-
 import Input from '../../components/Inputs/Input';
 
 export const Wrapper = styled.div``;
@@ -138,7 +137,6 @@ export const HeaderWrapper = styled.div<MenuProps>`
   `}
 `;
 
-
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -188,6 +186,7 @@ export const LoginContainer = styled.div`
     color: #016300;
   }
 `;
+
 export const SubTitle = styled.a`
   font-size: 1rem;
   font-weight: 400;

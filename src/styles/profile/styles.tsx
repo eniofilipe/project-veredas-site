@@ -9,7 +9,6 @@ export const Logo = styled.img`
 `;
 
 export const MenuNav = styled.div`
-  /* margin-right: 4rem; */
 `;
 
 
@@ -67,6 +66,7 @@ export const Title = styled.h1`
   margin-left: 2rem;
   font-weight: 400;
 `;
+
 export const MenuItem = styled.h1`
   font-size: 1.5rem;
   color: #552200;
@@ -150,6 +150,7 @@ export const WrapperData = styled.div`
   }
   padding-right: 3rem;
 `;
+
 export const WrapperAddress = styled.div`
   display: flex;
   flex-direction: column;
@@ -169,6 +170,7 @@ export const WrapperAddress = styled.div`
     margin-left: 16%;
   }
 `;
+
 export const Input = styled.input`
   margin-left: auto;
   width: 60%;
@@ -191,13 +193,16 @@ export const Label = styled.p`
 `;
 
 export default Label;
+
 export const WrapperController = styled.div``;
+
 export const Form = styled.div`
   padding-left: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 `;
+
 export const WrapperDataAddress = styled.div`
   display: flex;
   flex-direction: column;
@@ -207,6 +212,7 @@ export const WrapperDataAddress = styled.div`
   justify-content: space-between;
   gap: 1rem;
 `;
+
 export const CardHeader = styled.div`
   display: flex;
   padding-top: 1rem;
@@ -254,6 +260,7 @@ export const EditButtons = styled.div`
     }
   }
 `;
+
 export const Row = styled.div`
   display: flex;
   ${Button} {
@@ -279,6 +286,7 @@ export const Row = styled.div`
     }
   }
 `;
+
 export const WrapperFooter = styled.footer`
   height: 20vh;
   display: flex;
