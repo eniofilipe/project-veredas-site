@@ -27,6 +27,7 @@ import veredaslogo from '../../assets/images/logo.png';
 import logomst from '../../assets/images/logo-mst-rurais.png';
 import logoif from '../../assets/images/logo-if.png';
 import CardProduct from '../../components/Cards/CardProduct';
+import produtoimagem from '../../assets/images/produto.png';
 
 import { Categoria, Oferta } from '../../types';
 
@@ -295,7 +296,8 @@ const products = () => {
                 handleRemove={() => removeProduct(prod)}
                 PlusQuantityOnChange={() => aumentarQuantidade(index)}
                 MinusQuantityOnChange={() => diminuirQuantidade(index)}
-                image={prod.produtos.imagem.url}
+                // image={prod.produtos.imagem === null ? produtoimagem : prod.produtos.imagem.url}
+                image={prod.produtos.imagem === null ? null : prod.produtos.imagem.url}
                 inCart={checkInCart(prod)}
               />
             )):
@@ -316,7 +318,8 @@ const products = () => {
                   handleRemove={() => removeProduct(prod)}
                   PlusQuantityOnChange={() => aumentarQuantidade(index)}
                   MinusQuantityOnChange={() => diminuirQuantidade(index)}
-                  image={prod.produtos.imagem.url}
+                  // image={prod.produtos.imagem === null ? produtoimagem : prod.produtos.imagem.url}
+                  image={prod.produtos.imagem === null ? null : prod.produtos.imagem.url}
                   inCart={checkInCart(prod)}
                 />
                 : ''

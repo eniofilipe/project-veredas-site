@@ -66,7 +66,10 @@ const cardProduct = ({
 
   return (
     <Container>
-      <ImageHeader src={`http://${image}` || produto} alt="" />
+      {image === null ?
+        <ImageHeader src={produto} alt="" />
+      : <ImageHeader src={`http://${image}`} alt="" />}
+      {/* <ImageHeader src={`http://${image}` || produto} alt="" />  */}
       <InfoContainer>
         <Title>{name}</Title>
         <SubTitle>{comment}</SubTitle>
