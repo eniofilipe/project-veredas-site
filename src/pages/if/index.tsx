@@ -18,35 +18,10 @@ import jefeson from '../../assets/desenvolvedores/jefeson.jpg';
 import joao from '../../assets/desenvolvedores/joao.jpg';
 import enio from '../../assets/desenvolvedores/enio.jpg';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: 'flex',
-      height: '200px',
-      width: '600px',
-    },
-    details: {
-      display: 'flex',
-      flexDirection: 'column',
-    },
-    content: {
-      flex: '1 0 auto',
-    },
-    cover: {
-      width: 200,
-      height: 200,
-    },
-  }),
-);
+
 
 const Home = () => {
   const Router = useRouter();
-  const { validade } = useContext(ValidadeContext);
-  const [scrollY, setScrollY] = useState(0);
-
-  const router = useRouter();
-
-  const classes = useStyles();
 
   return (
     <S.Wrapper>
@@ -54,126 +29,82 @@ const Home = () => {
         <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')} />
         <S.TitlePage>Desenvolvedores</S.TitlePage>
         <S.MenuNav>
-          {/* <S.MenuLink onClick={() => Router.push('profile')}>
+          <S.MenuLink onClick={() => Router.push('/')}>
             Perfil
-            </S.MenuLink>
-          <S.MenuLink>
-            Sair
-            </S.MenuLink> */}
+          </S.MenuLink>
         </S.MenuNav>
       </S.Header>
-      <S.Body>
         <S.WrapperBody>
-          <Card className={classes.root}>
-            <CardMedia className={classes.cover}  image={logomst}/>
-            <div className={classes.details}>
-              <CardContent className={classes.content}>
-                <Typography align="center" component="h4" variant="h5">
-                Instituto Federal do Norte de Minas Gerais
-                </Typography>
-                <br/>&ensp;
-                <Link href="https://www.ifnmg.edu.br/montesclaros" color="inherit" variant="h6">
-                Página Oficial
-                </Link>
-                <br/>&ensp;
-                <Link href="https://www.ifnmg.edu.br/cursos/38-portal/montes-claros/montes-claros-cursos/3378-curso-de-bacharelado-em-ciencia-da-computacao" color="inherit" variant="h6">
-                Ciência da Computação
-                </Link>
-              </CardContent>
+
+          <div className="card">
+            <div id="img">
+              <img src={logomst} alt=""/>
             </div>
-          </Card>
-          <Card className={classes.root}>
-            <CardMedia className={classes.cover}  image={logomst}/>
-            <div className={classes.details}>
-              <CardContent className={classes.content}>
-                <br/>
-                <Typography component="h5" variant="h4">
-                Lúcio
-                </Typography>
-              </CardContent>
+            <div className="info">
+              <h1>Instituto Federal do Norte de Minas Gerais</h1>
+              <a href="http://">Página Oficial</a>
+              <a href="http://">Ciência da Computação</a>
             </div>
-          </Card>
-          <Card className={classes.root}>
-            <CardMedia className={classes.cover} image={enio}/>
-            <div className={classes.details}>
-              <CardContent className={classes.content}>
-                <br/>
-                <Typography component="h5" variant="h4">
-                Ênio
-                </Typography>
-                <br/>
-                <Link href="https://www.linkedin.com/in/eniofilipe/" color="inherit" variant="h6">
-                LinkedIn
-                </Link>
-                <br/>
-                <Link href="https://github.com/eniofilipe" color="inherit" variant="h6">
-                GitHub
-                </Link>
-              </CardContent>
+          </div>
+
+          <div className="card">
+            <div id="img">
+              <img src={logomst} alt=""/>
             </div>
-          </Card>
-        </S.WrapperBody>
-        <S.WrapperBody>
-          <Card className={classes.root}>
-            <CardMedia className={classes.cover} image={joao}/>
-            <div className={classes.details}>
-              <CardContent className={classes.content}>
-                <br/>
-                <Typography component="h5" variant="h4">
-                João Kevin
-                </Typography>
-                <br/>
-                <Link href="https://www.linkedin.com/in/joao-kevin-gomes-rodrigues/" color="inherit" variant="h6">
-                LinkedIn
-                </Link>
-                <br/>
-                <Link href="https://github.com/JkevinX23" color="inherit" variant="h6">
-                GitHub
-                </Link>
-              </CardContent>
+            <div className="info">
+              <h1>Lúcio</h1>
+              {/* <a href="http://">Link 1</a>
+              <a href="http://">Link 2</a> */}
             </div>
-          </Card>
-          <Card className={classes.root}>
-            <CardMedia className={classes.cover} image={jefeson}/>
-            <div className={classes.details}>
-              <CardContent className={classes.content}>
-                <br/>
-                <Typography component="h5" variant="h4">
-                Jefeson
-                </Typography>
-                <br/>
-                <Link href="https://www.linkedin.com/in/jefeson-martins-062a0b152/" color="inherit" variant="h6">
-                LinkedIn
-                </Link>
-                <br/>
-                <Link href="https://github.com/Jefesonk1" color="inherit" variant="h6">
-                GitHub
-                </Link>
-              </CardContent>
+          </div>
+
+          <div className="card">
+            <div id="img">
+              <img src={enio} alt=""/>
             </div>
-          </Card>
-          <Card className={classes.root}>
-            <CardMedia className={classes.cover} image={deise}/>
-            <div className={classes.details}>
-              <CardContent className={classes.content}>
-                <br/>
-                <Typography component="h5" variant="h4">
-                Deise Santana
-                </Typography>
-                <br/>
-                <Link href="https://www.linkedin.com/in/deise-santana-503704158/" color="inherit" variant="h6">
-                LinkedIn
-                </Link>
-                <br/>
-                <Link href="https://github.com/deisesan" color="inherit" variant="h6">
-                GitHub
-                </Link>
-              </CardContent>
+            <div className="info">
+              <h1>Ênio</h1>
+              <a href="http://">LinkedIn</a>
+              <a href="http://">GitHub</a>
             </div>
-          </Card>
+          </div>
+
+          <div className="card">
+            <div id="img">
+              <img src={joao} alt=""/>
+            </div>
+            <div className="info">
+              <h1>João Kevin</h1>
+              <a href="http://">LinkedIn</a>
+              <a href="http://">GitHub</a>
+            </div>
+          </div>
+
+          <div className="card">
+            <div id="img">
+              <img src={jefeson} alt=""/>
+            </div>
+            <div className="info">
+              <h1>Jefeson</h1>
+              <a href="http://">LinkedIn</a>
+              <a href="http://">GitHub</a>
+            </div>
+          </div>
+
+          <div className="card">
+            <div id="img">
+              <img src={deise} alt=""/>
+            </div>
+            <div className="info">
+              <h1>Deise</h1>
+              <a href="http://">LinkedIn</a>
+              <a href="http://">GitHub</a>
+            </div>
+          </div>
+
+
         </S.WrapperBody>
        <Footer/>
-      </S.Body>
     </S.Wrapper>
   );
 };

@@ -1,7 +1,8 @@
 /* eslint-disable indent */
 import styled, { css } from 'styled-components';
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div`
+`;
 
 export const Logo = styled.img`
 &:nth-child(1) {
@@ -100,29 +101,55 @@ export const TitleDesenvolvedores = styled.p`
 `;
 
 export const WrapperBody = styled.div`
-  height: 10vh;
   display: flex;
-  width: 100%;
+  gap: 4rem;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  padding-top: 8vw;
-  padding-left: 10vh;
-  padding-right: 10vh;
-  padding-bottom: 14vh;
-  gap: 6rem;
-  div {
-    color: #000000;
-    font-size: 1.5rem;
-  }
-  ${Logo}:nth-child(1) {
-    width: 200px;
+  justify-content: center;
+  width: 100%;
+  .card{
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     padding: 1rem;
+    min-height: 250px;
+    width: 512px;
+    border-radius: 10px;
+    margin: 2rem;
+    gap: 2rem;
+    img{
+      width: 200px;
+      min-height: 200px;
+      border-radius: 50%;
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    }
+    .info{
+      h1{
+        font-size: 1.5rem;
+        width: 100%;
+        margin-bottom: 4rem;
+        font-weight: 500;
+        color: #552200;
+      }
+      a{
+        text-decoration: none;
+        width: 100%;
+        color: #000c00;
+        &:hover {
+          color: #000000;
+        }
+        font-size: 1.2rem;
+      }
+      width: 100%;
+      display:flex;
+      flex-direction: column;
+    }
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   }
-
-  ${Logo}:nth-child(2) {
-    width: 200px;
-    padding: 1rem;
-  }
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 `;
 
 export const Body = styled.body``;
