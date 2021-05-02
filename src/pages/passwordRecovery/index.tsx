@@ -49,7 +49,7 @@ const PasswordRecovery = () => {
         <S.Header>
           <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')} />
           <S.MenuNav>
-            <S.MenuLink onClick={() => Router.push('/')}>Home</S.MenuLink>
+            {/* <S.MenuLink onClick={() => Router.push('/')}>Home</S.MenuLink> */}
             {!validade ? (
               <S.Button onClick={goToLogin}>Criar conta</S.Button>
             ) : (
@@ -72,9 +72,11 @@ const PasswordRecovery = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <S.ButtonLogin onClick={() => setRecuperarSenha({ email })}>
-            Enviar
+          <S.LoginContainer className="botoes">
+            <S.ButtonLogin onClick={() => setRecuperarSenha({ email })}>
+              Enviar
             </S.ButtonLogin>
+          </S.LoginContainer>
         </S.LoginContainer>
       </S.Content>
       <Footer/>

@@ -122,6 +122,11 @@ export const WrapperItem = styled.div`
   justify-content: space-between;
   border-radius: 8px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  @media (max-width: 1442px) {
+    padding: 1rem;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
 `;
 
 export const WrapperControl = styled.div`
@@ -237,7 +242,7 @@ export const WrapperButtons = styled.div`
 `;
 
 export const CancelButton = styled.button`
-  background: #017C00;
+  background: #961913;
   color: #fff;
   border-radius: 8px;
   padding: 1rem 2rem;

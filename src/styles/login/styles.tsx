@@ -25,11 +25,19 @@ export const Header = styled.menu<MenuProps>`
       ? '#FFF'
       : '#FFF'};
   `}
-
   ${Logo} {
     width: 200px;
   }
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+  @media(max-width: 658px){
+    padding: 0.8rem;
+    align: center;
+
+    ${Logo} {
+    width: 150px;
+    }
+  }
 `;
 
 export const HeaderWrapper = styled.div<MenuProps>`
@@ -63,6 +71,12 @@ export const Button = styled.button`
     background: #016300;
     cursor: pointer;
   }
+
+  @media (max-width: 442px){
+    padding: 0.8rem 0.6rem 0.8rem 0.6rem;
+    margin-left: 1rem;
+    margin-right: -2rem;
+  }
 `;
 
 export const ButtonLogin = styled.button`
@@ -74,8 +88,8 @@ export const ButtonLogin = styled.button`
   outline: none;
   font-weight: bold;
   font-size: 1rem;
-  width: 460px;
-  height: 60px;
+  width: 29rem;
+  height: 3.4rem;
 
   &:hover {
     color: #fff;
@@ -83,6 +97,12 @@ export const ButtonLogin = styled.button`
     border: 1px solid #016300;
     cursor: pointer;
   }
+
+  @media (max-width: 581px) {
+    width: 10rem;
+    height: 3.4rem;
+  }
+
 `;
 
 export const Content = styled.div`
@@ -133,6 +153,11 @@ export const LoginContainer = styled.div`
   .login-icon{
     color: #016300;
   }
+  .botoes{
+    flex-direction: column;
+    padding-top: 0rem;
+    align-items: center;
+  }
 `;
 
 export const SubTitle = styled.a`
@@ -150,13 +175,16 @@ export const Icon = styled.div`
 
 export const MenuNav = styled.div`
   margin-right: 4rem;
+  @media (max-width: 658px){
+    margin-right: 2rem;
+  }
 `;
 
 export const MenuLink = styled.a`
   position: relative;
   color: #552200;;
   font-size: 1.5rem;
-  margin: 0.3rem 0.8rem 0;
+  margin: 0.3rem 0.8rem;
   text-decoration: none;
   text-align: center;
   cursor: pointer;
