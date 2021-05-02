@@ -106,7 +106,10 @@ const products = () => {
 
     return tem;
   }
-  const aumentarQuantidade = (index: number) => {
+  const aumentarQuantidade = (index: number, maxQuantity: number) => {
+    if(quantidade[index]+1 > maxQuantity){
+      return;
+    }
     const temp = quantidade;
     if (!temp[index]) {
       temp[index] = 1;
@@ -295,7 +298,7 @@ const products = () => {
                   addProduct(prod, quantidade[index] ? quantidade[index] : 1)
                 }
                 handleRemove={() => removeProduct(prod)}
-                PlusQuantityOnChange={() => aumentarQuantidade(index)}
+                PlusQuantityOnChange={() => aumentarQuantidade(index,prod.quantidade)}
                 MinusQuantityOnChange={() => diminuirQuantidade(index)}
                 // image={prod.produtos.imagem === null ? produtoimagem : prod.produtos.imagem.url}
                 image={prod.produtos.imagem === null ? null : prod.produtos.imagem.url}
@@ -317,7 +320,7 @@ const products = () => {
                     addProduct(prod, quantidade[index] ? quantidade[index] : 1)
                   }
                   handleRemove={() => removeProduct(prod)}
-                  PlusQuantityOnChange={() => aumentarQuantidade(index)}
+                  PlusQuantityOnChange={() => aumentarQuantidade(index,prod.quantidade)}
                   MinusQuantityOnChange={() => diminuirQuantidade(index)}
                   // image={prod.produtos.imagem === null ? produtoimagem : prod.produtos.imagem.url}
                   image={prod.produtos.imagem === null ? null : prod.produtos.imagem.url}

@@ -91,8 +91,10 @@ const Cart = () => {
 
   }, [products, freteFixo]);
 
-  const aumentarQuantidade = (index: number) => {
-
+  const aumentarQuantidade = (index: number, maxQuantity: number) => {
+    if(products[index].quantidadeCart +1 > maxQuantity){
+      return
+    }
     products[index].quantidadeCart += 1;
     // setRenderizando(products[index].quantidadeCart);
 
@@ -195,7 +197,7 @@ const Cart = () => {
                 </S.ButtonMinus>
 
                 <S.Quantity>{offer.quantidadeCart}</S.Quantity>
-                <S.ButtonPlus onClick={() => aumentarQuantidade(index)}>
+                <S.ButtonPlus onClick={() => aumentarQuantidade(index,offer.quantidade)}>
                   <FontAwesomeIcon icon={faPlus} />
                 </S.ButtonPlus>
               </S.QuantityContainer>
