@@ -10,9 +10,13 @@ import logomst from '../assets/images/logo-mst-rurais.png';
 import imagecampo from '../assets/images/Campo-cidade.png';
 import ValidadeContext from '../contexts/validade';
 import Footer from '../components/Footer'
+import { Menu as MenuIcon } from '@styled-icons/feather/Menu'
+import { CloseOutline as CloseIcon } from '@styled-icons/evaicons-outline/CloseOutline'
+import Link from 'next/link'
 
 const Home = () => {
   const Router = useRouter();
+  const [isOpen, setIsOpen] = useState(true)
   const { validade } = useContext(ValidadeContext);
   const [scrollY, setScrollY] = useState(0);
 
@@ -21,6 +25,35 @@ const Home = () => {
   const sectionOneRef = useRef<null | HTMLDivElement>(null);
   const sectionTwoRef = useRef<null | HTMLDivElement>(null);
   const sectionThreeRef = useRef<null | HTMLDivElement>(null);
+
+  function setRef(value: number) {
+    switch (value) {
+      case 1:
+        if (router.pathname !== '/') {
+          router.push('/')
+        }
+        !!handleChange && handleChange('sectionOneRef')
+        return
+      case 2:
+        if (router.pathname !== '/') {
+          router.push('/')
+        }
+        !!handleChange && handleChange('sectionTwoRef')
+        return
+      case 3:
+        if (router.pathname !== '/') {
+          router.push('/')
+        }
+        !!handleChange && handleChange('sectionThreeRef')
+        return
+    }
+  }
+
+
+  function mobileMenu(option: number) {
+    setRef(option)
+    setIsOpen(false)
+  }
 
   function logit() {
     setScrollY(window.pageYOffset);
@@ -72,6 +105,15 @@ const Home = () => {
 
   return (
     <S.Wrapper>
+
+      <S.Sandwich>
+      <S.Logo src={veredaslogo} alt="Home" />
+        <S.IconWrapper >
+          <MenuIcon onClick={() => setIsOpen(true)} aria-label="Open Menu" />
+        </S.IconWrapper>
+      </S.Sandwich>
+
+
       <S.HeaderWrapper position={scrollY}>
         <S.Header>
           {/* <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')}/> */}
@@ -93,6 +135,25 @@ const Home = () => {
             )}
           </S.MenuNav>
         </S.Header>
+
+
+      <S.MenuFull aria-hidden={!isOpen} isOpen={isOpen}>
+        <CloseIcon aria-label="Close Menu" onClick={() => setIsOpen(false)} />
+        <S.MenuNav>
+          <S.MenuLink onClick={() => mobileMenu(1)}>Home</S.MenuLink>
+          <S.MenuLink onClick={() => mobileMenu(2)}>Quem somos</S.MenuLink>
+          <S.MenuLink onClick={() => mobileMenu(3)}>Como Funciona</S.MenuLink>
+          {!validade ? (
+             <Link href="/login">
+              <S.Button>Acessar Conta</S.Button>
+              </Link>
+            ) : (
+              <Link href="/products">
+                <S.Button>Entrar na Feirinha</S.Button>
+              </Link>
+            )}
+        </S.MenuNav>
+      </S.MenuFull>
       </S.HeaderWrapper>
 
       <S.HomeSectionWrapper ref={sectionOneRef}>
@@ -138,15 +199,10 @@ const Home = () => {
           <S.TextDiv1>
           <p>&nbsp; Pedidos: Segunda-Feira até Quarta-Feira. </p>
           <p>&nbsp; Entregas: A partir de Sexta-Feira. </p>
-            {/* &nbsp; &nbsp; &nbsp; Alteração do pedido até as Quarta-Feira 23:59hrs. <p /> */}
             <p>&nbsp; Taxa de Entrega: R$ 5,00. </p>
             <p>&nbsp; Entraremos em contato caso ocorra algum imprevisto! </p>
           </S.TextDiv1>
-          {/* <S.TextDiv3>
-            Endereço: Assentamento Estrela do Norte, Estrada da Produção, Km 14,
-            CEP: 39410-000, Zona Rural, Município de Montes Claros/MG CEP:
-            39410-000.
-          </S.TextDiv3> */}
+
         </S.TextDivPrincipal>
         <div ref={sectionThreeRef}>
 
