@@ -16,7 +16,7 @@ import Link from 'next/link'
 
 const Home = () => {
   const Router = useRouter();
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
   const { validade } = useContext(ValidadeContext);
   const [scrollY, setScrollY] = useState(0);
 
