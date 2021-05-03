@@ -63,12 +63,11 @@ const Login = () => {
       <Head>
         <title>Veredas da terra</title>
       </Head>
-
       <S.HeaderWrapper>
         <S.Header>
           <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')} />
           <S.MenuNav>
-            <S.MenuLink onClick={() => Router.push('/')}>Home</S.MenuLink>
+            {/* <S.MenuLink onClick={() => Router.push('/')}>Home</S.MenuLink> */}
             {!validade ? (
               <S.Button onClick={goToLogin}>Criar conta</S.Button>
             ) : (
@@ -106,10 +105,12 @@ const Login = () => {
             Esqueci a senha
             </S.SubTitle>
           <p />
-          <S.ButtonLogin onClick={() => handleLogin()}>Acessar</S.ButtonLogin>
-          <S.ButtonLogin onClick={() => Router.push('/register')}>
-            Criar conta
+          <S.LoginContainer className="botoes">
+            <S.ButtonLogin onClick={() => handleLogin()}>Acessar</S.ButtonLogin>
+            <S.ButtonLogin onClick={() => Router.push('/register')}>
+              Criar Conta
             </S.ButtonLogin>
+          </S.LoginContainer>
         </S.LoginContainer>
       </S.Content>
       <Footer/>

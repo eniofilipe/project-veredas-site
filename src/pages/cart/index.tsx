@@ -132,7 +132,6 @@ const Cart = () => {
       setTotal(result + freteFixo);
     }
     // setRenderizando(products[index].quantidadeCart);
-
   };
 
   async function handlePedido() {
@@ -191,11 +190,9 @@ const Cart = () => {
           {products.map((offer, index) => (
             <S.WrapperItem>
               <S.QuantityContainer>
-
                 <S.ButtonMinus onClick={() => diminuirQuantidade(index)}>
                   <FontAwesomeIcon icon={faMinus} />
                 </S.ButtonMinus>
-
                 <S.Quantity>{offer.quantidadeCart}</S.Quantity>
                 <S.ButtonPlus onClick={() => aumentarQuantidade(index,offer.quantidade)}>
                   <FontAwesomeIcon icon={faPlus} />
@@ -203,7 +200,7 @@ const Cart = () => {
               </S.QuantityContainer>
               <S.WrapperProd>
                 <S.Text id="prodNameDesc">Produto: {offer.produtos.nome}</S.Text>
-                <S.Text id="prodPriceDesc">Preço unitário: <S.Text id="boldPrice">R$ {offer.valor_unitario}</S.Text></S.Text>
+                <S.Text id="prodPriceDesc">Preço Unitário: <S.Text id="boldPrice">R$ {offer.valor_unitario}</S.Text></S.Text>
               </S.WrapperProd>
               <S.Value>
                 R$ {(offer.valor_unitario * offer.quantidadeCart).toFixed(2)}{' '}
@@ -246,15 +243,13 @@ const Cart = () => {
             )}
           </S.Address>
         </S.WrapperItem>
-
         <S.WrapperButtons>
           <S.CancelButton onClick={() => router.back()}>Cancelar</S.CancelButton>
           <S.AcceptButton onClick={() => handlePedido()}>
-            CONFIRMAR PEDIDO
+            Confirmar
         </S.AcceptButton>
         </S.WrapperButtons>
       </S.WrapperContent>
-
       <Footer/>
     </S.Wrapper>
   );
