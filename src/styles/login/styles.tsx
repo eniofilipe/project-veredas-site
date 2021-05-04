@@ -209,6 +209,12 @@ export const MenuLink = styled.a`
       }
     }
   }
+
+  @media (max-width: 860px){
+    &#home{
+      display: none;
+    }
+  }
 `;
 
 
