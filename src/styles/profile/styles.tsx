@@ -65,6 +65,9 @@ export const Title = styled.h1`
   margin-right: 2rem;
   margin-left: 2rem;
   font-weight: 400;
+  @media (max-width: 1280px){
+    font-size: 1rem;
+  }
 `;
 
 export const MenuItem = styled.h1`
@@ -112,7 +115,6 @@ export const Button = styled.button`
   #button-passwd{
     margin-top: 400px;
     color: black;
-    border: 2px solid black;
   }
 `;
 
@@ -124,6 +126,10 @@ export const WrapperContent = styled.div`
   padding-left: 14%;
   padding-right: 14%;
   justify-content: space-between;
+  @media (max-width: 1280px){
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
 `;
 
 export const WrapperMenu = styled.div`
@@ -143,13 +149,42 @@ export const WrapperData = styled.div`
   padding: 1rem;
   margin-top: 2rem;
   padding-bottom: 2rem;
+
   ${Title} {
     text-align: left;
     padding-top: 0.8rem;
     padding-bottom: 1.2rem;
   }
   padding-right: 3rem;
+  @media (max-width: 1280px){
+    width: 100%;
+  }
+
 `;
+
+
+export const Input = styled.input`
+  margin-left: auto;
+  width: 60%;
+  background: #f4f4f4;
+  border: 2px solid #c3c3c3;
+  height: 60px;
+  border-radius: 0.4rem;
+  outline: none;
+  font-size: 1.4rem;
+  color: #552200;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 14px;
+  @media (max-width: 1280px){
+    font-size: 1rem;
+    height: 40px;
+    width: 100%;
+    /* padding: 0; */
+    margin: 0;
+  }
+`;
+
 
 export const WrapperAddress = styled.div`
   display: flex;
@@ -169,27 +204,24 @@ export const WrapperAddress = styled.div`
     padding-bottom: 1.2rem;
     margin-left: 16%;
   }
+  @media (max-width: 1280px){
+    /* width: 72%; */
+  }
+  @media (max-width: 1280px){
+    font-size: 1rem;
+  }
 `;
 
-export const Input = styled.input`
-  margin-left: auto;
-  width: 60%;
-  background: #f4f4f4;
-  border: 2px solid #c3c3c3;
-  height: 60px;
-  border-radius: 0.4rem;
-  outline: none;
-  font-size: 1.4rem;
-  color: #552200;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 14px;
-`;
+
+
 
 export const Label = styled.p`
   font-size: 1.4rem;
   color: #552200;
   margin-top: 14px;
+  @media (max-width: 1280px){
+    font-size: 1rem;
+  }
 `;
 
 export default Label;
@@ -201,6 +233,9 @@ export const Form = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  @media (max-width: 1280px){
+    flex-wrap: wrap;
+  }
 `;
 
 export const WrapperDataAddress = styled.div`
@@ -211,6 +246,11 @@ export const WrapperDataAddress = styled.div`
   padding-right: 30%;
   justify-content: space-between;
   gap: 1rem;
+  @media (max-width: 1280px){
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+
 `;
 
 export const CardHeader = styled.div`
@@ -223,6 +263,7 @@ export const CardHeader = styled.div`
     margin-left: none;
     height: 54px;
   }
+
 `;
 
 export const EditButtons = styled.div`
@@ -284,6 +325,16 @@ export const Row = styled.div`
       font-size: 1rem;
       padding: 1rem 2rem 1rem 2rem;
     }
+  }
+
+  @media (max-width: 1280px){
+    font-size: 1rem;
+    flex-direction: column;
+    &#field{
+    margin-top: 0px;
+    }
+    align-items: center;
+    justify-content: center;
   }
 `;
 
