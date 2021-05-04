@@ -93,6 +93,12 @@ export const HeaderWrapper = styled.div<MenuProps>`
   `}
 `;
 
+export const SpanResponsivo = styled.span`
+  @media(max-width: 485px){
+    margin-left: -4rem;
+  }
+`;
+
 export const Button = styled.button`
   background: #017C00;
   color: #fff;
@@ -100,18 +106,36 @@ export const Button = styled.button`
   padding: 0.5rem 1rem;
   margin-top: -5rem;
   margin-bottom: -5rem;
-  margin-right: 1rem;
   border: none;
   outline: none;
   margin-left: 2rem;
   font-weight: bold;
   font-size: 1rem;
-
   &:hover {
     transition: 0.4s;
     color: #fff;
     background: #016300;
     cursor: pointer;
+  }
+  &#menor{
+    display: none;
+  }
+
+  @media(max-width: 700px){
+    margin-right: 2rem;
+  }
+
+  @media(max-width: 574px){
+    margin-left: -1rem;
+  }
+
+  @media(max-width: 485px){
+    display: none;
+    &#menor{
+      display: inline;
+      margin-right: 1rem;
+      font-size: 1rem;
+    }
   }
 `;
 
@@ -127,14 +151,27 @@ export const Title = styled.h1`
 
   &#principal{
     margin-top: 3rem;
-  margin-bottom: 0rem;
+    margin-bottom: 0rem;
     text-align: center;
     margin-bottom: 1rem;
   }
 `;
 
 export const WrapperContent = styled.div`
-  padding: 4rem 12rem;
+  padding: 4rem 10rem;
+
+  @media(max-width: 1300px){
+    padding: 3rem 4rem;
+  }
+
+  @media(max-width: 600px){
+    padding: 3rem 2rem;
+    font-size: 1rem;
+  }
+
+  @media(max-width: 452px){
+    padding: 3rem 1rem;
+  }
 `;
 
 export const WrapperButtons = styled.div`
