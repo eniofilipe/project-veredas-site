@@ -129,9 +129,14 @@ export const WrapperBody = styled.div`
       h1{
         font-size: 1.5rem;
         width: 100%;
-        margin-bottom: 4rem;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
         font-weight: 500;
         color: #552200;
+        &#campus{
+        font-size: 1.2rem;
+        margin-top: -2rem;
+      }
       }
       a{
         text-decoration: none;
@@ -142,6 +147,7 @@ export const WrapperBody = styled.div`
         }
         font-size: 1.2rem;
       }
+
       width: 100%;
       display:flex;
       flex-direction: column;
