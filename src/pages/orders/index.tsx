@@ -31,6 +31,7 @@ import AuthContext from '../../contexts/auth';
 import { PedidosProps } from '../../types';
 import { getPedidos, deletePedido } from '../../api/Pedidos';
 import { FormatDateByFNS } from '../../Utils/Masks';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,8 +39,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#f2f2f2',
     color: '#552200',
     borderRadius: '20px',
-
-
   },
   nested: {
     border: '1px solid magenta',
@@ -68,9 +67,20 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '1.0rem',
       color: '#441b00',
     },
+    [theme.breakpoints.down(700)]:{
+      '& th': {
+        fontSize: '1.0rem',
+      },
+      '& td': {
+        fontSize: '0.9rem',
+      },
+    },
   },
-
-
+  apagada: {
+      [theme.breakpoints.down(500)]:{
+          display: 'none',
+      },
+  },
 }));
 
 
@@ -189,13 +199,15 @@ const Order = () => {
                         pedido.createdAt
                       )}
                       \xa0\xa0\xa0\xa0\xa0\xa0\xa0
-                      \xa0\xa0\xa0\xa0\xa0\xa0\xa0
                       ${`${pedido.status}\xa0\xa0\xa0\xa0\xa0\xa0\xa0`}
                       `}
                     />
                     {pedido.status === "aberto" ?
-                      <ListItemText><S.Button onClick={() => deleteOrder(pedido.id)}>Cancelar</S.Button></ListItemText>
-                    : <ListItemText />
+                      <ListItemText align="right">
+                        <S.Button onClick={() => deleteOrder(pedido.id)}>Cancelar</S.Button>
+                        <S.Button id="menor" onClick={() => deleteOrder(pedido.id)}><DeleteForeverIcon style={{ fontSize: 20 }}/></S.Button>
+                      </ListItemText>
+                    : <ListItemText> <S.SpanResponsivo/> </ListItemText>
                     }
                     {controle ? <ExpandLess /> : <ExpandMore />}
                   </ListItem>
@@ -207,9 +219,9 @@ const Order = () => {
                       <Table aria-label="spanning table">
                         <TableHead>
                           <TableRow>
-                            <TableCell>Quantidade</TableCell>
+                            <TableCell>Qtd</TableCell>
                             <TableCell align="left">Produto</TableCell>
-                            <TableCell align="center">
+                            <TableCell className={classes.apagada} align="center">
                               Valor Unitário
                             </TableCell>
                             <TableCell colSpan={2} align="right">
@@ -227,7 +239,7 @@ const Order = () => {
                             <TableCell align="left">
                               {prod.produtos.nome}
                             </TableCell>
-                            <TableCell align="center">
+                            <TableCell className={classes.apagada} align="center">
                               R$ {prod.valor_unitario}
                             </TableCell>
                             <TableCell colSpan={2} align="right">
@@ -248,13 +260,7 @@ const Order = () => {
                           </TableCell>
                         </TableRow>
                         <TableRow >
-                        {/* {pedido.status === "aberto" ?
-                           <TableCell>
-                            <S.Button onClick={() => deleteOrder(pedido.id)}>Cancelar</S.Button>
-                          </TableCell>
-                        : <TableCell/>
-                        } */}
-                          <TableCell>Taxa de entrega</TableCell>
+                          <TableCell>Taxa de Entrega</TableCell>
                           <TableCell colSpan={2} align="right">
                             R$ {pedido.frete.valor_frete.toFixed(2)}
                           </TableCell>
