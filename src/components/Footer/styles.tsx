@@ -147,7 +147,7 @@ export const WrapperFooter = styled.footer`
     }
   }
   @media (max-width: 514px){
-    height: 110vh;
+    height: 70vh;
     justify-content: inherit;
     #logo{
       width: 100%;
