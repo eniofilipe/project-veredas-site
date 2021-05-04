@@ -67,7 +67,7 @@ const Login = () => {
         <S.Header>
           <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')} />
           <S.MenuNav>
-            {/* <S.MenuLink onClick={() => Router.push('/')}>Home</S.MenuLink> */}
+            <S.MenuLink id="home" onClick={() => Router.push('/')}>Home</S.MenuLink>
             {!validade ? (
               <S.Button onClick={goToLogin}>Criar conta</S.Button>
             ) : (

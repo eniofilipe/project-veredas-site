@@ -199,7 +199,7 @@ const Cart = () => {
                 </S.ButtonPlus>
               </S.QuantityContainer>
               <S.WrapperProd>
-                <S.Text id="prodNameDesc">Produto: {offer.produtos.nome}</S.Text>
+                <S.Text id="prodNameDesc">Produto:  <S.Text id="corProduto"> {offer.produtos.nome} </S.Text> </S.Text>
                 <S.Text id="prodPriceDesc">Preço Unitário: <S.Text id="boldPrice">R$ {offer.valor_unitario}</S.Text></S.Text>
               </S.WrapperProd>
               <S.Value>
@@ -223,7 +223,7 @@ const Cart = () => {
             </S.Row>
           </S.WrapperSubtotal>
         </S.Items>
-        <S.WrapperItem>
+        <S.ContainerPagamento>
           <S.WrapperSelect>
             <S.Label>Tipo de Pagamento</S.Label>
             <S.Select value={pagamento} onChange={handlePagamento} >
@@ -236,13 +236,14 @@ const Cart = () => {
             <S.Label>Endereço</S.Label>
             {endereco && (
               <S.Text>
-                {endereco?.cep.toString().replace(/(\d{5})(\d)/, '$1-$2')};{' '}
-                {endereco.street}, {endereco.number}, {endereco.neighborhood}{' '}
-                <br /> {endereco.complement}
+                {/* {endereco?.cep.toString().replace(/(\d{5})(\d)/, '$1-$2')};{' '} */}
+                {'Endereço: '} {endereco.street}, {endereco.number}
+                <br /> {'Bairro:'} {endereco.neighborhood}{' '}
+                <br /> {'Complemento: '} {endereco.complement}
               </S.Text>
             )}
           </S.Address>
-        </S.WrapperItem>
+        </S.ContainerPagamento>
         <S.WrapperButtons>
           <S.CancelButton onClick={() => router.back()}>Cancelar</S.CancelButton>
           <S.AcceptButton onClick={() => handlePedido()}>

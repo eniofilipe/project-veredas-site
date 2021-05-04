@@ -102,54 +102,101 @@ export const TitleDesenvolvedores = styled.p`
 
 export const WrapperBody = styled.div`
   display: flex;
-  gap: 4rem;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center; */
+  justify-content: space-evenly;
   width: 100%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+
+  @media(max-width: 1152px){
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+  }
+
   .card{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     background-color: #fff;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    min-height: 250px;
-    width: 512px;
+    min-height: 16rem;
+    width: 32rem;
     border-radius: 10px;
     margin: 2rem;
-    gap: 2rem;
+    gap: 1rem;
+
+    @media(max-width: 1152px){
+        min-height: 10rem;
+        width: 28rem;
+    }
+
     img{
       width: 200px;
       min-height: 200px;
       border-radius: 50%;
       box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
-    }
-    .info{
-      h1{
-        font-size: 1.5rem;
-        width: 100%;
-        margin-bottom: 4rem;
-        font-weight: 500;
-        color: #552200;
+
+      @media(max-width: 1152px){
+        width: 170px;
+        min-height: 170px;
       }
-      a{
+
+      @media(max-width: 380px){
+        width: 150px;
+        min-height: 150px;
+      }
+    }
+
+    a{
         text-decoration: none;
         width: 100%;
         color: #000c00;
         &:hover {
           color: #000000;
         }
-        font-size: 1.2rem;
+        font-size: 1.1rem;
+
+        @media(max-width: 1152px){
+          font-size: 1rem;
+        }
       }
+
+    .info{
       width: 100%;
-      display:flex;
+      display: flex;
       flex-direction: column;
+      h1{
+        font-size: 1.5rem;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+        font-weight: 500;
+        color: #552200;
+        &#campus{
+        font-size: 1.2rem;
+        margin-top: -2rem;
+        }
+      }
+
+      @media(max-width: 1152px){
+        h1{
+          font-size: 1.3rem;
+          margin-top: 0.8rem;
+          margin-bottom: 2rem;
+          font-weight: 500;
+          color: #552200;
+          &#campus{
+          font-size: 1rem;
+          margin-top: -2rem;
+          }
+        }
+      }
     }
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+
   }
-  margin-top: 2rem;
-  margin-bottom: 2rem;
 `;
 
 export const Body = styled.body``;

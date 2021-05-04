@@ -103,6 +103,10 @@ export const WrapperMenu = styled.div`
 export const WrapperContent = styled.div`
   width: 80%;
   margin: 1.5rem auto;
+
+  @media (max-width: 920px){
+    width: 90%;
+  }
 `;
 
 export const Label = styled.span`
@@ -164,18 +168,80 @@ export const SubButton = styled.button`
 export const Text = styled.span`
   color: #552200;
   font-size: 1rem;
-  max-width: 400px;
+  max-width: 30rem;
   &#prodNameDesc{
-    width: 600px;
+    width: 37.5rem;
     color: #552200;
-    margin-right: 40px;
+    margin-right: 4rem;
+    margin-left: 1.5rem;
   }
   &#prodPriceDesc{
     color: #552200;
   }
-  #boldPrice{
+  &#boldPrice{
     font-weight: 600;
     color: green;
+  }
+  &#corProduto{
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: #552200;
+  }
+
+  @media (max-width: 1959px){
+    &#prodNameDesc{
+      margin-right: 4rem;
+      margin-left: 1rem;
+    }
+  }
+
+  @media (max-width: 1710px){
+    &#prodNameDesc{
+      margin-right: 0rem;
+    }
+  }
+
+  @media (max-width: 1550px){
+    &#prodNameDesc{
+      width: 20rem;
+    }
+  }
+
+  @media (max-width: 1150px){
+    &#prodNameDesc{
+      width: 14rem;
+      margin-right: 0rem;
+    }
+  }
+
+  @media (max-width: 920px){
+    &#prodPriceDesc{
+      width: 8rem;
+    }
+  }
+
+  @media (max-width: 798px){
+    &#prodPriceDesc{
+      display: none;
+      width: 0rem;
+    }
+    &#prodNameDesc{
+      width: 10rem;
+    }
+  }
+
+  @media (max-width: 550px){
+    &#prodNameDesc{
+      width: 6rem;
+      margin-right: 0rem;
+    }
+  }
+
+  @media (max-width: 490px){
+    &#prodNameDesc{
+      width: 6rem;
+      margin-right: -2rem;
+    }
   }
 `;
 
@@ -200,33 +266,66 @@ export const Items = styled.div`
 `;
 
 export const WrapperSelect = styled.div`
-margin-top: 0.5rem;
-background: #fff;
-border-radius: 8px;
+  margin-top: 0.5rem;
+  background: #fff;
+  border-radius: 8px;
   display: flex;
   width: 100%;
+  padding: 1rem;
   align-items: center;
   justify-content: center;
-  gap: 5%;
+  gap: 6%;
   ${Label} {
     color: #552200;
     font-size: 1rem;
     align-self: flex-end;
     font-weight: 400;
   }
+
+  @media (max-width: 610px) {
+    justify-content: space-around;
+    justify-content: left;
+    padding: 0.2rem 1rem 2rem;
+    gap: 8%;
+  }
+`;
+
+export const ContainerPagamento = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  padding-left: 5%;
+  margin-top: 0.4rem;
+  justify-content: space-between;
+  border-radius: 8px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  padding: 1.5rem 0rem 1rem 1rem;
+  gap: 6%;
+
+  @media (max-width: 810px) {
+    padding: 1.5rem 0rem 1rem 1rem;
+  }
+
+  @media (max-width: 610px) {
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
 `;
 
 export const Select = styled.select`
   color: #016300;
   outline: none;
-  padding: 0.5rem 2rem;
+  padding: 0.6rem 1rem 0.5rem 1rem;
 `;
 
 export const Address = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left: 1rem;
   width: 100%;
-  gap: 0.5rem;
+  gap: 1rem;
   padding-bottom: 1rem;
   ${Text} {
     font-size: 1rem;
@@ -245,7 +344,38 @@ export const CancelButton = styled.button`
   background: #961913;
   color: #fff;
   border-radius: 8px;
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  font-size: 1rem;
+  width: 24rem;
+
+  &:hover {
+    transition: 0.4s;
+    color: #fff;
+    background: #961913;
+    cursor: pointer;
+  }
+
+  @media (max-width: 1160px) {
+    width: 15rem;
+  }
+
+  @media (max-width: 640px) {
+    width: 12rem;
+  }
+
+  @media (max-width: 490px) {
+    width: 8rem;
+  }
+`;
+
+export const AcceptButton = styled.button`
+  background: #017C00;
+  color: #fff;
+  border-radius: 8px;
+  padding: 1rem 1rem;
   border: none;
   outline: none;
   font-weight: bold;
@@ -258,24 +388,17 @@ export const CancelButton = styled.button`
     background: #016300;
     cursor: pointer;
   }
-`;
 
-export const AcceptButton = styled.button`
- background: #017C00;
-  color: #fff;
-  border-radius: 8px;
-  padding: 1rem 2rem;
-  border: none;
-  outline: none;
-  font-weight: bold;
-  font-size: 1rem;
-  width: 24rem;
+  @media (max-width: 1160px) {
+    width: 15rem;
+  }
 
-  &:hover {
-    transition: 0.4s;
-    color: #fff;
-    background: #016300;
-    cursor: pointer;
+  @media (max-width: 640px) {
+    width: 12rem;
+  }
+
+  @media (max-width: 490px) {
+    width: 8rem;
   }
 `;
 
@@ -298,6 +421,10 @@ export const WrapperSubtotal = styled.div`
   margin-left: 50%;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 798px){
+    margin-left: 1.2rem;
+  }
 `;
 
 export const Row = styled.div`
@@ -320,7 +447,11 @@ export const Line = styled.div`
 export const QuantityContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-right: 40px;
+  margin-right: 2.5;
+
+  @media (max-width: 920px){
+    margin-right: 2rem;
+  }
 `;
 
 export const ButtonMinus = styled.button`
@@ -329,6 +460,10 @@ export const ButtonMinus = styled.button`
   cursor: pointer;
   margin-right: 14px;
   color: #017C00;
+
+  @media (max-width: 920px){
+    margin-right: 0rem;
+  }
 `;
 
 export const ButtonPlus = styled.button`
@@ -337,6 +472,10 @@ export const ButtonPlus = styled.button`
   margin-left: 14px;
   cursor: pointer;
   color: #017C00;
+
+  @media (max-width: 920px){
+    margin-left: 0rem;
+  }
 `;
 
 export const Quantity = styled.span`

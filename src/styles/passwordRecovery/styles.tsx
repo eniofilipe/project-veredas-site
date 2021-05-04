@@ -27,7 +27,6 @@ export const Button = styled.button`
     background: #016300;
     cursor: pointer;
   }
-
   @media (max-width: 442px){
     padding: 0.8rem 0.6rem 0.8rem 0.6rem;
     margin-left: 1rem;
@@ -204,6 +203,12 @@ export const MenuLink = styled.a`
         width: 100%;
         left: 0;
       }
+    }
+  }
+
+  @media (max-width: 860px){
+    &#home{
+      display: none;
     }
   }
 `;
