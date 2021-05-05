@@ -185,11 +185,6 @@ export const WrapperSecondSection = styled.div`
   }
 `;
 
-
-
-
-
-
 export const TextWrapper = styled.div`
   width: 100%;
   height: 18%;
@@ -373,7 +368,7 @@ export const Header = styled.menu<MenuProps>`
     justify-content: space-between;
     background-color: ${background && background === 'white'
       ? '#FFF'
-      : 'rgba(211, 211, 211, 0.8)'};
+      : 'rgba(250, 250, 250, 1)'};
   `}
 
   ${Logo} {

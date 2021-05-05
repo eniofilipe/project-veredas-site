@@ -81,6 +81,9 @@ const useStyles = makeStyles((theme) => ({
           display: 'none',
       },
   },
+  direita: {
+    align: 'right',
+  },
 }));
 
 
@@ -203,7 +206,7 @@ const Order = () => {
                       `}
                     />
                     {pedido.status === "aberto" ?
-                      <ListItemText align="right">
+                      <ListItemText className={classes.direita}>
                         <S.Button onClick={() => deleteOrder(pedido.id)}>Cancelar</S.Button>
                         <S.Button id="menor" onClick={() => deleteOrder(pedido.id)}><DeleteForeverIcon style={{ fontSize: 20 }}/></S.Button>
                       </ListItemText>

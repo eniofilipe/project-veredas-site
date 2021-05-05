@@ -95,6 +95,7 @@ export const HeaderWrapper = styled.div`
 `;
 
 export const Button = styled.button`
+  justify-content: center;
   background: #017C00;
   color: #fff;
   border: 1px solid #017C00;
@@ -115,6 +116,20 @@ export const Button = styled.button`
   #button-passwd{
     margin-top: 400px;
     color: black;
+  }
+
+  @media (max-width: 600px) {
+    width: 6rem;
+    height: 3rem;
+    padding: 1rem 1rem;
+    &#menor{
+      padding: 1rem 1rem;
+    }
+    &#segundatela{
+      width: 6rem;
+      height: 3rem;
+      padding: 1rem 1rem;
+    }
   }
 `;
 

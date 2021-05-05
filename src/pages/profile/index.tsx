@@ -186,11 +186,11 @@ const Profile = () => {
               <S.CardHeader>
                 <S.Title>Dados Pessoais</S.Title>
                 {roDadosPessoais ? (
-                  <S.Button onClick={() => setRoDP(false)}>Editar</S.Button>
+                  <S.Button id="menor" onClick={() => setRoDP(false)}>Editar</S.Button>
                 ) : (
                   <S.EditButtons>
-                    <S.Button onClick={() => putProfile()}>Confirmar</S.Button>
-                    <S.Button onClick={() => reset()}>Cancelar</S.Button>
+                    <S.Button id="segundatela" onClick={() => putProfile()}>Confirmar</S.Button>
+                    <S.Button id="segundatela" onClick={() => reset()}>Cancelar</S.Button>
                   </S.EditButtons>
                 )}
               </S.CardHeader>
@@ -283,11 +283,11 @@ const Profile = () => {
             <S.CardHeader>
               <S.Title>Endereço</S.Title>
               {roEndereco ? (
-                <S.Button onClick={() => setRoE(false)}>Editar</S.Button>
+                <S.Button id="menor" onClick={() => setRoE(false)}>Editar</S.Button>
               ) : (
                 <S.EditButtons>
-                  <S.Button onClick={() => putProfile()}>Confirmar</S.Button>
-                  <S.Button onClick={() => reset()}>Cancelar</S.Button>
+                  <S.Button id="segundatela" onClick={() => putProfile()}>Confirmar</S.Button>
+                  <S.Button id="segundatela" onClick={() => reset()}>Cancelar</S.Button>
                 </S.EditButtons>
               )}
             </S.CardHeader>

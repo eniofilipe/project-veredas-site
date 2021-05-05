@@ -10,11 +10,11 @@ import { useRouter } from 'next/router';
 import {
   Cart as CartIcon,
   User as ProfileIcon,
-  SearchAlt2 as SearchIcon,
+  // SearchAlt2 as SearchIcon,
 } from '@styled-icons/boxicons-regular';
 import Footer from '../../components/Footer';
 
-import { Checkbox,TextField, CheckboxProps, FormControlLabel  } from '@material-ui/core';
+import { Checkbox,TextField, CheckboxProps } from '@material-ui/core';
 import { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { withStyles } from '@material-ui/core/styles';
@@ -25,10 +25,10 @@ import { toast } from 'react-toastify';
 import * as S from '../../styles/products/styles';
 import veredaslogo from '../../assets/images/logo.png';
 
-import logomst from '../../assets/images/logo-mst-rurais.png';
-import logoif from '../../assets/images/logo-if.png';
 import CardProduct from '../../components/Cards/CardProduct';
-import produtoimagem from '../../assets/images/produto.png';
+// import produtoimagem from '../../assets/images/produto.png';
+// import logomst from '../../assets/images/logo-mst-rurais.png';
+// import logoif from '../../assets/images/logo-if.png';
 
 import { Categoria, Oferta } from '../../types';
 
