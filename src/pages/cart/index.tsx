@@ -17,22 +17,15 @@ import CartContext from '../../contexts/cart';
 import AuthContext from '../../contexts/auth';
 import Footer from '../../components/Footer';
 import { OfertaPedido, Address, CartProps, Pagamento, Frete } from '../../types';
-import { cepMask } from '../../Utils/Masks';
-import logomst from '../../assets/images/logo-mst-rurais.png';
-import logoif from '../../assets/images/logo-if.png';
 import { postPedido, getPagamento, getFrete } from '../../api/Pedidos';
 import ValidadeContext from '../../contexts/validade';
 import {
   getOpenedWithoutToken,
-  getValidaTokenWithoutToken,
 } from '../../api/Validade';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faShoppingBasket,
   faPlus,
   faMinus,
-  faCheckCircle,
-  faTrash
 } from '@fortawesome/free-solid-svg-icons';
 
 const Cart = () => {
@@ -107,6 +100,7 @@ const Cart = () => {
       0,
     );
 
+    localStorage.setItem('cart', JSON.stringify(products))
     setSubtotal(result);
 
     setTotal(result + freteFixo);
@@ -127,6 +121,7 @@ const Cart = () => {
         0,
       );
 
+      localStorage.setItem('cart', JSON.stringify(products))
       setSubtotal(result);
 
       setTotal(result + freteFixo);
@@ -165,10 +160,20 @@ const Cart = () => {
   }
 
   useEffect(() => {
+    checkProducts()
     setAddress(getAddress());
     setCliente(getCliente());
     pegarPagamento();
     pegarFrete();
+
+    function checkProducts(){
+     setTimeout(() => {
+        if(products.length < 1){
+          toast.warn('Você removeu todos os produtos do carrinho!', { position: 'top-center' });
+          Router.push('/products')
+        }
+      }, 800)
+    }
   }, [products]);
 
   return (

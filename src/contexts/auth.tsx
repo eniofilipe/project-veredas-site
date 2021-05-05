@@ -21,9 +21,24 @@ const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const router = useRouter();
-  const [cliente, setCliente] = useState<ClienteLogin | null>(null);
-  const [endereco, setEndereco] = useState<Address | null>(null);
-  const [token, setToken] = useState<string | null>(null);
+
+  let clientJSON = null
+  let tokenJSON = null
+  let enderecoJSON = null
+  if (process.browser) {
+    clientJSON = localStorage.getItem('cliente')
+    tokenJSON = localStorage.getItem('token')
+    enderecoJSON = localStorage.getItem('endereco')
+  }
+
+  const [cliente, setCliente] = useState<ClienteLogin | null
+  >((process.browser ? clientJSON !== null && JSON.parse(clientJSON) : null))
+  const [endereco, setEndereco] = useState<Address | null>(
+    process.browser ? enderecoJSON : null
+  );
+  const [token, setToken] = useState<string | null>(
+    process.browser ? tokenJSON : null
+  );
 
   /* const handleToken = async () => {
     const localToken = Cookie.get('token');
@@ -61,6 +76,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       setCliente(response.data.client);
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('endereco', JSON.stringify(response.data.endereco));
+      localStorage.setItem('cliente', JSON.stringify(response.data.client))
       Cookie.set('token', response.data.token);
       Cookie.set('cliente', JSON.stringify(response.data.client));
       Cookie.set('endereco', response.data.endereco);

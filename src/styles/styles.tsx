@@ -18,7 +18,7 @@ export const MenuNav = styled.div`
 export const MenuLink = styled.a`
   position: relative;
   color: #552200;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin: 0.3rem 0.8rem 0;
   text-decoration: none;
   text-align: center;

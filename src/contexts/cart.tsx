@@ -20,10 +20,20 @@ interface ICartContext {
 const CartContext = createContext<ICartContext>({} as ICartContext);
 
 export const CartProvider: React.FC = ({ children }) => {
-  const [products, setProducts] = useState<OfertaCart[]>([]);
+  let cartJSON = null
+  if (process.browser) {
+    cartJSON = localStorage.getItem('cart')
+  }
+
+  const [products, setProducts] = useState<OfertaCart[]>(
+    (process.browser ? (cartJSON !== null ? JSON.parse(cartJSON) : []): [])
+  );
+
 
   const removeProduct = (prod: Oferta) => {
-    setProducts(products.filter((p) => p.id !== prod.id));
+    const prods =products.filter((p) => p.id !== prod.id)
+    setProducts(prods);
+    localStorage.setItem('cart', JSON.stringify(prods))
     toast.error('Produto Removido', { position: 'bottom-right' });
   };
   const checkInCart = (prod: Oferta) => products.findIndex((p) => p.id === prod.id) > -1;
@@ -50,17 +60,16 @@ export const CartProvider: React.FC = ({ children }) => {
       };
 
       setProducts(productsAux);
+      localStorage.setItem('cart', JSON.stringify(productsAux))
       toast.success('Produto Adicionado', { position: 'bottom-right' });
     } else {
       const productAux = { ...prod, quantidadeCart: quantidade } as OfertaCart;
 
       setProducts(products.concat(productAux));
+      localStorage.setItem('cart', JSON.stringify(products.concat(productAux)))
       toast.success('Produto Adicionado', { position: 'bottom-right' });
     }
   };
-  useEffect(() => {
-    console.log(products);
-  }, [products]);
 
   return (
     <CartContext.Provider
