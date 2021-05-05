@@ -10,10 +10,11 @@ import { toast } from 'react-toastify';
 import { GetServerSideProps } from 'next';
 import Cookie from 'js-cookie';
 import * as S from '../../styles/profile/styles';
-import veredaslogo from '../../assets/logo.png';
+import veredaslogo from '../../assets/images/logo.png';
 import AuthContext from '../../contexts/auth';
-import logomst from '../../assets/logo-mst-rurais.png';
-import logoif from '../../assets/logo-if.png';
+import Footer from '../../components/Footer';
+import logomst from '../../assets/images/logo-mst-rurais.png';
+import logoif from '../../assets/images/logo-if.png';
 
 import { Cliente, ClienteLogin } from '../../types';
 import { cleanObject, isEmail, validarCPF } from '../../Utils/Validation';
@@ -24,6 +25,7 @@ const Profile = () => {
   const [roDadosPessoais, setRoDP] = useState(true);
   const [roSenha, setRoS] = useState(true);
   const [roEndereco, setRoE] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const Router = useRouter();
   const { signOut } = useContext(AuthContext);
@@ -137,7 +139,7 @@ const Profile = () => {
             break;
           case 404:
             toast.warn(
-              'Usuário não encontrado. Recomendamos que saia e faça o login novamente.'
+              'Usuário não encontrado. Recomendamos que saia e faça o login novamente.',
             );
             break;
 
@@ -160,24 +162,43 @@ const Profile = () => {
     }
   }
 
+  const optionsLinksMobile = [
+    {
+      label: 'Pedidos',
+      action: () => Router.push('/orders'),
+    },
+    {
+      label: 'Sair',
+      action: signOut,
+    },
+  ];
+
+  const optionsLinks = [
+    {
+      label: 'Pedidos',
+      action: () => Router.push('/orders'),
+    },
+    {
+      label: 'Sair',
+      action: signOut,
+    },
+  ];
+
   return (
     <>
       <S.Wrapper>
         <Head>
           <title>Veredas da terra</title>
         </Head>
-        <S.Header>
-          <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')} />
-          <S.TitlePage>Perfil</S.TitlePage>
-          <S.MenuNav>
-            <S.MenuLink onClick={() => Router.push('/orders')}>
-              Pedidos
-            </S.MenuLink>
-            <S.MenuLink onClick={signOut}>
-              Sair
-            </S.MenuLink>
-          </S.MenuNav>
-        </S.Header>
+        <S.StyledHeader
+          buttons={[]}
+          buttonsMenulFull={[]}
+          handleSandwich={(open) => setIsOpen(open)}
+          links={optionsLinks}
+          linksMenuFull={optionsLinksMobile}
+          openMenuFull={isOpen}
+          title="Perfil"
+        />
 
         <S.WrapperController>
           <S.WrapperContent>
@@ -185,11 +206,11 @@ const Profile = () => {
               <S.CardHeader>
                 <S.Title>Dados Pessoais</S.Title>
                 {roDadosPessoais ? (
-                  <S.Button onClick={() => setRoDP(false)}>Editar</S.Button>
+                  <S.Button id="menor" onClick={() => setRoDP(false)}>Editar</S.Button>
                 ) : (
                   <S.EditButtons>
-                    <S.Button onClick={() => putProfile()}>Confirmar</S.Button>
-                    <S.Button onClick={() => reset()}>Cancelar</S.Button>
+                    <S.Button id="segundatela" onClick={() => putProfile()}>Confirmar</S.Button>
+                    <S.Button id="segundatela" onClick={() => reset()}>Cancelar</S.Button>
                   </S.EditButtons>
                 )}
               </S.CardHeader>
@@ -216,8 +237,7 @@ const Profile = () => {
                   <S.Input
                     value={telefone}
                     readOnly={roDadosPessoais}
-                    onChange={(e) =>
-                      setTelefone(cellphoneeMask(e.target.value))
+                    onChange={(e) => setTelefone(cellphoneeMask(e.target.value))
                     }
                   />
                 </S.Row>
@@ -282,11 +302,11 @@ const Profile = () => {
             <S.CardHeader>
               <S.Title>Endereço</S.Title>
               {roEndereco ? (
-                <S.Button onClick={() => setRoE(false)}>Editar</S.Button>
+                <S.Button id="menor" onClick={() => setRoE(false)}>Editar</S.Button>
               ) : (
                 <S.EditButtons>
-                  <S.Button onClick={() => putProfile()}>Confirmar</S.Button>
-                  <S.Button onClick={() => reset()}>Cancelar</S.Button>
+                  <S.Button id="segundatela" onClick={() => putProfile()}>Confirmar</S.Button>
+                  <S.Button id="segundatela" onClick={() => reset()}>Cancelar</S.Button>
                 </S.EditButtons>
               )}
             </S.CardHeader>
@@ -345,31 +365,7 @@ const Profile = () => {
         </S.WrapperController>
 
       </S.Wrapper>
-      <S.WrapperFooter>
-
-        <div id='contato'>
-          <h1 id='contato-info'>Contato</h1>
-          <p>contato@veredasdaterra.com.br</p>
-          <p>(38) 9 9900-0000</p>
-        </div>
-
-        <div id='info'>
-          <h1 id='title-info'>Informações</h1>
-          <p>Cooperativa Camponesa - Veredas da Terra</p>
-          <p>CNPJ: 10.286.881/0001-02</p>
-          <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
-        </div>
-
-        <div id='logo'>
-          <S.Logo
-            src={veredaslogo}
-            alt="Logo da cooperativa Veredas da Terra"
-          />
-          <S.Logo src={logomst} alt="Logo do MST" />
-          <S.Logo src={logoif} alt="Logo do IFNMG" onClick={() => Router.push('/if')}/>
-        </div>
-
-      </S.WrapperFooter>
+     <Footer/>
     </>
   );
 };

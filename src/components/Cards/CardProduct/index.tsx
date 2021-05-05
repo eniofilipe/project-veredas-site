@@ -27,7 +27,7 @@ import {
   Stock,
   PriceAndQuantityWrapper
 } from './styles';
-import alface from '../../../assets/images/alface.jpeg';
+import produto from '../../../assets/images/produto.png';
 import Money from '../../StylesText/Money';
 
 interface CardProductProps {
@@ -66,7 +66,10 @@ const cardProduct = ({
 
   return (
     <Container>
-      <ImageHeader src={`http://${image}` || alface} alt="" />
+      {image === null ?
+        <ImageHeader src={produto} alt="" />
+      : <ImageHeader src={`http://${image}`} alt="" />}
+      {/* <ImageHeader src={`http://${image}` || produto} alt="" />  */}
       <InfoContainer>
         <Title>{name}</Title>
         <SubTitle>{comment}</SubTitle>

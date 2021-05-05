@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import styled, { css } from 'styled-components';
+import Header from '../../components/Header';
 
 export const Wrapper = styled.main`
   display: flex;
@@ -8,6 +9,7 @@ export const Wrapper = styled.main`
   min-height: 100vh;
 
 `;
+
 export const Logo = styled.img`
 
 &:nth-child(1) {
@@ -15,17 +17,12 @@ export const Logo = styled.img`
   }
 `;
 
-
-
 type MenuProps = {
   background?: string;
   position?: number;
 };
 
-export const MenuNav = styled.div`
-  /* margin-right: 4rem; */
-`;
-
+export const MenuNav = styled.div``;
 
 export const MenuLink = styled.a`
   position: relative;
@@ -68,25 +65,10 @@ export const TitlePage = styled.h1`
   cursor: default;
 `;
 
-export const Header = styled.menu<MenuProps>`
-  ${({ background }) => css`
-    display: flex;
-    align-items: center;
-    padding: 0.8rem 2rem;
-    justify-content: space-between;
-    background-color: ${background && background === 'white'
-      ? '#FFF'
-      : '#FFF'};
-  `}
-
-
-  ${Logo} {
-    width: 200px;
-  }
+export const StyledHeader = styled(Header)`
+  
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 `;
-
-
 
 export const Title = styled.p`
   white-space: nowrap;
@@ -94,7 +76,6 @@ export const Title = styled.p`
   margin: 0 25%;
   font-size: 2.5rem;
 `;
-
 
 export const WrapperMenu = styled.div`
   display: flex;
@@ -108,8 +89,13 @@ export const WrapperMenu = styled.div`
 `;
 
 export const WrapperContent = styled.div`
+  padding-top: 80px;
   width: 80%;
   margin: 1.5rem auto;
+
+  @media (max-width: 920px){
+    width: 90%;
+  }
 `;
 
 export const Label = styled.span`
@@ -117,6 +103,7 @@ export const Label = styled.span`
   color: #016300;
   font-weight: 500;
 `;
+
 export const WrapperItem = styled.div`
   display: flex;
   justify-content: center;
@@ -128,7 +115,13 @@ export const WrapperItem = styled.div`
   justify-content: space-between;
   border-radius: 8px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  @media (max-width: 1442px) {
+    padding: 1rem;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
 `;
+
 export const WrapperControl = styled.div`
    display: flex;
   justify-content: center;
@@ -140,6 +133,7 @@ export const WrapperControl = styled.div`
     width: 32px;
   };
 `;
+
 export const SumButton = styled.button`
   border: none;
   background: none;
@@ -149,6 +143,7 @@ export const SumButton = styled.button`
     content: '+';
   }
 `;
+
 export const SubButton = styled.button`
   border: none;
   background: none;
@@ -158,24 +153,87 @@ export const SubButton = styled.button`
     content: '-';
   }
 `;
+
 export const Text = styled.span`
   color: #552200;
   font-size: 1rem;
-  max-width: 400px;
+  max-width: 30rem;
   &#prodNameDesc{
-    width: 600px;
+    width: 37.5rem;
     color: #552200;
-    margin-right: 40px;
+    margin-right: 4rem;
+    margin-left: 1.5rem;
   }
   &#prodPriceDesc{
     color: #552200;
   }
-  #boldPrice{
+  &#boldPrice{
     font-weight: 600;
     color: green;
   }
+  &#corProduto{
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: #552200;
+  }
 
+  @media (max-width: 1959px){
+    &#prodNameDesc{
+      margin-right: 4rem;
+      margin-left: 1rem;
+    }
+  }
+
+  @media (max-width: 1710px){
+    &#prodNameDesc{
+      margin-right: 0rem;
+    }
+  }
+
+  @media (max-width: 1550px){
+    &#prodNameDesc{
+      width: 20rem;
+    }
+  }
+
+  @media (max-width: 1150px){
+    &#prodNameDesc{
+      width: 14rem;
+      margin-right: 0rem;
+    }
+  }
+
+  @media (max-width: 920px){
+    &#prodPriceDesc{
+      width: 8rem;
+    }
+  }
+
+  @media (max-width: 798px){
+    &#prodPriceDesc{
+      display: none;
+      width: 0rem;
+    }
+    &#prodNameDesc{
+      width: 10rem;
+    }
+  }
+
+  @media (max-width: 550px){
+    &#prodNameDesc{
+      width: 6rem;
+      margin-right: 0rem;
+    }
+  }
+
+  @media (max-width: 490px){
+    &#prodNameDesc{
+      width: 6rem;
+      margin-right: -2rem;
+    }
+  }
 `;
+
 export const Value = styled.span`
   color: #016300;
   font-size: 1rem;
@@ -186,6 +244,7 @@ export const Value = styled.span`
   font-weight: 600;
   width: 120px;
 `;
+
 export const Items = styled.div`
   margin-top: 1rem;
   padding: 0;
@@ -195,33 +254,67 @@ export const Items = styled.div`
   border-radius: 8px;
 `;
 
-
 export const WrapperSelect = styled.div`
-margin-top: 0.5rem;
-background: #fff;
-border-radius: 8px;
+  margin-top: 0.5rem;
+  background: #fff;
+  border-radius: 8px;
   display: flex;
   width: 100%;
+  padding: 1rem;
   align-items: center;
   justify-content: center;
-  gap: 5%;
+  gap: 6%;
   ${Label} {
     color: #552200;
     font-size: 1rem;
     align-self: flex-end;
     font-weight: 400;
   }
+
+  @media (max-width: 610px) {
+    justify-content: space-around;
+    justify-content: left;
+    padding: 0.2rem 1rem 2rem;
+    gap: 8%;
+  }
 `;
+
+export const ContainerPagamento = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  padding-left: 5%;
+  margin-top: 0.4rem;
+  justify-content: space-between;
+  border-radius: 8px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  padding: 1.5rem 0rem 1rem 1rem;
+  gap: 6%;
+
+  @media (max-width: 810px) {
+    padding: 1.5rem 0rem 1rem 1rem;
+  }
+
+  @media (max-width: 610px) {
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+`;
+
 export const Select = styled.select`
   color: #016300;
   outline: none;
-  padding: 0.5rem 2rem;
+  padding: 0.6rem 1rem 0.5rem 1rem;
 `;
+
 export const Address = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left: 1rem;
   width: 100%;
-  gap: 0.5rem;
+  gap: 1rem;
   padding-bottom: 1rem;
   ${Text} {
     font-size: 1rem;
@@ -235,11 +328,43 @@ export const WrapperButtons = styled.div`
   margin-top: 2rem;
   margin-bottom: 2rem;
 `;
+
 export const CancelButton = styled.button`
+  background: #961913;
+  color: #fff;
+  border-radius: 8px;
+  padding: 1rem 1rem;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  font-size: 1rem;
+  width: 24rem;
+
+  &:hover {
+    transition: 0.4s;
+    color: #fff;
+    background: #961913;
+    cursor: pointer;
+  }
+
+  @media (max-width: 1160px) {
+    width: 15rem;
+  }
+
+  @media (max-width: 640px) {
+    width: 12rem;
+  }
+
+  @media (max-width: 490px) {
+    width: 8rem;
+  }
+`;
+
+export const AcceptButton = styled.button`
   background: #017C00;
   color: #fff;
   border-radius: 8px;
-  padding: 1rem 2rem;
+  padding: 1rem 1rem;
   border: none;
   outline: none;
   font-weight: bold;
@@ -252,76 +377,19 @@ export const CancelButton = styled.button`
     background: #016300;
     cursor: pointer;
   }
-`;
-export const AcceptButton = styled.button`
- background: #017C00;
-  color: #fff;
-  border-radius: 8px;
-  padding: 1rem 2rem;
-  border: none;
-  outline: none;
-  font-weight: bold;
-  font-size: 1rem;
-  width: 24rem;
 
-  &:hover {
-    transition: 0.4s;
-    color: #fff;
-    background: #016300;
-    cursor: pointer;
+  @media (max-width: 1160px) {
+    width: 15rem;
+  }
+
+  @media (max-width: 640px) {
+    width: 12rem;
+  }
+
+  @media (max-width: 490px) {
+    width: 8rem;
   }
 `;
-
-export const WrapperFooter = styled.footer`
-  height: 20vh;
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #fff;
-
-  div p{
-    color: #552200;
-    font-size: 1.1rem;
-  }
-  div h1{
-    font-weight: bold;
-    color: #017C00;
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-  #info{
-    text-align: center;
-    margin-left: 12.3rem;
-  }
-  #logo{
-    margin-right: 4rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-  }
-  #contato{
-    margin-left: 8rem;
-    text-align: center;
-  }
-   ${Logo}:nth-child(1) {
-    width: 250px;
-    padding: 0.8rem;
-  }
-  ${Logo}:nth-child(2) {
-    width: 120px;
-    padding: 1rem;
-  }
-  ${Logo}:nth-child(3) {
-    width: 150px;
-    padding: 1rem;
-    border-radius: 30px;
-  }
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px -1.95px 6px;
-`;
-
 
 export const H1 = styled.h1`
   text-align: center;
@@ -329,6 +397,7 @@ export const H1 = styled.h1`
   font-weight: 500;
   font-size: 1.8rem;
 `;
+
 export const WrapperProd = styled.div`
   display: flex;
   justify-content: space-between;
@@ -336,12 +405,15 @@ export const WrapperProd = styled.div`
   margin-right: auto;
 `;
 
-
 export const WrapperSubtotal = styled.div`
   margin-top: 1rem;
   margin-left: 50%;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 798px){
+    margin-left: 1.2rem;
+  }
 `;
 
 export const Row = styled.div`
@@ -352,6 +424,7 @@ export const Row = styled.div`
   justify-content: space-between;
   padding-right: 1rem;
 `;
+
 export const Line = styled.div`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
   height: 2px;
@@ -360,11 +433,14 @@ export const Line = styled.div`
   width: 98%;
 `;
 
-
 export const QuantityContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-right: 40px;
+  margin-right: 2.5;
+
+  @media (max-width: 920px){
+    margin-right: 2rem;
+  }
 `;
 
 export const ButtonMinus = styled.button`
@@ -373,13 +449,22 @@ export const ButtonMinus = styled.button`
   cursor: pointer;
   margin-right: 14px;
   color: #017C00;
+
+  @media (max-width: 920px){
+    margin-right: 0rem;
+  }
 `;
+
 export const ButtonPlus = styled.button`
   border: none;
   background: none;
   margin-left: 14px;
   cursor: pointer;
   color: #017C00;
+
+  @media (max-width: 920px){
+    margin-left: 0rem;
+  }
 `;
 
 export const Quantity = styled.span`

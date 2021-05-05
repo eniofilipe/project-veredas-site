@@ -1,43 +1,72 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable import/no-unresolved */
-import { useContext, useState } from 'react';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
+import { useContext, useState } from 'react'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 import EmailIcon from '@material-ui/icons/Email';
 import { toast } from 'react-toastify';
-import * as S from '../../styles/passwordRecovery/styles';
-import veredaslogo from '../../assets/logo.png';
-import ValidadeContext from '../../contexts/validade';
-import logomst from '../../assets/logo-mst-rurais.png';
-import logoif from '../../assets/logo-if.png';
+import Footer from '../../components/Footer';
+import * as S from '../../styles/passwordRecovery/styles'
+import veredaslogo from '../../assets/images/logo.png'
+import ValidadeContext from '../../contexts/validade'
+import logomst from '../../assets/images/logo-mst-rurais.png'
+import logoif from '../../assets/images/logo-if.png'
 
-import { postRecuperarSenha } from '../../api/RecuperarSenha';
-import { PostRecuperarSenhaProps } from '../../types/index';
+import { postRecuperarSenha } from '../../api/RecuperarSenha'
+import { PostRecuperarSenhaProps } from '../../types/index'
 
 const PasswordRecovery = () => {
-  const { validade } = useContext(ValidadeContext);
-  const Router = useRouter();
-
-  const [email, setEmail] = useState('');
+  const { validade } = useContext(ValidadeContext)
+  const Router = useRouter()
+  const [isOpen, setIsOpen] = useState(false);
+  const [email, setEmail] = useState('')
   const goToProducts = () => {
-    Router.push('/products');
-  };
+    Router.push('/products')
+  }
 
   const goToLogin = () => {
-    Router.push('/register');
-  };
+    Router.push('/register')
+  }
 
   const setRecuperarSenha = async (data: PostRecuperarSenhaProps) => {
     try {
-      const response = await postRecuperarSenha(data);
-      console.log(data);
-      toast.success('Confira seu email!');
-      Router.push('/login');
+      const response = await postRecuperarSenha(data)
+      console.log(data)
+      toast.success('Confira seu email!')
+      Router.push('/login')
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
+
+  const optionsLinksMobile = [
+    {
+      label: 'Home',
+      action: () => Router.push('/')
+    }
+  ]
+
+  const optionsLinks = [
+    {
+      label: 'Home',
+      action: () => Router.push('/')
+    }
+  ]
+
+  const optionsButtons = !validade
+    ? [
+        {
+          label: 'Criar conta',
+          action: goToLogin
+        }
+      ]
+    : [
+        {
+          label: 'Entrar na Feirinha',
+          action: goToProducts
+        }
+      ]
 
   return (
     <div>
@@ -45,17 +74,14 @@ const PasswordRecovery = () => {
         <title>Veredas da terra</title>
       </Head>
       <S.HeaderWrapper>
-        <S.Header>
-          <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')} />
-          <S.MenuNav>
-            <S.MenuLink onClick={() => Router.push('/')}>Home</S.MenuLink>
-            {!validade ? (
-              <S.Button onClick={goToLogin}>Criar conta</S.Button>
-            ) : (
-              <S.Button onClick={goToProducts}>Entrar na Feirinha</S.Button>
-            )}
-          </S.MenuNav>
-        </S.Header>
+        <S.StyledHeader
+          links={optionsLinks}
+          buttons={optionsButtons}
+          linksMenuFull={optionsLinksMobile}
+          buttonsMenulFull={optionsButtons}
+          handleSandwich={(open) => setIsOpen(open)}
+          openMenuFull={isOpen}
+        />
       </S.HeaderWrapper>
       <S.Content>
         <S.LoginContainer>
@@ -71,38 +97,16 @@ const PasswordRecovery = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <S.ButtonLogin onClick={() => setRecuperarSenha({ email })}>
-            Enviar
+          <S.LoginContainer className="botoes">
+            <S.ButtonLogin onClick={() => setRecuperarSenha({ email })}>
+              Enviar
             </S.ButtonLogin>
+          </S.LoginContainer>
         </S.LoginContainer>
       </S.Content>
-      <S.WrapperFooter>
-
-        <div id='contato'>
-          <h1 id='contato-info'>Contato</h1>
-          <p>contato@veredasdaterra.com.br</p>
-          <p>(38) 9 9900-0000</p>
-        </div>
-
-        <div id='info'>
-          <h1 id='title-info'>Informações</h1>
-          <p>Cooperativa Camponesa - Veredas da Terra</p>
-          <p>CNPJ: 10.286.881/0001-02</p>
-          <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
-        </div>
-
-        <div id='logo'>
-          <S.Logo
-            src={veredaslogo}
-            alt="Logo da cooperativa Veredas da Terra"
-          />
-          <S.Logo src={logomst} alt="Logo do MST" />
-          <S.Logo src={logoif} alt="Logo do IFNMG" onClick={() => Router.push('/if')}/>
-        </div>
-
-      </S.WrapperFooter>
+      <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default PasswordRecovery;
+export default PasswordRecovery

@@ -3,6 +3,8 @@
 /* eslint-disable operator-linebreak */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable react/require-default-props */
+/* eslint-disable prettier/prettier */
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -21,15 +23,17 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
-import * as S from '../../styles/orders/styles';
-import veredaslogo from '../../assets/logo.png';
-import logomst from '../../assets/logo-mst-rurais.png';
-import logoif from '../../assets/logo-if.png';
 import { GetServerSideProps } from 'next';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import * as S from '../../styles/orders/styles';
+import veredaslogo from '../../assets/images/logo.png';
+import logomst from '../../assets/images/logo-mst-rurais.png';
+import logoif from '../../assets/images/logo-if.png';
 import AuthContext from '../../contexts/auth';
 import { PedidosProps } from '../../types';
 import { getPedidos, deletePedido } from '../../api/Pedidos';
 import { FormatDateByFNS } from '../../Utils/Masks';
+import Footer from '../../components/Footer';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,8 +41,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#f2f2f2',
     color: '#552200',
     borderRadius: '20px',
-
-
   },
   nested: {
     border: '1px solid magenta',
@@ -51,8 +53,8 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '8px',
     boxShadow: 'rgba(0, 0, 0, 0.18) 0px 2px 4px',
     '& span, & svg': {
-      fontSize: '1rem'
-    }
+      fontSize: '1rem',
+    },
 
   },
   tabela: {
@@ -67,11 +69,24 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '1.0rem',
       color: '#441b00',
     },
+    [theme.breakpoints.down(700)]: {
+      '& th': {
+        fontSize: '1.0rem',
+      },
+      '& td': {
+        fontSize: '0.9rem',
+      },
+    },
   },
-
-
+  apagada: {
+    [theme.breakpoints.down(500)]: {
+      display: 'none',
+    },
+  },
+  direita: {
+    align: 'right',
+  },
 }));
-
 
 export type ProfileProps = {
   name: string;
@@ -90,10 +105,11 @@ const Order = () => {
   const classes = useStyles();
   const Router = useRouter();
   const { signOut } = useContext(AuthContext);
+  const [isOpen, setIsOpen] = useState(false);
   const [open, setOpen] = useState([false]);
   const [pedidos, setPedidos] = useState<PedidosProps[]>([]);
-  var [ajuda, setAjuda] = useState<string>("");
-  var [render, setRender] = useState<number>(0);
+  let [ajuda, setAjuda] = useState<string>('');
+  const [render, setRender] = useState<number>(0);
 
   const fetchPedidos = async () => {
     try {
@@ -112,19 +128,17 @@ const Order = () => {
   };
 
   const deleteOrder = async (id: number) => {
-
     deletePedido(id);
 
     const response = await getPedidos();
 
     setPedidos(response.data.reverse());
 
-    setAjuda("cancelado");
+    setAjuda('cancelado');
     setRender(id);
 
     toast.success('Pedido Cancelado', { position: 'bottom-right' });
-
-  }
+  };
 
   useEffect(() => {
     fetchPedidos();
@@ -141,20 +155,39 @@ const Order = () => {
     return sub.toFixed(2);
   }
 
+  const optionsLinksMobile = [
+    {
+      label: 'Perfil',
+      action: () => Router.push('profile'),
+    },
+    {
+      label: 'Sair',
+      action: signOut,
+    },
+  ];
+
+  const optionsLinks = [
+    {
+      label: 'Perfil',
+      action: () => Router.push('/profile'),
+    },
+    {
+      label: 'Sair',
+      action: signOut,
+    },
+  ];
+
   return (
     <S.Wrapper>
-      <S.Header>
-        <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')} />
-        <S.TitlePage>Meus Pedidos</S.TitlePage>
-        <S.MenuNav>
-          <S.MenuLink onClick={() => Router.push('profile')}>
-            Perfil
-            </S.MenuLink>
-          <S.MenuLink onClick={signOut}>
-            Sair
-            </S.MenuLink>
-        </S.MenuNav>
-      </S.Header>
+      <S.StyledHeader
+          buttons={[]}
+          buttonsMenulFull={[]}
+          handleSandwich={(open) => setIsOpen(open)}
+          links={optionsLinks}
+          linksMenuFull={optionsLinksMobile}
+          openMenuFull={isOpen}
+          title="Meus Pedidos"
+        />
       <S.Body>
         <S.WrapperController>
           <S.WrapperContent>
@@ -165,14 +198,14 @@ const Order = () => {
             >
             {pedidos &&
               pedidos.map((pedido, i) => {
-              const handleClick = (option) => {
-              const array = open.map((e) => false);
-                array[i] = option;
-                setOpen(array);
-              };
-              const controle = open[i];
-              ajuda = pedido.status;
-              return (
+                const handleClick = (option) => {
+                  const array = open.map((e) => false);
+                  array[i] = option;
+                  setOpen(array);
+                };
+                const controle = open[i];
+                ajuda = pedido.status;
+                return (
                 <div key={`${pedido.id}`}>
                   <ListItem
                     button
@@ -185,16 +218,18 @@ const Order = () => {
                       }
                       \xa0\xa0\xa0\xa0\xa0\xa0\xa0
                       ${FormatDateByFNS(
-                        pedido.createdAt
+                        pedido.createdAt,
                       )}
-                      \xa0\xa0\xa0\xa0\xa0\xa0\xa0
                       \xa0\xa0\xa0\xa0\xa0\xa0\xa0
                       ${`${pedido.status}\xa0\xa0\xa0\xa0\xa0\xa0\xa0`}
                       `}
                     />
-                    {pedido.status === "aberto" ?
-                      <ListItemText  align="right"><S.Button onClick={() => deleteOrder(pedido.id)}>Cancelar</S.Button></ListItemText>
-                    : <ListItemText />
+                    {pedido.status === 'aberto' ?
+                      <ListItemText className={classes.direita}>
+                        <S.Button onClick={() => deleteOrder(pedido.id)}>Cancelar</S.Button>
+                        <S.Button id="menor" onClick={() => deleteOrder(pedido.id)}><DeleteForeverIcon style={{ fontSize: 20 }}/></S.Button>
+                      </ListItemText>
+                      : <ListItemText> <S.SpanResponsivo/> </ListItemText>
                     }
                     {controle ? <ExpandLess /> : <ExpandMore />}
                   </ListItem>
@@ -206,9 +241,9 @@ const Order = () => {
                       <Table aria-label="spanning table">
                         <TableHead>
                           <TableRow>
-                            <TableCell>Quantidade</TableCell>
+                            <TableCell>Qtd</TableCell>
                             <TableCell align="left">Produto</TableCell>
-                            <TableCell align="center">
+                            <TableCell className={classes.apagada} align="center">
                               Valor Unitário
                             </TableCell>
                             <TableCell colSpan={2} align="right">
@@ -226,7 +261,7 @@ const Order = () => {
                             <TableCell align="left">
                               {prod.produtos.nome}
                             </TableCell>
-                            <TableCell align="center">
+                            <TableCell className={classes.apagada} align="center">
                               R$ {prod.valor_unitario}
                             </TableCell>
                             <TableCell colSpan={2} align="right">
@@ -237,34 +272,28 @@ const Order = () => {
                               ).toFixed(2)}
                             </TableCell>
                           </TableRow>
-                        ))}
+                          ))}
                         <TableRow>
                           <TableCell rowSpan={3}/>
                         {/* <TableCell><S.Button>Editar</S.Button></TableCell> */}
                           <TableCell colSpan={2}>Subtotal</TableCell>
-                          <TableCell  align="right">
+                          <TableCell align="right">
                             R$ {handleSubtotal(pedido.ofertas)}
                           </TableCell>
                         </TableRow>
                         <TableRow >
-                        {/* {pedido.status === "aberto" ?
-                           <TableCell>
-                            <S.Button onClick={() => deleteOrder(pedido.id)}>Cancelar</S.Button>
-                          </TableCell>
-                        : <TableCell/>
-                        } */}
-                          <TableCell>Taxa de entrega</TableCell>
+                          <TableCell>Taxa de Entrega</TableCell>
                           <TableCell colSpan={2} align="right">
                             R$ {pedido.frete.valor_frete.toFixed(2)}
                           </TableCell>
                         </TableRow>
                         <TableRow>
                           <TableCell colSpan={2}>Total</TableCell>
-                          <TableCell  align="right">
+                          <TableCell align="right">
                             R${' '}
                             {Number(
                               pedido.frete.valor_frete +
-                                Number(handleSubtotal(pedido.ofertas))
+                                Number(handleSubtotal(pedido.ofertas)),
                             ).toFixed(2)}
                           </TableCell>
                         </TableRow>
@@ -272,7 +301,8 @@ const Order = () => {
                       </Table>
                       </TableContainer>
                       </Collapse>
-                      </div>);})}
+                      </div>);
+              })}
             </List>
           </S.WrapperContent>
 
@@ -280,31 +310,7 @@ const Order = () => {
 
       </S.Body>
 
-      <S.WrapperFooter>
-
-        <div id='contato'>
-          <h1 id='contato-info'>Contato</h1>
-          <p>contato@veredasdaterra.com.br</p>
-          <p>(38) 9 9900-0000</p>
-        </div>
-
-        <div id='info'>
-          <h1 id='title-info'>Informações</h1>
-          <p>Cooperativa Camponesa - Veredas da Terra</p>
-          <p>CNPJ: 10.286.881/0001-02</p>
-          <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
-        </div>
-
-        <div id='logo'>
-          <S.Logo
-            src={veredaslogo}
-            alt="Logo da cooperativa Veredas da Terra"
-          />
-          <S.Logo src={logomst} alt="Logo do MST" />
-          <S.Logo src={logoif} alt="Logo do IFNMG" onClick={() => Router.push('/if')}/>
-        </div>
-
-      </S.WrapperFooter>
+    <Footer/>
     </S.Wrapper>
   );
 };

@@ -1,67 +1,18 @@
 /* eslint-disable indent */
 import styled, { css } from 'styled-components';
 import Input from '../../components/Inputs/Input';
+import Header from '../../components/Header'
 
 export const Wrapper = styled.div``;
+
 export const Logo = styled.img`
-&:nth-child(1) {
-  cursor: pointer;
-}
-`;
-
-
-export const WrapperFooter = styled.footer`
-  height: 20vh;
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #fff;
-
-  div p{
-    color: #552200;
-    font-size: 1.1rem;
+  &:nth-child(1) {
+    cursor: pointer;
   }
-  div h1{
-    font-weight: bold;
-    color: #017C00;
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-  #info{
-    text-align: center;
-    margin-left: 12.3rem;
-  }
-  #logo{
-    margin-right: 4rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-  }
-  #contato{
-    margin-left: 8rem;
-    text-align: center;
-  }
-   ${Logo}:nth-child(1) {
-    width: 250px;
-    padding: 0.8rem;
-  }
-  ${Logo}:nth-child(2) {
-    width: 120px;
-    padding: 1rem;
-  }
-  ${Logo}:nth-child(3) {
-    width: 150px;
-    padding: 1rem;
-    border-radius: 30px;
-  }
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px -1.95px 6px;
 `;
 
 export const Button = styled.button`
-  background: #017C00;
+  background: #017c00;
   color: #fff;
   border-radius: 8px;
   padding: 1rem 2rem;
@@ -77,10 +28,15 @@ export const Button = styled.button`
     background: #016300;
     cursor: pointer;
   }
+  @media (max-width: 442px) {
+    padding: 0.8rem 0.6rem 0.8rem 0.6rem;
+    margin-left: 1rem;
+    margin-right: -2rem;
+  }
 `;
 
 export const ButtonLogin = styled.button`
-  background: #017C00;
+  background: #017c00;
   color: #fff;
   border-radius: 8px;
   padding: 1rem 2rem;
@@ -88,8 +44,8 @@ export const ButtonLogin = styled.button`
   outline: none;
   font-weight: bold;
   font-size: 1rem;
-  width: 460px;
-  height: 60px;
+  width: 29rem;
+  height: 3.4rem;
 
   &:hover {
     color: #fff;
@@ -97,30 +53,21 @@ export const ButtonLogin = styled.button`
     border: 1px solid #016300;
     cursor: pointer;
   }
+
+  @media (max-width: 581px) {
+    width: 10rem;
+    height: 3.4rem;
+  }
 `;
 
 type MenuProps = {
-  background?: string;
-  position?: number;
-};
+  background?: string
+  position?: number
+}
 
-export const Header = styled.menu<MenuProps>`
-  ${({ background }) => css`
-    display: flex;
-    align-items: center;
-    padding: 0.8rem 2rem;
-    justify-content: space-between;
-    background-color: ${background && background === 'white'
-      ? '#FFF'
-      : '#FFF'};
-  `}
-
-  ${Logo} {
-    width: 200px;
-  }
+export const StyledHeader = styled(Header)`
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 `;
-
 export const HeaderWrapper = styled.div<MenuProps>`
   ${({ position }) => css`
     position: relative;
@@ -134,7 +81,6 @@ export const HeaderWrapper = styled.div<MenuProps>`
     width: 100%;
   `}
 `;
-
 
 export const Content = styled.div`
   display: flex;
@@ -181,10 +127,16 @@ export const LoginContainer = styled.div`
       width: 80px;
     }
   }
-  #email-icon{
+  #email-icon {
     color: #016300;
   }
+  .botoes {
+    flex-direction: column;
+    padding-top: 0rem;
+    align-items: center;
+  }
 `;
+
 export const SubTitle = styled.a`
   font-size: 1rem;
   font-weight: 400;
@@ -230,6 +182,12 @@ export const MenuLink = styled.a`
         width: 100%;
         left: 0;
       }
+    }
+  }
+
+  @media (max-width: 860px) {
+    &#home {
+      display: none;
     }
   }
 `;

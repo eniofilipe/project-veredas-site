@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable import/no-unresolved */
+/* eslint-disable react/require-default-props */
+/* eslint-disable prettier/prettier */
 import { useContext, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -7,17 +9,18 @@ import { useRouter } from 'next/router';
 import EmailIcon from '@material-ui/icons/Email';
 import LockIcon from '@material-ui/icons/Lock';
 import { toast } from 'react-toastify';
+import Footer from '../../components/Footer';
 import AuthContext from '../../contexts/auth';
 import * as S from '../../styles/login/styles';
-import veredaslogo from '../../assets/logo.png';
+import veredaslogo from '../../assets/images/logo.png';
 import ValidadeContext from '../../contexts/validade';
-import logomst from '../../assets/logo-mst-rurais.png';
-import logoif from '../../assets/logo-if.png';
+import logomst from '../../assets/images/logo-mst-rurais.png';
+import logoif from '../../assets/images/logo-if.png';
 
 const Login = () => {
   const { validade } = useContext(ValidadeContext);
   const Router = useRouter();
-
+  const [isOpen, setIsOpen] = useState(false);
   const { signIn } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -57,6 +60,35 @@ const Login = () => {
   const goToPasswordRecovery = () => {
     Router.push('/passwordRecovery');
   };
+
+  const optionsLinksMobile = [
+    {
+      label: 'Home',
+      action: () => Router.push('/'),
+    },
+  ];
+
+  const optionsLinks = [
+    {
+      label: 'Home',
+      action: () => Router.push('/'),
+    },
+  ];
+
+  const optionsButtons = !validade
+    ? [
+      {
+        label: 'Criar conta',
+        action: goToLogin,
+      },
+    ]
+    : [
+      {
+        label: 'Entrar na Feirinha',
+        action: goToProducts,
+      },
+    ];
+
   return (
     <>
       <Head>
@@ -64,17 +96,14 @@ const Login = () => {
       </Head>
 
       <S.HeaderWrapper>
-        <S.Header>
-          <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')} />
-          <S.MenuNav>
-            <S.MenuLink onClick={() => Router.push('/')}>Home</S.MenuLink>
-            {!validade ? (
-              <S.Button onClick={goToLogin}>Criar conta</S.Button>
-            ) : (
-              <S.Button onClick={goToProducts}>Entrar na Feirinha</S.Button>
-            )}
-          </S.MenuNav>
-        </S.Header>
+        <S.StyledHeader
+          links={optionsLinks}
+          buttons={optionsButtons}
+          linksMenuFull={optionsLinksMobile}
+          buttonsMenulFull={optionsButtons}
+          handleSandwich={(open) => setIsOpen(open)}
+          openMenuFull={isOpen}
+        />
       </S.HeaderWrapper>
       <S.Content>
         <S.LoginContainer>
@@ -103,39 +132,17 @@ const Login = () => {
           </div>
           <S.SubTitle onClick={goToPasswordRecovery}>
             Esqueci a senha
-            </S.SubTitle>
+          </S.SubTitle>
           <p />
-          <S.ButtonLogin onClick={() => handleLogin()}>Acessar</S.ButtonLogin>
-          <S.ButtonLogin onClick={() => Router.push('/register')}>
-            Criar conta
+          <S.LoginContainer className="botoes">
+            <S.ButtonLogin onClick={() => handleLogin()}>Acessar</S.ButtonLogin>
+            <S.ButtonLogin onClick={() => Router.push('/register')}>
+              Criar Conta
             </S.ButtonLogin>
+          </S.LoginContainer>
         </S.LoginContainer>
       </S.Content>
-      <S.WrapperFooter>
-
-        <div id='contato'>
-          <h1 id='contato-info'>Contato</h1>
-          <p>contato@veredasdaterra.com.br</p>
-          <p>(38) 9 9900-0000</p>
-        </div>
-
-        <div id='info'>
-          <h1 id='title-info'>Informações</h1>
-          <p>Cooperativa Camponesa - Veredas da Terra</p>
-          <p>CNPJ: 10.286.881/0001-02</p>
-          <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
-        </div>
-
-        <div id='logo'>
-          <S.Logo
-            src={veredaslogo}
-            alt="Logo da cooperativa Veredas da Terra"
-          />
-          <S.Logo src={logomst} alt="Logo do MST" />
-          <S.Logo src={logoif} alt="Logo do IFNMG" onClick={() => Router.push('/if')}/>
-        </div>
-
-      </S.WrapperFooter>
+      <Footer />
     </>
   );
 };

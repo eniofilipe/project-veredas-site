@@ -1,13 +1,18 @@
 /* eslint-disable indent */
 import styled, { css } from 'styled-components';
-import bg1 from '../assets/bg1.png';
-import bg2 from '../assets/cesta.png';
+import bg1 from '../assets/images/bg1.png';
+import bg2 from '../assets/images/cesta.png';
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div`
+  width: 100vw;
+`;
 export const Logo = styled.img`
 `;
 export const MenuNav = styled.div`
   margin-right: 4rem;
+  @media (max-width: 1100px) {
+    margin-right: 1rem;
+  }
 `;
 
 export const MenuLink = styled.a`
@@ -46,6 +51,7 @@ export const HomeSectionWrapper = styled.div`
   top: 0;
   left: 0;
   z-index: -1;
+
 `;
 
 export const BGHome = styled.div`
@@ -53,8 +59,8 @@ export const BGHome = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  width: 100vw;
   height: 100vh;
+  width: 100vw;
 `;
 export const CentralizeWrapper = styled.div`
   display: flex;
@@ -75,21 +81,36 @@ export const CentralizeWrapper = styled.div`
     font-weight: 300;
     color: #fff;
   }
-
   padding-top: 15vh;
+
+  @media (max-width: 1367px) {
+    p {
+      font-size: 2.5rem;
+    }
+    p:nth-child(2) {
+    font-size: 2rem;
+    font-weight: 400;
+    }
+  }
+
+  @media (max-width: 830px) {
+    padding: 1rem;
+
+    p {
+      font-size: 2rem;
+    }
+    p:nth-child(2) {
+    font-size: 1.5rem;
+    }
+  }
 `;
 
-export const WrapperSecondSection = styled.div`
-  padding-top: 110vh;
-  display: flex;
-  padding-bottom: 10vh;
-`;
 
 export const Card1 = styled.div`
   margin-left: 5%;
   background-color: #016300;
   height: 100%;
-  width: 40vw;
+  width: 50vw;
   padding: 2rem;
   border-radius: 4px;
   p {
@@ -103,9 +124,26 @@ export const Card1 = styled.div`
     font-size: 3rem;
     padding-bottom: 2rem;
   }
-`;
-export const Image = styled.img``;
 
+  @media (max-width: 1367px) {
+    margin-left: 4%;
+    padding: 1.8rem;
+    padding-bottom: 3rem;
+    padding-top: 2rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    p {
+      font-size: 1.5rem;
+      line-height: 1.3;
+  }
+  p:nth-child(1) {
+    font-size: 2.3rem;
+    padding-bottom: 1.8rem;
+  }
+  }
+`;
+export const Image = styled.img`
+`;
 export const Card2 = styled.div`
   ${Image} {
     margin: 2rem;
@@ -113,36 +151,47 @@ export const Card2 = styled.div`
     height: 80%;
     border-radius: 4px;
   }
-  padding-top: 1rem;
   padding-left: 2rem;
 `;
-export const WrapperThreeSection = styled.div`
-  background-image: url(${bg2});
-  height: 60rem;
-  width: 100%;
 
-  /* Create the parallax scrolling effect */
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-
+export const WrapperSecondSection = styled.div`
+  padding-top: 110vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  padding-bottom: 10vh;
+  flex-direction: row;
+  @media (max-width:1000px) {
+    padding-top: 100vh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  ${Card1}{
+    margin-top: 1rem;
+    margin-left:0;
+    width: 80%;
+    height:100%;
+  }
+  ${Card2}{
+  padding-left: 0;
+  display: flex;
+  width: 100%;
   align-items: center;
-  position: relative;
+    flex-direction: column;
+    ${Image}{
+      margin: 1rem;
+      width: 90%;
+      height:70%;
+      }
+  }
+  }
 `;
 
 export const TextWrapper = styled.div`
   width: 100%;
   height: 18%;
-  /* padding: 4%; */
   padding: 0px 50px 50px 25px;
   p:nth-child(1) {
     font-size: 4rem;
     font-weight: 600;
-    /* padding-bottom: 20px; */
   }
 
   p:nth-child(3) {
@@ -167,18 +216,6 @@ export const TextDivPrincipal = styled.div`
 `;
 
 export const TextDiv1 = styled.div`
-  /* float: left;
-  width: 42%;
-  height: 50%;
-  text-align: left;
-  color: #552200;
-  background-color: rgba(211, 211, 211, 0.8);
-  font-size: 1.8rem;
-  line-height: 1.8;
-  margin-right: 3rem;
-  margin-left: 8rem;
-  border-radius: 10px;
-  padding: 0px 50px 50px 25px; */
   color: #552200;
   background: rgba(255,255,255,0.92);
   height: 400px;
@@ -191,121 +228,93 @@ export const TextDiv1 = styled.div`
   font-weight: 600;
   font-size: 1.4rem;
   line-height: 1.8;
+  @media (max-width: 1367px) {
+    height: 42vh;
+    width: 40vw;
+    background: rgba(255,255,255,0.75);
+    padding: 1.5rem;
+
+  }
 `;
 
-export const TextDiv2 = styled.div`
- border-radius: 10px;
+
+export const WrapperThreeSection = styled.div`
+  background-image: url(${bg2});
+  height: 100vh;
+  width: 100%;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 400px;
-  color: #552200;
-  background: rgba(255,255,255,0.92);
-  padding: 4rem;
-  font-weight: 600;
-  font-size: 1.4rem;
-  line-height: 1.8;
-  /* float: left;
-  width: 42%;
-  height: 55%;
-  text-align: left;
-  color: #017C00;
-  background-color: rgba(211, 211, 211, 0.8);
-  font-size: 1.8rem;
-  line-height: 2;
-  margin-top: 10rem;
-  margin-right: 2rem;
-  border-radius: 10px;
-  padding: 0px 50px 50px 25px; */
-`;
-
-export const TextDiv3 = styled.div`
-  float: left;
-  width: 30%;
-  height: 100%;
-  text-align: left;
-  color: #961913;
-  background-color: rgba(211, 211, 211, 0.8);
-  font-size: 1.8rem;
-  line-height: 2;
-  margin-right: 1rem;
-  /* margin-bottom: 2rem; */
-  border-radius: 10px;
-  padding: 0px 50px 50px 25px;
-`;
-
-export const WrapperFooter = styled.footer`
-  height: 20vh;
-  display: flex;
-  width: 100%;
-  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  /* padding-top: 4vw; */
-  /* padding-bottom: 6vw; */
-  /* gap: 4rem; */
-  background-color: #fff;
+  position: relative;
 
-  div p{
-    color: #552200;
-    font-size: 1.1rem;
-  }
-  div h1{
-    font-weight: bold;
-    color: #017C00;
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-  #info{
-    text-align: center;
-    /* border: 1px solid black; */
-    margin-left: 12.3rem;
+  @media (max-width: 960px) {
 
-    /* padding-left: 2.8rem; */
-  }
-  #logo{
-    margin-right: 4rem;
-    display: flex;
-    /* border: 1px solid black; */
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    /* padding-right: 8rem; */
-  }
-  #contato{
-    /* border: 1px solid black; */
-    margin-left: 8rem;
-    text-align: center;
-    /* padding-right: 8rem; */
-    /* margin-right: 14rem; */
-  }
-   ${Logo}:nth-child(1) {
-    width: 250px;
-    padding: 0.8rem;
-  }
-  ${Logo}:nth-child(2) {
-    width: 120px;
-    padding: 1rem;
-    /* margin-left: 2rem; */
-  }
-  ${Logo}:nth-child(3) {
-    width: 150px;
-    padding: 1rem;
-    border-radius: 30px;
+    ${TextWrapper}{
+      p{
+      font-size: 3rem;
+      }
+    }
+    ${TextDiv1}{
+      height: 50vh;
+      font-size: 1.5rem;
+      line-height: 1.3;
+      width: 40vw;
+      padding: 1.2rem;
+    }
   }
 
-  /* ${Logo}:nth-child(2) {
-    width: 150px;
-    padding: 1rem;
-    margin-left: 2rem;
-  } */
-  /* ${Logo}:nth-child(3) {
-    width: 175px;
-    padding: 1rem;
-    border-radius: 30px;
-  } */
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px -1.95px 6px;
+  @media (max-width: 700px) {
+    ${TextDivPrincipal}{
+      text-align: center;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    ${TextDiv1}{
+      width: 80vw;
+      height: 30vh;
+      padding-top: 1rem;
+      margin-bottom: 1rem;
+    }
+    ${TextWrapper}{
+      padding: 0rem 1rem;
+      height: 10rem;
+    }
+  }
+  @media (max-width: 520px) {
+    height: 120vh;
+    ${TextWrapper}{
+      p{
+      font-size: 2rem;
+      }
+    }
+    ${TextDiv1}{
+      width:90vw;
+      height: 35vh;
+      padding: 0;
+      padding-top: 1rem;
+      margin-bottom: 0.5rem;
+      p{
+        font-size: 1.2rem;
+      }
+    }
+    ${TextWrapper}{
+      padding: 0rem 1rem;
+      height: 4rem;
+    }
+  }
 `;
+
 
 export const Button = styled.button`
   background: #017C00;
@@ -359,23 +368,123 @@ export const Header = styled.menu<MenuProps>`
     justify-content: space-between;
     background-color: ${background && background === 'white'
       ? '#FFF'
-      : 'rgba(211, 211, 211, 0.8)'};
+      : 'rgba(250, 250, 250, 1)'};
   `}
 
   ${Logo} {
     width: 200px;
   }
+  @media (max-width: 700px) {
+    display: none;
+  }
+
+  @media (max-width: 1020px) {
+    ${MenuLink}{
+      font-size: 1.2rem;
+    }
+  }
+
+  @media (max-width: 940px) {
+    ${Button}{
+      padding: 1rem 1.5rem;
+      margin-left: 1.5rem;
+      font-size: 1rem;
+    }
+  }
 `;
 export const HeaderWrapper = styled.div<MenuProps>`
-  ${({ position }) => css`
     position: fixed;
-    opacity: ${position !== 0 ? 1 : 0.8};
-    background-color: ${position !== 0
-      ? 'rgba(250, 250, 250, 1)'
-      : 'rgba(250, 250, 240, 0.8)'};
+    opacity: 1;
+    background-color: rgba(250, 250, 250, 1);
     top: 0;
     left: 0;
     z-index: 2;
     width: 100%;
-  `}
 `;
+
+
+
+
+export const IconWrapper = styled.div`
+    color:#444;
+    width: 4rem;
+    height: 4rem;
+    cursor: pointer;
+  `
+
+
+export const Sandwich = styled.div`
+  color: #444;
+  width: 4rem;
+  height: 5rem;
+  cursor: pointer;
+  display:flex;
+  background-color: white;
+  width: 100%;
+  justify-content: space-between;
+  position: fixed;
+  ${Logo}{
+    height: 4rem;
+  }
+  @media (max-width: 300px) {
+    display: flex;
+  }
+  `
+
+type MenufullProps = {
+  isOpen: boolean
+}
+export const MenuFull = styled.nav<MenufullProps>`
+  ${({ isOpen }) => css`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #FFF;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    overflow: hidden;
+    transition: opacity 0.3s ease-in-out;
+    opacity: ${isOpen ? 1 : 0};
+    pointer-events: ${isOpen ? 'all' : 'none'};
+    z-index: 5;
+
+    > svg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 2.4rem;
+      cursor: pointer;
+      width: 4rem;
+      height: 4rem;
+    }
+
+    ${MenuNav} {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      flex-direction: column;
+    }
+
+    ${MenuLink} {
+      color: #222;
+      font-weight: bold;
+      font-size: 2rem;
+      margin-bottom: 2.4rem;
+
+      transform: ${isOpen ? 'translateY(0)' : 'translateY(3rem)'};
+      transition: transform 0.3s ease-in-out;
+
+      &:hover {
+        &::after {
+          background-color: #339034;
+        }
+      }
+    }
+
+  `}
+`

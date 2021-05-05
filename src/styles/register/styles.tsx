@@ -1,19 +1,23 @@
 import styled, { css } from 'styled-components';
+import Header from '../../components/Header';
 
 export const Wrapper = styled.div``;
+
 export const Logo = styled.img`
-&:nth-child(1) {
-  cursor: pointer;
-}
+  &:nth-child(1) {
+    cursor: pointer;
+  }
 `;
 
 type MenuProps = {
-  background?: string;
-  position?: number;
-};
+  background?: string
+  position?: number
+}
+
 export const MenuNav = styled.div`
   margin-right: 4rem;
 `;
+
 export const MenuLink = styled.a`
   position: relative;
   color: #961913;
@@ -44,20 +48,8 @@ export const MenuLink = styled.a`
     }
   }
 `;
-export const Header = styled.menu<MenuProps>`
-  ${({ background }) => css`
-    display: flex;
-    align-items: center;
-    padding: 0.8rem 2rem;
-    justify-content: space-between;
-    background-color: ${background && background === 'white'
-      ? '#FFF'
-      : '#FFF'};
-  `}
 
-  ${Logo} {
-    width: 200px;
-  }
+export const StyledHeader = styled(Header)`
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 `;
 
@@ -76,13 +68,13 @@ export const HeaderWrapper = styled.div<MenuProps>`
 `;
 
 export const Button = styled.button`
-  background: #017C00;
+  background: #017c00;
   color: #fff;
   border-radius: 8px;
-  padding: 1rem 2rem;
+  padding: 1rem;
   border: none;
   outline: none;
-  margin-left: 2rem;
+  //margin-left: 2rem;
   font-weight: bold;
   font-size: 1rem;
 
@@ -93,6 +85,7 @@ export const Button = styled.button`
     cursor: pointer;
   }
 `;
+
 export const Title = styled.h1`
   font-size: 2rem;
   color: #552200;
@@ -103,17 +96,20 @@ export const Title = styled.h1`
   margin-top: 2rem;
   margin-bottom: 1rem;
 
-  &#principal{
+  &#principal {
     margin-top: 3rem;
-  margin-bottom: 0rem;
+    margin-bottom: 0rem;
     text-align: center;
     margin-bottom: 1rem;
   }
+
+  @media (max-width: 1280px) {
+    font-size: 1rem;
+  }
 `;
 
-
 export const WrapperData = styled.div`
- display: flex;
+  display: flex;
   flex-direction: column;
   width: 48%;
   background-color: #fff;
@@ -128,13 +124,21 @@ export const WrapperData = styled.div`
     padding-bottom: 1.2rem;
   }
   padding-right: 3rem;
+  @media (max-width: 1280px) {
+    width: 100%;
+  }
 `;
+
 export const WrapperContent = styled.div`
- display: flex;
+  display: flex;
   width: 100%;
   padding-left: 14%;
   padding-right: 14%;
   justify-content: space-between;
+  @media (max-width: 1280px) {
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
 `;
 
 export const Form = styled.div`
@@ -142,12 +146,20 @@ export const Form = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  @media (max-width: 1280px) {
+    flex-wrap: wrap;
+  }
 `;
+
 export const Label = styled.label`
-   font-size: 1.4rem;
+  font-size: 1.4rem;
   color: #552200;
   margin-top: 14px;
+  @media (max-width: 1280px) {
+    font-size: 1rem;
+  }
 `;
+
 export const Input = styled.input`
   margin-left: auto;
   width: 60%;
@@ -161,15 +173,37 @@ export const Input = styled.input`
   padding-top: 2px;
   padding-bottom: 2px;
   padding-left: 14px;
+  @media (max-width: 1280px) {
+    font-size: 1rem;
+    height: 40px;
+    width: 100%;
+    /* padding: 0; */
+    margin: 0;
+  }
 `;
-export const Body = styled.div``;
+
+export const Body = styled.div`
+  padding-top: 90px;
+`;
+
 export const WrapperController = styled.div``;
+
 export const Row = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
   white-space: nowrap;
+  @media (max-width: 1280px) {
+    font-size: 1rem;
+    flex-direction: column;
+    &#field {
+      margin-top: 0px;
+    }
+    align-items: center;
+    justify-content: center;
+  }
 `;
+
 export const WrapperAddress = styled.div`
   display: flex;
   flex-direction: column;
@@ -188,7 +222,11 @@ export const WrapperAddress = styled.div`
     padding-bottom: 1.2rem;
     margin-left: 16%;
   }
+  @media (max-width: 1280px) {
+    font-size: 1rem;
+  }
 `;
+
 export const WrapperDataAddress = styled.div`
   display: flex;
   flex-direction: column;
@@ -198,6 +236,10 @@ export const WrapperDataAddress = styled.div`
   justify-content: space-between;
   gap: 1rem;
   padding-bottom: 2rem;
+  @media (max-width: 1280px) {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
 `;
 
 export const WrapperButtons = styled.div`
@@ -221,53 +263,4 @@ export const WrapperButtons = styled.div`
       background: #78140f;
     }
   }
-`;
-export const WrapperFooter = styled.footer`
-  height: 20vh;
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #fff;
-
-  div p{
-    color: #552200;
-    font-size: 1.1rem;
-  }
-  div h1{
-    font-weight: bold;
-    color: #017C00;
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-  #info{
-    text-align: center;
-    margin-left: 12.3rem;
-  }
-  #logo{
-    margin-right: 4rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-  }
-  #contato{
-    margin-left: 8rem;
-    text-align: center;
-  }
-   ${Logo}:nth-child(1) {
-    width: 250px;
-    padding: 0.8rem;
-  }
-  ${Logo}:nth-child(2) {
-    width: 120px;
-    padding: 1rem;
-  }
-  ${Logo}:nth-child(3) {
-    width: 150px;
-    padding: 1rem;
-    border-radius: 30px;
-  }
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px -1.95px 6px;
-`;
+`
