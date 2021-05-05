@@ -1,17 +1,18 @@
 import styled, { css } from 'styled-components';
+import Header from '../../components/Header';
 
 export const Wrapper = styled.div``;
 
 export const Logo = styled.img`
-&:nth-child(1) {
-  cursor: pointer;
-}
+  &:nth-child(1) {
+    cursor: pointer;
+  }
 `;
 
 type MenuProps = {
-  background?: string;
-  position?: number;
-};
+  background?: string
+  position?: number
+}
 
 export const MenuNav = styled.div`
   margin-right: 4rem;
@@ -48,20 +49,7 @@ export const MenuLink = styled.a`
   }
 `;
 
-export const Header = styled.menu<MenuProps>`
-  ${({ background }) => css`
-    display: flex;
-    align-items: center;
-    padding: 0.8rem 2rem;
-    justify-content: space-between;
-    background-color: ${background && background === 'white'
-      ? '#FFF'
-      : '#FFF'};
-  `}
-
-  ${Logo} {
-    width: 200px;
-  }
+export const StyledHeader = styled(Header)`
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 `;
 
@@ -80,10 +68,10 @@ export const HeaderWrapper = styled.div<MenuProps>`
 `;
 
 export const Button = styled.button`
-  background: #017C00;
+  background: #017c00;
   color: #fff;
   border-radius: 8px;
-   padding: 1rem;
+  padding: 1rem;
   border: none;
   outline: none;
   //margin-left: 2rem;
@@ -108,20 +96,20 @@ export const Title = styled.h1`
   margin-top: 2rem;
   margin-bottom: 1rem;
 
-  &#principal{
+  &#principal {
     margin-top: 3rem;
-  margin-bottom: 0rem;
+    margin-bottom: 0rem;
     text-align: center;
     margin-bottom: 1rem;
   }
 
-  @media (max-width: 1280px){
+  @media (max-width: 1280px) {
     font-size: 1rem;
   }
 `;
 
 export const WrapperData = styled.div`
- display: flex;
+  display: flex;
   flex-direction: column;
   width: 48%;
   background-color: #fff;
@@ -136,18 +124,18 @@ export const WrapperData = styled.div`
     padding-bottom: 1.2rem;
   }
   padding-right: 3rem;
-  @media (max-width: 1280px){
+  @media (max-width: 1280px) {
     width: 100%;
   }
 `;
 
 export const WrapperContent = styled.div`
- display: flex;
+  display: flex;
   width: 100%;
   padding-left: 14%;
   padding-right: 14%;
   justify-content: space-between;
-  @media (max-width: 1280px){
+  @media (max-width: 1280px) {
     flex-direction: column;
     flex-wrap: wrap;
   }
@@ -158,16 +146,16 @@ export const Form = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  @media (max-width: 1280px){
+  @media (max-width: 1280px) {
     flex-wrap: wrap;
   }
 `;
 
 export const Label = styled.label`
-   font-size: 1.4rem;
+  font-size: 1.4rem;
   color: #552200;
   margin-top: 14px;
-  @media (max-width: 1280px){
+  @media (max-width: 1280px) {
     font-size: 1rem;
   }
 `;
@@ -185,7 +173,7 @@ export const Input = styled.input`
   padding-top: 2px;
   padding-bottom: 2px;
   padding-left: 14px;
-  @media (max-width: 1280px){
+  @media (max-width: 1280px) {
     font-size: 1rem;
     height: 40px;
     width: 100%;
@@ -194,7 +182,9 @@ export const Input = styled.input`
   }
 `;
 
-export const Body = styled.div``;
+export const Body = styled.div`
+  padding-top: 90px;
+`;
 
 export const WrapperController = styled.div``;
 
@@ -203,11 +193,11 @@ export const Row = styled.div`
   justify-content: space-between;
   width: 100%;
   white-space: nowrap;
-  @media (max-width: 1280px){
+  @media (max-width: 1280px) {
     font-size: 1rem;
     flex-direction: column;
-    &#field{
-    margin-top: 0px;
+    &#field {
+      margin-top: 0px;
     }
     align-items: center;
     justify-content: center;
@@ -232,7 +222,7 @@ export const WrapperAddress = styled.div`
     padding-bottom: 1.2rem;
     margin-left: 16%;
   }
-  @media (max-width: 1280px){
+  @media (max-width: 1280px) {
     font-size: 1rem;
   }
 `;
@@ -246,7 +236,7 @@ export const WrapperDataAddress = styled.div`
   justify-content: space-between;
   gap: 1rem;
   padding-bottom: 2rem;
-  @media (max-width: 1280px){
+  @media (max-width: 1280px) {
     padding-left: 10%;
     padding-right: 10%;
   }
@@ -273,5 +263,4 @@ export const WrapperButtons = styled.div`
       background: #78140f;
     }
   }
-`;
-
+`

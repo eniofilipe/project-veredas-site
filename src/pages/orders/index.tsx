@@ -3,7 +3,8 @@
 /* eslint-disable operator-linebreak */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import Footer from '../../components/Footer';
+/* eslint-disable react/require-default-props */
+/* eslint-disable prettier/prettier */
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -22,16 +23,17 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
+import { GetServerSideProps } from 'next';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import * as S from '../../styles/orders/styles';
 import veredaslogo from '../../assets/images/logo.png';
 import logomst from '../../assets/images/logo-mst-rurais.png';
 import logoif from '../../assets/images/logo-if.png';
-import { GetServerSideProps } from 'next';
 import AuthContext from '../../contexts/auth';
 import { PedidosProps } from '../../types';
 import { getPedidos, deletePedido } from '../../api/Pedidos';
 import { FormatDateByFNS } from '../../Utils/Masks';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import Footer from '../../components/Footer';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,8 +53,8 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '8px',
     boxShadow: 'rgba(0, 0, 0, 0.18) 0px 2px 4px',
     '& span, & svg': {
-      fontSize: '1rem'
-    }
+      fontSize: '1rem',
+    },
 
   },
   tabela: {
@@ -67,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '1.0rem',
       color: '#441b00',
     },
-    [theme.breakpoints.down(700)]:{
+    [theme.breakpoints.down(700)]: {
       '& th': {
         fontSize: '1.0rem',
       },
@@ -77,15 +79,14 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   apagada: {
-      [theme.breakpoints.down(500)]:{
-          display: 'none',
-      },
+    [theme.breakpoints.down(500)]: {
+      display: 'none',
+    },
   },
   direita: {
     align: 'right',
   },
 }));
-
 
 export type ProfileProps = {
   name: string;
@@ -104,10 +105,11 @@ const Order = () => {
   const classes = useStyles();
   const Router = useRouter();
   const { signOut } = useContext(AuthContext);
+  const [isOpen, setIsOpen] = useState(false);
   const [open, setOpen] = useState([false]);
   const [pedidos, setPedidos] = useState<PedidosProps[]>([]);
-  var [ajuda, setAjuda] = useState<string>("");
-  var [render, setRender] = useState<number>(0);
+  let [ajuda, setAjuda] = useState<string>('');
+  const [render, setRender] = useState<number>(0);
 
   const fetchPedidos = async () => {
     try {
@@ -126,19 +128,17 @@ const Order = () => {
   };
 
   const deleteOrder = async (id: number) => {
-
     deletePedido(id);
 
     const response = await getPedidos();
 
     setPedidos(response.data.reverse());
 
-    setAjuda("cancelado");
+    setAjuda('cancelado');
     setRender(id);
 
     toast.success('Pedido Cancelado', { position: 'bottom-right' });
-
-  }
+  };
 
   useEffect(() => {
     fetchPedidos();
@@ -155,20 +155,39 @@ const Order = () => {
     return sub.toFixed(2);
   }
 
+  const optionsLinksMobile = [
+    {
+      label: 'Perfil',
+      action: () => Router.push('profile'),
+    },
+    {
+      label: 'Sair',
+      action: signOut,
+    },
+  ];
+
+  const optionsLinks = [
+    {
+      label: 'Perfil',
+      action: () => Router.push('/profile'),
+    },
+    {
+      label: 'Sair',
+      action: signOut,
+    },
+  ];
+
   return (
     <S.Wrapper>
-      <S.Header>
-        <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')} />
-        <S.TitlePage>Meus Pedidos</S.TitlePage>
-        <S.MenuNav>
-          <S.MenuLink onClick={() => Router.push('profile')}>
-            Perfil
-            </S.MenuLink>
-          <S.MenuLink onClick={signOut}>
-            Sair
-            </S.MenuLink>
-        </S.MenuNav>
-      </S.Header>
+      <S.StyledHeader
+          buttons={[]}
+          buttonsMenulFull={[]}
+          handleSandwich={(open) => setIsOpen(open)}
+          links={optionsLinks}
+          linksMenuFull={optionsLinksMobile}
+          openMenuFull={isOpen}
+          title="Meus Pedidos"
+        />
       <S.Body>
         <S.WrapperController>
           <S.WrapperContent>
@@ -179,14 +198,14 @@ const Order = () => {
             >
             {pedidos &&
               pedidos.map((pedido, i) => {
-              const handleClick = (option) => {
-              const array = open.map((e) => false);
-                array[i] = option;
-                setOpen(array);
-              };
-              const controle = open[i];
-              ajuda = pedido.status;
-              return (
+                const handleClick = (option) => {
+                  const array = open.map((e) => false);
+                  array[i] = option;
+                  setOpen(array);
+                };
+                const controle = open[i];
+                ajuda = pedido.status;
+                return (
                 <div key={`${pedido.id}`}>
                   <ListItem
                     button
@@ -199,18 +218,18 @@ const Order = () => {
                       }
                       \xa0\xa0\xa0\xa0\xa0\xa0\xa0
                       ${FormatDateByFNS(
-                        pedido.createdAt
+                        pedido.createdAt,
                       )}
                       \xa0\xa0\xa0\xa0\xa0\xa0\xa0
                       ${`${pedido.status}\xa0\xa0\xa0\xa0\xa0\xa0\xa0`}
                       `}
                     />
-                    {pedido.status === "aberto" ?
+                    {pedido.status === 'aberto' ?
                       <ListItemText className={classes.direita}>
                         <S.Button onClick={() => deleteOrder(pedido.id)}>Cancelar</S.Button>
                         <S.Button id="menor" onClick={() => deleteOrder(pedido.id)}><DeleteForeverIcon style={{ fontSize: 20 }}/></S.Button>
                       </ListItemText>
-                    : <ListItemText> <S.SpanResponsivo/> </ListItemText>
+                      : <ListItemText> <S.SpanResponsivo/> </ListItemText>
                     }
                     {controle ? <ExpandLess /> : <ExpandMore />}
                   </ListItem>
@@ -253,12 +272,12 @@ const Order = () => {
                               ).toFixed(2)}
                             </TableCell>
                           </TableRow>
-                        ))}
+                          ))}
                         <TableRow>
                           <TableCell rowSpan={3}/>
                         {/* <TableCell><S.Button>Editar</S.Button></TableCell> */}
                           <TableCell colSpan={2}>Subtotal</TableCell>
-                          <TableCell  align="right">
+                          <TableCell align="right">
                             R$ {handleSubtotal(pedido.ofertas)}
                           </TableCell>
                         </TableRow>
@@ -270,11 +289,11 @@ const Order = () => {
                         </TableRow>
                         <TableRow>
                           <TableCell colSpan={2}>Total</TableCell>
-                          <TableCell  align="right">
+                          <TableCell align="right">
                             R${' '}
                             {Number(
                               pedido.frete.valor_frete +
-                                Number(handleSubtotal(pedido.ofertas))
+                                Number(handleSubtotal(pedido.ofertas)),
                             ).toFixed(2)}
                           </TableCell>
                         </TableRow>
@@ -282,7 +301,8 @@ const Order = () => {
                       </Table>
                       </TableContainer>
                       </Collapse>
-                      </div>);})}
+                      </div>);
+              })}
             </List>
           </S.WrapperContent>
 

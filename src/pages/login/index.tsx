@@ -1,13 +1,15 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable import/no-unresolved */
+/* eslint-disable react/require-default-props */
+/* eslint-disable prettier/prettier */
 import { useContext, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Footer from '../../components/Footer';
 
 import EmailIcon from '@material-ui/icons/Email';
 import LockIcon from '@material-ui/icons/Lock';
 import { toast } from 'react-toastify';
+import Footer from '../../components/Footer';
 import AuthContext from '../../contexts/auth';
 import * as S from '../../styles/login/styles';
 import veredaslogo from '../../assets/images/logo.png';
@@ -18,7 +20,7 @@ import logoif from '../../assets/images/logo-if.png';
 const Login = () => {
   const { validade } = useContext(ValidadeContext);
   const Router = useRouter();
-
+  const [isOpen, setIsOpen] = useState(false);
   const { signIn } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -58,23 +60,50 @@ const Login = () => {
   const goToPasswordRecovery = () => {
     Router.push('/passwordRecovery');
   };
+
+  const optionsLinksMobile = [
+    {
+      label: 'Home',
+      action: () => Router.push('/'),
+    },
+  ];
+
+  const optionsLinks = [
+    {
+      label: 'Home',
+      action: () => Router.push('/'),
+    },
+  ];
+
+  const optionsButtons = !validade
+    ? [
+      {
+        label: 'Criar conta',
+        action: goToLogin,
+      },
+    ]
+    : [
+      {
+        label: 'Entrar na Feirinha',
+        action: goToProducts,
+      },
+    ];
+
   return (
     <>
       <Head>
         <title>Veredas da terra</title>
       </Head>
+
       <S.HeaderWrapper>
-        <S.Header>
-          <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')} />
-          <S.MenuNav>
-            <S.MenuLink id="home" onClick={() => Router.push('/')}>Home</S.MenuLink>
-            {!validade ? (
-              <S.Button onClick={goToLogin}>Criar conta</S.Button>
-            ) : (
-              <S.Button onClick={goToProducts}>Entrar na Feirinha</S.Button>
-            )}
-          </S.MenuNav>
-        </S.Header>
+        <S.StyledHeader
+          links={optionsLinks}
+          buttons={optionsButtons}
+          linksMenuFull={optionsLinksMobile}
+          buttonsMenulFull={optionsButtons}
+          handleSandwich={(open) => setIsOpen(open)}
+          openMenuFull={isOpen}
+        />
       </S.HeaderWrapper>
       <S.Content>
         <S.LoginContainer>
@@ -103,7 +132,7 @@ const Login = () => {
           </div>
           <S.SubTitle onClick={goToPasswordRecovery}>
             Esqueci a senha
-            </S.SubTitle>
+          </S.SubTitle>
           <p />
           <S.LoginContainer className="botoes">
             <S.ButtonLogin onClick={() => handleLogin()}>Acessar</S.ButtonLogin>
@@ -113,7 +142,7 @@ const Login = () => {
           </S.LoginContainer>
         </S.LoginContainer>
       </S.Content>
-      <Footer/>
+      <Footer />
     </>
   );
 };
