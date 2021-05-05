@@ -267,7 +267,7 @@ const products = () => {
           </S.Header>
         </S.HeaderWrapper>
         <S.WrapperContent>
-          <S.WrapperCategory>
+          <S.WrapperCategory id="consumo">
             <S.HeadCategory>Categorias</S.HeadCategory>
             {categorias &&
               categorias.map((cat, index) => (

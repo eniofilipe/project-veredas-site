@@ -120,7 +120,7 @@ const ResetarSenha = () => {
             />
           </div>
 
-          <S.ButtonLogin
+          <S.ButtonLogin id="menorEnviar"
             onClick={() => setResetarSenha(password, passwordRepeat)}
           >
             Enviar

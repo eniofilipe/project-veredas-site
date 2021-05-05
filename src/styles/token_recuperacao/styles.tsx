@@ -49,6 +49,13 @@ export const ButtonLogin = styled.button`
     border: 1px solid #016300;
     cursor: pointer;
   }
+
+  @media (max-width: 581px) {
+    width: 10rem;
+    height: 3.4rem;
+    align-self: center;
+  }
+
 `;
 
 type MenuProps = {
