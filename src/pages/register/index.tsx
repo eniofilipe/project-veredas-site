@@ -151,7 +151,6 @@ const Profile = () => {
         </S.HeaderWrapper>
       <S.Body>
         <S.WrapperController>
-          <S.Title id="principal">Cadastro</S.Title>
           <S.WrapperContent>
             <S.WrapperData>
               <S.Title>Dados Pessoais</S.Title>

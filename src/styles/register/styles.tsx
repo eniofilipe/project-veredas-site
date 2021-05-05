@@ -83,10 +83,10 @@ export const Button = styled.button`
   background: #017C00;
   color: #fff;
   border-radius: 8px;
-  padding: 1rem 2rem;
+   padding: 1rem;
   border: none;
   outline: none;
-  margin-left: 2rem;
+  //margin-left: 2rem;
   font-weight: bold;
   font-size: 1rem;
 
@@ -114,6 +114,10 @@ export const Title = styled.h1`
     text-align: center;
     margin-bottom: 1rem;
   }
+
+  @media (max-width: 1280px){
+    font-size: 1rem;
+  }
 `;
 
 export const WrapperData = styled.div`
@@ -132,6 +136,9 @@ export const WrapperData = styled.div`
     padding-bottom: 1.2rem;
   }
   padding-right: 3rem;
+  @media (max-width: 1280px){
+    width: 100%;
+  }
 `;
 
 export const WrapperContent = styled.div`
@@ -140,6 +147,10 @@ export const WrapperContent = styled.div`
   padding-left: 14%;
   padding-right: 14%;
   justify-content: space-between;
+  @media (max-width: 1280px){
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
 `;
 
 export const Form = styled.div`
@@ -147,12 +158,18 @@ export const Form = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  @media (max-width: 1280px){
+    flex-wrap: wrap;
+  }
 `;
 
 export const Label = styled.label`
    font-size: 1.4rem;
   color: #552200;
   margin-top: 14px;
+  @media (max-width: 1280px){
+    font-size: 1rem;
+  }
 `;
 
 export const Input = styled.input`
@@ -168,6 +185,13 @@ export const Input = styled.input`
   padding-top: 2px;
   padding-bottom: 2px;
   padding-left: 14px;
+  @media (max-width: 1280px){
+    font-size: 1rem;
+    height: 40px;
+    width: 100%;
+    /* padding: 0; */
+    margin: 0;
+  }
 `;
 
 export const Body = styled.div``;
@@ -179,6 +203,15 @@ export const Row = styled.div`
   justify-content: space-between;
   width: 100%;
   white-space: nowrap;
+  @media (max-width: 1280px){
+    font-size: 1rem;
+    flex-direction: column;
+    &#field{
+    margin-top: 0px;
+    }
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 export const WrapperAddress = styled.div`
@@ -199,6 +232,9 @@ export const WrapperAddress = styled.div`
     padding-bottom: 1.2rem;
     margin-left: 16%;
   }
+  @media (max-width: 1280px){
+    font-size: 1rem;
+  }
 `;
 
 export const WrapperDataAddress = styled.div`
@@ -210,6 +246,10 @@ export const WrapperDataAddress = styled.div`
   justify-content: space-between;
   gap: 1rem;
   padding-bottom: 2rem;
+  @media (max-width: 1280px){
+    padding-left: 10%;
+    padding-right: 10%;
+  }
 `;
 
 export const WrapperButtons = styled.div`
