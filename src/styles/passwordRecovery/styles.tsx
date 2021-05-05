@@ -1,17 +1,18 @@
 /* eslint-disable indent */
 import styled, { css } from 'styled-components';
 import Input from '../../components/Inputs/Input';
+import Header from '../../components/Header'
 
 export const Wrapper = styled.div``;
 
 export const Logo = styled.img`
-&:nth-child(1) {
-  cursor: pointer;
-}
+  &:nth-child(1) {
+    cursor: pointer;
+  }
 `;
 
 export const Button = styled.button`
-  background: #017C00;
+  background: #017c00;
   color: #fff;
   border-radius: 8px;
   padding: 1rem 2rem;
@@ -27,7 +28,7 @@ export const Button = styled.button`
     background: #016300;
     cursor: pointer;
   }
-  @media (max-width: 442px){
+  @media (max-width: 442px) {
     padding: 0.8rem 0.6rem 0.8rem 0.6rem;
     margin-left: 1rem;
     margin-right: -2rem;
@@ -35,7 +36,7 @@ export const Button = styled.button`
 `;
 
 export const ButtonLogin = styled.button`
-  background: #017C00;
+  background: #017c00;
   color: #fff;
   border-radius: 8px;
   padding: 1rem 2rem;
@@ -57,37 +58,15 @@ export const ButtonLogin = styled.button`
     width: 10rem;
     height: 3.4rem;
   }
-
 `;
 
 type MenuProps = {
-  background?: string;
-  position?: number;
-};
+  background?: string
+  position?: number
+}
 
-export const Header = styled.menu<MenuProps>`
-  ${({ background }) => css`
-    display: flex;
-    align-items: center;
-    padding: 0.8rem 2rem;
-    justify-content: space-between;
-    background-color: ${background && background === 'white'
-      ? '#FFF'
-      : '#FFF'};
-  `}
-  ${Logo} {
-    width: 200px;
-  }
+export const StyledHeader = styled(Header)`
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-
-  @media(max-width: 658px){
-    padding: 0.8rem;
-    align: center;
-
-    ${Logo} {
-    width: 150px;
-    }
-  }
 `;
 export const HeaderWrapper = styled.div<MenuProps>`
   ${({ position }) => css`
@@ -148,10 +127,10 @@ export const LoginContainer = styled.div`
       width: 80px;
     }
   }
-  #email-icon{
+  #email-icon {
     color: #016300;
   }
-  .botoes{
+  .botoes {
     flex-direction: column;
     padding-top: 0rem;
     align-items: center;
@@ -206,8 +185,8 @@ export const MenuLink = styled.a`
     }
   }
 
-  @media (max-width: 860px){
-    &#home{
+  @media (max-width: 860px) {
+    &#home {
       display: none;
     }
   }

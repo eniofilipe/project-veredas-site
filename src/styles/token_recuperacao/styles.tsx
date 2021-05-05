@@ -1,19 +1,19 @@
 /* eslint-disable indent */
 /* eslint-disable import/no-unresolved */
 import styled, { css } from 'styled-components';
-
+import Header from '../../components/Header';
 import Input from '../../components/Inputs/Input';
 
 export const Wrapper = styled.div``;
 
 export const Logo = styled.img`
-&:nth-child(1) {
-  cursor: pointer;
-}
+  &:nth-child(1) {
+    cursor: pointer;
+  }
 `;
 
 export const Button = styled.button`
-  background: #017C00;
+  background: #017c00;
   color: #fff;
   border-radius: 8px;
   padding: 1rem 2rem;
@@ -32,7 +32,7 @@ export const Button = styled.button`
 `;
 
 export const ButtonLogin = styled.button`
-  background: #017C00;
+  background: #017c00;
   color: #fff;
   border-radius: 8px;
   padding: 1rem 2rem;
@@ -52,26 +52,13 @@ export const ButtonLogin = styled.button`
 `;
 
 type MenuProps = {
-  background?: string;
-  position?: number;
-};
+  background?: string
+  position?: number
+}
 
-export const Header = styled.menu<MenuProps>`
-  ${({ background }) => css`
-    display: flex;
-    align-items: center;
-    padding: 0.8rem 2rem;
-    justify-content: space-between;
-    background-color: ${background && background === 'white'
-      ? '#FFF'
-      : '#FFF'};
-  `}
-
-  ${Logo} {
-    width: 200px;
-  }
+export const StyledHeader = styled(Header)`
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-`;
+`
 
 export const HeaderWrapper = styled.div<MenuProps>`
   ${({ position }) => css`
@@ -132,7 +119,7 @@ export const LoginContainer = styled.div`
       width: 80px;
     }
   }
-  #email-icon{
+  #email-icon {
     color: #016300;
   }
 `;

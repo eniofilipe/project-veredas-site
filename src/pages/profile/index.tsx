@@ -25,6 +25,7 @@ const Profile = () => {
   const [roDadosPessoais, setRoDP] = useState(true);
   const [roSenha, setRoS] = useState(true);
   const [roEndereco, setRoE] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const Router = useRouter();
   const { signOut } = useContext(AuthContext);
@@ -138,7 +139,7 @@ const Profile = () => {
             break;
           case 404:
             toast.warn(
-              'Usuário não encontrado. Recomendamos que saia e faça o login novamente.'
+              'Usuário não encontrado. Recomendamos que saia e faça o login novamente.',
             );
             break;
 
@@ -161,24 +162,43 @@ const Profile = () => {
     }
   }
 
+  const optionsLinksMobile = [
+    {
+      label: 'Pedidos',
+      action: () => Router.push('/orders'),
+    },
+    {
+      label: 'Sair',
+      action: signOut,
+    },
+  ];
+
+  const optionsLinks = [
+    {
+      label: 'Pedidos',
+      action: () => Router.push('/orders'),
+    },
+    {
+      label: 'Sair',
+      action: signOut,
+    },
+  ];
+
   return (
     <>
       <S.Wrapper>
         <Head>
           <title>Veredas da terra</title>
         </Head>
-        <S.Header>
-          <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')} />
-          <S.TitlePage>Perfil</S.TitlePage>
-          <S.MenuNav>
-            <S.MenuLink onClick={() => Router.push('/orders')}>
-              Pedidos
-            </S.MenuLink>
-            <S.MenuLink onClick={signOut}>
-              Sair
-            </S.MenuLink>
-          </S.MenuNav>
-        </S.Header>
+        <S.StyledHeader
+          buttons={[]}
+          buttonsMenulFull={[]}
+          handleSandwich={(open) => setIsOpen(open)}
+          links={optionsLinks}
+          linksMenuFull={optionsLinksMobile}
+          openMenuFull={isOpen}
+          title="Perfil"
+        />
 
         <S.WrapperController>
           <S.WrapperContent>
@@ -217,8 +237,7 @@ const Profile = () => {
                   <S.Input
                     value={telefone}
                     readOnly={roDadosPessoais}
-                    onChange={(e) =>
-                      setTelefone(cellphoneeMask(e.target.value))
+                    onChange={(e) => setTelefone(cellphoneeMask(e.target.value))
                     }
                   />
                 </S.Row>

@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import styled, { css } from 'styled-components';
+import Header from '../../components/Header';
 
 export const Wrapper = styled.main`
   display: flex;
@@ -64,21 +65,8 @@ export const TitlePage = styled.h1`
   cursor: default;
 `;
 
-export const Header = styled.menu<MenuProps>`
-  ${({ background }) => css`
-    display: flex;
-    align-items: center;
-    padding: 0.8rem 2rem;
-    justify-content: space-between;
-    background-color: ${background && background === 'white'
-      ? '#FFF'
-      : '#FFF'};
-  `}
-
-
-  ${Logo} {
-    width: 200px;
-  }
+export const StyledHeader = styled(Header)`
+  
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 `;
 
@@ -101,6 +89,7 @@ export const WrapperMenu = styled.div`
 `;
 
 export const WrapperContent = styled.div`
+  padding-top: 80px;
   width: 80%;
   margin: 1.5rem auto;
 

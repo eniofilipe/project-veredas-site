@@ -1,23 +1,23 @@
 /* eslint-disable indent */
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components'
+import Header from '../../components/Header';
 
-export const Wrapper = styled.div`
-`;
+export const Wrapper = styled.div``
 
 export const Logo = styled.img`
-&:nth-child(1) {
-  cursor: pointer;
-}
-`;
+  &:nth-child(1) {
+    cursor: pointer;
+  }
+`
 
 type MenuProps = {
-  background?: string;
-  position?: number;
-};
+  background?: string
+  position?: number
+}
 
 export const MenuNav = styled.div`
   /* margin-right: 4rem; */
-`;
+`
 
 export const MenuLink = styled.a`
   position: relative;
@@ -34,7 +34,7 @@ export const MenuLink = styled.a`
       position: absolute;
       display: block;
       height: 0.15rem;
-      background-color: #017C00;
+      background-color: #017c00;
       animation: hoverAnimation 0.2s forwards;
     }
     @keyframes hoverAnimation {
@@ -48,7 +48,7 @@ export const MenuLink = styled.a`
       }
     }
   }
-`;
+`
 
 export const TitlePage = styled.h1`
   position: absolute;
@@ -58,25 +58,11 @@ export const TitlePage = styled.h1`
   font-weight: 400;
   font-size: 1.5rem;
   cursor: default;
-`;
+`
 
-export const Header = styled.menu<MenuProps>`
-  ${({ background }) => css`
-    display: flex;
-    align-items: center;
-    padding: 0.8rem 2rem;
-    justify-content: space-between;
-    background-color: ${background && background === 'white'
-      ? '#FFF'
-      : '#FFF'};
-  `}
-
-
-  ${Logo} {
-    width: 200px;
-  }
+export const StyledHeader = styled(Header)`
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-`;
+`
 
 export const HeaderWrapper = styled.div<MenuProps>`
   ${({ position }) => css`
@@ -90,7 +76,7 @@ export const HeaderWrapper = styled.div<MenuProps>`
     z-index: 2;
     width: 100%;
   `}
-`;
+`
 
 export const TitleDesenvolvedores = styled.p`
   font-size: 2rem;
@@ -98,9 +84,10 @@ export const TitleDesenvolvedores = styled.p`
   cursor: default;
   display: flex;
   width: 50%;
-`;
+`
 
 export const WrapperBody = styled.div`
+  padding-top: 70px;
   display: flex;
   flex-wrap: wrap;
   /* align-items: center; */
@@ -109,14 +96,15 @@ export const WrapperBody = styled.div`
   margin-top: 2rem;
   margin-bottom: 2rem;
 
-  @media(max-width: 1152px){
+  @media (max-width: 1152px) {
     margin-top: 1rem;
     margin-bottom: 1rem;
     justify-content: center;
   }
 
-  .card{
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  .card {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+      rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     background-color: #fff;
     display: flex;
     flex-direction: row;
@@ -129,74 +117,73 @@ export const WrapperBody = styled.div`
     margin: 2rem;
     gap: 1rem;
 
-    @media(max-width: 1152px){
-        min-height: 10rem;
-        width: 28rem;
+    @media (max-width: 1152px) {
+      min-height: 10rem;
+      width: 28rem;
     }
 
-    img{
+    img {
       width: 200px;
       min-height: 200px;
       border-radius: 50%;
       box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 
-      @media(max-width: 1152px){
+      @media (max-width: 1152px) {
         width: 170px;
         min-height: 170px;
       }
 
-      @media(max-width: 380px){
+      @media (max-width: 380px) {
         width: 150px;
         min-height: 150px;
       }
     }
 
-    a{
-        text-decoration: none;
-        width: 100%;
-        color: #000c00;
-        &:hover {
-          color: #000000;
-        }
-        font-size: 1.1rem;
-
-        @media(max-width: 1152px){
-          font-size: 1rem;
-        }
+    a {
+      text-decoration: none;
+      width: 100%;
+      color: #000c00;
+      &:hover {
+        color: #000000;
       }
+      font-size: 1.1rem;
 
-    .info{
+      @media (max-width: 1152px) {
+        font-size: 1rem;
+      }
+    }
+
+    .info {
       width: 100%;
       display: flex;
       flex-direction: column;
-      h1{
+      h1 {
         font-size: 1.5rem;
         margin-top: 1rem;
         margin-bottom: 2rem;
         font-weight: 500;
         color: #552200;
-        &#campus{
-        font-size: 1.2rem;
-        margin-top: -2rem;
+        &#campus {
+          font-size: 1.2rem;
+          margin-top: -2rem;
         }
       }
 
-      @media(max-width: 1152px){
-        h1{
+      @media (max-width: 1152px) {
+        h1 {
           font-size: 1.3rem;
           margin-top: 0.8rem;
           margin-bottom: 2rem;
           font-weight: 500;
           color: #552200;
-          &#campus{
-          font-size: 1rem;
-          margin-top: -2rem;
+          &#campus {
+            font-size: 1rem;
+            margin-top: -2rem;
           }
         }
       }
     }
-
   }
-`;
+`
 
-export const Body = styled.body``;
+export const Body = styled.body``
