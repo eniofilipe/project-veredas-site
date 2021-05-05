@@ -1,12 +1,12 @@
-import React, { ReactChildren, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { ReactChildren, useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faShoppingBasket,
   faPlus,
   faMinus,
   faCheckCircle,
-  faTrash
-} from '@fortawesome/free-solid-svg-icons';
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons'
 
 import {
   InfoContainer,
@@ -25,25 +25,25 @@ import {
   AditionalInfo,
   StockBuyWrapper,
   Stock,
-  PriceAndQuantityWrapper
-} from './styles';
-import produto from '../../../assets/images/produto.png';
-import Money from '../../StylesText/Money';
+  PriceAndQuantityWrapper,
+} from './styles'
+import produto from '../../../assets/images/produto.png'
+import Money from '../../StylesText/Money'
 
 interface CardProductProps {
-  className?: string;
-  value: any;
-  MinusQuantityOnChange: (e: any) => void;
-  PlusQuantityOnChange: (e: any) => void;
-  onChange: (e: any) => void;
-  handleRemove: (e: any) => void;
-  name: string;
-  comment: string;
-  category: string[];
-  image?: string;
-  quantity: number;
-  inCart?: boolean;
-  availableStock: number;
+  className?: string
+  value: any
+  MinusQuantityOnChange: (e: any) => void
+  PlusQuantityOnChange: (e: any) => void
+  onChange: (e: any) => void
+  handleRemove: (e: any) => void
+  name: string
+  comment: string
+  category: string[]
+  image?: string
+  quantity: number
+  inCart?: boolean
+  availableStock: number
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -60,15 +60,17 @@ const cardProduct = ({
   category,
   availableStock,
   image,
-  inCart
+  inCart,
 }: CardProductProps) => {
-  const [HoverIcon, setHoverIcon] = useState(false)
+  const [HoverIcon, setHoverIcon] = useState(false);
 
   return (
     <Container>
-      {image === null ?
-        <ImageHeader src={produto} alt="" />
-      : <ImageHeader src={`http://${image}`} alt="" />}
+      {image === null
+        ? <ImageHeader src={produto} alt="" />
+        ) : (
+        <ImageHeader src={`${image}`} alt="" />
+      )}
       {/* <ImageHeader src={`http://${image}` || produto} alt="" />  */}
       <InfoContainer>
         <Title>{name}</Title>
@@ -76,14 +78,13 @@ const cardProduct = ({
         {/* <PriceContainer> */}
 
 
-        {!inCart ?
-          <>
+        {!inCart
+          ? <>
             <PriceAndQuantityWrapper>
               <Price>
                 <Money value={value} />
               </Price>
               <QuantityContainer>
-
                 <ButtonMinus onClick={MinusQuantityOnChange}>
                   <FontAwesomeIcon icon={faMinus} />
                 </ButtonMinus>
@@ -102,15 +103,14 @@ const cardProduct = ({
               </ButtonBuy>
             </StockBuyWrapper>
 
-          </> :
+          </>
 
-          <>
+          : <>
             <PriceAndQuantityWrapper>
               <Price>
                 <Money value={value} />
               </Price>
               <QuantityContainer>
-
                 <ButtonMinus onClick={MinusQuantityOnChange}>
                   <FontAwesomeIcon icon={faMinus} />
                 </ButtonMinus>
@@ -124,12 +124,14 @@ const cardProduct = ({
 
             <StockBuyWrapper>
               <Stock>Estoque: {availableStock}</Stock>
-              <ButtonRemove onMouseOver={() => setHoverIcon(true)} onMouseOut={() => setHoverIcon(false)} onClick={handleRemove}>
+              <ButtonRemove
+                onMouseOver={() => setHoverIcon(true)}
+                onMouseOut={() => setHoverIcon(false)}
+                onClick={handleRemove}
+              >
                 <FontAwesomeIcon icon={HoverIcon ? faTrash : faCheckCircle} />
               </ButtonRemove>
-
             </StockBuyWrapper>
-
           </>
 
         }
@@ -137,7 +139,7 @@ const cardProduct = ({
       </InfoContainer>
       <AditionalInfo>Imagem meramente ilustrativa</AditionalInfo>
     </Container>
-  )
-};
+  );
+}
 
-export default cardProduct;
+export default cardProduct
