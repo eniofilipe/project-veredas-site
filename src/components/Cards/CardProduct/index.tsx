@@ -68,7 +68,7 @@ const cardProduct = ({
     <Container>
       {image === null ?
         <ImageHeader src={produto} alt="" />
-      : <ImageHeader src={`http://${image}`} alt="" />}
+      : <ImageHeader src={`${image}`} alt="" />}
       {/* <ImageHeader src={`http://${image}` || produto} alt="" />  */}
       <InfoContainer>
         <Title>{name}</Title>
