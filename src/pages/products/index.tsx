@@ -10,10 +10,11 @@ import { useRouter } from 'next/router';
 import {
   Cart as CartIcon,
   User as ProfileIcon,
-  SearchAlt2 as SearchIcon,
+  // SearchAlt2 as SearchIcon,
 } from '@styled-icons/boxicons-regular';
+import Footer from '../../components/Footer';
 
-import { Checkbox,TextField, CheckboxProps, FormControlLabel  } from '@material-ui/core';
+import { Checkbox,TextField, CheckboxProps } from '@material-ui/core';
 import { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { withStyles } from '@material-ui/core/styles';
@@ -22,11 +23,12 @@ import { GetServerSideProps } from 'next';
 
 import { toast } from 'react-toastify';
 import * as S from '../../styles/products/styles';
-import veredaslogo from '../../assets/logo.png';
+import veredaslogo from '../../assets/images/logo.png';
 
-import logomst from '../../assets/logo-mst-rurais.png';
-import logoif from '../../assets/logo-if.png';
 import CardProduct from '../../components/Cards/CardProduct';
+// import produtoimagem from '../../assets/images/produto.png';
+// import logomst from '../../assets/images/logo-mst-rurais.png';
+// import logoif from '../../assets/images/logo-if.png';
 
 import { Categoria, Oferta } from '../../types';
 
@@ -104,7 +106,10 @@ const products = () => {
 
     return tem;
   }
-  const aumentarQuantidade = (index: number) => {
+  const aumentarQuantidade = (index: number, maxQuantity: number) => {
+    if(quantidade[index]+1 > maxQuantity){
+      return;
+    }
     const temp = quantidade;
     if (!temp[index]) {
       temp[index] = 1;
@@ -293,9 +298,10 @@ const products = () => {
                   addProduct(prod, quantidade[index] ? quantidade[index] : 1)
                 }
                 handleRemove={() => removeProduct(prod)}
-                PlusQuantityOnChange={() => aumentarQuantidade(index)}
+                PlusQuantityOnChange={() => aumentarQuantidade(index,prod.quantidade)}
                 MinusQuantityOnChange={() => diminuirQuantidade(index)}
-                image={prod.produtos.imagem.url}
+                // image={prod.produtos.imagem === null ? produtoimagem : prod.produtos.imagem.url}
+                image={prod.produtos.imagem === null ? null : prod.produtos.imagem.url}
                 inCart={checkInCart(prod)}
               />
             )):
@@ -314,9 +320,10 @@ const products = () => {
                     addProduct(prod, quantidade[index] ? quantidade[index] : 1)
                   }
                   handleRemove={() => removeProduct(prod)}
-                  PlusQuantityOnChange={() => aumentarQuantidade(index)}
+                  PlusQuantityOnChange={() => aumentarQuantidade(index,prod.quantidade)}
                   MinusQuantityOnChange={() => diminuirQuantidade(index)}
-                  image={prod.produtos.imagem.url}
+                  // image={prod.produtos.imagem === null ? produtoimagem : prod.produtos.imagem.url}
+                  image={prod.produtos.imagem === null ? null : prod.produtos.imagem.url}
                   inCart={checkInCart(prod)}
                 />
                 : ''
@@ -325,30 +332,7 @@ const products = () => {
             }
           </S.WrapperProduct>
         </S.WrapperContent>
-        <S.WrapperFooter>
-        <div id='contato'>
-          <h1 id='contato-info'>Contato</h1>
-          <p>contato@veredasdaterra.com.br</p>
-          <p>(38) 9 9900-0000</p>
-        </div>
-
-        <div id='info'>
-          <h1 id='title-info'>Informações</h1>
-          <p>Cooperativa Camponesa - Veredas da Terra</p>
-          <p>CNPJ: 10.286.881/0001-02</p>
-          <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
-        </div>
-
-        <div id='logo'>
-        <S.Logo
-            src={veredaslogo}
-            alt="Logo da cooperativa Veredas da Terra"
-          />
-        <S.Logo src={logomst} alt="Logo do MST" />
-        <S.Logo src={logoif} alt="Logo do IFNMG" onClick={() => Router.push('/if')}/>
-        </div>
-
-      </S.WrapperFooter>
+      <Footer/>
     </S.Wrapper>
   );
 };

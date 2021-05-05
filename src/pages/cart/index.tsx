@@ -12,13 +12,14 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { GetServerSideProps } from 'next';
 import * as S from '../../styles/cart/styles';
-import veredaslogo from '../../assets/logo.png';
+import veredaslogo from '../../assets/images/logo.png';
 import CartContext from '../../contexts/cart';
 import AuthContext from '../../contexts/auth';
+import Footer from '../../components/Footer';
 import { OfertaPedido, Address, CartProps, Pagamento, Frete } from '../../types';
 import { cepMask } from '../../Utils/Masks';
-import logomst from '../../assets/logo-mst-rurais.png';
-import logoif from '../../assets/logo-if.png';
+import logomst from '../../assets/images/logo-mst-rurais.png';
+import logoif from '../../assets/images/logo-if.png';
 import { postPedido, getPagamento, getFrete } from '../../api/Pedidos';
 import ValidadeContext from '../../contexts/validade';
 import {
@@ -90,8 +91,10 @@ const Cart = () => {
 
   }, [products, freteFixo]);
 
-  const aumentarQuantidade = (index: number) => {
-
+  const aumentarQuantidade = (index: number, maxQuantity: number) => {
+    if(products[index].quantidadeCart +1 > maxQuantity){
+      return
+    }
     products[index].quantidadeCart += 1;
     // setRenderizando(products[index].quantidadeCart);
 
@@ -129,7 +132,6 @@ const Cart = () => {
       setTotal(result + freteFixo);
     }
     // setRenderizando(products[index].quantidadeCart);
-
   };
 
   async function handlePedido() {
@@ -188,19 +190,17 @@ const Cart = () => {
           {products.map((offer, index) => (
             <S.WrapperItem>
               <S.QuantityContainer>
-
                 <S.ButtonMinus onClick={() => diminuirQuantidade(index)}>
                   <FontAwesomeIcon icon={faMinus} />
                 </S.ButtonMinus>
-
                 <S.Quantity>{offer.quantidadeCart}</S.Quantity>
-                <S.ButtonPlus onClick={() => aumentarQuantidade(index)}>
+                <S.ButtonPlus onClick={() => aumentarQuantidade(index,offer.quantidade)}>
                   <FontAwesomeIcon icon={faPlus} />
                 </S.ButtonPlus>
               </S.QuantityContainer>
               <S.WrapperProd>
-                <S.Text id="prodNameDesc">Produto: {offer.produtos.nome}</S.Text>
-                <S.Text id="prodPriceDesc">Preço unitário: <S.Text id="boldPrice">R$ {offer.valor_unitario}</S.Text></S.Text>
+                <S.Text id="prodNameDesc">Produto:  <S.Text id="corProduto"> {offer.produtos.nome} </S.Text> </S.Text>
+                <S.Text id="prodPriceDesc">Preço Unitário: <S.Text id="boldPrice">R$ {offer.valor_unitario}</S.Text></S.Text>
               </S.WrapperProd>
               <S.Value>
                 R$ {(offer.valor_unitario * offer.quantidadeCart).toFixed(2)}{' '}
@@ -223,7 +223,7 @@ const Cart = () => {
             </S.Row>
           </S.WrapperSubtotal>
         </S.Items>
-        <S.WrapperItem>
+        <S.ContainerPagamento>
           <S.WrapperSelect>
             <S.Label>Tipo de Pagamento</S.Label>
             <S.Select value={pagamento} onChange={handlePagamento} >
@@ -236,47 +236,22 @@ const Cart = () => {
             <S.Label>Endereço</S.Label>
             {endereco && (
               <S.Text>
-                {endereco?.cep.toString().replace(/(\d{5})(\d)/, '$1-$2')};{' '}
-                {endereco.street}, {endereco.number}, {endereco.neighborhood}{' '}
-                <br /> {endereco.complement}
+                {/* {endereco?.cep.toString().replace(/(\d{5})(\d)/, '$1-$2')};{' '} */}
+                {'Endereço: '} {endereco.street}, {endereco.number}
+                <br /> {'Bairro:'} {endereco.neighborhood}{' '}
+                <br /> {'Complemento: '} {endereco.complement}
               </S.Text>
             )}
           </S.Address>
-        </S.WrapperItem>
-
+        </S.ContainerPagamento>
         <S.WrapperButtons>
           <S.CancelButton onClick={() => router.back()}>Cancelar</S.CancelButton>
           <S.AcceptButton onClick={() => handlePedido()}>
-            CONFIRMAR PEDIDO
+            Confirmar
         </S.AcceptButton>
         </S.WrapperButtons>
       </S.WrapperContent>
-
-      <S.WrapperFooter>
-
-        <div id='contato'>
-          <h1 id='contato-info'>Contato</h1>
-          <p>contato@veredasdaterra.com.br</p>
-          <p>(38) 9 9900-0000</p>
-        </div>
-
-        <div id='info'>
-          <h1 id='title-info'>Informações</h1>
-          <p>Cooperativa Camponesa - Veredas da Terra</p>
-          <p>CNPJ: 10.286.881/0001-02</p>
-          <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
-        </div>
-
-        <div id='logo'>
-          <S.Logo
-            src={veredaslogo}
-            alt="Logo da cooperativa Veredas da Terra"
-          />
-          <S.Logo src={logomst} alt="Logo do MST" />
-          <S.Logo src={logoif} alt="Logo do IFNMG" onClick={() => Router.push('/if')}/>
-        </div>
-
-      </S.WrapperFooter>
+      <Footer/>
     </S.Wrapper>
   );
 };

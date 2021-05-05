@@ -4,15 +4,19 @@ import {
   useEffect, useState, useRef, useContext,
 } from 'react';
 import { useRouter } from 'next/router';
-import veredaslogo from '../assets/logo.png';
+import veredaslogo from '../assets/images/logo.png';
 import * as S from '../styles/styles';
-import logomst from '../assets/logo-mst-rurais.png';
-import logoif from '../assets/logo-if.png';
-import imagecampo from '../assets/Campo-cidade.png';
+import logomst from '../assets/images/logo-mst-rurais.png';
+import imagecampo from '../assets/images/Campo-cidade.png';
 import ValidadeContext from '../contexts/validade';
+import Footer from '../components/Footer'
+import { Menu as MenuIcon } from '@styled-icons/feather/Menu'
+import { CloseOutline as CloseIcon } from '@styled-icons/evaicons-outline/CloseOutline'
+import Link from 'next/link'
 
 const Home = () => {
   const Router = useRouter();
+  const [isOpen, setIsOpen] = useState(false)
   const { validade } = useContext(ValidadeContext);
   const [scrollY, setScrollY] = useState(0);
 
@@ -21,6 +25,35 @@ const Home = () => {
   const sectionOneRef = useRef<null | HTMLDivElement>(null);
   const sectionTwoRef = useRef<null | HTMLDivElement>(null);
   const sectionThreeRef = useRef<null | HTMLDivElement>(null);
+
+  function setRef(value: number) {
+    switch (value) {
+      case 1:
+        if (router.pathname !== '/') {
+          router.push('/')
+        }
+        !!handleChange && handleChange('sectionOneRef')
+        return
+      case 2:
+        if (router.pathname !== '/') {
+          router.push('/')
+        }
+        !!handleChange && handleChange('sectionTwoRef')
+        return
+      case 3:
+        if (router.pathname !== '/') {
+          router.push('/')
+        }
+        !!handleChange && handleChange('sectionThreeRef')
+        return
+    }
+  }
+
+
+  function mobileMenu(option: number) {
+    setRef(option)
+    setIsOpen(false)
+  }
 
   function logit() {
     setScrollY(window.pageYOffset);
@@ -59,6 +92,8 @@ const Home = () => {
       case 'sectionThreeRef':
         sectionThreeRef.current?.scrollIntoView({
           behavior: 'smooth',
+          block: 'end',
+
         });
         return;
       default:
@@ -70,6 +105,15 @@ const Home = () => {
 
   return (
     <S.Wrapper>
+
+      <S.Sandwich>
+      <S.Logo src={veredaslogo} alt="Home" />
+        <S.IconWrapper >
+          <MenuIcon onClick={() => setIsOpen(true)} aria-label="Open Menu" />
+        </S.IconWrapper>
+      </S.Sandwich>
+
+
       <S.HeaderWrapper position={scrollY}>
         <S.Header>
           {/* <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')}/> */}
@@ -91,6 +135,25 @@ const Home = () => {
             )}
           </S.MenuNav>
         </S.Header>
+
+
+      <S.MenuFull aria-hidden={!isOpen} isOpen={isOpen}>
+        <CloseIcon aria-label="Close Menu" onClick={() => setIsOpen(false)} />
+        <S.MenuNav>
+          <S.MenuLink onClick={() => mobileMenu(1)}>Home</S.MenuLink>
+          <S.MenuLink onClick={() => mobileMenu(2)}>Quem somos</S.MenuLink>
+          <S.MenuLink onClick={() => mobileMenu(3)}>Como Funciona</S.MenuLink>
+          {!validade ? (
+             <Link href="/login">
+              <S.Button>Acessar Conta</S.Button>
+              </Link>
+            ) : (
+              <Link href="/products">
+                <S.Button>Entrar na Feirinha</S.Button>
+              </Link>
+            )}
+        </S.MenuNav>
+      </S.MenuFull>
       </S.HeaderWrapper>
 
       <S.HomeSectionWrapper ref={sectionOneRef}>
@@ -101,13 +164,13 @@ const Home = () => {
               Aqui nós oferecemos os alimentos orgânicos de melhor qualidade,{' '}
             </p>
             <p>
-              direto do campo da agricultura familiar.
+              Direto do campo da agricultura familiar.
             </p>
             <S.Logo src={logomst} alt="Logo do MST" />
           </S.CentralizeWrapper>
         </S.BGHome>
       </S.HomeSectionWrapper>
-      <S.WrapperSecondSection ref={sectionTwoRef}>
+      <S.WrapperSecondSection >
         <S.Card1>
           <p> Do campo à cidade</p>
           <p>
@@ -118,11 +181,11 @@ const Home = () => {
 
           </p>
         </S.Card1>
-        <S.Card2>
+        <S.Card2 ref={sectionTwoRef}>
           <S.Image src={imagecampo} />
         </S.Card2>
       </S.WrapperSecondSection>
-      <S.WrapperThreeSection ref={sectionThreeRef}>
+      <S.WrapperThreeSection >
         <S.TextWrapper>
           <p>Como funciona? </p>
         </S.TextWrapper>
@@ -133,52 +196,26 @@ const Home = () => {
           <p>&nbsp; Clique em finalizar o pedido. </p>
           <p> &nbsp; Informe seus dados corretamente. </p>
           </S.TextDiv1>
-          <S.TextDiv2>
+          <S.TextDiv1>
           <p>&nbsp; Pedidos: Segunda-Feira até Quarta-Feira. </p>
           <p>&nbsp; Entregas: A partir de Sexta-Feira. </p>
-            {/* &nbsp; &nbsp; &nbsp; Alteração do pedido até as Quarta-Feira 23:59hrs. <p /> */}
             <p>&nbsp; Taxa de Entrega: R$ 5,00. </p>
             <p>&nbsp; Entraremos em contato caso ocorra algum imprevisto! </p>
-          </S.TextDiv2>
-          {/* <S.TextDiv3>
-            Endereço: Assentamento Estrela do Norte, Estrada da Produção, Km 14,
-            CEP: 39410-000, Zona Rural, Município de Montes Claros/MG CEP:
-            39410-000.
-          </S.TextDiv3> */}
+          </S.TextDiv1>
+
         </S.TextDivPrincipal>
+        <div ref={sectionThreeRef}>
+
         {!validade ? (
           <S.ButtonSecond onClick={goToLogin}>Acessar Conta</S.ButtonSecond>
-        ) : (
-          <S.ButtonSecond onClick={goToProducts}>
+          ) : (
+            <S.ButtonSecond onClick={goToProducts}>
             Entrar na Feirinha
           </S.ButtonSecond>
         )}
+        </div>
       </S.WrapperThreeSection>
-      <S.WrapperFooter>
-
-        <div id='contato'>
-          <h1 id='contato-info'>Contato</h1>
-          <p>contato@veredasdaterra.com.br</p>
-          <p>(38) 9 9900-0000</p>
-        </div>
-
-        <div id='info'>
-          <h1 id='title-info'>Informações</h1>
-          <p>Cooperativa Camponesa - Veredas da Terra</p>
-          <p>CNPJ: 10.286.881/0001-02</p>
-          <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
-        </div>
-
-        <div id='logo'>
-          <S.Logo
-            src={veredaslogo}
-            alt="Logo da cooperativa Veredas da Terra"
-          />
-          <S.Logo src={logomst} alt="Logo do MST" />
-          <S.Logo src={logoif} alt="Logo do IFNMG" onClick={() => Router.push('/if')}/>
-        </div>
-
-      </S.WrapperFooter>
+      <Footer/>
     </S.Wrapper>
   );
 };

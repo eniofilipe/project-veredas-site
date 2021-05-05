@@ -8,13 +8,14 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import searchCep from 'cep-promise';
 import * as S from '../../styles/register/styles';
-import veredaslogo from '../../assets/logo.png';
+import veredaslogo from '../../assets/images/logo.png';
 import { postClientes } from '../../api/Clientes';
 import { isEmail, validarCPF } from '../../Utils/Validation';
 import { cepMask, cellphoneeMask, cpfMask } from '../../Utils/Masks';
 import ValidadeContext from '../../contexts/validade';
-import logomst from '../../assets/logo-mst-rurais.png';
-import logoif from '../../assets/logo-if.png';
+import logomst from '../../assets/images/logo-mst-rurais.png';
+import logoif from '../../assets/images/logo-if.png';
+import Footer from '../../components/Footer';
 
 
 export type ProfileProps = {
@@ -150,7 +151,6 @@ const Profile = () => {
         </S.HeaderWrapper>
       <S.Body>
         <S.WrapperController>
-          <S.Title id="principal">Cadastro</S.Title>
           <S.WrapperContent>
             <S.WrapperData>
               <S.Title>Dados Pessoais</S.Title>
@@ -263,31 +263,7 @@ const Profile = () => {
         </S.WrapperButtons>
       </S.Body>
 
-      <S.WrapperFooter>
-
-        <div id='contato'>
-          <h1 id='contato-info'>Contato</h1>
-          <p>contato@veredasdaterra.com.br</p>
-          <p>(38) 9 9900-0000</p>
-        </div>
-
-        <div id='info'>
-          <h1 id='title-info'>Informações</h1>
-          <p>Cooperativa Camponesa - Veredas da Terra</p>
-          <p>CNPJ: 10.286.881/0001-02</p>
-          <p>Entregas realizadas somente na cidade de Montes Claros/MG.</p>
-        </div>
-
-        <div id='logo'>
-          <S.Logo
-            src={veredaslogo}
-            alt="Logo da cooperativa Veredas da Terra"
-          />
-          <S.Logo src={logomst} alt="Logo do MST" />
-          <S.Logo src={logoif} alt="Logo do IFNMG" onClick={() => Router.push('/if')}/>
-        </div>
-
-      </S.WrapperFooter>
+   <Footer/>
     </S.Wrapper>
   );
 };
