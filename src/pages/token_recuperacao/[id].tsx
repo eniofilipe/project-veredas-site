@@ -2,9 +2,9 @@ import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 import Head from 'next/head'
 
-import LockIcon from '@material-ui/icons/Lock';
-import { toast } from 'react-toastify';
-import Footer from '../../components/Footer';
+import LockIcon from '@material-ui/icons/Lock'
+import { toast } from 'react-toastify'
+import Footer from '../../components/Footer'
 import * as S from '../../styles/token_recuperacao/styles'
 import veredaslogo from '../../assets/images/logo.png'
 import ValidadeContext from '../../contexts/validade'
@@ -120,7 +120,8 @@ const ResetarSenha = () => {
             />
           </div>
 
-          <S.ButtonLogin id="menorEnviar"
+          <S.ButtonLogin
+            id="menorEnviar"
             onClick={() => setResetarSenha(password, passwordRepeat)}
           >
             Enviar

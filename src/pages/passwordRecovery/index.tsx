@@ -1,17 +1,13 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-/* eslint-disable import/no-unresolved */
 import { useContext, useState } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-import EmailIcon from '@material-ui/icons/Email';
-import { toast } from 'react-toastify';
-import Footer from '../../components/Footer';
+import EmailIcon from '@material-ui/icons/Email'
+import { toast } from 'react-toastify'
+import Footer from '../../components/Footer'
 import * as S from '../../styles/passwordRecovery/styles'
-import veredaslogo from '../../assets/images/logo.png'
 import ValidadeContext from '../../contexts/validade'
-import logomst from '../../assets/images/logo-mst-rurais.png'
-import logoif from '../../assets/images/logo-if.png'
 
 import { postRecuperarSenha } from '../../api/RecuperarSenha'
 import { PostRecuperarSenhaProps } from '../../types/index'
@@ -19,7 +15,7 @@ import { PostRecuperarSenhaProps } from '../../types/index'
 const PasswordRecovery = () => {
   const { validade } = useContext(ValidadeContext)
   const Router = useRouter()
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
   const [email, setEmail] = useState('')
   const goToProducts = () => {
     Router.push('/products')
@@ -32,7 +28,7 @@ const PasswordRecovery = () => {
   const setRecuperarSenha = async (data: PostRecuperarSenhaProps) => {
     try {
       const response = await postRecuperarSenha(data)
-      console.log(data)
+      console.log(response)
       toast.success('Confira seu email!')
       Router.push('/login')
     } catch (error) {

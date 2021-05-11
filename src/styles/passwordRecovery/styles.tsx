@@ -1,15 +1,15 @@
 /* eslint-disable indent */
-import styled, { css } from 'styled-components';
-import Input from '../../components/Inputs/Input';
+import styled, { css } from 'styled-components'
+import Input from '../../components/Inputs/Input'
 import Header from '../../components/Header'
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div``
 
 export const Logo = styled.img`
   &:nth-child(1) {
     cursor: pointer;
   }
-`;
+`
 
 export const Button = styled.button`
   background: #017c00;
@@ -33,7 +33,7 @@ export const Button = styled.button`
     margin-left: 1rem;
     margin-right: -2rem;
   }
-`;
+`
 
 export const ButtonLogin = styled.button`
   background: #017c00;
@@ -58,7 +58,7 @@ export const ButtonLogin = styled.button`
     width: 10rem;
     height: 3.4rem;
   }
-`;
+`
 
 type MenuProps = {
   background?: string
@@ -67,7 +67,7 @@ type MenuProps = {
 
 export const StyledHeader = styled(Header)`
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-`;
+`
 export const HeaderWrapper = styled.div<MenuProps>`
   ${({ position }) => css`
     position: relative;
@@ -80,7 +80,7 @@ export const HeaderWrapper = styled.div<MenuProps>`
     z-index: 2;
     width: 100%;
   `}
-`;
+`
 
 export const Content = styled.div`
   display: flex;
@@ -88,7 +88,7 @@ export const Content = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 23vh;
-`;
+`
 
 export const InputLogin = styled(Input)`
   height: 50px;
@@ -105,7 +105,7 @@ export const InputLogin = styled(Input)`
   height: 60px;
   padding-left: 14px;
   color: #552200;
-`;
+`
 
 export const LoginContainer = styled.div`
   width: 80%;
@@ -135,25 +135,25 @@ export const LoginContainer = styled.div`
     padding-top: 0rem;
     align-items: center;
   }
-`;
+`
 
 export const SubTitle = styled.a`
   font-size: 1rem;
   font-weight: 400;
   text-align: right;
   cursor: pointer;
-`;
+`
 
 export const Icon = styled.div`
   width: 3rem;
   height: 1.5rem;
-`;
+`
 
-export default Icon;
+export default Icon
 
 export const MenuNav = styled.div`
   margin-right: 4rem;
-`;
+`
 
 export const MenuLink = styled.a`
   position: relative;
@@ -190,4 +190,4 @@ export const MenuLink = styled.a`
       display: none;
     }
   }
-`;
+`

@@ -1,17 +1,17 @@
-import styled from 'styled-components';
-import Button from '../../Buttons/Button';
+import styled from 'styled-components'
+import Button from '../../Buttons/Button'
 
 export const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px;
-`;
+`
 export const Title = styled.span`
   font-size: 20px;
   font-weight: 500;
   margin-bottom: 5px;
   color: #552200;
-`;
+`
 export const SubTitle = styled.span`
   font-size: 14px;
   font-weight: 400;
@@ -20,17 +20,17 @@ export const SubTitle = styled.span`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-`;
+`
 
 export const Price = styled.span`
   font-size: 24px;
   font-weight: 400;
-`;
+`
 export const Categories = styled.span`
   font-size: 12px;
   font-weight: 400;
   margin: 2px;
-`;
+`
 
 export const Container = styled.div`
   width: 260px;
@@ -41,19 +41,19 @@ export const Container = styled.div`
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   /* border: 1px solid magenta; */
-`;
+`
 
 export const ImageHeader = styled.img`
   width: 100%;
   height: 50%;
   max-height: 200px;
   border-radius: 8px 8px 0 0;
-`;
+`
 
 export const ButtonBuy = styled(Button)`
   width: 110px;
   height: 40px;
-`;
+`
 
 export const ButtonRemove = styled.button`
   width: 110px;
@@ -71,12 +71,11 @@ export const ButtonRemove = styled.button`
   outline: none;
 
   &:hover {
-    color:#961913;
+    color: #961913;
     background: #fff;
     border: 1px solid #fff;
   }
-`;
-
+`
 
 export const QuantityContainer = styled.div`
   display: flex;
@@ -84,57 +83,53 @@ export const QuantityContainer = styled.div`
   /* margin-bottom: 8px; */
   margin-right: 10px;
   /* border: 1px solid magenta; */
-`;
+`
 
 export const ButtonMinus = styled.button`
   border: none;
   background: none;
   cursor: pointer;
   margin-right: 14px;
-`;
+`
 export const ButtonPlus = styled.button`
   border: none;
   background: none;
   margin-left: 14px;
   cursor: pointer;
-`;
+`
 
 export const Quantity = styled.span`
   font-weight: bold;
   text-align: center;
   width: 32px;
-
-`;
+`
 
 export const AddQuantityWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2px;
   margin: 4px;
-`;
+`
 
 export const AditionalInfo = styled.div`
   text-align: center;
   font-size: 10px;
   margin-top: -6px;
   /* border: 1px solid black; */
-
-`;
-
+`
 
 export const StockBuyWrapper = styled.div`
-display: flex;
+  display: flex;
   margin: 2px;
   justify-content: space-between;
-align-items: center;
+  align-items: center;
+`
 
-`;
-
-export const Stock = styled.span``;
+export const Stock = styled.span``
 
 export const PriceAndQuantityWrapper = styled.div`
-margin: 4px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-`;
+  margin: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`

@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 import styled, { css } from 'styled-components'
-import Header from '../../components/Header';
+import Header from '../../components/Header'
 
 export const Wrapper = styled.div``
 

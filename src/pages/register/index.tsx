@@ -15,7 +15,7 @@ import { cepMask, cellphoneeMask, cpfMask } from '../../Utils/Masks'
 import ValidadeContext from '../../contexts/validade'
 import logomst from '../../assets/images/logo-mst-rurais.png'
 import logoif from '../../assets/images/logo-if.png'
-import Footer from '../../components/Footer';
+import Footer from '../../components/Footer'
 
 export type ProfileProps = {
   name: string
@@ -137,30 +137,30 @@ const Profile = () => {
   const optionsLinksMobile = [
     {
       label: 'Home',
-      action: () => Router.push('/'),
-    },
-  ];
+      action: () => Router.push('/')
+    }
+  ]
 
   const optionsLinks = [
     {
       label: 'Home',
-      action: () => Router.push('/'),
-    },
-  ];
+      action: () => Router.push('/')
+    }
+  ]
 
   const optionsButtons = !validade
     ? [
-      {
-        label: 'Criar conta',
-        action: goToLogin,
-      },
-    ]
+        {
+          label: 'Criar conta',
+          action: goToLogin
+        }
+      ]
     : [
-      {
-        label: 'Entrar na Feirinha',
-        action: goToProducts,
-      },
-    ];
+        {
+          label: 'Entrar na Feirinha',
+          action: goToProducts
+        }
+      ]
 
   return (
     <S.Wrapper>

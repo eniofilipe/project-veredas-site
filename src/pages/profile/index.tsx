@@ -1,7 +1,5 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable operator-linebreak */
-/* eslint-disable import/no-unresolved */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { useContext, useState, useEffect } from 'react';
 import Head from 'next/head';
@@ -10,11 +8,8 @@ import { toast } from 'react-toastify';
 import { GetServerSideProps } from 'next';
 import Cookie from 'js-cookie';
 import * as S from '../../styles/profile/styles';
-import veredaslogo from '../../assets/images/logo.png';
 import AuthContext from '../../contexts/auth';
 import Footer from '../../components/Footer';
-import logomst from '../../assets/images/logo-mst-rurais.png';
-import logoif from '../../assets/images/logo-if.png';
 
 import { Cliente, ClienteLogin } from '../../types';
 import { cleanObject, isEmail, validarCPF } from '../../Utils/Validation';

@@ -1,46 +1,46 @@
 /* eslint-disable no-use-before-define */
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect } from 'react'
 
-import { getOpened } from '../api/Validade';
+import { getOpened } from '../api/Validade'
 
 interface IValidContext {
-  validade: boolean | null;
+  validade: boolean | null
 }
 
-const ValidadeContext = createContext<IValidContext>({} as IValidContext);
+const ValidadeContext = createContext<IValidContext>({} as IValidContext)
 
 export const ValidadeProvider: React.FC = ({ children }) => {
-  const [validade, setValidade] = useState<boolean | null>();
+  const [validade, setValidade] = useState<boolean | null>()
 
   const get = async () => {
     try {
-      const response = await getOpened();
+      const response = await getOpened()
 
       if (response.data.success === 'aberta') {
-        setValidade(true);
+        setValidade(true)
       } else {
-        setValidade(false);
+        setValidade(false)
       }
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.log(error);
-      setValidade(false);
+      console.log(error)
+      setValidade(false)
     }
-  };
+  }
 
   useEffect(() => {
-    get();
-  }, []);
+    get()
+  }, [])
 
   return (
     <ValidadeContext.Provider
       value={{
-        validade,
+        validade
       }}
     >
       {children}
     </ValidadeContext.Provider>
-  );
-};
+  )
+}
 
-export default ValidadeContext;
+export default ValidadeContext

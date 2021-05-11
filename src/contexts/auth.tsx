@@ -1,29 +1,29 @@
 /* eslint-disable no-throw-literal */
 /* eslint-disable import/no-unresolved */
-import { createContext, useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import Cookie from 'js-cookie';
-import { getLogin } from '../api/Login';
-import { ClienteLogin, Login, Address } from '../types';
-import { getValidaToken } from '../api/Validade';
+import { createContext, useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
+import Cookie from 'js-cookie'
+import { getLogin } from '../api/Login'
+import { ClienteLogin, Login, Address } from '../types'
+import { getValidaToken } from '../api/Validade'
 
 interface IAuthContext {
-  signed: boolean;
-  cliente: ClienteLogin | null;
-  endereco: Address | null;
-  getCliente: () => ClienteLogin;
-  signIn: (data: Login) => Promise<404 | 200 | 403>;
-  signOut: () => void;
-  getAddress: () => Address;
+  signed: boolean
+  cliente: ClienteLogin | null
+  endereco: Address | null
+  getCliente: () => ClienteLogin
+  signIn: (data: Login) => Promise<404 | 200 | 403>
+  signOut: () => void
+  getAddress: () => Address
 }
 
-const AuthContext = createContext<IAuthContext>({} as IAuthContext);
+const AuthContext = createContext<IAuthContext>({} as IAuthContext)
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const router = useRouter();
-  const [cliente, setCliente] = useState<ClienteLogin | null>(null);
-  const [endereco, setEndereco] = useState<Address | null>(null);
-  const [token, setToken] = useState<string | null>(null);
+  const router = useRouter()
+  const [cliente, setCliente] = useState<ClienteLogin | null>(null)
+  const [endereco, setEndereco] = useState<Address | null>(null)
+  const [token, setToken] = useState<string | null>(null)
 
   /* const handleToken = async () => {
     const localToken = Cookie.get('token');
@@ -47,46 +47,46 @@ export const AuthProvider: React.FC = ({ children }) => {
   }, []); */
 
   const signIn = async (data: Login) => {
-    localStorage.clear();
+    localStorage.clear()
     try {
       const response = await getLogin({
         email: data.email,
-        password: data.password,
-      });
+        password: data.password
+      })
       if (response.data.option !== 'cliente') {
-        return 403;
+        return 403
       }
-      setEndereco(response.data.endereco);
-      setToken(response.data.token);
-      setCliente(response.data.client);
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('endereco', JSON.stringify(response.data.endereco));
-      Cookie.set('token', response.data.token);
-      Cookie.set('cliente', JSON.stringify(response.data.client));
-      Cookie.set('endereco', response.data.endereco);
-      router.push('/products');
-      return 200;
+      setEndereco(response.data.endereco)
+      setToken(response.data.token)
+      setCliente(response.data.client)
+      localStorage.setItem('token', response.data.token)
+      localStorage.setItem('endereco', JSON.stringify(response.data.endereco))
+      Cookie.set('token', response.data.token)
+      Cookie.set('cliente', JSON.stringify(response.data.client))
+      Cookie.set('endereco', response.data.endereco)
+      router.push('/products')
+      return 200
     } catch (error) {
-      console.log(error);
-      return 404;
+      console.log(error)
+      return 404
     }
-  };
+  }
 
   function signOut() {
-    setCliente(null);
-    setToken(null);
-    Cookie.remove('token');
-    Cookie.remove('cliente');
-    Cookie.remove('endereco');
-    localStorage.clear();
-    router.push('/');
+    setCliente(null)
+    setToken(null)
+    Cookie.remove('token')
+    Cookie.remove('cliente')
+    Cookie.remove('endereco')
+    localStorage.clear()
+    router.push('/')
   }
 
   function getAddress() {
-    return Cookie.getJSON('endereco');
+    return Cookie.getJSON('endereco')
   }
   function getCliente() {
-    return Cookie.getJSON('cliente');
+    return Cookie.getJSON('cliente')
   }
 
   return (
@@ -98,12 +98,12 @@ export const AuthProvider: React.FC = ({ children }) => {
         signIn,
         signOut,
         getAddress,
-        getCliente,
+        getCliente
       }}
     >
       {children}
     </AuthContext.Provider>
-  );
-};
+  )
+}
 
-export default AuthContext;
+export default AuthContext
