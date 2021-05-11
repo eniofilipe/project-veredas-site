@@ -1,10 +1,7 @@
-/* eslint-disable import/no-unresolved */
 /* eslint-disable prettier/prettier */
-/* eslint-disable import/extensions */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable operator-linebreak */
-// eslint-disable-next-line import/no-unresolved
 import {
   useContext, useState, useEffect, useLayoutEffect,
 } from 'react';
@@ -206,7 +203,7 @@ const Cart = () => {
       <S.WrapperContent>
         <S.Items>
           {products.map((offer, index) => (
-            <S.WrapperItem>
+            <S.WrapperItem key={index}>
               <S.QuantityContainer>
                 <S.ButtonMinus onClick={() => diminuirQuantidade(index)}>
                   <FontAwesomeIcon icon={faMinus} />
@@ -217,7 +214,7 @@ const Cart = () => {
                 </S.ButtonPlus>
               </S.QuantityContainer>
               <S.WrapperProd>
-                <S.Text id="prodNameDesc">Produto:  <S.Text id="corProduto"> {offer.produtos.nome} </S.Text> </S.Text>
+                <S.Text id="prodNameDesc"><S.Text id="corProduto"> {offer.produtos.nome} </S.Text> </S.Text>
                 <S.Text id="prodPriceDesc">Preço Unitário: <S.Text id="boldPrice">R$ {offer.valor_unitario}</S.Text></S.Text>
               </S.WrapperProd>
               <S.Value>
@@ -245,7 +242,7 @@ const Cart = () => {
           <S.WrapperSelect>
             <S.Label>Tipo de Pagamento</S.Label>
             <S.Select value={pagamento} onChange={handlePagamento} >
-              {tipoPagamento.map((tipo) => <option value={tipo.id}> {tipo.titulo} </option>)}
+              {tipoPagamento.map((tipo) => <option key={tipo.id} value={tipo.id}> {tipo.titulo} </option>)}
             </S.Select>
           </S.WrapperSelect>
           <S.Address>

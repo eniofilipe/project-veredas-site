@@ -1,8 +1,5 @@
 /* eslint-disable implicit-arrow-linebreak */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable operator-linebreak */
-/* eslint-disable import/no-unresolved */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React, { useState, useEffect, useContext } from 'react'
 import Head from 'next/head'
@@ -77,7 +74,7 @@ const CustomProfileIcon = styled(ProfileIcon)`
   color: #552200;
 `
 
-const products = () => {
+const Products = () => {
   const Router = useRouter()
   const { addProduct, removeProduct, checkInCart, getCartLenght } = useContext(
     CartContext
@@ -356,7 +353,7 @@ const products = () => {
   )
 }
 
-export default products
+export default Products
 
 export const getServerSideProps: GetServerSideProps = async ({}) => {
   let validade = false

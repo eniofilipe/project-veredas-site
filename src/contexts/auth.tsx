@@ -1,11 +1,8 @@
-/* eslint-disable no-throw-literal */
-/* eslint-disable import/no-unresolved */
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useState } from 'react'
 import { useRouter } from 'next/router'
 import Cookie from 'js-cookie'
 import { getLogin } from '../api/Login'
 import { ClienteLogin, Login, Address } from '../types'
-import { getValidaToken } from '../api/Validade'
 
 interface IAuthContext {
   signed: boolean
@@ -21,30 +18,25 @@ const AuthContext = createContext<IAuthContext>({} as IAuthContext)
 
 export const AuthProvider: React.FC = ({ children }) => {
   const router = useRouter()
-  const [cliente, setCliente] = useState<ClienteLogin | null>(null)
-  const [endereco, setEndereco] = useState<Address | null>(null)
-  const [token, setToken] = useState<string | null>(null)
 
-  /* const handleToken = async () => {
-    const localToken = Cookie.get('token');
+  let clientJSON = null
+  let tokenJSON = null
+  let enderecoJSON = null
+  if (process.browser) {
+    clientJSON = localStorage.getItem('cliente')
+    tokenJSON = localStorage.getItem('token')
+    enderecoJSON = localStorage.getItem('endereco')
+  }
 
-    try {
-      const response = await getValidaToken(localToken);
-
-      setCliente({
-        nome: response.data.nome,
-        email: response.data.email,
-        id: response.data.id,
-      });
-    } catch (e) {
-      console.log(e);
-      setCliente(null);
-    }
-  };
-
-  useEffect(() => {
-    handleToken();
-  }, []); */
+  const [cliente, setCliente] = useState<ClienteLogin | null>(
+    process.browser ? clientJSON !== null && JSON.parse(clientJSON) : null
+  )
+  const [endereco, setEndereco] = useState<Address | null>(
+    process.browser ? enderecoJSON : null
+  )
+  const [token, setToken] = useState<string | null>(
+    process.browser ? tokenJSON : null
+  )
 
   const signIn = async (data: Login) => {
     localStorage.clear()
@@ -61,6 +53,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       setCliente(response.data.client)
       localStorage.setItem('token', response.data.token)
       localStorage.setItem('endereco', JSON.stringify(response.data.endereco))
+      localStorage.setItem('cliente', JSON.stringify(response.data.client))
       Cookie.set('token', response.data.token)
       Cookie.set('cliente', JSON.stringify(response.data.client))
       Cookie.set('endereco', response.data.endereco)
