@@ -35,7 +35,7 @@ export const Categories = styled.span`
 export const Container = styled.div`
   width: 260px;
   /* overflow: hidden; */
-  height: 430px;
+  height: auto;
   border-radius: 10px;
   border: 1px solid #ddd;
   background-color: #fff;
@@ -112,10 +112,10 @@ export const AddQuantityWrapper = styled.div`
 `
 
 export const AditionalInfo = styled.div`
-  text-align: center;
-  font-size: 10px;
-  margin-top: -6px;
-  /* border: 1px solid black; */
+  position: absolute;
+  top: 1;
+  font-size: 0.5rem;
+  padding-left: 4rem;
 `
 
 export const StockBuyWrapper = styled.div`

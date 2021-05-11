@@ -1,4 +1,4 @@
-import React, { ReactChildren, useState } from 'react'
+import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faShoppingBasket,
@@ -47,7 +47,7 @@ interface CardProductProps {
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-const cardProduct = ({
+export default function CardProduct({
   className,
   value,
   name,
@@ -61,7 +61,7 @@ const cardProduct = ({
   availableStock,
   image,
   inCart
-}: CardProductProps) => {
+}: CardProductProps) {
   const [HoverIcon, setHoverIcon] = useState(false)
 
   return (
@@ -71,7 +71,7 @@ const cardProduct = ({
       ) : (
         <ImageHeader src={`${image}`} alt="" />
       )}
-      {/* <ImageHeader src={`http://${image}` || produto} alt="" />  */}
+      <AditionalInfo>Imagem meramente ilustrativa</AditionalInfo>
       <InfoContainer>
         <Title>{name}</Title>
         <SubTitle>{comment}</SubTitle>
@@ -134,9 +134,6 @@ const cardProduct = ({
         )}
         <Categories>{category.map((item) => `${item},`)}</Categories>
       </InfoContainer>
-      <AditionalInfo>Imagem meramente ilustrativa</AditionalInfo>
     </Container>
   )
 }
-
-export default cardProduct
