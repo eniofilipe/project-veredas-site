@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable react/require-default-props */
 /* eslint-disable prettier/prettier */
 import { useContext, useState } from 'react';
 import Head from 'next/head';
@@ -12,10 +10,7 @@ import { toast } from 'react-toastify';
 import Footer from '../../components/Footer';
 import AuthContext from '../../contexts/auth';
 import * as S from '../../styles/login/styles';
-import veredaslogo from '../../assets/images/logo.png';
 import ValidadeContext from '../../contexts/validade';
-import logomst from '../../assets/images/logo-mst-rurais.png';
-import logoif from '../../assets/images/logo-if.png';
 
 const Login = () => {
   const { validade } = useContext(ValidadeContext);
@@ -34,16 +29,16 @@ const Login = () => {
 
       switch (code) {
         case 404:
-          toast.warn('Credenciais incorretas. Tente novamente');
+          toast.warn('Credenciais incorretas. Tente novamente', { autoClose: 8000});
           break;
         case 403:
-          toast.warn('Essa conta percente a um administrador.');
+          toast.warn('Essa conta percente a um administrador.', { autoClose: 8000});
           break;
         case 200:
-          toast.success('Seja bem vindo', { position: 'bottom-right' });
+          toast.success('Seja bem vindo', { position: 'bottom-right' ,autoClose: 8000});
           break;
         default:
-          toast.success('Ocorreu um erro ao tentar realizar o login');
+          toast.error('Ocorreu um erro ao tentar realizar o login', { autoClose: 8000});
       }
     } catch (err) {
       console.log(err);

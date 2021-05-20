@@ -29,7 +29,9 @@ const PasswordRecovery = () => {
     try {
       const response = await postRecuperarSenha(data)
       console.log(response)
-      toast.success('Confira seu email!')
+      toast.success('Link de redefinição enviado. Confira seu email!', {
+        autoClose: 8000
+      })
       Router.push('/login')
     } catch (error) {
       console.log(error)

@@ -39,7 +39,9 @@ export const AuthProvider: React.FC = ({ children }) => {
   )
 
   const signIn = async (data: Login) => {
-    localStorage.clear()
+    localStorage.removeItem('endereco')
+    localStorage.removeItem('token')
+    localStorage.removeItem('cliente')
     try {
       const response = await getLogin({
         email: data.email,

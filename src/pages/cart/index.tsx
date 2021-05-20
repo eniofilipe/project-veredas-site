@@ -3,42 +3,32 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable operator-linebreak */
 import {
-  useContext, useState, useEffect, useLayoutEffect,
+  useContext, useState, useEffect,
 } from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { GetServerSideProps } from 'next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faShoppingBasket,
   faPlus,
   faMinus,
-  faCheckCircle,
-  faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 import * as S from '../../styles/cart/styles';
-import veredaslogo from '../../assets/images/logo.png';
 import CartContext from '../../contexts/cart';
 import AuthContext from '../../contexts/auth';
 import Footer from '../../components/Footer';
 import {
-  OfertaPedido, Address, CartProps, Pagamento, Frete,
+  OfertaPedido, Pagamento, 
 } from '../../types';
-import { cepMask } from '../../Utils/Masks';
-import logomst from '../../assets/images/logo-mst-rurais.png';
-import logoif from '../../assets/images/logo-if.png';
 import { postPedido, getPagamento, getFrete } from '../../api/Pedidos';
-import ValidadeContext from '../../contexts/validade';
 import {
   getOpenedWithoutToken,
-  getValidaTokenWithoutToken,
 } from '../../api/Validade';
 
 const Cart = () => {
   const Router = useRouter();
   const { signOut } = useContext(AuthContext);
   const { products, removeProduct } = useContext(CartContext);
-  const { validade } = useContext(ValidadeContext);
   const { getCliente, getAddress } = useContext(AuthContext);
   const [subtotal, setSubtotal] = useState(0);
   const [total, setTotal] = useState(0);
@@ -147,10 +137,10 @@ const Cart = () => {
         valor_frete: freteFixo,
       });
       // {console.log(cliente.id, idFixo, pagamento, freteFixo);}
-      toast.success('Pedido realizado com sucesso!', { position: 'bottom-right' });
+      toast.success('Pedido realizado com sucesso!', { position: 'bottom-right', autoClose: 5000 });
       setTimeout(() => Router.push('/orders'), 1000);
     } catch (err) {
-      toast.error('Erro ao realizar pedido!', { position: 'bottom-right' });
+      toast.error('Erro ao realizar pedido!', { position: 'bottom-right', autoClose: 5000 });
 
       console.log(err);
     }
@@ -165,7 +155,7 @@ const Cart = () => {
     setCliente(getCliente());
     pegarPagamento();
     pegarFrete();
-  }, [products]);
+  }, [getAddress, getCliente, products]);
 
   const optionsLinksMobile = [
     {

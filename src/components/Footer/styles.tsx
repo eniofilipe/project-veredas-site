@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 export const Logo = styled.img``
 
 export const WrapperFooter = styled.footer`
-  height: 20vh;
+  height: 30vh;
   display: flex;
   width: 100%;
   flex-direction: row;
@@ -25,8 +25,8 @@ export const WrapperFooter = styled.footer`
   }
   #info {
     text-align: center;
-    margin-left: 12.3rem;
     align-self: inherit;
+    padding: 0 1rem;
   }
   #logo {
     margin-right: 4rem;
@@ -79,7 +79,7 @@ export const WrapperFooter = styled.footer`
     }
   }
   @media (max-width: 1200px) {
-    height: 40vh;
+    height: 45vh;
     #info {
       margin-top: 1rem;
     }
@@ -91,7 +91,7 @@ export const WrapperFooter = styled.footer`
     }
   }
   @media (max-width: 1100px) {
-    height: 50vh;
+    height: 55vh;
     #info {
       margin-top: 4rem;
       align-self: start;
@@ -106,7 +106,7 @@ export const WrapperFooter = styled.footer`
   }
 
   @media (max-width: 1000px) {
-    height: 52vh;
+    height: 55vh;
     #info {
       margin-top: 1rem;
       align-self: start;
@@ -124,6 +124,7 @@ export const WrapperFooter = styled.footer`
     }
   }
   @media (max-width: 720px) {
+    height: 65vh;
     #footer-responsive {
       display: block;
       width: 100vw;
@@ -141,7 +142,7 @@ export const WrapperFooter = styled.footer`
     }
   }
   @media (max-width: 514px) {
-    height: 70vh;
+    height: 110vh;
     justify-content: inherit;
     #logo {
       width: 100%;

@@ -31,7 +31,10 @@ export const CartProvider: React.FC = ({ children }) => {
     const prods = products.filter((p) => p.id !== prod.id)
     setProducts(prods)
     localStorage.setItem('cart', JSON.stringify(prods))
-    toast.error('Produto Removido', { position: 'bottom-right' })
+    toast.error('Produto Removido', {
+      position: 'bottom-right',
+      autoClose: 5000
+    })
   }
   const checkInCart = (prod: Oferta) =>
     products.findIndex((p) => p.id === prod.id) > -1
@@ -59,13 +62,19 @@ export const CartProvider: React.FC = ({ children }) => {
 
       setProducts(productsAux)
       localStorage.setItem('cart', JSON.stringify(productsAux))
-      toast.success('Produto Adicionado', { position: 'bottom-right' })
+      toast.success('Produto Adicionado', {
+        position: 'bottom-right',
+        autoClose: 5000
+      })
     } else {
       const productAux = { ...prod, quantidadeCart: quantidade } as OfertaCart
 
       setProducts(products.concat(productAux))
       localStorage.setItem('cart', JSON.stringify(products.concat(productAux)))
-      toast.success('Produto Adicionado', { position: 'bottom-right' })
+      toast.success('Produto Adicionado', {
+        position: 'bottom-right',
+        autoClose: 5000
+      })
     }
   }
 

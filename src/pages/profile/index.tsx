@@ -26,6 +26,7 @@ const Profile = () => {
   const { signOut } = useContext(AuthContext);
   const cliente = (Cookie.get('cliente') as unknown) as ClienteLogin;
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [profileData, setProfileData] = useState<Cliente>();
 
   const [oldPassword, setOldpassword] = useState('');
@@ -96,7 +97,7 @@ const Profile = () => {
         return;
       }
       if (oldPassword && password.length < 6) {
-        toast.warn('Sua senha deve ter pelo menos 6 caracteres.');
+        toast.warn('Sua senha deve ter pelo menos 6 caracteres.', { autoClose: 8000});
         setOldpassword('');
         setPassword('');
         setConfirmPassword('');
@@ -124,7 +125,7 @@ const Profile = () => {
         oldPassword,
       };
       await updateProfile(cleanObject(data));
-      toast.success('Perfil atualizado com sucesso.');
+      toast.success('Perfil atualizado com sucesso.', { autoClose: 6000});
       reset();
     } catch (err) {
       if (err.response) {
@@ -135,6 +136,7 @@ const Profile = () => {
           case 404:
             toast.warn(
               'Usuário não encontrado. Recomendamos que saia e faça o login novamente.',
+              { autoClose: 8000}
             );
             break;
 
@@ -146,7 +148,7 @@ const Profile = () => {
             break;
 
           case 402:
-            toast.warn('Email já cadastrado em nossas bases de dados.');
+            toast.warn('Email já cadastrado em nossas bases de dados.',  { autoClose: 8000});
             break;
 
           default:

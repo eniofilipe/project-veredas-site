@@ -6,10 +6,7 @@ import LockIcon from '@material-ui/icons/Lock'
 import { toast } from 'react-toastify'
 import Footer from '../../components/Footer'
 import * as S from '../../styles/token_recuperacao/styles'
-import veredaslogo from '../../assets/images/logo.png'
 import ValidadeContext from '../../contexts/validade'
-import logomst from '../../assets/images/logo-mst-rurais.png'
-import logoif from '../../assets/images/logo-if.png'
 import { postResetarSenha } from '../../api/ResetarSenha'
 
 const ResetarSenha = () => {
@@ -41,7 +38,7 @@ const ResetarSenha = () => {
       console.log(obj)
       const response = await postResetarSenha(obj)
       if (!response.data.error) {
-        toast.success('sucesso ao atualizar senha')
+        toast.success('sucesso ao atualizar senha', { autoClose: 6000 })
         Router.push('/login')
       }
 

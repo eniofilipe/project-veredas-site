@@ -108,16 +108,6 @@ export default function CardProduct({
               <Price>
                 <Money value={value} />
               </Price>
-              <QuantityContainer>
-                <ButtonMinus onClick={MinusQuantityOnChange}>
-                  <FontAwesomeIcon icon={faMinus} />
-                </ButtonMinus>
-
-                <Quantity>{quantity}</Quantity>
-                <ButtonPlus onClick={PlusQuantityOnChange}>
-                  <FontAwesomeIcon icon={faPlus} />
-                </ButtonPlus>
-              </QuantityContainer>
             </PriceAndQuantityWrapper>
 
             <StockBuyWrapper>
