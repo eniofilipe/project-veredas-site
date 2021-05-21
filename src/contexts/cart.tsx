@@ -13,6 +13,7 @@ interface ICartContext {
   removeProduct: (prod: Oferta) => void
   checkInCart: (prod: Oferta) => boolean
   getCartLenght: () => number
+  clearCart: () => void
 }
 
 const CartContext = createContext<ICartContext>({} as ICartContext)
@@ -46,7 +47,6 @@ export const CartProvider: React.FC = ({ children }) => {
     })
     return qtd
   }
-
   const addProduct = (prod: Oferta, quantidade: number) => {
     const index = products.findIndex((value) => value.id === prod.id)
 
@@ -77,6 +77,10 @@ export const CartProvider: React.FC = ({ children }) => {
       })
     }
   }
+  const clearCart = () => {
+    process.browser && localStorage.removeItem('cart')
+    setProducts([])
+  }
 
   return (
     <CartContext.Provider
@@ -85,7 +89,8 @@ export const CartProvider: React.FC = ({ children }) => {
         addProduct,
         removeProduct,
         checkInCart,
-        getCartLenght
+        getCartLenght,
+        clearCart
       }}
     >
       {children}

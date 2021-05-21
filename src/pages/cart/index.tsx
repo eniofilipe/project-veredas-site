@@ -28,7 +28,7 @@ import {
 const Cart = () => {
   const Router = useRouter();
   const { signOut } = useContext(AuthContext);
-  const { products, removeProduct } = useContext(CartContext);
+  const { products, removeProduct, clearCart } = useContext(CartContext);
   const { getCliente, getAddress } = useContext(AuthContext);
   const [subtotal, setSubtotal] = useState(0);
   const [total, setTotal] = useState(0);
@@ -138,6 +138,7 @@ const Cart = () => {
       });
       // {console.log(cliente.id, idFixo, pagamento, freteFixo);}
       toast.success('Pedido realizado com sucesso!', { position: 'bottom-right', autoClose: 5000 });
+      clearCart();
       setTimeout(() => Router.push('/orders'), 1000);
     } catch (err) {
       toast.error('Erro ao realizar pedido!', { position: 'bottom-right', autoClose: 5000 });
@@ -178,6 +179,12 @@ const Cart = () => {
       action: signOut,
     },
   ];
+
+
+  function handlerCancelar(){
+    router.back()
+    clearCart()
+  }
 
   return (
     <S.Wrapper>
@@ -248,7 +255,7 @@ const Cart = () => {
           </S.Address>
         </S.ContainerPagamento>
         <S.WrapperButtons>
-          <S.CancelButton onClick={() => router.back()}>Cancelar</S.CancelButton>
+          <S.CancelButton onClick={() => handlerCancelar()}>Cancelar</S.CancelButton>
           <S.AcceptButton onClick={() => handlePedido()}>
             Confirmar
         </S.AcceptButton>
