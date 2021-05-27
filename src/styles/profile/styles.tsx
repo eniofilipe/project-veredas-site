@@ -3,6 +3,10 @@
 import styled, { css } from 'styled-components'
 import Header from '../../components/Header'
 
+export const StyledHeader = styled(Header)`
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+`
+
 export const Logo = styled.img`
   &:nth-child(1) {
     cursor: pointer;
@@ -40,11 +44,6 @@ export const MenuLink = styled.a`
     }
   }
 `
-
-export const StyledHeader = styled(Header)`
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-`
-
 export const Title = styled.h1`
   font-size: 2rem;
   color: #552200;
@@ -123,7 +122,6 @@ export const Wrapper = styled.div``
 export const WrapperContent = styled.div`
   display: flex;
   width: 100%;
-  padding-top: 80px;
   padding-left: 14%;
   padding-right: 14%;
   justify-content: space-between;
