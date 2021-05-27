@@ -215,7 +215,8 @@ const Order = () => {
                     setOpen(array)
                   }
                   const controle = open[i]
-                  ajuda = pedido.status
+
+                  setAjuda(pedido.status)
                   return (
                     <div key={`${pedido.id}`}>
                       <ListItem
