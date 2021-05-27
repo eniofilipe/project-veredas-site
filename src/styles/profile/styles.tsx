@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable indent */
-import styled, { css } from 'styled-components';
-import Header from '../../components/Header';
+import styled, { css } from 'styled-components'
+import Header from '../../components/Header'
 
 export const StyledHeader = styled(Header)`
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
@@ -11,9 +11,9 @@ export const Logo = styled.img`
   &:nth-child(1) {
     cursor: pointer;
   }
-`;
+`
 
-export const MenuNav = styled.div``;
+export const MenuNav = styled.div``
 export const MenuLink = styled.a`
   position: relative;
   color: #552200;
@@ -43,7 +43,7 @@ export const MenuLink = styled.a`
       }
     }
   }
-`;
+`
 export const Title = styled.h1`
   font-size: 2rem;
   color: #552200;
@@ -54,7 +54,7 @@ export const Title = styled.h1`
   @media (max-width: 1280px) {
     font-size: 1rem;
   }
-`;
+`
 
 export const MenuItem = styled.h1`
   font-size: 1.5rem;
@@ -64,7 +64,7 @@ export const MenuItem = styled.h1`
   margin-left: 2rem;
   font-weight: 400;
   cursor: pointer;
-`;
+`
 
 export const TitlePage = styled.h1`
   position: absolute;
@@ -74,9 +74,9 @@ export const TitlePage = styled.h1`
   font-weight: 400;
   font-size: 1.5rem;
   cursor: default;
-`;
+`
 
-export const HeaderWrapper = styled.div``;
+export const HeaderWrapper = styled.div``
 
 export const Button = styled.button`
   justify-content: center;
@@ -115,13 +115,14 @@ export const Button = styled.button`
       padding: 1rem 1rem;
     }
   }
-`;
+`
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div``
 
 export const WrapperContent = styled.div`
   display: flex;
   width: 100%;
+  padding-top: 80px;
   padding-left: 14%;
   padding-right: 14%;
   justify-content: space-between;
@@ -129,7 +130,7 @@ export const WrapperContent = styled.div`
     flex-direction: column;
     flex-wrap: wrap;
   }
-`;
+`
 
 export const WrapperMenu = styled.div`
   display: flex;
@@ -137,7 +138,7 @@ export const WrapperMenu = styled.div`
   top: 2rem;
   gap: 3rem;
   border: 1px solid blue;
-`;
+`
 export const WrapperData = styled.div`
   display: flex;
   flex-direction: column;
@@ -158,7 +159,7 @@ export const WrapperData = styled.div`
   @media (max-width: 1280px) {
     width: 100%;
   }
-`;
+`
 export const Input = styled.input`
   margin-left: auto;
   width: 60%;
@@ -179,7 +180,7 @@ export const Input = styled.input`
     /* padding: 0; */
     margin: 0;
   }
-`;
+`
 export const WrapperAddress = styled.div`
   display: flex;
   flex-direction: column;
@@ -204,7 +205,7 @@ export const WrapperAddress = styled.div`
   @media (max-width: 1280px) {
     font-size: 1rem;
   }
-`;
+`
 
 export const Label = styled.p`
   font-size: 1.4rem;
@@ -213,11 +214,11 @@ export const Label = styled.p`
   @media (max-width: 1280px) {
     font-size: 1rem;
   }
-`;
+`
 
-export default Label;
+export default Label
 
-export const WrapperController = styled.div``;
+export const WrapperController = styled.div``
 
 export const Form = styled.div`
   padding-left: 2rem;
@@ -227,7 +228,7 @@ export const Form = styled.div`
   @media (max-width: 1280px) {
     flex-wrap: wrap;
   }
-`;
+`
 
 export const WrapperDataAddress = styled.div`
   display: flex;
@@ -241,7 +242,7 @@ export const WrapperDataAddress = styled.div`
     padding-left: 10%;
     padding-right: 10%;
   }
-`;
+`
 
 export const CardHeader = styled.div`
   display: flex;
@@ -253,7 +254,7 @@ export const CardHeader = styled.div`
     margin-left: none;
     height: 54px;
   }
-`;
+`
 
 export const EditButtons = styled.div`
   display: flex;
@@ -289,7 +290,7 @@ export const EditButtons = styled.div`
       cursor: pointer;
     }
   }
-`;
+`
 
 export const Row = styled.div`
   display: flex;
@@ -325,4 +326,4 @@ export const Row = styled.div`
     align-items: center;
     justify-content: center;
   }
-`;
+`

@@ -1,37 +1,37 @@
 /* eslint-disable no-use-before-define */
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable operator-linebreak */
-/* eslint-disable import/no-unresolved */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Collapse from '@material-ui/core/Collapse';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import { toast } from 'react-toastify';
+/* eslint-disable react/require-default-props */
+/* eslint-disable prettier/prettier */
+import { makeStyles } from '@material-ui/core/styles'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import Collapse from '@material-ui/core/Collapse'
+import ExpandLess from '@material-ui/icons/ExpandLess'
+import ExpandMore from '@material-ui/icons/ExpandMore'
+import { toast } from 'react-toastify'
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import { useState, useEffect, useContext } from 'react';
-import { useRouter } from 'next/router';
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
+import { useState, useEffect, useContext } from 'react'
+import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
-import * as S from '../../styles/orders/styles';
-import veredaslogo from '../../assets/images/logo.png';
-import logomst from '../../assets/images/logo-mst-rurais.png';
-import logoif from '../../assets/images/logo-if.png';
+import * as S from '../../styles/orders/styles'
+import veredaslogo from '../../assets/images/logo.png'
+import logomst from '../../assets/images/logo-mst-rurais.png'
+import logoif from '../../assets/images/logo-if.png'
 import AuthContext from '../../contexts/auth'
 import { PedidosProps } from '../../types'
 import { getPedidos, deletePedido } from '../../api/Pedidos'
 import { FormatDateByFNS } from '../../Utils/Masks'
-import Footer from '../../components/Footer';
+import Footer from '../../components/Footer'
 import ValidadeContext from '../../contexts/validade'
 
 const useStyles = makeStyles((theme) => ({
@@ -52,8 +52,8 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '8px',
     boxShadow: 'rgba(0, 0, 0, 0.18) 0px 2px 4px',
     '& span, & svg': {
-      fontSize: '1rem',
-    },
+      fontSize: '1rem'
+    }
   },
   tabela: {
     marginBottom: theme.spacing(1),
@@ -78,8 +78,8 @@ const useStyles = makeStyles((theme) => ({
   },
   apagada: {
     [theme.breakpoints.down(500)]: {
-      display: 'none',
-    },
+      display: 'none'
+    }
   },
   direita: {
     align: 'right'
@@ -105,13 +105,13 @@ const Order = () => {
   const [open, setOpen] = useState([false])
   const [isOpen, setIsOpen] = useState(false)
   const [pedidos, setPedidos] = useState<PedidosProps[]>([])
-  let [ajuda, setAjuda] = useState<string>('');
-  const [render, setRender] = useState<number>(0);
+  const [ajuda, setAjuda] = useState<string>('')
+  const [render, setRender] = useState<number>(0)
   const { validade } = useContext(ValidadeContext)
 
   const goToProducts = () => {
-    Router.push('/products');
-  };
+    Router.push('/products')
+  }
 
   const fetchPedidos = async () => {
     try {
@@ -136,11 +136,11 @@ const Order = () => {
 
     setPedidos(response.data.reverse())
 
-    setAjuda('cancelado');
+    setAjuda('cancelado')
     setRender(id)
 
     toast.success('Pedido Cancelado', { position: 'bottom-right' })
-  };
+  }
 
   useEffect(() => {
     fetchPedidos()
@@ -160,33 +160,33 @@ const Order = () => {
   const optionsLinksMobile = [
     {
       label: 'Perfil',
-      action: () => Router.push('profile'),
+      action: () => Router.push('profile')
     },
     {
       label: 'Sair',
-      action: signOut,
-    },
-  ];
+      action: signOut
+    }
+  ]
 
   const optionsLinks = [
     {
       label: 'Perfil',
-      action: () => Router.push('/profile'),
+      action: () => Router.push('/profile')
     },
     {
       label: 'Sair',
-      action: signOut,
-    },
-  ];
+      action: signOut
+    }
+  ]
 
   const optionsButtons = !validade
     ? []
     : [
-      {
-        label: 'Ir pra Feirinha',
-        action: goToProducts,
-      },
-    ];
+        {
+          label: 'Ir pra Feirinha',
+          action: goToProducts
+        }
+      ]
 
   return (
     <S.Wrapper>
@@ -317,7 +317,7 @@ const Order = () => {
                                   R${' '}
                                   {Number(
                                     pedido.frete.valor_frete +
-                                      Number(handleSubtotal(pedido.ofertas)),
+                                      Number(handleSubtotal(pedido.ofertas))
                                   ).toFixed(2)}
                                 </TableCell>
                               </TableRow>

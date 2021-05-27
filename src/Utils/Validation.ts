@@ -21,34 +21,35 @@ Author  : Celso Goya
 */
 
 export function isEmail(text: string) {
-  let arroba = '@';
-  let ponto = '.';
-  let posponto = 0;
-  let posarroba = 0;
+  let arroba = '@',
+    ponto = '.',
+    posponto = 0,
+    posarroba = 0
 
-  if (text == '') return false;
+  if (text == '') return false
 
   for (let indice = 0; indice < text.length; indice++) {
     if (text.charAt(indice) == arroba) {
-      posarroba = indice;
-      break;
+      posarroba = indice
+      break
     }
   }
 
   for (let indice = posarroba; indice < text.length; indice++) {
     if (text.charAt(indice) == ponto) {
-      posponto = indice;
-      break;
+      posponto = indice
+      break
     }
   }
-  if (posponto == 0 || posarroba == 0) return false;
-  if (posponto == posarroba + 1) return false;
-  if (posponto + 1 == text.length) return false;
-  return true;
+  if (posponto == 0 || posarroba == 0) return false
+  if (posponto == posarroba + 1) return false
+  if (posponto + 1 == text.length) return false
+  return true
 }
+
 export function validarCPF(value: string) {
-  const cpf = value.replace(/[^\d]+/g, '');
-  if (cpf == '') return false;
+  const cpf = value.replace(/[^\d]+/g, '')
+  if (cpf == '') return false
   // Elimina CPFs invalidos conhecidos
   if (
     cpf.length !== 11 ||
@@ -63,27 +64,27 @@ export function validarCPF(value: string) {
     cpf == '88888888888' ||
     cpf == '99999999999'
   )
-    return false;
+    return false
   // Valida 1o digito
-  let add = 0;
-  for (let i = 0; i < 9; i++) add += parseInt(cpf.charAt(i)) * (10 - i);
-  let rev = 11 - (add % 11);
-  if (rev == 10 || rev == 11) rev = 0;
-  if (rev !== parseInt(cpf.charAt(9))) return false;
+  let add = 0
+  for (let i = 0; i < 9; i++) add += parseInt(cpf.charAt(i)) * (10 - i)
+  let rev = 11 - (add % 11)
+  if (rev == 10 || rev == 11) rev = 0
+  if (rev !== parseInt(cpf.charAt(9))) return false
   // Valida 2o digito
-  add = 0;
-  for (let i = 0; i < 10; i++) add += parseInt(cpf.charAt(i)) * (11 - i);
-  rev = 11 - (add % 11);
-  if (rev == 10 || rev == 11) rev = 0;
-  if (rev !== parseInt(cpf.charAt(10))) return false;
-  return true;
+  add = 0
+  for (let i = 0; i < 10; i++) add += parseInt(cpf.charAt(i)) * (11 - i)
+  rev = 11 - (add % 11)
+  if (rev == 10 || rev == 11) rev = 0
+  if (rev !== parseInt(cpf.charAt(10))) return false
+  return true
 }
 export function validarCNPJ(cnpj: any) {
-  cnpj = cnpj.replace(/[^\d]+/g, '');
+  cnpj = cnpj.replace(/[^\d]+/g, '')
 
-  if (cnpj == '') return false;
+  if (cnpj == '') return false
 
-  if (cnpj.length !== 14) return false;
+  if (cnpj.length !== 14) return false
 
   // Elimina CNPJs invalidos conhecidos
   if (
@@ -98,44 +99,44 @@ export function validarCNPJ(cnpj: any) {
     cnpj == '88888888888888' ||
     cnpj == '99999999999999'
   )
-    return false;
+    return false
 
   // Valida DVs
-  let tamanho = cnpj.length - 2;
-  let numeros = cnpj.substring(0, tamanho);
-  const digitos = cnpj.substring(tamanho);
-  let soma = 0;
-  let pos = tamanho - 7;
+  let tamanho = cnpj.length - 2
+  let numeros = cnpj.substring(0, tamanho)
+  const digitos = cnpj.substring(tamanho)
+  let soma = 0
+  let pos = tamanho - 7
   for (let i = tamanho; i >= 1; i--) {
-    soma += numeros.charAt(tamanho - i) * pos--;
-    if (pos < 2) pos = 9;
+    soma += numeros.charAt(tamanho - i) * pos--
+    if (pos < 2) pos = 9
   }
-  let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-  if (resultado != digitos.charAt(0)) return false;
+  let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11)
+  if (resultado != digitos.charAt(0)) return false
 
-  tamanho += 1;
-  numeros = cnpj.substring(0, tamanho);
-  soma = 0;
-  pos = tamanho - 7;
+  tamanho += 1
+  numeros = cnpj.substring(0, tamanho)
+  soma = 0
+  pos = tamanho - 7
   for (let i = tamanho; i >= 1; i--) {
-    soma += numeros.charAt(tamanho - i) * pos--;
-    if (pos < 2) pos = 9;
+    soma += numeros.charAt(tamanho - i) * pos--
+    if (pos < 2) pos = 9
   }
-  resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-  if (resultado != digitos.charAt(1)) return false;
+  resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11)
+  if (resultado != digitos.charAt(1)) return false
 
-  return true;
+  return true
 }
 export function cleanObject(object: any) {
-  const obj = object;
+  const obj = object
   for (const propName in obj) {
     if (
       obj[propName] === null ||
       obj[propName] === undefined ||
       obj[propName] === ''
     ) {
-      delete obj[propName];
+      delete obj[propName]
     }
   }
-  return obj;
+  return obj
 }

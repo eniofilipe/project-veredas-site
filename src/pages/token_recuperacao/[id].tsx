@@ -1,72 +1,95 @@
-import { useRouter } from 'next/router';
-import { useContext, useState } from 'react';
-import Head from 'next/head';
-import Footer from '../../components/Footer';
+import { useRouter } from 'next/router'
+import { useContext, useState } from 'react'
+import Head from 'next/head'
 
-import LockIcon from '@material-ui/icons/Lock';
-import { toast } from 'react-toastify';
-import * as S from '../../styles/token_recuperacao/styles';
-import veredaslogo from '../../assets/images/logo.png';
-import ValidadeContext from '../../contexts/validade';
-import logomst from '../../assets/images/logo-mst-rurais.png';
-import logoif from '../../assets/images/logo-if.png';
-import { postResetarSenha } from '../../api/ResetarSenha';
+import LockIcon from '@material-ui/icons/Lock'
+import { toast } from 'react-toastify'
+import Footer from '../../components/Footer'
+import * as S from '../../styles/token_recuperacao/styles'
+import ValidadeContext from '../../contexts/validade'
+import { postResetarSenha } from '../../api/ResetarSenha'
 
 const ResetarSenha = () => {
-  const Router = useRouter();
-  const [password, setPassword] = useState('');
-  const [passwordRepeat, setPasswordRepeat] = useState('');
-  const { validade } = useContext(ValidadeContext);
-
-  const { id } = Router.query;
+  const Router = useRouter()
+  const [password, setPassword] = useState('')
+  const [passwordRepeat, setPasswordRepeat] = useState('')
+  const { validade } = useContext(ValidadeContext)
+  const [isOpen, setIsOpen] = useState(false)
+  const { id } = Router.query
   const goToProducts = () => {
-    Router.push('/products');
-  };
+    Router.push('/products')
+  }
 
   const goToLogin = () => {
-    Router.push('/register');
-  };
+    Router.push('/register')
+  }
   const setResetarSenha = async (
     _password: string,
-    _passwordRepeat: string,
+    _passwordRepeat: string
   ) => {
     if (_password !== _passwordRepeat) {
-      console.log('senhas nao conferem');
+      console.log('senhas nao conferem')
     }
     if (_password.length < 6) {
-      console.log('senha pequena demais');
+      console.log('senha pequena demais')
     }
     try {
-      const obj = { password: _password, token: id };
-      console.log(obj);
-      const response = await postResetarSenha(obj);
+      const obj = { password: _password, token: id }
+      console.log(obj)
+      const response = await postResetarSenha(obj)
       if (!response.data.error) {
-        toast.success('sucesso ao atualizar senha');
-        Router.push('/login');
+        toast.success('sucesso ao atualizar senha', { autoClose: 6000 })
+        Router.push('/login')
       }
 
-      console.log(response);
+      console.log(response)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
+  }
+
+  const optionsLinksMobile = [
+    {
+      label: 'Home',
+      action: () => Router.push('/')
+    }
+  ]
+
+  const optionsLinks = [
+    {
+      label: 'Home',
+      action: () => Router.push('/')
+    }
+  ]
+
+  const optionsButtons = !validade
+    ? [
+        {
+          label: 'Criar conta',
+          action: goToLogin
+        }
+      ]
+    : [
+        {
+          label: 'Entrar na Feirinha',
+          action: goToProducts
+        }
+      ]
+
   return (
     <div>
       <Head>
         <title>Veredas da terra</title>
       </Head>
       <S.HeaderWrapper>
-        <S.Header>
-          <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')} />
-          <S.MenuNav>
-            <S.MenuLink onClick={() => Router.push('/')}>Home</S.MenuLink>
-            {!validade ? (
-              <S.Button onClick={goToLogin}>Criar conta</S.Button>
-            ) : (
-              <S.Button onClick={goToProducts}>Entrar na Feirinha</S.Button>
-            )}
-          </S.MenuNav>
-        </S.Header>
+        <S.StyledHeader
+          links={optionsLinks}
+          buttons={optionsButtons}
+          linksMenuFull={optionsLinksMobile}
+          buttonsMenulFull={optionsButtons}
+          handleSandwich={(open) => setIsOpen(open)}
+          openMenuFull={isOpen}
+        />
       </S.HeaderWrapper>
       <S.Content>
         <S.LoginContainer>
@@ -95,15 +118,16 @@ const ResetarSenha = () => {
           </div>
 
           <S.ButtonLogin
+            id="menorEnviar"
             onClick={() => setResetarSenha(password, passwordRepeat)}
           >
             Enviar
-            </S.ButtonLogin>
+          </S.ButtonLogin>
         </S.LoginContainer>
       </S.Content>
-      <Footer/>
+      <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default ResetarSenha;
+export default ResetarSenha

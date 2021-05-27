@@ -1,28 +1,26 @@
 /* eslint-disable prettier/prettier */
-import styled, { css } from 'styled-components';
-import Header from '../../components/Header';
+import styled, { css } from 'styled-components'
+import Header from '../../components/Header'
 
 export const Wrapper = styled.main`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-height: 100vh;
-
-`;
+`
 
 export const Logo = styled.img`
-
-&:nth-child(1) {
-  cursor: pointer;
+  &:nth-child(1) {
+    cursor: pointer;
   }
-`;
+`
 
 type MenuProps = {
-  background?: string;
-  position?: number;
-};
+  background?: string
+  position?: number
+}
 
-export const MenuNav = styled.div``;
+export const MenuNav = styled.div``
 
 export const MenuLink = styled.a`
   position: relative;
@@ -39,7 +37,7 @@ export const MenuLink = styled.a`
       position: absolute;
       display: block;
       height: 0.15rem;
-      background-color: #017C00;
+      background-color: #017c00;
       animation: hoverAnimation 0.2s forwards;
     }
     @keyframes hoverAnimation {
@@ -53,7 +51,7 @@ export const MenuLink = styled.a`
       }
     }
   }
-`;
+`
 
 export const TitlePage = styled.h1`
   position: absolute;
@@ -63,19 +61,18 @@ export const TitlePage = styled.h1`
   font-weight: 400;
   font-size: 1.5rem;
   cursor: default;
-`;
+`
 
 export const StyledHeader = styled(Header)`
-
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-`;
+`
 
 export const Title = styled.p`
   white-space: nowrap;
   align-self: center;
   margin: 0 25%;
   font-size: 2.5rem;
-`;
+`
 
 export const WrapperMenu = styled.div`
   display: flex;
@@ -86,22 +83,23 @@ export const WrapperMenu = styled.div`
   ${Title} {
     cursor: pointer;
   }
-`;
+`
 
 export const WrapperContent = styled.div`
+  padding-top: 80px;
   width: 80%;
   margin: 1.5rem auto;
 
-  @media (max-width: 920px){
+  @media (max-width: 920px) {
     width: 90%;
   }
-`;
+`
 
 export const Label = styled.span`
   align-self: flex-start;
   color: #016300;
   font-weight: 500;
-`;
+`
 
 export const WrapperItem = styled.div`
   display: flex;
@@ -119,10 +117,10 @@ export const WrapperItem = styled.div`
     padding: 1rem;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
-`;
+`
 
 export const WrapperControl = styled.div`
-   display: flex;
+  display: flex;
   justify-content: center;
   margin-right: 10px;
 
@@ -130,8 +128,8 @@ export const WrapperControl = styled.div`
     font-weight: bold;
     text-align: center;
     width: 32px;
-  };
-`;
+  }
+`
 
 export const SumButton = styled.button`
   border: none;
@@ -141,7 +139,7 @@ export const SumButton = styled.button`
   ::after {
     content: '+';
   }
-`;
+`
 
 export const SubButton = styled.button`
   border: none;
@@ -151,87 +149,87 @@ export const SubButton = styled.button`
   ::after {
     content: '-';
   }
-`;
+`
 
 export const Text = styled.span`
   color: #552200;
   font-size: 1rem;
   max-width: 30rem;
-  &#prodNameDesc{
+  &#prodNameDesc {
     width: 37.5rem;
     color: #552200;
     margin-right: 4rem;
     margin-left: 1.5rem;
   }
-  &#prodPriceDesc{
+  &#prodPriceDesc {
     color: #552200;
   }
-  &#boldPrice{
+  &#boldPrice {
     font-weight: 600;
     color: green;
   }
-  &#corProduto{
+  &#corProduto {
     font-weight: 800;
     font-size: 1.2rem;
     color: #552200;
   }
 
-  @media (max-width: 1959px){
-    &#prodNameDesc{
+  @media (max-width: 1959px) {
+    &#prodNameDesc {
       margin-right: 4rem;
       margin-left: 1rem;
     }
   }
 
-  @media (max-width: 1710px){
-    &#prodNameDesc{
+  @media (max-width: 1710px) {
+    &#prodNameDesc {
       margin-right: 0rem;
     }
   }
 
-  @media (max-width: 1550px){
-    &#prodNameDesc{
+  @media (max-width: 1550px) {
+    &#prodNameDesc {
       width: 20rem;
     }
   }
 
-  @media (max-width: 1150px){
-    &#prodNameDesc{
+  @media (max-width: 1150px) {
+    &#prodNameDesc {
       width: 14rem;
       margin-right: 0rem;
     }
   }
 
-  @media (max-width: 920px){
-    &#prodPriceDesc{
+  @media (max-width: 920px) {
+    &#prodPriceDesc {
       width: 8rem;
     }
   }
 
-  @media (max-width: 798px){
-    &#prodPriceDesc{
+  @media (max-width: 798px) {
+    &#prodPriceDesc {
       display: none;
       width: 0rem;
     }
-    &#prodNameDesc{
+    &#prodNameDesc {
       width: 10rem;
     }
   }
 
-  @media (max-width: 550px){
-    &#prodNameDesc{
+  @media (max-width: 550px) {
+    &#prodNameDesc {
       width: 6rem;
       margin-right: 0rem;
     }
   }
 
-  @media (max-width: 490px){
-    &#prodNameDesc{
+  @media (max-width: 490px) {
+    &#prodNameDesc {
       width: 6rem;
       margin-right: -2rem;
     }
   }
-`;
+`
 
 export const Value = styled.span`
   color: #016300;
@@ -242,7 +240,7 @@ export const Value = styled.span`
   margin-left: 40px;
   font-weight: 600;
   width: 120px;
-`;
+`
 
 export const Items = styled.div`
   margin-top: 1rem;
@@ -251,7 +249,7 @@ export const Items = styled.div`
   padding-bottom: 2rem;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
-`;
+`
 
 export const WrapperSelect = styled.div`
   margin-top: 0.5rem;
@@ -276,7 +274,7 @@ export const WrapperSelect = styled.div`
     padding: 0.2rem 1rem 2rem;
     gap: 8%;
   }
-`;
+`
 
 export const ContainerPagamento = styled.div`
   display: flex;
@@ -300,13 +298,13 @@ export const ContainerPagamento = styled.div`
     justify-content: space-around;
     flex-wrap: wrap;
   }
-`;
+`
 
 export const Select = styled.select`
   color: #016300;
   outline: none;
   padding: 0.6rem 1rem 0.5rem 1rem;
-`;
+`
 
 export const Address = styled.div`
   display: flex;
@@ -319,14 +317,14 @@ export const Address = styled.div`
     font-size: 1rem;
     width: 90%;
   }
-`;
+`
 
 export const WrapperButtons = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 2rem;
   margin-bottom: 2rem;
-`;
+`
 
 export const CancelButton = styled.button`
   background: #961913;
@@ -357,10 +355,10 @@ export const CancelButton = styled.button`
   @media (max-width: 490px) {
     width: 8rem;
   }
-`;
+`
 
 export const AcceptButton = styled.button`
-  background: #017C00;
+  background: #017c00;
   color: #fff;
   border-radius: 8px;
   padding: 1rem 1rem;
@@ -388,21 +386,21 @@ export const AcceptButton = styled.button`
   @media (max-width: 490px) {
     width: 8rem;
   }
-`;
+`
 
 export const H1 = styled.h1`
   text-align: center;
   color: #961913;
   font-weight: 500;
   font-size: 1.8rem;
-`;
+`
 
 export const WrapperProd = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-right: auto;
-`;
+`
 
 export const WrapperSubtotal = styled.div`
   margin-top: 1rem;
@@ -410,10 +408,10 @@ export const WrapperSubtotal = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media (max-width: 798px){
+  @media (max-width: 798px) {
     margin-left: 1.2rem;
   }
-`;
+`
 
 export const Row = styled.div`
   display: flex;
@@ -422,7 +420,7 @@ export const Row = styled.div`
   margin-top: 2px;
   justify-content: space-between;
   padding-right: 1rem;
-`;
+`
 
 export const Line = styled.div`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
@@ -430,41 +428,41 @@ export const Line = styled.div`
   margin-top: 1rem;
   margin-bottom: 1rem;
   width: 98%;
-`;
+`
 
 export const QuantityContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-right: 2.5;
 
-  @media (max-width: 920px){
+  @media (max-width: 920px) {
     margin-right: 2rem;
   }
-`;
+`
 
 export const ButtonMinus = styled.button`
   border: none;
   background: none;
   cursor: pointer;
   margin-right: 14px;
-  color: #017C00;
+  color: #017c00;
 
-  @media (max-width: 920px){
+  @media (max-width: 920px) {
     margin-right: 0rem;
   }
-`;
+`
 
 export const ButtonPlus = styled.button`
   border: none;
   background: none;
   margin-left: 14px;
   cursor: pointer;
-  color: #017C00;
+  color: #017c00;
 
-  @media (max-width: 920px){
+  @media (max-width: 920px) {
     margin-left: 0rem;
   }
-`;
+`
 
 export const Quantity = styled.span`
   font-weight: bold;
@@ -472,11 +470,11 @@ export const Quantity = styled.span`
   width: 32px;
   color: #552200;
   cursor: default;
-`;
+`
 
 export const AddQuantityWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2px;
   margin: 4px;
-`;
+`

@@ -1,20 +1,15 @@
 /* eslint-disable no-use-before-define */
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable operator-linebreak */
-/* eslint-disable import/no-unresolved */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { useState, useEffect, useContext } from 'react';
-import { useRouter } from 'next/router';
-import { toast } from 'react-toastify';
-import searchCep from 'cep-promise';
-import * as S from '../../styles/register/styles';
-import veredaslogo from '../../assets/images/logo.png';
-import { postClientes } from '../../api/Clientes';
-import { isEmail, validarCPF } from '../../Utils/Validation';
-import { cepMask, cellphoneeMask, cpfMask } from '../../Utils/Masks';
-import ValidadeContext from '../../contexts/validade';
-import logomst from '../../assets/images/logo-mst-rurais.png';
-import logoif from '../../assets/images/logo-if.png';
+import { useState, useEffect, useContext } from 'react'
+import { useRouter } from 'next/router'
+import { toast } from 'react-toastify'
+import searchCep from 'cep-promise'
+import * as S from '../../styles/register/styles'
+import { postClientes } from '../../api/Clientes'
+import { isEmail, validarCPF } from '../../Utils/Validation'
+import { cepMask, cellphoneeMask, cpfMask } from '../../Utils/Masks'
+import ValidadeContext from '../../contexts/validade'
 import Footer from '../../components/Footer'
 
 export type ProfileProps = {
@@ -31,68 +26,69 @@ export type ProfileProps = {
 }
 
 const Profile = () => {
-  const Router = useRouter();
-  const { validade } = useContext(ValidadeContext);
+  const Router = useRouter()
+  const { validade } = useContext(ValidadeContext)
   const [isOpen, setIsOpen] = useState(false)
-  const [name, setName] = useState('');
-  const [cpf, setCpf] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState('')
+  const [cpf, setCpf] = useState('')
+  const [phone, setPhone] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
 
-  const [cep, setCep] = useState('');
-  const [neighborhood, setNeighborhood] = useState('');
-  const [street, setStreet] = useState('');
-  const [number, setNumber] = useState('');
-  const [cidade, setCidade] = useState('');
-  const [estado, setEstado] = useState('');
+  const [cep, setCep] = useState('')
+  const [neighborhood, setNeighborhood] = useState('')
+  const [street, setStreet] = useState('')
+  const [number, setNumber] = useState('')
+  const [cidade, setCidade] = useState('')
+  const [estado, setEstado] = useState('')
 
   useEffect(() => {
     if (cep) {
-      setCep(cepMask(cep));
+      setCep(cepMask(cep))
       if (cep.length === 9) {
-        searchCep(cep.replace(/\D/g, '')).then(setValuesCep).catch(errorCep);
+        searchCep(cep.replace(/\D/g, '')).then(setValuesCep).catch(errorCep)
       }
     }
 
     function errorCep() {
-      toast.warn('CEP não encontrado!');
+      toast.warn('CEP não encontrado!')
     }
+    // eslint-disable-next-line
     function setValuesCep(data: any) {
-      console.log(data);
-      setEstado(data.state);
-      setCidade(data.city);
-      setNeighborhood(data.neighborhood);
-      setStreet(data.street);
+      console.log(data)
+      setEstado(data.state)
+      setCidade(data.city)
+      setNeighborhood(data.neighborhood)
+      setStreet(data.street)
     }
-  }, [cep]);
+  }, [cep])
 
   const register = async () => {
     try {
       if (!validarCPF(cpf)) {
-        toast.warn('CPF Inválido');
-        return;
+        toast.warn('CPF Inválido')
+        return
       }
 
       if (!isEmail(email)) {
-        toast.warn('Email Inválido');
-        return;
+        toast.warn('Email Inválido')
+        return
       }
 
       if (!isEmail(email)) {
-        toast.warn('Email Inválido');
-        return;
+        toast.warn('Email Inválido')
+        return
       }
 
       if (password !== confirmPassword) {
-        toast.warn('As senhas não coincidem');
-        return;
+        toast.warn('As senhas não coincidem')
+        return
       }
 
       if (password.length < 6) {
-        toast.warn('As senhas não coincidem');
-        return;
+        toast.warn('As senhas não coincidem')
+        return
       }
       await postClientes({
         bairro: neighborhood,
@@ -105,34 +101,36 @@ const Profile = () => {
         nome: name,
         numero: number,
         password,
-        telefone: phone.replace(/\D/g, ''),
-      });
-      toast.success('Cadastro realizado com sucesso.');
-      Router.push('/login');
+        telefone: phone.replace(/\D/g, '')
+      })
+      toast.success('Cadastro realizado com sucesso.', { autoClose: 6000 })
+      Router.push('/login')
     } catch (error) {
-      const { status } = error.response;
+      const { status } = error.response
       switch (status) {
         case 400:
-          toast.warn('Email já cadastrado.');
-          break;
+          toast.warn('Email já cadastrado.')
+          break
         case 401:
-          toast.warn('CPF já cadastrado.');
-          break;
+          toast.warn('CPF já cadastrado.')
+          break
         default:
-          toast.warn('Algo de errado ocorreu ao tentar criar sua conta.');
-          break;
+          toast.error('Algo de errado ocorreu ao tentar criar sua conta.', {
+            autoClose: 8000
+          })
+          break
       }
-      console.log({ error });
+      console.log({ error })
     }
-  };
+  }
 
   const goToProducts = () => {
-    Router.push('/products');
-  };
+    Router.push('/products')
+  }
 
   const goToLogin = () => {
-    Router.push('/login');
-  };
+    Router.push('/login')
+  }
 
   const optionsLinksMobile = [
     {
@@ -290,7 +288,7 @@ const Profile = () => {
 
       <Footer />
     </S.Wrapper>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile

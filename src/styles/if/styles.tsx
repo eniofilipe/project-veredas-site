@@ -1,14 +1,14 @@
 /* eslint-disable indent */
-import styled, { css } from 'styled-components';
-import Header from '../../components/Header';
+import styled, { css } from 'styled-components'
+import Header from '../../components/Header'
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div``
 
 export const Logo = styled.img`
   &:nth-child(1) {
     cursor: pointer;
   }
-`;
+`
 
 type MenuProps = {
   background?: string
@@ -17,7 +17,7 @@ type MenuProps = {
 
 export const MenuNav = styled.div`
   /* margin-right: 4rem; */
-`;
+`
 
 export const MenuLink = styled.a`
   position: relative;
@@ -48,7 +48,7 @@ export const MenuLink = styled.a`
       }
     }
   }
-`;
+`
 
 export const TitlePage = styled.h1`
   position: absolute;
@@ -58,7 +58,7 @@ export const TitlePage = styled.h1`
   font-weight: 400;
   font-size: 1.5rem;
   cursor: default;
-`;
+`
 
 export const StyledHeader = styled(Header)`
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
@@ -76,7 +76,7 @@ export const HeaderWrapper = styled.div<MenuProps>`
     z-index: 2;
     width: 100%;
   `}
-`;
+`
 
 export const TitleDesenvolvedores = styled.p`
   font-size: 2rem;
@@ -84,9 +84,10 @@ export const TitleDesenvolvedores = styled.p`
   cursor: default;
   display: flex;
   width: 50%;
-`;
+`
 
 export const WrapperBody = styled.div`
+  padding-top: 70px;
   display: flex;
   flex-wrap: wrap;
   /* align-items: center; */
@@ -183,6 +184,6 @@ export const WrapperBody = styled.div`
       }
     }
   }
-`;
+`
 
-export const Body = styled.body``;
+export const Body = styled.body``

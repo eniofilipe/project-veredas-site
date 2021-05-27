@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Button = styled.button<{ clear?: boolean }>`
   color: ${(props) => (props.clear ? '#000' : '#fff')};
@@ -19,4 +19,4 @@ export const Button = styled.button<{ clear?: boolean }>`
     background: ${(props) => (props.clear ? '#000' : '#016300')};
     /* border: 1px solid ${(props) => (props.clear ? '#000' : '#017C00')}; */
   }
-`;
+`

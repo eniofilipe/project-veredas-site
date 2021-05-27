@@ -1,19 +1,18 @@
 /* eslint-disable indent */
-import styled, { css } from 'styled-components';
-import bg1 from '../assets/images/bg1.png';
-import bg2 from '../assets/images/cesta.png';
+import styled, { css } from 'styled-components'
+import bg1 from '../assets/images/bg1.png'
+import bg2 from '../assets/images/cesta.png'
 
 export const Wrapper = styled.div`
   width: 100vw;
-`;
-export const Logo = styled.img`
-`;
+`
+export const Logo = styled.img``
 export const MenuNav = styled.div`
   margin-right: 4rem;
   @media (max-width: 1100px) {
     margin-right: 1rem;
   }
-`;
+`
 
 export const MenuLink = styled.a`
   position: relative;
@@ -30,7 +29,7 @@ export const MenuLink = styled.a`
       position: absolute;
       display: block;
       height: 0.3rem;
-      background-color: #017C00;
+      background-color: #017c00;
       animation: hoverAnimation 0.2s forwards;
     }
     @keyframes hoverAnimation {
@@ -44,15 +43,14 @@ export const MenuLink = styled.a`
       }
     }
   }
-`;
+`
 
 export const HomeSectionWrapper = styled.div`
   position: absolute;
   top: 0;
   left: 0;
   z-index: -1;
-
-`;
+`
 
 export const BGHome = styled.div`
   background-image: url(${bg1});
@@ -61,7 +59,7 @@ export const BGHome = styled.div`
   background-position: center center;
   height: 100vh;
   width: 100vw;
-`;
+`
 export const CentralizeWrapper = styled.div`
   display: flex;
   text-align: center;
@@ -88,8 +86,8 @@ export const CentralizeWrapper = styled.div`
       font-size: 2.5rem;
     }
     p:nth-child(2) {
-    font-size: 2rem;
-    font-weight: 400;
+      font-size: 2rem;
+      font-weight: 400;
     }
   }
 
@@ -100,11 +98,10 @@ export const CentralizeWrapper = styled.div`
       font-size: 2rem;
     }
     p:nth-child(2) {
-    font-size: 1.5rem;
+      font-size: 1.5rem;
     }
   }
-`;
-
+`
 
 export const Card1 = styled.div`
   margin-left: 5%;
@@ -135,15 +132,14 @@ export const Card1 = styled.div`
     p {
       font-size: 1.5rem;
       line-height: 1.3;
+    }
+    p:nth-child(1) {
+      font-size: 2.3rem;
+      padding-bottom: 1.8rem;
+    }
   }
-  p:nth-child(1) {
-    font-size: 2.3rem;
-    padding-bottom: 1.8rem;
-  }
-  }
-`;
-export const Image = styled.img`
-`;
+`
+export const Image = styled.img``
 export const Card2 = styled.div`
   ${Image} {
     margin: 2rem;
@@ -152,38 +148,38 @@ export const Card2 = styled.div`
     border-radius: 4px;
   }
   padding-left: 2rem;
-`;
+`
 
 export const WrapperSecondSection = styled.div`
   padding-top: 110vh;
   display: flex;
   padding-bottom: 10vh;
   flex-direction: row;
-  @media (max-width:1000px) {
+  @media (max-width: 1000px) {
     padding-top: 100vh;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-  ${Card1}{
-    margin-top: 1rem;
-    margin-left:0;
-    width: 80%;
-    height:100%;
-  }
-  ${Card2}{
-  padding-left: 0;
-  display: flex;
-  width: 100%;
-  align-items: center;
-    flex-direction: column;
-    ${Image}{
-      margin: 1rem;
-      width: 90%;
-      height:70%;
+    ${Card1} {
+      margin-top: 1rem;
+      margin-left: 0;
+      width: 80%;
+      height: 100%;
+    }
+    ${Card2} {
+      padding-left: 0;
+      display: flex;
+      width: 100%;
+      align-items: center;
+      flex-direction: column;
+      ${Image} {
+        margin: 1rem;
+        width: 90%;
+        height: 70%;
       }
+    }
   }
-  }
-`;
+`
 
 export const TextWrapper = styled.div`
   width: 100%;
@@ -205,7 +201,7 @@ export const TextWrapper = styled.div`
     font-size: 1.5rem;
     line-height: 1.8;
   }
-`;
+`
 
 export const TextDivPrincipal = styled.div`
   text-align: center;
@@ -213,11 +209,11 @@ export const TextDivPrincipal = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-`;
+`
 
 export const TextDiv1 = styled.div`
   color: #552200;
-  background: rgba(255,255,255,0.92);
+  background: rgba(255, 255, 255, 0.92);
   height: 400px;
   display: flex;
   flex-direction: column;
@@ -231,12 +227,10 @@ export const TextDiv1 = styled.div`
   @media (max-width: 1367px) {
     height: 42vh;
     width: 40vw;
-    background: rgba(255,255,255,0.75);
+    background: rgba(255, 255, 255, 0.75);
     padding: 1.5rem;
-
   }
-`;
-
+`
 
 export const WrapperThreeSection = styled.div`
   background-image: url(${bg2});
@@ -256,13 +250,12 @@ export const WrapperThreeSection = styled.div`
   position: relative;
 
   @media (max-width: 960px) {
-
-    ${TextWrapper}{
-      p{
-      font-size: 3rem;
+    ${TextWrapper} {
+      p {
+        font-size: 3rem;
       }
     }
-    ${TextDiv1}{
+    ${TextDiv1} {
       height: 50vh;
       font-size: 1.5rem;
       line-height: 1.3;
@@ -272,7 +265,7 @@ export const WrapperThreeSection = styled.div`
   }
 
   @media (max-width: 700px) {
-    ${TextDivPrincipal}{
+    ${TextDivPrincipal} {
       text-align: center;
       width: 100%;
       display: flex;
@@ -280,44 +273,43 @@ export const WrapperThreeSection = styled.div`
       justify-content: center;
       align-items: center;
     }
-    ${TextDiv1}{
+    ${TextDiv1} {
       width: 80vw;
       height: 30vh;
       padding-top: 1rem;
       margin-bottom: 1rem;
     }
-    ${TextWrapper}{
+    ${TextWrapper} {
       padding: 0rem 1rem;
       height: 10rem;
     }
   }
   @media (max-width: 520px) {
     height: 120vh;
-    ${TextWrapper}{
-      p{
-      font-size: 2rem;
+    ${TextWrapper} {
+      p {
+        font-size: 2rem;
       }
     }
-    ${TextDiv1}{
-      width:90vw;
+    ${TextDiv1} {
+      width: 90vw;
       height: 35vh;
       padding: 0;
       padding-top: 1rem;
       margin-bottom: 0.5rem;
-      p{
+      p {
         font-size: 1.2rem;
       }
     }
-    ${TextWrapper}{
+    ${TextWrapper} {
       padding: 0rem 1rem;
       height: 4rem;
     }
   }
-`;
-
+`
 
 export const Button = styled.button`
-  background: #017C00;
+  background: #017c00;
   color: #fff;
   border-radius: 8px;
   padding: 1rem 2rem;
@@ -333,10 +325,10 @@ export const Button = styled.button`
     background: #016300;
     cursor: pointer;
   }
-`;
+`
 
 export const ButtonSecond = styled.button`
-  background: #017C00;
+  background: #017c00;
   color: #fff;
 
   border-radius: 8px;
@@ -354,12 +346,12 @@ export const ButtonSecond = styled.button`
     background: #016300;
     cursor: pointer;
   }
-`;
+`
 
 type MenuProps = {
-  background?: string;
-  position?: number;
-};
+  background?: string
+  position?: number
+}
 export const Header = styled.menu<MenuProps>`
   ${({ background }) => css`
     display: flex;
@@ -379,57 +371,53 @@ export const Header = styled.menu<MenuProps>`
   }
 
   @media (max-width: 1020px) {
-    ${MenuLink}{
+    ${MenuLink} {
       font-size: 1.2rem;
     }
   }
 
   @media (max-width: 940px) {
-    ${Button}{
+    ${Button} {
       padding: 1rem 1.5rem;
       margin-left: 1.5rem;
       font-size: 1rem;
     }
   }
-`;
+`
 export const HeaderWrapper = styled.div<MenuProps>`
-    position: fixed;
-    opacity: 1;
-    background-color: rgba(250, 250, 250, 1);
-    top: 0;
-    left: 0;
-    z-index: 2;
-    width: 100%;
-`;
-
-
-
+  position: fixed;
+  opacity: 1;
+  background-color: rgba(250, 250, 250, 1);
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+`
 
 export const IconWrapper = styled.div`
-    color:#444;
-    width: 4rem;
-    height: 4rem;
-    cursor: pointer;
-  `
-
+  color: #444;
+  width: 4rem;
+  height: 4rem;
+  cursor: pointer;
+`
 
 export const Sandwich = styled.div`
   color: #444;
   width: 4rem;
   height: 5rem;
   cursor: pointer;
-  display:flex;
+  display: flex;
   background-color: white;
   width: 100%;
   justify-content: space-between;
   position: fixed;
-  ${Logo}{
+  ${Logo} {
     height: 4rem;
   }
   @media (max-width: 300px) {
     display: flex;
   }
-  `
+`
 
 type MenufullProps = {
   isOpen: boolean
@@ -439,7 +427,7 @@ export const MenuFull = styled.nav<MenufullProps>`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: #FFF;
+    background: #fff;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -485,6 +473,5 @@ export const MenuFull = styled.nav<MenufullProps>`
         }
       }
     }
-
   `}
 `

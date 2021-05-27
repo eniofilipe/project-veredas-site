@@ -57,8 +57,8 @@ export const HeaderWrapper = styled.div<MenuProps>`
     position: relative;
     opacity: ${position !== 0 ? 1 : 0.8};
     background-color: ${position !== 0
-    ? 'rgba(250, 250, 250, 1)'
-    : 'rgba(250, 250, 240, 0.8)'};
+      ? 'rgba(250, 250, 250, 1)'
+      : 'rgba(250, 250, 240, 0.8)'};
     top: 0;
     left: 0;
     z-index: 2;
@@ -260,4 +260,4 @@ export const WrapperButtons = styled.div`
       background: #78140f;
     }
   }
-`;
+`

@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components'
 
 export const Logo = styled.img`
   cursor: pointer;
@@ -148,7 +148,7 @@ export const TitlePage = styled.h1`
   font-weight: 400;
   font-size: 1.5rem;
   cursor: default;
-`;
+`
 type MenufullProps = {
   isOpen: boolean
 }
