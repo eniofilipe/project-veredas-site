@@ -86,7 +86,6 @@ export const WrapperMenu = styled.div`
 `
 
 export const WrapperContent = styled.div`
-  padding-top: 80px;
   width: 80%;
   margin: 1.5rem auto;
 

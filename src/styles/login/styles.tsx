@@ -87,7 +87,7 @@ export const ButtonLogin = styled.button`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 40px;
+
   align-items: center;
   justify-content: center;
   padding-bottom: 16.5vh;

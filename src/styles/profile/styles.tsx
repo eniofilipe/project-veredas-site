@@ -122,7 +122,6 @@ export const Wrapper = styled.div``
 export const WrapperContent = styled.div`
   display: flex;
   width: 100%;
-  padding-top: 80px;
   padding-left: 14%;
   padding-right: 14%;
   justify-content: space-between;

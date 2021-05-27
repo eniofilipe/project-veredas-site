@@ -3,9 +3,7 @@ import Header from '../../components/Header'
 
 export const Wrapper = styled.div``
 
-export const Body = styled.div`
-  padding-top: 60px;
-`
+export const Body = styled.div``
 
 export const WrapperController = styled.div``
 
