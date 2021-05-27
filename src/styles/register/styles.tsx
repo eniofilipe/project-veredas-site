@@ -1,13 +1,13 @@
-import styled, { css } from 'styled-components';
-import Header from '../../components/Header';
+import styled, { css } from 'styled-components'
+import Header from '../../components/Header'
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div``
 
 export const Logo = styled.img`
   &:nth-child(1) {
     cursor: pointer;
   }
-`;
+`
 
 type MenuProps = {
   background?: string
@@ -16,7 +16,7 @@ type MenuProps = {
 
 export const MenuNav = styled.div`
   margin-right: 4rem;
-`;
+`
 
 export const MenuLink = styled.a`
   position: relative;
@@ -47,11 +47,11 @@ export const MenuLink = styled.a`
       }
     }
   }
-`;
+`
 
 export const StyledHeader = styled(Header)`
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-`;
+`
 
 export const HeaderWrapper = styled.div<MenuProps>`
   ${({ position }) => css`
@@ -65,7 +65,7 @@ export const HeaderWrapper = styled.div<MenuProps>`
     z-index: 2;
     width: 100%;
   `}
-`;
+`
 
 export const Button = styled.button`
   background: #017c00;
@@ -84,7 +84,7 @@ export const Button = styled.button`
     background: #016300;
     cursor: pointer;
   }
-`;
+`
 
 export const Title = styled.h1`
   font-size: 2rem;
@@ -106,7 +106,7 @@ export const Title = styled.h1`
   @media (max-width: 1280px) {
     font-size: 1rem;
   }
-`;
+`
 
 export const WrapperData = styled.div`
   display: flex;
@@ -127,7 +127,7 @@ export const WrapperData = styled.div`
   @media (max-width: 1280px) {
     width: 100%;
   }
-`;
+`
 
 export const WrapperContent = styled.div`
   display: flex;
@@ -139,7 +139,7 @@ export const WrapperContent = styled.div`
     flex-direction: column;
     flex-wrap: wrap;
   }
-`;
+`
 
 export const Form = styled.div`
   padding-left: 2rem;
@@ -149,7 +149,7 @@ export const Form = styled.div`
   @media (max-width: 1280px) {
     flex-wrap: wrap;
   }
-`;
+`
 
 export const Label = styled.label`
   font-size: 1.4rem;
@@ -158,7 +158,7 @@ export const Label = styled.label`
   @media (max-width: 1280px) {
     font-size: 1rem;
   }
-`;
+`
 
 export const Input = styled.input`
   margin-left: auto;
@@ -180,13 +180,13 @@ export const Input = styled.input`
     /* padding: 0; */
     margin: 0;
   }
-`;
+`
 
 export const Body = styled.div`
   padding-top: 90px;
-`;
+`
 
-export const WrapperController = styled.div``;
+export const WrapperController = styled.div``
 
 export const Row = styled.div`
   display: flex;
@@ -202,7 +202,7 @@ export const Row = styled.div`
     align-items: center;
     justify-content: center;
   }
-`;
+`
 
 export const WrapperAddress = styled.div`
   display: flex;
@@ -225,7 +225,7 @@ export const WrapperAddress = styled.div`
   @media (max-width: 1280px) {
     font-size: 1rem;
   }
-`;
+`
 
 export const WrapperDataAddress = styled.div`
   display: flex;
@@ -240,7 +240,7 @@ export const WrapperDataAddress = styled.div`
     padding-left: 10%;
     padding-right: 10%;
   }
-`;
+`
 
 export const WrapperButtons = styled.div`
   display: flex;

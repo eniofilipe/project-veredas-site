@@ -1,17 +1,17 @@
-import React from 'react';
+import React from 'react'
 
 interface MoneyProps {
-  value: number;
-  className?: string;
+  value: number
+  className?: string
 }
 
 const index = ({ value, className }: MoneyProps) => (
   <span className={className}>
     {Intl.NumberFormat('pt-BR', {
       style: 'currency',
-      currency: 'BRL',
+      currency: 'BRL'
     }).format(value)}
   </span>
-);
+)
 
-export default index;
+export default index

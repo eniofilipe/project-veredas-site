@@ -1,21 +1,16 @@
 /* eslint-disable no-use-before-define */
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable operator-linebreak */
-/* eslint-disable import/no-unresolved */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 import searchCep from 'cep-promise'
 import * as S from '../../styles/register/styles'
-import veredaslogo from '../../assets/images/logo.png'
 import { postClientes } from '../../api/Clientes'
 import { isEmail, validarCPF } from '../../Utils/Validation'
 import { cepMask, cellphoneeMask, cpfMask } from '../../Utils/Masks'
 import ValidadeContext from '../../contexts/validade'
-import logomst from '../../assets/images/logo-mst-rurais.png'
-import logoif from '../../assets/images/logo-if.png'
-import Footer from '../../components/Footer';
+import Footer from '../../components/Footer'
 
 export type ProfileProps = {
   name: string
@@ -59,6 +54,7 @@ const Profile = () => {
     function errorCep() {
       toast.warn('CEP não encontrado!')
     }
+    // eslint-disable-next-line 
     function setValuesCep(data: any) {
       console.log(data)
       setEstado(data.state)
@@ -107,7 +103,7 @@ const Profile = () => {
         password,
         telefone: phone.replace(/\D/g, '')
       })
-      toast.success('Cadastro realizado com sucesso.')
+      toast.success('Cadastro realizado com sucesso.', { autoClose: 6000 })
       Router.push('/login')
     } catch (error) {
       const { status } = error.response
@@ -119,7 +115,9 @@ const Profile = () => {
           toast.warn('CPF já cadastrado.')
           break
         default:
-          toast.warn('Algo de errado ocorreu ao tentar criar sua conta.')
+          toast.error('Algo de errado ocorreu ao tentar criar sua conta.', {
+            autoClose: 8000
+          })
           break
       }
       console.log({ error })
@@ -137,30 +135,30 @@ const Profile = () => {
   const optionsLinksMobile = [
     {
       label: 'Home',
-      action: () => Router.push('/'),
-    },
-  ];
+      action: () => Router.push('/')
+    }
+  ]
 
   const optionsLinks = [
     {
       label: 'Home',
-      action: () => Router.push('/'),
-    },
-  ];
+      action: () => Router.push('/')
+    }
+  ]
 
   const optionsButtons = !validade
     ? [
-      {
-        label: 'Criar conta',
-        action: goToLogin,
-      },
-    ]
+        {
+          label: 'Criar conta',
+          action: goToLogin
+        }
+      ]
     : [
-      {
-        label: 'Entrar na Feirinha',
-        action: goToProducts,
-      },
-    ];
+        {
+          label: 'Entrar na Feirinha',
+          action: goToProducts
+        }
+      ]
 
   return (
     <S.Wrapper>

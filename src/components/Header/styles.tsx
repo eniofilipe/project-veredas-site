@@ -1,13 +1,13 @@
 import styled, { css } from 'styled-components'
 
-export const Logo = styled.img``;
+export const Logo = styled.img``
 
 export const MenuNav = styled.div`
   margin-right: 4rem;
   @media (max-width: 1100px) {
     margin-right: 1rem;
   }
-`;
+`
 
 export const MenuLink = styled.a`
   position: relative;
@@ -38,7 +38,7 @@ export const MenuLink = styled.a`
       }
     }
   }
-`;
+`
 
 export const Button = styled.button`
   background: #017c00;
@@ -57,7 +57,7 @@ export const Button = styled.button`
     background: #016300;
     cursor: pointer;
   }
-`;
+`
 type MenuProps = {
   background?: string
   position?: number
@@ -69,8 +69,8 @@ export const Header = styled.menu<MenuProps>`
     padding: 0.8rem 2rem;
     justify-content: space-between;
     background-color: ${background && background === 'white'
-    ? '#FFF'
-    : 'rgba(250, 250, 250, 1)'};
+      ? '#FFF'
+      : 'rgba(250, 250, 250, 1)'};
   `}
 
   ${Logo} {
@@ -93,7 +93,7 @@ export const Header = styled.menu<MenuProps>`
       font-size: 1rem;
     }
   }
-`;
+`
 export const HeaderWrapper = styled.div<MenuProps>`
   position: fixed;
   opacity: 1;
@@ -102,14 +102,14 @@ export const HeaderWrapper = styled.div<MenuProps>`
   left: 0;
   z-index: 2;
   width: 100%;
-`;
+`
 
 export const IconWrapper = styled.div`
   color: #444;
   width: 4rem;
   height: 4rem;
   cursor: pointer;
-`;
+`
 
 export const Sandwich = styled.div`
   display: flex;
@@ -131,7 +131,7 @@ export const Sandwich = styled.div`
   @media (max-width: 300px) {
     display: flex;
   }
-`;
+`
 export const TitlePage = styled.h1`
   position: absolute;
   right: 50%;
@@ -196,4 +196,4 @@ export const MenuFull = styled.nav<MenufullProps>`
       }
     }
   `}
-`;
+`

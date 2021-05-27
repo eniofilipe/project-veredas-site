@@ -1,7 +1,5 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable operator-linebreak */
-/* eslint-disable import/no-unresolved */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { useContext, useState, useEffect } from 'react';
 import Head from 'next/head';
@@ -10,11 +8,8 @@ import { toast } from 'react-toastify';
 import { GetServerSideProps } from 'next';
 import Cookie from 'js-cookie';
 import * as S from '../../styles/profile/styles';
-import veredaslogo from '../../assets/images/logo.png';
 import AuthContext from '../../contexts/auth';
 import Footer from '../../components/Footer';
-import logomst from '../../assets/images/logo-mst-rurais.png';
-import logoif from '../../assets/images/logo-if.png';
 
 import { Cliente, ClienteLogin } from '../../types';
 import { cleanObject, isEmail, validarCPF } from '../../Utils/Validation';
@@ -31,6 +26,7 @@ const Profile = () => {
   const { signOut } = useContext(AuthContext);
   const cliente = (Cookie.get('cliente') as unknown) as ClienteLogin;
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [profileData, setProfileData] = useState<Cliente>();
 
   const [oldPassword, setOldpassword] = useState('');
@@ -101,7 +97,7 @@ const Profile = () => {
         return;
       }
       if (oldPassword && password.length < 6) {
-        toast.warn('Sua senha deve ter pelo menos 6 caracteres.');
+        toast.warn('Sua senha deve ter pelo menos 6 caracteres.', { autoClose: 8000});
         setOldpassword('');
         setPassword('');
         setConfirmPassword('');
@@ -129,7 +125,7 @@ const Profile = () => {
         oldPassword,
       };
       await updateProfile(cleanObject(data));
-      toast.success('Perfil atualizado com sucesso.');
+      toast.success('Perfil atualizado com sucesso.', { autoClose: 6000});
       reset();
     } catch (err) {
       if (err.response) {
@@ -140,6 +136,7 @@ const Profile = () => {
           case 404:
             toast.warn(
               'Usuário não encontrado. Recomendamos que saia e faça o login novamente.',
+              { autoClose: 8000}
             );
             break;
 
@@ -151,7 +148,7 @@ const Profile = () => {
             break;
 
           case 402:
-            toast.warn('Email já cadastrado em nossas bases de dados.');
+            toast.warn('Email já cadastrado em nossas bases de dados.',  { autoClose: 8000});
             break;
 
           default:
