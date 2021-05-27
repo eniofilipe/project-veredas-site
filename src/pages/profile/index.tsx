@@ -20,14 +20,16 @@ import { Cliente, ClienteLogin } from '../../types';
 import { cleanObject, isEmail, validarCPF } from '../../Utils/Validation';
 import { cepMask, cellphoneeMask, cpfMask } from '../../Utils/Masks';
 import { getDetails, updateProfile } from '../../api/Clientes';
+import ValidadeContext from '../../contexts/validade';
 
 const Profile = () => {
   const [roDadosPessoais, setRoDP] = useState(true);
   const [roSenha, setRoS] = useState(true);
   const [roEndereco, setRoE] = useState(true);
-
+  const [isOpen, setIsOpen] = useState(false);
   const Router = useRouter();
   const { signOut } = useContext(AuthContext);
+  const { validade } = useContext(ValidadeContext);
   const cliente = (Cookie.get('cliente') as unknown) as ClienteLogin;
 
   const [profileData, setProfileData] = useState<Cliente>();
@@ -48,6 +50,10 @@ const Profile = () => {
   const [numero, setNumero] = useState('');
   const [referencia, setReferencia] = useState('');
   const [telefone, setTelefone] = useState('');
+
+  const goToProducts = () => {
+    Router.push('/products');
+  };
 
   const fetchDetails = async () => {
     if (cliente) {
@@ -138,7 +144,7 @@ const Profile = () => {
             break;
           case 404:
             toast.warn(
-              'Usuário não encontrado. Recomendamos que saia e faça o login novamente.'
+              'Usuário não encontrado. Recomendamos que saia e faça o login novamente.',
             );
             break;
 
@@ -161,24 +167,52 @@ const Profile = () => {
     }
   }
 
+  const optionsLinksMobile = [
+    {
+      label: 'Pedidos',
+      action: () => Router.push('/orders'),
+    },
+    {
+      label: 'Sair',
+      action: signOut,
+    },
+  ];
+
+  const optionsLinks = [
+    {
+      label: 'Pedidos',
+      action: () => Router.push('/orders'),
+    },
+    {
+      label: 'Sair',
+      action: signOut,
+    },
+  ];
+
+  const optionsButtons = !validade
+    ? []
+    : [
+      {
+        label: 'Ir pra Feirinha',
+        action: goToProducts,
+      },
+    ];
+
   return (
     <>
       <S.Wrapper>
         <Head>
           <title>Veredas da terra</title>
         </Head>
-        <S.Header>
-          <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')} />
-          <S.TitlePage>Perfil</S.TitlePage>
-          <S.MenuNav>
-            <S.MenuLink onClick={() => Router.push('/orders')}>
-              Pedidos
-            </S.MenuLink>
-            <S.MenuLink onClick={signOut}>
-              Sair
-            </S.MenuLink>
-          </S.MenuNav>
-        </S.Header>
+        <S.StyledHeader
+          buttons={optionsButtons}
+          buttonsMenulFull={optionsButtons}
+          handleSandwich={(open) => setIsOpen(open)}
+          links={optionsLinks}
+          linksMenuFull={optionsLinksMobile}
+          openMenuFull={isOpen}
+          title="Perfil"
+        />
 
         <S.WrapperController>
           <S.WrapperContent>
@@ -217,8 +251,7 @@ const Profile = () => {
                   <S.Input
                     value={telefone}
                     readOnly={roDadosPessoais}
-                    onChange={(e) =>
-                      setTelefone(cellphoneeMask(e.target.value))
+                    onChange={(e) => setTelefone(cellphoneeMask(e.target.value))
                     }
                   />
                 </S.Row>

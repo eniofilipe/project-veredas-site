@@ -15,26 +15,25 @@ import { cepMask, cellphoneeMask, cpfMask } from '../../Utils/Masks';
 import ValidadeContext from '../../contexts/validade';
 import logomst from '../../assets/images/logo-mst-rurais.png';
 import logoif from '../../assets/images/logo-if.png';
-import Footer from '../../components/Footer';
-
+import Footer from '../../components/Footer'
 
 export type ProfileProps = {
-  name: string;
-  cpf: string;
-  phone: string;
-  email: string;
-  cep: string;
-  neighborhood: string;
-  street: string;
-  number: string;
-  complement?: string;
-  ref?: string;
-};
+  name: string
+  cpf: string
+  phone: string
+  email: string
+  cep: string
+  neighborhood: string
+  street: string
+  number: string
+  complement?: string
+  ref?: string
+}
 
 const Profile = () => {
   const Router = useRouter();
   const { validade } = useContext(ValidadeContext);
-
+  const [isOpen, setIsOpen] = useState(false)
   const [name, setName] = useState('');
   const [cpf, setCpf] = useState('');
   const [phone, setPhone] = useState('');
@@ -134,21 +133,47 @@ const Profile = () => {
   const goToLogin = () => {
     Router.push('/login');
   };
+
+  const optionsLinksMobile = [
+    {
+      label: 'Home',
+      action: () => Router.push('/')
+    }
+  ]
+
+  const optionsLinks = [
+    {
+      label: 'Home',
+      action: () => Router.push('/')
+    }
+  ]
+
+  const optionsButtons = !validade
+    ? [
+        {
+          label: 'Criar conta',
+          action: goToLogin
+        }
+      ]
+    : [
+        {
+          label: 'Entrar na Feirinha',
+          action: goToProducts
+        }
+      ]
+
   return (
     <S.Wrapper>
       <S.HeaderWrapper>
-          <S.Header>
-            <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')} />
-            <S.MenuNav>
-              <S.MenuLink onClick={() => Router.push('/')}>Home</S.MenuLink>
-              {!validade ? (
-                <S.Button onClick={goToLogin}>Criar conta</S.Button>
-              ) : (
-                <S.Button onClick={goToProducts}>Entrar na Feirinha</S.Button>
-              )}
-            </S.MenuNav>
-          </S.Header>
-        </S.HeaderWrapper>
+        <S.StyledHeader
+          links={optionsLinks}
+          buttons={optionsButtons}
+          linksMenuFull={optionsLinksMobile}
+          buttonsMenulFull={optionsButtons}
+          handleSandwich={(open) => setIsOpen(open)}
+          openMenuFull={isOpen}
+        />
+      </S.HeaderWrapper>
       <S.Body>
         <S.WrapperController>
           <S.WrapperContent>
@@ -263,7 +288,7 @@ const Profile = () => {
         </S.WrapperButtons>
       </S.Body>
 
-   <Footer/>
+      <Footer />
     </S.Wrapper>
   );
 };

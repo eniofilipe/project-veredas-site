@@ -21,18 +21,31 @@ import enio from '../../assets/desenvolvedores/enio.jpg';
 
 const Home = () => {
   const Router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
+  const optionsLinksMobile = [
+    {
+      label: 'Perfil',
+      action: () => Router.push('profile'),
+    },
+  ];
 
+  const optionsLinks = [
+    {
+      label: 'Perfil',
+      action: () => Router.push('/profile'),
+    },
+  ];
   return (
     <S.Wrapper>
-      <S.Header>
-        <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')} />
-        <S.TitlePage>Desenvolvedores</S.TitlePage>
-        <S.MenuNav>
-          <S.MenuLink onClick={() => Router.push('/')}>
-            Perfil
-          </S.MenuLink>
-        </S.MenuNav>
-      </S.Header>
+       <S.StyledHeader
+          buttons={[]}
+          buttonsMenulFull={[]}
+          handleSandwich={(open) => setIsOpen(open)}
+          links={optionsLinks}
+          linksMenuFull={optionsLinksMobile}
+          openMenuFull={isOpen}
+          title="Desenvolvedores"
+        />
         <S.WrapperBody>
           <div className="card">
             <div id="img">

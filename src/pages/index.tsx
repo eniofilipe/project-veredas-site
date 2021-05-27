@@ -4,19 +4,20 @@ import {
   useEffect, useState, useRef, useContext,
 } from 'react';
 import { useRouter } from 'next/router';
+import { Menu as MenuIcon } from '@styled-icons/feather/Menu';
+import { CloseOutline as CloseIcon } from '@styled-icons/evaicons-outline/CloseOutline';
+import Link from 'next/link';
 import veredaslogo from '../assets/images/logo.png';
 import * as S from '../styles/styles';
 import logomst from '../assets/images/logo-mst-rurais.png';
 import imagecampo from '../assets/images/Campo-cidade.png';
 import ValidadeContext from '../contexts/validade';
-import Footer from '../components/Footer'
-import { Menu as MenuIcon } from '@styled-icons/feather/Menu'
-import { CloseOutline as CloseIcon } from '@styled-icons/evaicons-outline/CloseOutline'
-import Link from 'next/link'
+import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 const Home = () => {
   const Router = useRouter();
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
   const { validade } = useContext(ValidadeContext);
   const [scrollY, setScrollY] = useState(0);
 
@@ -30,29 +31,27 @@ const Home = () => {
     switch (value) {
       case 1:
         if (router.pathname !== '/') {
-          router.push('/')
+          router.push('/');
         }
-        !!handleChange && handleChange('sectionOneRef')
-        return
+        !!handleChange && handleChange('sectionOneRef');
+        return;
       case 2:
         if (router.pathname !== '/') {
-          router.push('/')
+          router.push('/');
         }
-        !!handleChange && handleChange('sectionTwoRef')
-        return
+        !!handleChange && handleChange('sectionTwoRef');
+        return;
       case 3:
         if (router.pathname !== '/') {
-          router.push('/')
+          router.push('/');
         }
-        !!handleChange && handleChange('sectionThreeRef')
-        return
+        !!handleChange && handleChange('sectionThreeRef');
     }
   }
 
-
   function mobileMenu(option: number) {
-    setRef(option)
-    setIsOpen(false)
+    setRef(option);
+    setIsOpen(false);
   }
 
   function logit() {
@@ -103,58 +102,55 @@ const Home = () => {
     }
   }
 
+  const optionsLinksMobile = [
+    {
+      label: 'Home',
+      action: () => mobileMenu(1),
+    },
+    {
+      label: 'Quem somos',
+      action: () => mobileMenu(2),
+    },
+    {
+      label: 'Como funciona',
+      action: () => mobileMenu(3),
+    },
+  ];
+
+  const optionsLinks = [
+    {
+      label: 'Home',
+      action: () => handleChange('sectionOneRef'),
+    },
+    {
+      label: 'Quem somos',
+      action: () => handleChange('sectionTwoRef'),
+    },
+    {
+      label: 'Como funciona',
+      action: () => handleChange('sectionThreeRef'),
+    },
+  ];
+
+  const optionsButtons = !validade ? [{
+    label: 'Acessar Conta',
+    action: goToLogin,
+  }] : [{
+    label: 'Entrar na Feirinha',
+    action: goToProducts,
+  }];
+
   return (
     <S.Wrapper>
 
-      <S.Sandwich>
-      <S.Logo src={veredaslogo} alt="Home" />
-        <S.IconWrapper >
-          <MenuIcon onClick={() => setIsOpen(true)} aria-label="Open Menu" />
-        </S.IconWrapper>
-      </S.Sandwich>
-
-
-      <S.HeaderWrapper position={scrollY}>
-        <S.Header>
-          {/* <S.Logo src={veredaslogo} alt="Home" onClick={() => Router.push('/')}/> */}
-          <S.Logo src={veredaslogo} alt="Home" />
-          <S.MenuNav>
-            <S.MenuLink onClick={() => handleChange('sectionOneRef')}>
-              Home
-            </S.MenuLink>
-            <S.MenuLink onClick={() => handleChange('sectionTwoRef')}>
-              Quem somos
-            </S.MenuLink>
-            <S.MenuLink onClick={() => handleChange('sectionThreeRef')}>
-              Como Funciona
-            </S.MenuLink>
-            {!validade ? (
-              <S.Button onClick={goToLogin}>Acessar Conta</S.Button>
-            ) : (
-              <S.Button onClick={goToProducts}>Entrar na Feirinha</S.Button>
-            )}
-          </S.MenuNav>
-        </S.Header>
-
-
-      <S.MenuFull aria-hidden={!isOpen} isOpen={isOpen}>
-        <CloseIcon aria-label="Close Menu" onClick={() => setIsOpen(false)} />
-        <S.MenuNav>
-          <S.MenuLink onClick={() => mobileMenu(1)}>Home</S.MenuLink>
-          <S.MenuLink onClick={() => mobileMenu(2)}>Quem somos</S.MenuLink>
-          <S.MenuLink onClick={() => mobileMenu(3)}>Como Funciona</S.MenuLink>
-          {!validade ? (
-             <Link href="/login">
-              <S.Button>Acessar Conta</S.Button>
-              </Link>
-            ) : (
-              <Link href="/products">
-                <S.Button>Entrar na Feirinha</S.Button>
-              </Link>
-            )}
-        </S.MenuNav>
-      </S.MenuFull>
-      </S.HeaderWrapper>
+<Header
+        links={optionsLinks}
+        buttons={optionsButtons}
+        linksMenuFull={optionsLinksMobile}
+        buttonsMenulFull={optionsButtons}
+        handleSandwich={(open) => setIsOpen(open)}
+        openMenuFull={isOpen}
+      />
 
       <S.HomeSectionWrapper ref={sectionOneRef}>
         <S.BGHome>
@@ -208,7 +204,7 @@ const Home = () => {
 
         {!validade ? (
           <S.ButtonSecond onClick={goToLogin}>Acessar Conta</S.ButtonSecond>
-          ) : (
+        ) : (
             <S.ButtonSecond onClick={goToProducts}>
             Entrar na Feirinha
           </S.ButtonSecond>

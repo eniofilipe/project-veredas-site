@@ -1,17 +1,19 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable indent */
 import styled, { css } from 'styled-components';
+import Header from '../../components/Header';
+
+export const StyledHeader = styled(Header)`
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+`
 
 export const Logo = styled.img`
-&:nth-child(1) {
-  cursor: pointer;
-}
+  &:nth-child(1) {
+    cursor: pointer;
+  }
 `;
 
-export const MenuNav = styled.div`
-`;
-
-
+export const MenuNav = styled.div``;
 export const MenuLink = styled.a`
   position: relative;
   color: #552200;
@@ -27,7 +29,7 @@ export const MenuLink = styled.a`
       position: absolute;
       display: block;
       height: 0.15rem;
-      background-color: #017C00;
+      background-color: #017c00;
       animation: hoverAnimation 0.2s forwards;
     }
     @keyframes hoverAnimation {
@@ -42,22 +44,6 @@ export const MenuLink = styled.a`
     }
   }
 `;
-
-export const Header = styled.menu`
-    position: sticky;
-    top: 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.8rem 2rem;
-    background-color: #fff;
-  ${Logo} {
-    width: 200px;
-  }
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-`;
-
 export const Title = styled.h1`
   font-size: 2rem;
   color: #552200;
@@ -65,7 +51,7 @@ export const Title = styled.h1`
   margin-right: 2rem;
   margin-left: 2rem;
   font-weight: 400;
-  @media (max-width: 1280px){
+  @media (max-width: 1280px) {
     font-size: 1rem;
   }
 `;
@@ -90,15 +76,13 @@ export const TitlePage = styled.h1`
   cursor: default;
 `;
 
-export const HeaderWrapper = styled.div`
-
-`;
+export const HeaderWrapper = styled.div``;
 
 export const Button = styled.button`
   justify-content: center;
-  background: #017C00;
+  background: #017c00;
   color: #fff;
-  border: 1px solid #017C00;
+  border: 1px solid #017c00;
   border-radius: 8px;
   padding: 1rem 2rem;
   outline: none;
@@ -113,7 +97,7 @@ export const Button = styled.button`
     border: 1px solid #016300;
     cursor: pointer;
   }
-  #button-passwd{
+  #button-passwd {
     margin-top: 400px;
     color: black;
   }
@@ -122,10 +106,10 @@ export const Button = styled.button`
     width: 6rem;
     height: 3rem;
     padding: 1rem 1rem;
-    &#menor{
+    &#menor {
       padding: 1rem 1rem;
     }
-    &#segundatela{
+    &#segundatela {
       width: 6rem;
       height: 3rem;
       padding: 1rem 1rem;
@@ -141,7 +125,7 @@ export const WrapperContent = styled.div`
   padding-left: 14%;
   padding-right: 14%;
   justify-content: space-between;
-  @media (max-width: 1280px){
+  @media (max-width: 1280px) {
     flex-direction: column;
     flex-wrap: wrap;
   }
@@ -171,13 +155,10 @@ export const WrapperData = styled.div`
     padding-bottom: 1.2rem;
   }
   padding-right: 3rem;
-  @media (max-width: 1280px){
+  @media (max-width: 1280px) {
     width: 100%;
   }
-
 `;
-
-
 export const Input = styled.input`
   margin-left: auto;
   width: 60%;
@@ -191,7 +172,7 @@ export const Input = styled.input`
   padding-top: 2px;
   padding-bottom: 2px;
   padding-left: 14px;
-  @media (max-width: 1280px){
+  @media (max-width: 1280px) {
     font-size: 1rem;
     height: 40px;
     width: 100%;
@@ -199,8 +180,6 @@ export const Input = styled.input`
     margin: 0;
   }
 `;
-
-
 export const WrapperAddress = styled.div`
   display: flex;
   flex-direction: column;
@@ -219,22 +198,19 @@ export const WrapperAddress = styled.div`
     padding-bottom: 1.2rem;
     margin-left: 16%;
   }
-  @media (max-width: 1280px){
+  @media (max-width: 1280px) {
     /* width: 72%; */
   }
-  @media (max-width: 1280px){
+  @media (max-width: 1280px) {
     font-size: 1rem;
   }
 `;
-
-
-
 
 export const Label = styled.p`
   font-size: 1.4rem;
   color: #552200;
   margin-top: 14px;
-  @media (max-width: 1280px){
+  @media (max-width: 1280px) {
     font-size: 1rem;
   }
 `;
@@ -248,7 +224,7 @@ export const Form = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  @media (max-width: 1280px){
+  @media (max-width: 1280px) {
     flex-wrap: wrap;
   }
 `;
@@ -261,11 +237,10 @@ export const WrapperDataAddress = styled.div`
   padding-right: 30%;
   justify-content: space-between;
   gap: 1rem;
-  @media (max-width: 1280px){
+  @media (max-width: 1280px) {
     padding-left: 10%;
     padding-right: 10%;
   }
-
 `;
 
 export const CardHeader = styled.div`
@@ -278,7 +253,6 @@ export const CardHeader = styled.div`
     margin-left: none;
     height: 54px;
   }
-
 `;
 
 export const EditButtons = styled.div`
@@ -294,12 +268,12 @@ export const EditButtons = styled.div`
   }
 
   ${Button}:nth-child(1) {
-    background-color: #017C00;
-    border: 1px solid #017C00;
+    background-color: #017c00;
+    border: 1px solid #017c00;
     &:hover {
-      color:  #fff;
+      color: #fff;
       background: #016300;
-      border: 1px solid #017C00;
+      border: 1px solid #017c00;
       cursor: pointer;
     }
   }
@@ -323,7 +297,7 @@ export const Row = styled.div`
     width: 100%;
     margin-top: 2.2rem;
   }
-  &#field{
+  &#field {
     margin-top: 40px;
   }
 
@@ -342,15 +316,13 @@ export const Row = styled.div`
     }
   }
 
-  @media (max-width: 1280px){
+  @media (max-width: 1280px) {
     font-size: 1rem;
     flex-direction: column;
-    &#field{
-    margin-top: 0px;
+    &#field {
+      margin-top: 0px;
     }
     align-items: center;
     justify-content: center;
   }
 `;
-
-
