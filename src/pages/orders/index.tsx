@@ -115,7 +115,8 @@ const Order = () => {
     try {
       const response = await getPedidos();
 
-      setPedidos(response.data.reverse());
+      // setPedidos(response.data.reverse());
+      setPedidos(response.data);
 
       const control = [];
       for (const i of response.data) {
@@ -133,8 +134,8 @@ const Order = () => {
 
     const response = await getPedidos();
 
-    // setPedidos(response.data.reverse());
-    setPedidos(response.data);
+    setPedidos(response.data.reverse());
+    // setPedidos(response.data);
 
     setAjuda('cancelado');
     setRender(id);
