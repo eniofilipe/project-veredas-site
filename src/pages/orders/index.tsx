@@ -115,14 +115,12 @@ const Order = () => {
     try {
       const response = await getPedidos();
 
-      // setPedidos(response.data.reverse());
-      setPedidos(response.data);
+      setPedidos(response.data.reverse());
 
       const control = [];
       for (const i of response.data) {
         control.push(false);
       }
-      
       setOpen(control);
     } catch (error) {
       console.log(error);
@@ -135,7 +133,6 @@ const Order = () => {
     const response = await getPedidos();
 
     setPedidos(response.data.reverse());
-    // setPedidos(response.data);
 
     setAjuda('cancelado');
     setRender(id);
