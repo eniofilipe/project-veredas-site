@@ -117,13 +117,15 @@ const Order = () => {
     try {
       const response = await getPedidos()
 
-      setPedidos(response.data.reverse())
+      setPedidos(response.data);
 
       const control = []
       for (const i of response.data) {
         control.push(false)
       }
-      setOpen(control)
+
+      setOpen(control);
+        
     } catch (error) {
       console.log(error)
     }

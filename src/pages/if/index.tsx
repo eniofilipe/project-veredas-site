@@ -1,27 +1,25 @@
 /* eslint-disable max-len */
 /* eslint-disable prettier/prettier */
-import { useEffect, useState, useRef, useContext } from 'react'
-import { useRouter } from 'next/router'
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 import {
-  Link,
-  Card,
-  CardContent,
-  CardMedia,
-  Typography
-} from '@material-ui/core'
-import * as S from '../../styles/if/styles'
-import ValidadeContext from '../../contexts/validade'
-import Footer from '../../components/Footer'
-import veredaslogo from '../../assets/images/logo.png'
-import logomst from '../../assets/images/logo-mst-rurais.png'
-// import logoif from '../../assets/images/logo-if.png';
-import logoifnovo from '../../assets/images/if.png'
+  useEffect, useState, useRef, useContext,
+} from 'react';
+import { useRouter } from 'next/router';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import {
+  Link, Card, CardContent, CardMedia, Typography,
+} from '@material-ui/core';
+import * as S from '../../styles/if/styles';
+import ValidadeContext from '../../contexts/validade';
+import Footer from '../../components/Footer';
+import veredaslogo from '../../assets/images/logo.png';
+import logomst from '../../assets/images/logo-mst-rurais.png';
+import logoifnovo from '../../assets/images/if.png';
 
-import deise from '../../assets/desenvolvedores/deise.jpg'
-import jefeson from '../../assets/desenvolvedores/jefeson.jpg'
-import joao from '../../assets/desenvolvedores/joao.jpg'
-import enio from '../../assets/desenvolvedores/enio.jpg'
+import deise from '../../assets/desenvolvedores/deise.jpg';
+import jefeson from '../../assets/desenvolvedores/jefeson.jpg';
+import joao from '../../assets/desenvolvedores/joao.jpg';
+import enio from '../../assets/desenvolvedores/enio.jpg';
+import lucio from '../../assets/desenvolvedores/lucio.jpg';
 
 const Home = () => {
   const Router = useRouter()
@@ -67,11 +65,11 @@ const Home = () => {
 
         <div className="card">
           <div id="img">
-            <img src={logomst} alt="" />
+            <img src={lucio} alt=""/>
           </div>
           <div className="info">
             <h1>Lúcio</h1>
-            <a href="http://">Link 1</a>
+            <a href="http://lattes.cnpq.br/2669267422941392">Lattes</a>
             <a href="http://">Link 2</a>
           </div>
         </div>
