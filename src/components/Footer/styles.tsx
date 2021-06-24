@@ -78,6 +78,7 @@ export const WrapperFooter = styled.footer`
       width: 140px;
     }
   }
+  
   @media (max-width: 1200px) {
     height: 45vh;
     #info {
