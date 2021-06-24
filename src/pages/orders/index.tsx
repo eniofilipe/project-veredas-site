@@ -123,7 +123,7 @@ const Order = () => {
       for (const i of response.data) {
         control.push(false)
       }
-
+      
       setOpen(control);
         
     } catch (error) {

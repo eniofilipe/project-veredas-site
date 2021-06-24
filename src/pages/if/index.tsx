@@ -13,13 +13,13 @@ import ValidadeContext from '../../contexts/validade';
 import Footer from '../../components/Footer';
 import veredaslogo from '../../assets/images/logo.png';
 import logomst from '../../assets/images/logo-mst-rurais.png';
+// import logoif from '../../assets/images/logo-if.png';
 import logoifnovo from '../../assets/images/if.png';
 
 import deise from '../../assets/desenvolvedores/deise.jpg';
 import jefeson from '../../assets/desenvolvedores/jefeson.jpg';
 import joao from '../../assets/desenvolvedores/joao.jpg';
 import enio from '../../assets/desenvolvedores/enio.jpg';
-import lucio from '../../assets/desenvolvedores/lucio.jpg';
 
 const Home = () => {
   const Router = useRouter()
