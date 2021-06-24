@@ -54,7 +54,7 @@ const Profile = () => {
     function errorCep() {
       toast.warn('CEP não encontrado!')
     }
-    // eslint-disable-next-line 
+    // eslint-disable-next-line
     function setValuesCep(data: any) {
       console.log(data)
       setEstado(data.state)

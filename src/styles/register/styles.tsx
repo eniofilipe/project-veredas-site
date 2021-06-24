@@ -52,7 +52,6 @@ export const MenuLink = styled.a`
 export const StyledHeader = styled(Header)`
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 `
-
 export const HeaderWrapper = styled.div<MenuProps>`
   ${({ position }) => css`
     position: relative;
@@ -182,9 +181,7 @@ export const Input = styled.input`
   }
 `
 
-export const Body = styled.div`
-  padding-top: 90px;
-`
+export const Body = styled.div``
 
 export const WrapperController = styled.div``
 

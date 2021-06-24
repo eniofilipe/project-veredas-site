@@ -1,5 +1,4 @@
 /* eslint-disable indent */
-/* eslint-disable import/no-unresolved */
 import styled, { css } from 'styled-components'
 import Input from '../../components/Inputs/Input'
 import Header from '../../components/Header'
@@ -88,7 +87,7 @@ export const ButtonLogin = styled.button`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 40px;
+
   align-items: center;
   justify-content: center;
   padding-bottom: 16.5vh;
