@@ -87,7 +87,6 @@ export const TitleDesenvolvedores = styled.p`
 `
 
 export const WrapperBody = styled.div`
-  padding-top: 70px;
   display: flex;
   flex-wrap: wrap;
   /* align-items: center; */

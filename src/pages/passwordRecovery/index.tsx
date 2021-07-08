@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+
 import { useContext, useState } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -65,7 +66,6 @@ const PasswordRecovery = () => {
           action: goToProducts
         }
       ]
-
   return (
     <div>
       <Head>

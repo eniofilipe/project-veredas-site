@@ -1,9 +1,14 @@
 import styled, { css } from 'styled-components'
 
-export const Logo = styled.img``
+export const Logo = styled.img`
+  cursor: pointer;
+`
 
 export const MenuNav = styled.div`
   margin-right: 4rem;
+  display: flex;
+  align-items: center;
+
   @media (max-width: 1100px) {
     margin-right: 1rem;
   }
@@ -95,7 +100,7 @@ export const Header = styled.menu<MenuProps>`
   }
 `
 export const HeaderWrapper = styled.div<MenuProps>`
-  position: fixed;
+  position: relative;
   opacity: 1;
   background-color: rgba(250, 250, 250, 1);
   top: 0;
@@ -124,9 +129,12 @@ export const Sandwich = styled.div`
   background-color: white;
   width: 100%;
   justify-content: space-between;
-  position: fixed;
+  position: relative;
   ${Logo} {
     height: 4rem;
+  }
+  @media (min-width: 700px) {
+    display: none;
   }
   @media (max-width: 300px) {
     display: flex;

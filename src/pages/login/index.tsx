@@ -1,88 +1,96 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable prettier/prettier */
-import { useContext, useState } from 'react';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-
-import EmailIcon from '@material-ui/icons/Email';
-import LockIcon from '@material-ui/icons/Lock';
-import { toast } from 'react-toastify';
-import Footer from '../../components/Footer';
-import AuthContext from '../../contexts/auth';
-import * as S from '../../styles/login/styles';
-import ValidadeContext from '../../contexts/validade';
+import { useContext, useState } from 'react'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import EmailIcon from '@material-ui/icons/Email'
+import LockIcon from '@material-ui/icons/Lock'
+import { toast } from 'react-toastify'
+import Footer from '../../components/Footer'
+import AuthContext from '../../contexts/auth'
+import * as S from '../../styles/login/styles'
+import ValidadeContext from '../../contexts/validade'
 
 const Login = () => {
-  const { validade } = useContext(ValidadeContext);
-  const Router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
-  const { signIn } = useContext(AuthContext);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { validade } = useContext(ValidadeContext)
+  const Router = useRouter()
+  const [isOpen, setIsOpen] = useState(false)
+  const { signIn } = useContext(AuthContext)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleLogin = async () => {
     try {
       const code = await signIn({
         email,
-        password,
-      });
+        password
+      })
 
       switch (code) {
         case 404:
-          toast.warn('Credenciais incorretas. Tente novamente', { autoClose: 8000});
-          break;
+          toast.warn('Credenciais incorretas. Tente novamente', {
+            autoClose: 8000
+          })
+          break
         case 403:
-          toast.warn('Essa conta percente a um administrador.', { autoClose: 8000});
-          break;
+          toast.warn('Essa conta percente a um administrador.', {
+            autoClose: 8000
+          })
+          break
         case 200:
-          toast.success('Seja bem vindo', { position: 'bottom-right' ,autoClose: 8000});
-          break;
+          toast.success('Seja bem vindo', {
+            position: 'bottom-right',
+            autoClose: 8000
+          })
+          break
         default:
-          toast.error('Ocorreu um erro ao tentar realizar o login', { autoClose: 8000});
+          toast.error('Ocorreu um erro ao tentar realizar o login', {
+            autoClose: 8000
+          })
       }
     } catch (err) {
-      console.log(err);
-      toast.warn('Credenciais incorretas. Tente novamente');
+      console.log(err)
+      toast.warn('Credenciais incorretas. Tente novamente')
     }
-  };
+  }
   const goToProducts = () => {
-    Router.push('/products');
-  };
+    Router.push('/products')
+  }
 
   const goToLogin = () => {
-    Router.push('/register');
-  };
+    Router.push('/register')
+  }
   const goToPasswordRecovery = () => {
-    Router.push('/passwordRecovery');
-  };
+    Router.push('/passwordRecovery')
+  }
 
   const optionsLinksMobile = [
     {
       label: 'Home',
-      action: () => Router.push('/'),
-    },
-  ];
+      action: () => Router.push('/')
+    }
+  ]
 
   const optionsLinks = [
     {
       label: 'Home',
-      action: () => Router.push('/'),
-    },
-  ];
+      action: () => Router.push('/')
+    }
+  ]
 
   const optionsButtons = !validade
     ? [
-      {
-        label: 'Criar conta',
-        action: goToLogin,
-      },
-    ]
+        {
+          label: 'Criar conta',
+          action: goToLogin
+        }
+      ]
     : [
-      {
-        label: 'Entrar na Feirinha',
-        action: goToProducts,
-      },
-    ];
+        {
+          label: 'Entrar na Feirinha',
+          action: goToProducts
+        }
+      ]
 
   return (
     <>
@@ -139,7 +147,7 @@ const Login = () => {
       </S.Content>
       <Footer />
     </>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
