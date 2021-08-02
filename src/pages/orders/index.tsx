@@ -19,7 +19,7 @@ import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
@@ -117,36 +117,32 @@ const Order = () => {
     try {
       const response = await getPedidos()
 
-      setPedidos(response.data);
-
       const control = []
-      for (const i of response.data) {
+
+      response.data.forEach(() => {
         control.push(false)
-      }
-      
-      setOpen(control);
-        
+      })
+
+      setPedidos([...response.data])
+      setOpen([...control])
     } catch (error) {
       console.log(error)
     }
   }
 
   const deleteOrder = async (id: number) => {
-    deletePedido(id)
-
-    const response = await getPedidos()
-
-    setPedidos(response.data.reverse())
-
-    setAjuda('cancelado')
-    setRender(id)
-
-    toast.success('Pedido Cancelado', { position: 'bottom-right' })
+    try {
+      await deletePedido(id)
+      toast.success('Pedido Cancelado', { position: 'bottom-right' })
+      await fetchPedidos()
+    } catch (err) {
+      toast.error('Erro ao cancelar pedido', { position: 'bottom-right' })
+    }
   }
 
   useEffect(() => {
     fetchPedidos()
-  }, [ajuda, render])
+  }, [])
 
   function handleSubtotal(prods) {
     let sub = 0
@@ -190,6 +186,12 @@ const Order = () => {
         }
       ]
 
+  const handleClick = (i) => {
+    const array = open.map((e) => false)
+    array[i] = !open[i]
+    setOpen([...array])
+  }
+
   return (
     <S.Wrapper>
       <S.StyledHeader
@@ -211,20 +213,12 @@ const Order = () => {
             >
               {pedidos &&
                 pedidos.map((pedido, i) => {
-                  const handleClick = (option) => {
-                    const array = open.map((e) => false)
-                    array[i] = option
-                    setOpen(array)
-                  }
-                  const controle = open[i]
-
-                  setAjuda(pedido.status)
                   return (
                     <div key={`${pedido.id}`}>
                       <ListItem
                         button
                         className={classes.item}
-                        onClick={() => handleClick(!open[i])}
+                        onClick={() => handleClick(i)}
                       >
                         <ListItemText
                           primary={`Pedido #${pedido.id}
@@ -252,9 +246,9 @@ const Order = () => {
                             <S.SpanResponsivo />{' '}
                           </ListItemText>
                         )}
-                        {controle ? <ExpandLess /> : <ExpandMore />}
+                        {open[i] ? <ExpandLess /> : <ExpandMore />}
                       </ListItem>
-                      <Collapse in={controle} timeout="auto" unmountOnExit>
+                      <Collapse in={open[i]} timeout="auto" unmountOnExit>
                         <TableContainer
                           className={classes.tabela}
                           component={Paper}
